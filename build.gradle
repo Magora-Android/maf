@@ -1,0 +1,122 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+
+    project.ext {
+        git_branch = 'origin/master'
+
+
+        version_appcompat = '23.4.0'
+        version_support_annotations = '23.4.0'
+        version_buildTools = '23.0.3'
+        version_sdk_target = 23
+        version_sdk_min = 16
+
+        version_retrofit2 = '2.0.1'
+        version_okhttp = '3.2.0'
+
+        version_rx_java = '1.1.3'
+        version_rx_android = '1.1.0'
+        version_rxbinding = '0.2.0'
+        version_rx_preferences = '1.0.1'
+        version_retrolambda_plugin = '3.2.4'
+        version_retrolambda = '2.0.5'
+        version_butterknife = '7.0.1'
+        version_semver_git = '2.2.1'
+        version_dagger = '2.0.2'
+        version_jsr250 = '1.0'
+        version_guava = '19.0'
+
+        version_junit = '4.12'
+        version_hamcrest = '1.3'
+        version_mockito = '1.10.19'
+        version_mockitoserver = '3.2.0'
+        version_dexmaker = '1.2'
+        version_support_test = '0.4.1'
+        version_espresso = '2.2.1'
+
+        version_gradle_plugin = '2.1.0'
+        version_apt = '1.8'
+        version_crashlytics = '2.5.5'
+        version_fabric_plugin = '1.21.5'
+
+        version_slf4j_api = '1.7.21'
+        version_logback = '1.1.1-5'
+
+        version_google_service = '8.4.0'
+
+        version_magora_rxlocation = '1.0.0'
+
+        version_frodo = '0.8.1'
+
+        versionMajor = 0
+        versionMinor = 0
+        versionPatch = 0
+    }
+
+
+    repositories {
+        jcenter()
+        mavenCentral();
+        maven { url 'https://maven.fabric.io/public' }
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:$version_gradle_plugin"
+        classpath "com.neenbedankt.gradle.plugins:android-apt:$version_apt"
+        classpath "me.tatarka:gradle-retrolambda:$version_retrolambda_plugin"
+        classpath "io.fabric.tools:gradle:$version_fabric_plugin"
+        classpath group: 'com.cinnober.gradle', name: 'semver-git', version: "$version_semver_git"
+        classpath "com.fernandocejas.frodo:frodo-plugin:$version_frodo"
+
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        mavenCentral();
+        maven { url "https://jitpack.io" }
+        maven { url 'https://maven.fabric.io/public' }
+        maven {
+            credentials {
+                username 'build'
+                password 'dj0asd123Ie3zxeBX8XYUrQSyi'
+            }
+            url "http://nexus.java.magora.team/content/repositories/releases/"
+        }
+    }
+
+    configurations.all {
+        resolutionStrategy.force 'com.android.support:support-annotations:23.3.0'
+    }
+}
+
+
+def gitVersion() {
+    def counter = 0
+    def process = "git rev-list $git_branch --first-parent --count".execute()
+    def version = process.text
+    if(version.empty) {
+        return counter;
+    }
+    return version.toInteger()
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+ext.snapshotSuffix = "<count>.g<sha>-SNAPSHOT"
+ext.nextVersion = "${versionMajor}.${versionMinor}.${versionPatch}"
+apply plugin: 'com.cinnober.gradle.semver-git'
+
+def renameArtifact(variant, projectName, defaultConfig) {
+    variant.outputs.each { output ->
+        output.outputFile = new File(
+                (String) output.outputFile.parent,
+                (String) output.outputFile.name.replace('app',
+                        "${projectName}-" +
+                                "${defaultConfig.versionCode}-" +
+                                "${project.version}"))
+    }
+}
