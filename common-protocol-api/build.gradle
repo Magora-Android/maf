@@ -1,0 +1,15 @@
+apply plugin: 'java'
+group 'com.magorasystems.android'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+version "${versionMajor}.${versionMinor}.${versionPatch}"
+
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile(
+         group: "com.magorasystems.protocolapi", name: "protocol-api-common-dto", version: "$version_protocol_api"
+    )
+
+    testCompile("junit:junit:$version_junit")
+}

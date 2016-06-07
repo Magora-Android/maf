@@ -51,6 +51,9 @@ buildscript {
 
         version_lang3 = '3.0'
 
+        //Magora Versions
+        version_protocol_api = '2.2.0'
+
         versionMajor = 0
         versionMinor = 0
         versionPatch = 0

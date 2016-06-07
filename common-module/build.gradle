@@ -15,7 +15,7 @@ android {
     defaultConfig {
         minSdkVersion version_sdk_min
         targetSdkVersion version_sdk_target
-        group  'com.magorasystems.android.modules'
+        group  'com.magorasystems.android'
         versionCode gitVersion()
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
