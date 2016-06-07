@@ -1,6 +1,8 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'io.fabric'
+apply plugin: 'com.fernandocejas.frodo'
 
 version "${versionMajor}.${versionMinor}.${versionPatch}"
 
@@ -11,14 +13,13 @@ android {
     defaultPublishConfig "debug"
 
     defaultConfig {
-        applicationId "com.mgrmobi.lunchdelivery.client"
         minSdkVersion version_sdk_min
         targetSdkVersion version_sdk_target
+        group  'com.magorasystems.android'
         versionCode gitVersion()
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-
     buildTypes {
         release {
             minifyEnabled true
@@ -28,21 +29,7 @@ android {
         debug {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            testCoverageEnabled = true
         }
-    }
-
-    productFlavors {
-        mock {
-            applicationIdSuffix = ".mock"
-        }
-        prod {
-
-        }
-    }
-
-    applicationVariants.all { variant ->
-        renameArtifact(variant, 'samples', defaultConfig)
     }
 
     packagingOptions {
@@ -84,26 +71,21 @@ android {
         incremental false
     }
 
+
     // Always show the result of every unit test, even if it passes.
     testOptions.unitTests.all {
         testLogging {
             events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
         }
     }
+
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':common-network')
-    compile project(':common-module')
+    compile project(':common-protocol-api')
+    compile project(':common-utils')
 
-    compile(
-            "com.android.support:appcompat-v7:$version_appcompat",
-            "com.android.support:cardview-v7:$version_appcompat",
-            "com.android.support:recyclerview-v7:$version_appcompat",
-            "com.android.support:support-v13:$version_appcompat",
-            "com.android.support:design:$version_appcompat"
-    )
 
     compile(
             "com.google.dagger:dagger:$version_dagger",
@@ -112,10 +94,27 @@ dependencies {
 
     apt "com.google.dagger:dagger-compiler:$version_dagger"
 
+    compile(
+            "com.squareup.retrofit2:retrofit:$version_retrofit2",
+            "com.squareup.retrofit2:converter-gson:$version_retrofit2",
+            "com.squareup.retrofit2:adapter-rxjava:$version_retrofit2",
+            "com.squareup.okhttp3:logging-interceptor:$version_okhttp"
+    )
+
+    compile(
+            "io.reactivex:rxandroid:$version_rx_android",
+            "io.reactivex:rxjava:$version_rx_java"
+    )
+
+    retrolambdaConfig "net.orfjackal.retrolambda:retrolambda:$version_retrolambda"
+
+
     testCompile("junit:junit:$version_junit",
             "org.hamcrest:hamcrest-core:$version_hamcrest",
             "org.hamcrest:hamcrest-library:$version_hamcrest",
             "org.mockito:mockito-core:$version_mockito")
+
+    androidTestApt "com.google.dagger:dagger-compiler:$version_dagger"
 
     androidTestCompile(
             "com.android.support:support-annotations:$version_support_annotations",
