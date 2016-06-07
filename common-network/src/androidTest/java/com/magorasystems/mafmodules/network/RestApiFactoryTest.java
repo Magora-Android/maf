@@ -5,6 +5,8 @@ import android.test.suitebuilder.annotation.SmallTest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.magorasystems.mafmodules.network.config.BasicTokenConfig;
+import com.magorasystems.mafmodules.network.config.BearerTokenConfig;
 import com.magorasystems.mafmodules.network.config.SimpleServerEndpoint;
 import com.magorasystems.mafmodules.network.model.SampleApiClient;
 import com.magorasystems.mafmodules.network.model.SampleRestApiFactory;
@@ -46,6 +48,17 @@ public class RestApiFactoryTest {
                 .build()
                 .create();
         Assert.assertNotNull(restApiClient);
+    }
+
+    @Test
+    public void testTokenConfigs() throws IOException {
+        final BasicTokenConfig basicTokenConfig = new BasicTokenConfig();
+        basicTokenConfig.createAccessToken("valka", "123456");
+        final String actual = basicTokenConfig.getAccessToken();
+        Assert.assertEquals("Basic dmFsa2FAMTIzNDU2", actual);
+        final BearerTokenConfig bearerTokenConfig = new BearerTokenConfig();
+        bearerTokenConfig.setAccessToken("dmFsa2FAMTIzNDU2");
+        Assert.assertEquals("Bearer dmFsa2FAMTIzNDU2", bearerTokenConfig.getAccessToken());
     }
 
 }

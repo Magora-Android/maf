@@ -1,7 +1,5 @@
 package com.magorasystems.mafmodules.network.config;
 
-import android.util.Base64;
-
 import com.magorasystems.mafmodules.common.utils.ConverterBase64;
 
 /**
@@ -12,7 +10,7 @@ import com.magorasystems.mafmodules.common.utils.ConverterBase64;
 public class BasicTokenConfig extends SimpleTokenConfig {
 
     public void createAccessToken(String login, String password) {
-        setAccessToken(ConverterBase64.toBase64(login + "@" + password, Base64.NO_WRAP));
+        setAccessToken(ConverterBase64.toBase64(login + "@" + password));
     }
 
     @Override
