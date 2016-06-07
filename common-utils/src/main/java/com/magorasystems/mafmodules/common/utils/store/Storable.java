@@ -11,4 +11,6 @@ public interface Storable<K,T> {
 
     void storeObject(K key, T object);
 
+    void remove(K key);
+
 }
