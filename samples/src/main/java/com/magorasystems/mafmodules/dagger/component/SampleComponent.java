@@ -3,6 +3,7 @@ package com.magorasystems.mafmodules.dagger.component;
 import com.magorasystems.mafmodules.application.SampleApplication;
 import com.magorasystems.mafmodules.common.dagger.component.CommonModuleComponent;
 import com.magorasystems.mafmodules.dagger.scope.ApplicationScope;
+import com.magorasystems.mafmodules.ui.activity.SampleActivity;
 
 import dagger.Component;
 
@@ -16,5 +17,9 @@ import dagger.Component;
 @ApplicationScope
 public interface SampleComponent {
 
+    CommonModuleComponent commonModuleComponent();
+
     void inject(SampleApplication application);
+
+    void inject(SampleActivity activity);
 }
