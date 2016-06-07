@@ -1,7 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
-apply plugin: 'io.fabric'
 apply plugin: 'com.fernandocejas.frodo'
 
 version "${versionMajor}.${versionMinor}.${versionPatch}"
@@ -15,7 +14,7 @@ android {
     defaultConfig {
         minSdkVersion version_sdk_min
         targetSdkVersion version_sdk_target
-        group  'com.magorasystems.android.modules'
+        group  'com.magorasystems.android.utils'
         versionCode gitVersion()
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -71,28 +70,13 @@ android {
         incremental false
     }
 
-
-    // Always show the result of every unit test, even if it passes.
-    testOptions.unitTests.all {
-        testLogging {
-            events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
-        }
-    }
-
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':common-utils')
-
-
     compile(
-            "com.google.dagger:dagger:$version_dagger",
-            "javax.annotation:jsr250-api:$version_jsr250"
+            "com.android.support:support-annotations:$version_support_annotations"
     )
-
-    apt "com.google.dagger:dagger-compiler:$version_dagger"
-
     compile(
             "io.reactivex:rxandroid:$version_rx_android",
             "io.reactivex:rxjava:$version_rx_java"
@@ -100,24 +84,13 @@ dependencies {
 
     retrolambdaConfig "net.orfjackal.retrolambda:retrolambda:$version_retrolambda"
 
-    compile("com.crashlytics.sdk.android:crashlytics:$version_crashlytics@aar") {
-        transitive = true;
-    }
-
-    testCompile("junit:junit:$version_junit",
-            "org.hamcrest:hamcrest-core:$version_hamcrest",
-            "org.hamcrest:hamcrest-library:$version_hamcrest",
-            "org.mockito:mockito-core:$version_mockito")
-
-    androidTestApt "com.google.dagger:dagger-compiler:$version_dagger"
-
-    androidTestCompile(
-            "com.android.support:support-annotations:$version_support_annotations",
-            "org.mockito:mockito-core:$version_mockito",
-            "com.google.dexmaker:dexmaker:$version_dexmaker",
-            "com.google.dexmaker:dexmaker-mockito:$version_dexmaker",
-            "com.android.support.test:runner:$version_support_test",
-            // Set this dependency to use JUnit 4 rules
-            "com.android.support.test:rules:$version_support_test"
+    //Logger
+    compile(
+            "com.github.tony19:logback-android-classic:$version_logback",
+            "com.github.tony19:logback-android-core:$version_logback",
+            "org.slf4j:slf4j-api:$version_slf4j_api"
     )
+
+    //Guava
+    compile "com.google.guava:guava:$version_guava"
 }
