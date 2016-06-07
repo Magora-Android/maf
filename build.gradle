@@ -49,6 +49,8 @@ buildscript {
 
         version_frodo = '0.8.1'
 
+        version_lang3 = '3.0'
+
         versionMajor = 0
         versionMinor = 0
         versionPatch = 0

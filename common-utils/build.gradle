@@ -91,6 +91,9 @@ dependencies {
             "org.slf4j:slf4j-api:$version_slf4j_api"
     )
 
+    // http://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: "$version_lang3"
+
     //Guava
     compile "com.google.guava:guava:$version_guava"
 

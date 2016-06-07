@@ -10,6 +10,7 @@ import com.magorasystems.mafmodules.common.dagger.module.ApplicationModule;
 import com.magorasystems.mafmodules.dagger.component.DaggerSampleComponent;
 import com.magorasystems.mafmodules.dagger.component.SampleComponent;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,6 +36,7 @@ public class SampleApplication extends BaseComponentApplication<SampleComponent>
         super.onCreate();
         LOGGER.debug("location manager is init {}", locationManager != null);
         LOGGER.debug("Inject Context {}", context);
+        LOGGER.debug("{}", StringUtils.isBlank(""));
     }
 
     @Override
@@ -47,6 +49,5 @@ public class SampleApplication extends BaseComponentApplication<SampleComponent>
                 .build();
         sampleComponent.inject(this);
         setComponent(sampleComponent);
-
     }
 }
