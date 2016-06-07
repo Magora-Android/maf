@@ -3,7 +3,7 @@
 buildscript {
 
     project.ext {
-        git_branch = 'origin/master'
+        git_branch = 'origin/develop'
 
 
         version_appcompat = '23.4.0'

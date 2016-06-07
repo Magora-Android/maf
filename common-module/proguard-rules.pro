@@ -26,57 +26,14 @@
 #---------------------------------------------------------------------------------------------------
 #Project classes
 
--keep class  com.magorasystems.** { *; }
--keep interface  com.magorasystems.**
--keep enum  com.magorasystems.**
+-keep class com.magorasystems.** { *; }
+-keep interface com.magorasystems.**
+-keep enum com.magorasystems.**
 -keepattributes *Annotation*
-
+-keepattributes Signature
+-keepattributes InnerClasses
+-keepattributes InnerClasses,EnclosingMethod
 #---------------------------------------------------------------------------------------------------
-
-#Gson
-
--keep class com.google.gson.Gson** {
-     public ** toJson(...);
-}
-
-#---------------------------------------------------------------------------------------------------
-#Butterknife
-
--keep class butterknife.** { *; }
--dontwarn butterknife.internal.**
--dontwarn butterknife.Views$InjectViewProcessor
-
--keep class **$$ViewBinder { *; }
-
--keepclasseswithmembernames class * {
-    @butterknife.* <fields>;
-}
-
--keepclasseswithmembernames class * {
-    @butterknife.* <methods>;
-}
-
--keepclasseswithmembernames class * {
-    @butterknife.BindInt* <fields>;
-}
-
--keepclasseswithmembernames class * {
-    @butterknife.Bind* <fields>;
-}
-
--keepclasseswithmembernames class * {
-    @butterknife.Bind* <methods>;
-}
-
--keepnames class * {
-    @butterknife.Bind *;
- }
-
--keepnames class * {
-    @butterknife.BindInt *;
- }
-#---------------------------------------------------------------------------------------------------
-
 ## Retrolambda specific rules ##
 # as per official recommendation: https://github.com/evant/gradle-retrolambda#proguard
 -dontwarn java.lang.invoke.*
@@ -132,19 +89,6 @@
 
 
 #---------------------------------------------------------------------------------------------------
-
-# Retrofit 2.X
-## https://square.github.io/retrofit/ ##
-
--dontwarn retrofit2.**
--dontwarn okhttp3.**
--keep class retrofit2.** { *; }
--keep class okhttp3.** {*;}
--keepattributes Signature
--keepattributes Exceptions
-
-#---------------------------------------------------------------------------------------------------
-
 # Logback-android
 ## https://github.com/tony19/logback-android/wiki#proguard
 
@@ -154,58 +98,8 @@
 -keep interface org.slf4j.**
 -keep enum org.slf4j.**
 -keepattributes *Annotation*
-
-
-#---------------------------------------------------------------------------------------------------
-
-#Facebook Fresco
-# Keep our interfaces so they can be used by other ProGuard rules.
-# See http://sourceforge.net/p/proguard/bugs/466/
--keep,allowobfuscation @interface com.facebook.common.internal.DoNotStrip
-
-# Do not strip any method/class that is annotated with @DoNotStrip
--keep @com.facebook.common.internal.DoNotStrip class *
--keepclassmembers class * {
-    @com.facebook.common.internal.DoNotStrip *;
-}
-
-# Keep native methods
--keepclassmembers class * {
-    native <methods>;
-}
-
--dontwarn okio.**
--dontwarn javax.annotation.**
--dontwarn com.android.volley.toolbox.**
-#---------------------------------------------------------------------------------------------------
-# Configuration for Guava 18.0
--keep class com.google.common.io.Resources {
-    public static <methods>;
-}
--keep class com.google.common.collect.Lists {
-    public static ** reverse(**);
-}
--keep class com.google.common.base.Charsets {
-    public static <fields>;
-}
-
--keep class com.google.common.base.Joiner {
-    public static com.google.common.base.Joiner on(java.lang.String);
-    public ** join(...);
-}
-
--keep class com.google.common.collect.MapMakerInternalMap$ReferenceEntry
--keep class com.google.common.cache.LocalCache$ReferenceEntry
-
-# http://stackoverflow.com/questions/9120338/proguard-configuration-for-guava-with-obfuscation-and-optimization
--dontwarn javax.annotation.**
--dontwarn javax.inject.**
--dontwarn sun.misc.Unsafe
-
-# Guava 19.0
--dontwarn java.lang.ClassValue
--dontwarn com.google.j2objc.annotations.Weak
--dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+-keepattributes Signature
+-keepattributes Exceptions
 
 #---------------------------------------------------------------------------------------------------
 
