@@ -35,7 +35,7 @@ buildscript {
         version_support_test = '0.4.1'
         version_espresso = '2.2.1'
 
-        version_gradle_plugin = '2.1.0'
+        version_gradle_plugin = '2.1.2'
         version_apt = '1.8'
         version_crashlytics = '2.5.5'
         version_fabric_plugin = '1.21.5'

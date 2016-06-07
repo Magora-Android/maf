@@ -1,5 +1,6 @@
 package com.magorasystems.mafmodules.application;
 
+import android.content.Context;
 import android.location.LocationManager;
 
 import com.magorasystems.mafmodules.common.application.BaseComponentApplication;
@@ -26,10 +27,14 @@ public class SampleApplication extends BaseComponentApplication<SampleComponent>
     @Inject
     protected LocationManager locationManager;
 
+    @Inject
+    protected Context context;
+
     @Override
     public void onCreate() {
         super.onCreate();
         LOGGER.debug("location manager is init {}", locationManager != null);
+        LOGGER.debug("Inject Context {}", context);
     }
 
     @Override

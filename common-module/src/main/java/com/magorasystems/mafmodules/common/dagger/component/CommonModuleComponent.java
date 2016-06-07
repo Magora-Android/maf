@@ -1,5 +1,6 @@
 package com.magorasystems.mafmodules.common.dagger.component;
 
+import android.content.Context;
 import android.location.LocationManager;
 
 import com.magorasystems.mafmodules.common.dagger.module.ApplicationModule;
@@ -21,4 +22,6 @@ import dagger.Component;
 public interface CommonModuleComponent {
 
     LocationManager locationManager();
+
+    Context context();
 }
