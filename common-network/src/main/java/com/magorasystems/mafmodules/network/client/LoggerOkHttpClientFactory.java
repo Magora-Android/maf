@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Cache;
 import okhttp3.Dispatcher;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -22,6 +23,7 @@ public class LoggerOkHttpClientFactory {
     private final long readTimeout;
     private final long writeTimeout;
     private final int maxRequestsCount;
+    private final Cache cache;
     private final Collection<Interceptor> interceptors;
 
     private LoggerOkHttpClientFactory(Builder builder) {
@@ -30,6 +32,7 @@ public class LoggerOkHttpClientFactory {
         readTimeout = builder.readTimeout;
         writeTimeout = builder.writeTimeout;
         maxRequestsCount = builder.maxRequestsCount;
+        cache = builder.cache;
         interceptors = builder.interceptors == null ? Lists.newArrayList() :
                 Lists.newArrayList(builder.interceptors);
     }
@@ -53,6 +56,9 @@ public class LoggerOkHttpClientFactory {
                 builder.addInterceptor(interceptor);
             }
         }
+        if (cache != null) {
+            builder.cache(cache);
+        }
         return builder.build();
     }
 
@@ -70,6 +76,7 @@ public class LoggerOkHttpClientFactory {
         private long readTimeout;
         private long writeTimeout;
         private int maxRequestsCount;
+        private Cache cache;
         private Collection<Interceptor> interceptors;
 
         public Builder() {
@@ -144,6 +151,11 @@ public class LoggerOkHttpClientFactory {
                 interceptors = Lists.newArrayList();
             }
             interceptors.add(val);
+            return this;
+        }
+
+        public Builder cache(Cache val) {
+            this.cache = val;
             return this;
         }
 
