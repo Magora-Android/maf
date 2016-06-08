@@ -6,6 +6,7 @@ import android.location.LocationManager;
 import com.magorasystems.mafmodules.common.SomeClass;
 import com.magorasystems.mafmodules.common.dagger.module.ApplicationModule;
 import com.magorasystems.mafmodules.common.dagger.scope.CommonScope;
+import com.magorasystems.mafmodules.common.mvp.interactor.CommonInteractor;
 
 import dagger.Component;
 
@@ -27,6 +28,8 @@ public interface CommonModuleComponent {
     Context context();
 
     void inject(SomeClass someClass);
+
+    void inject(CommonInteractor interactor);
 
 
 }
