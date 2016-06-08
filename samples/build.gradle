@@ -23,11 +23,24 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "REST_API_HOST", "\"http://api.golod.me\""
+            buildConfigField "String", "REST_API_PATH", "\"api\""
+            buildConfigField "String", "REST_API_VERSION", "\"v2\""
+            buildConfigField "int", "NETWORK_RETRY_COUNT", '3'
+            buildConfigField "int", "REQUESTS_COUNT", '2'
+            buildConfigField "long", "NETWORK_DELAY_ATTEMPT", '5000'
         }
 
         debug {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-test-rules.pro'
+            buildConfigField "String", "REST_API_HOST", "\"http://test.dev2.mgrnix.com:23680\""
+            buildConfigField "String", "REST_API_PATH", "\"api\""
+            buildConfigField "String", "REST_API_VERSION", "\"v2\""
+            buildConfigField "int", "NETWORK_RETRY_COUNT", '3'
+            buildConfigField "int", "REQUESTS_COUNT", '2'
+            buildConfigField "long", "NETWORK_DELAY_ATTEMPT", '5000'
             testCoverageEnabled = true
         }
     }
@@ -115,7 +128,10 @@ dependencies {
     testCompile("junit:junit:$version_junit",
             "org.hamcrest:hamcrest-core:$version_hamcrest",
             "org.hamcrest:hamcrest-library:$version_hamcrest",
-            "org.mockito:mockito-core:$version_mockito")
+            "org.mockito:mockito-core:$version_mockito",
+            "com.squareup.okhttp3:mockwebserver:$version_mockitoserver")
+
+    androidTestApt "com.google.dagger:dagger-compiler:$version_dagger"
 
     androidTestCompile(
             "com.android.support:support-annotations:$version_support_annotations",
@@ -124,6 +140,8 @@ dependencies {
             "com.google.dexmaker:dexmaker-mockito:$version_dexmaker",
             "com.android.support.test:runner:$version_support_test",
             // Set this dependency to use JUnit 4 rules
-            "com.android.support.test:rules:$version_support_test"
+            "com.android.support.test:rules:$version_support_test",
+            "com.squareup.okhttp3:mockwebserver:$version_mockitoserver",
+            "com.android.support.test.espresso:espresso-core:$version_espresso"
     )
 }

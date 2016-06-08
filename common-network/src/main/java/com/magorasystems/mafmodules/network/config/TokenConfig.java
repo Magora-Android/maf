@@ -14,5 +14,7 @@ public interface TokenConfig {
 
     void setRefreshToken(final String refreshToken);
 
+    String getRefreshToken();
+
 
 }
