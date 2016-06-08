@@ -4,7 +4,7 @@ import com.magorasystems.mafmodules.authmodule.provider.AuthProvider;
 import com.magorasystems.mafmodules.common.mvp.interactor.CommonInteractor;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
 import com.magorasystems.mafmodules.common.utils.component.HasComponent;
-import com.magorasystems.protocolapi.auth.dto.request.MetaAuthRequest;
+import com.magorasystems.protocolapi.auth.dto.request.AuthRequest;
 
 import rx.Subscriber;
 
@@ -20,7 +20,7 @@ public abstract class BaseAuthInteractor<COMPONENT, R> extends CommonInteractor<
     }
 
     @Override
-    public void executeAuthToken(MetaAuthRequest<?> authorization, Subscriber<R> subscriber) {
+    public void executeAuthToken(AuthRequest authorization, Subscriber<R> subscriber) {
         execute(getAuthProvider().authToken(authorization), subscriber);
     }
 

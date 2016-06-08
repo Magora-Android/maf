@@ -1,6 +1,6 @@
 package com.magorasystems.mafmodules.authmodule.interactor;
 
-import com.magorasystems.protocolapi.auth.dto.request.MetaAuthRequest;
+import com.magorasystems.protocolapi.auth.dto.request.AuthRequest;
 
 import rx.Subscriber;
 
@@ -11,7 +11,7 @@ import rx.Subscriber;
  */
 public interface AuthInteractor<R> {
 
-    void executeAuthToken(MetaAuthRequest<?> authorization, Subscriber<R> subscriber);
+    void executeAuthToken(AuthRequest authorization, Subscriber<R> subscriber);
 
     void executeRefreshToken(Subscriber<R> subscriber);
 

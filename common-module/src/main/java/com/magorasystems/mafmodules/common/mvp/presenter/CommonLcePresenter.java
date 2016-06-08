@@ -11,6 +11,9 @@ import com.magorasystems.mafmodules.common.mvp.view.BaseLceView;
 public abstract class CommonLcePresenter<M, V extends BaseLceView<M>, R extends BaseRouter> extends CommonPresenter<V, R> {
 
     protected final void showProgress() {
+        if(!isViewAttached()) {
+            return;
+        }
         V view = getView();
         if (null != view) {
             view.showProgress();
@@ -18,6 +21,9 @@ public abstract class CommonLcePresenter<M, V extends BaseLceView<M>, R extends 
     }
 
     protected final void removeView() {
+        if(!isViewAttached()) {
+            return;
+        }
         V view = getView();
         if (null != view) {
             view.detachView();
@@ -25,6 +31,9 @@ public abstract class CommonLcePresenter<M, V extends BaseLceView<M>, R extends 
     }
 
     protected final void showContent() {
+        if(!isViewAttached()) {
+            return;
+        }
         V view = getView();
         if (null != view) {
             view.showContent();
@@ -32,6 +41,9 @@ public abstract class CommonLcePresenter<M, V extends BaseLceView<M>, R extends 
     }
 
     protected final void setModel(M model) {
+        if(!isViewAttached()) {
+            return;
+        }
         V view = getView();
         if (null != view) {
             view.setModel(model);

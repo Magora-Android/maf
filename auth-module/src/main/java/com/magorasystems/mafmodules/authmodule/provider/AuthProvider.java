@@ -1,7 +1,7 @@
 package com.magorasystems.mafmodules.authmodule.provider;
 
 import com.magorasystems.mafmodules.common.mvp.provider.BaseProvider;
-import com.magorasystems.protocolapi.auth.dto.request.MetaAuthRequest;
+import com.magorasystems.protocolapi.auth.dto.request.AuthRequest;
 
 import rx.Observable;
 
@@ -12,7 +12,7 @@ import rx.Observable;
  */
 public interface AuthProvider<R> extends BaseProvider<R> {
 
-    Observable<R> authToken(final MetaAuthRequest<?> authorization);
+    Observable<R> authToken(final AuthRequest authorization);
 
     Observable<R> refreshToken();
 }
