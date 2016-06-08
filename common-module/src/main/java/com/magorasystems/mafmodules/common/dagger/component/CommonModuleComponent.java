@@ -7,7 +7,6 @@ import com.magorasystems.mafmodules.common.SomeClass;
 import com.magorasystems.mafmodules.common.dagger.module.ApplicationModule;
 import com.magorasystems.mafmodules.common.dagger.module.DomainModule;
 import com.magorasystems.mafmodules.common.dagger.scope.CommonScope;
-import com.magorasystems.mafmodules.common.mvp.interactor.CommonInteractor;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
 
 import dagger.Component;
@@ -33,8 +32,6 @@ public interface CommonModuleComponent {
     SchedulersUtils.CoreScheduler coreScheduler();
 
     void inject(SomeClass someClass);
-
-    void inject(CommonInteractor interactor);
 
 
 }
