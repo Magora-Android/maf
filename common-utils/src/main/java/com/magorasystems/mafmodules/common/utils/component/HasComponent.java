@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.common.dagger;
+package com.magorasystems.mafmodules.common.utils.component;
 
 /**
  * Developed by Magora Team (magora-systems.com). 2016.

@@ -83,7 +83,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':common-utils')
     compile project(':common-network')
 
 

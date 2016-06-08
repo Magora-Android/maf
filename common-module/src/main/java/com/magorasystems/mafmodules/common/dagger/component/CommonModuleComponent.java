@@ -5,8 +5,10 @@ import android.location.LocationManager;
 
 import com.magorasystems.mafmodules.common.SomeClass;
 import com.magorasystems.mafmodules.common.dagger.module.ApplicationModule;
+import com.magorasystems.mafmodules.common.dagger.module.DomainModule;
 import com.magorasystems.mafmodules.common.dagger.scope.CommonScope;
 import com.magorasystems.mafmodules.common.mvp.interactor.CommonInteractor;
+import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
 
 import dagger.Component;
 
@@ -18,7 +20,8 @@ import dagger.Component;
 @CommonScope
 @Component(
         modules = {
-                ApplicationModule.class
+                ApplicationModule.class,
+                DomainModule.class
         }
 )
 public interface CommonModuleComponent {
@@ -26,6 +29,8 @@ public interface CommonModuleComponent {
     LocationManager locationManager();
 
     Context context();
+
+    SchedulersUtils.CoreScheduler coreScheduler();
 
     void inject(SomeClass someClass);
 

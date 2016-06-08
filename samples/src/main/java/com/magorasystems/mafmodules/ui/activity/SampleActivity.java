@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.magorasystems.mafmodules.application.SampleApplication;
 import com.magorasystems.mafmodules.common.SomeClass;
+import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
 import com.magorasystems.mafmodules.dagger.component.SampleComponent;
 
 import org.slf4j.Logger;
@@ -26,6 +27,9 @@ public class SampleActivity extends AppCompatActivity {
     @Inject
     protected LocationManager locationManager;
 
+    @Inject
+    protected SchedulersUtils.CoreScheduler coreScheduler;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +37,7 @@ public class SampleActivity extends AppCompatActivity {
         sampleComponent.inject(this);
         SomeClass claz = new SomeClass(sampleComponent.commonModuleComponent());
         LOGGER.debug("someclass: {} ", claz);
+        LOGGER.debug("coreScheduler: {} ", coreScheduler);
 
     }
 }
