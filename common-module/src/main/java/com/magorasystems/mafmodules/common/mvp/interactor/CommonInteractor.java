@@ -13,7 +13,7 @@ import rx.subscriptions.CompositeSubscription;
  *
  * @author Valentin S.Bolkonsky
  */
-public abstract class CommonInteractor<COMPONENT> implements BaseInteractor, Injectable<COMPONENT> {
+public abstract class CommonInteractor<COMPONENT,R> implements BaseInteractor<R>, Injectable<COMPONENT> {
 
     private final CompositeSubscription subscription = new CompositeSubscription();
     private final SchedulersUtils.CoreScheduler coreScheduler;
@@ -26,7 +26,7 @@ public abstract class CommonInteractor<COMPONENT> implements BaseInteractor, Inj
     }
 
     @Override
-    public void execute(Observable<?> observer, Subscriber<? super Object> subscriber) {
+    public void execute(Observable<R> observer, Subscriber<R> subscriber) {
         subscription.add(observer
                 .compose(SchedulersUtils.applySchedulers(coreScheduler))
                 .subscribe(subscriber));

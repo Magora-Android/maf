@@ -5,5 +5,5 @@ package com.magorasystems.mafmodules.common.mvp.provider;
  *
  * @author Valentin S.Bolkonsky
  */
-public interface BaseProvider {
+public interface BaseProvider<R> {
 }

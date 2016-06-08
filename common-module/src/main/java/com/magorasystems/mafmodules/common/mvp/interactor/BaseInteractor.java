@@ -8,9 +8,9 @@ import rx.Subscriber;
  *
  * @author Valentin S.Bolkonsky
  */
-public interface BaseInteractor {
+public interface BaseInteractor<R> {
 
-    void execute(Observable<?> observer, Subscriber<? super Object> subscriber);
+    void execute(Observable<R> observer, Subscriber<R> subscriber);
 
     void unsubscribe();
 }

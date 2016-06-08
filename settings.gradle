@@ -1,1 +1,1 @@
-include ':samples', ':common-module', ':common-utils', ':common-protocol-api', ':common-network', ':auth-protocol-api'
+include ':samples', ':common-module', ':common-utils', ':common-protocol-api', ':common-network', ':auth-protocol-api', ':auth-module'
