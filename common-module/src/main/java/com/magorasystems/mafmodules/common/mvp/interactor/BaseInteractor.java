@@ -10,7 +10,7 @@ import rx.Subscriber;
  */
 public interface BaseInteractor<R> {
 
-    void execute(Observable<R> observer, Subscriber<R> subscriber);
+    void execute(Observable<? extends R> observer, Subscriber<R> subscriber);
 
     void unsubscribe();
 }

@@ -12,5 +12,4 @@ import java.io.Serializable;
  */
 public interface AuthView<ID extends Serializable, M extends AuthInfo<ID>> extends BaseLceView<M> {
 
-
 }

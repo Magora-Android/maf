@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules;
+package com.magorasystems.mafmodules.network.provider;
 
 import com.magorasystems.mafmodules.authmodule.provider.impl.SimpleAuthProvider;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
@@ -6,11 +6,10 @@ import com.magorasystems.mafmodules.common.utils.component.HasComponent;
 import com.magorasystems.mafmodules.dagger.component.SampleComponent;
 import com.magorasystems.mafmodules.network.AuthApiClientWrapper;
 import com.magorasystems.mafmodules.network.config.SimpleTokenConfig;
-import com.magorasystems.mafmodules.network.provider.RestBaseDataProvider;
 import com.magorasystems.mafmodules.network.store.SimpleMemoryTokenStorable;
-import com.magorasystems.mafmodules.protocolapi.auth.response.StringAuthResponseData;
 import com.magorasystems.protocolapi.auth.dto.request.AuthRequest;
 import com.magorasystems.protocolapi.auth.dto.request.RefreshTokenRequest;
+import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
 
 import javax.inject.Inject;
 
@@ -36,20 +35,24 @@ public class AuthRestProvider extends RestBaseDataProvider<AuthApiClientWrapper,
     }
 
     @Override
-    public Observable<StringAuthResponseData> authToken(AuthRequest authorization) {
+    public Observable<StringAuthInfo> authToken(AuthRequest authorization) {
         return restApiClientWrapper.getClient().authToken(authorization)
-                .compose(converter());
+                .compose(converter())
+                .map(data -> data != null ? data.getAuthInfo() : null);
     }
 
     @Override
-    public Observable<StringAuthResponseData> refreshToken() {
+    public Observable<StringAuthInfo> refreshToken() {
         return restApiClientWrapper.getClient().refreshToken(
                 new RefreshTokenRequest(memoryTokenStorable.restoreObject(SimpleTokenConfig.HEADER_FIELD_NAME)
                         .getRefreshToken()))
                 .compose(converter())
                 .doOnNext(model -> {
-                    memoryTokenStorable.remove(SimpleTokenConfig.HEADER_FIELD_NAME);
-                    memoryTokenStorable.storeObject(SimpleTokenConfig.HEADER_FIELD_NAME, new SimpleTokenConfig(model.getAccessToken(), model.getRefreshToken()));
-                });
+                    if (model != null) {
+                        memoryTokenStorable.remove(SimpleTokenConfig.HEADER_FIELD_NAME);
+                        memoryTokenStorable.storeObject(SimpleTokenConfig.HEADER_FIELD_NAME, new SimpleTokenConfig(model.getAccessToken(), model.getRefreshToken()));
+                    }
+                })
+                .map(data -> data != null ? data.getAuthInfo() : null);
     }
 }

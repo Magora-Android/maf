@@ -1,6 +1,6 @@
 package com.magorasystems.mafmodules.authmodule.presenter.impl;
 
-import com.magorasystems.mafmodules.authmodule.interactor.BaseAuthInteractor;
+import com.magorasystems.mafmodules.authmodule.interactor.AuthInteractor;
 import com.magorasystems.mafmodules.authmodule.model.AuthViewModel;
 import com.magorasystems.mafmodules.authmodule.presenter.AuthPresenter;
 import com.magorasystems.mafmodules.authmodule.router.AuthRouter;
@@ -16,7 +16,7 @@ import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
  *
  * @author Valentin S.Bolkonsky
  */
-public class AuthLcePresenter<COMPONENT, I extends BaseAuthInteractor<COMPONENT, StringAuthInfo>>
+public class AuthLcePresenter<I extends AuthInteractor<StringAuthInfo>>
         extends BaseIteratorLcePresenter<StringAuthInfo, I, StringAuthView, AuthRouter>
         implements AuthPresenter<StringAuthInfo, I>, BaseLifecyclePresenter<StringAuthView, AuthRouter> {
 

@@ -1,5 +1,6 @@
 package com.magorasystems.mafmodules.authmodule.interactor;
 
+import com.magorasystems.mafmodules.common.mvp.interactor.BaseInteractor;
 import com.magorasystems.protocolapi.auth.dto.request.AuthRequest;
 
 import rx.Subscriber;
@@ -9,7 +10,7 @@ import rx.Subscriber;
  *
  * @author Valentin S.Bolkonsky
  */
-public interface AuthInteractor<R> {
+public interface AuthInteractor<R> extends BaseInteractor<R>{
 
     void executeAuthToken(AuthRequest authorization, Subscriber<R> subscriber);
 

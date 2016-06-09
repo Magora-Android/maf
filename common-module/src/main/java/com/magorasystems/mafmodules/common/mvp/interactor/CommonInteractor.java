@@ -1,8 +1,6 @@
 package com.magorasystems.mafmodules.common.mvp.interactor;
 
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
-import com.magorasystems.mafmodules.common.utils.component.HasComponent;
-import com.magorasystems.mafmodules.common.utils.component.Injectable;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -13,20 +11,17 @@ import rx.subscriptions.CompositeSubscription;
  *
  * @author Valentin S.Bolkonsky
  */
-public abstract class CommonInteractor<COMPONENT,R> implements BaseInteractor<R>, Injectable<COMPONENT> {
+public abstract class CommonInteractor<R> implements BaseInteractor<R> {
 
     private final CompositeSubscription subscription = new CompositeSubscription();
     private final SchedulersUtils.CoreScheduler coreScheduler;
 
-    protected CommonInteractor(HasComponent<? extends COMPONENT> hasComponent, SchedulersUtils.CoreScheduler scheduler) {
+    protected CommonInteractor( SchedulersUtils.CoreScheduler scheduler) {
         this.coreScheduler = scheduler;
-        if (hasComponent != null) {
-            inject(hasComponent);
-        }
     }
 
     @Override
-    public void execute(Observable<R> observer, Subscriber<R> subscriber) {
+    public void execute(Observable<? extends R> observer, Subscriber<R> subscriber) {
         subscription.add(observer
                 .compose(SchedulersUtils.applySchedulers(coreScheduler))
                 .subscribe(subscriber));

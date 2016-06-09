@@ -3,7 +3,6 @@ package com.magorasystems.mafmodules.authmodule.interactor;
 import com.magorasystems.mafmodules.authmodule.provider.AuthProvider;
 import com.magorasystems.mafmodules.common.mvp.interactor.CommonInteractor;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
-import com.magorasystems.mafmodules.common.utils.component.HasComponent;
 import com.magorasystems.protocolapi.auth.dto.request.AuthRequest;
 
 import rx.Subscriber;
@@ -13,10 +12,10 @@ import rx.Subscriber;
  *
  * @author Valentin S.Bolkonsky
  */
-public abstract class BaseAuthInteractor<COMPONENT, R> extends CommonInteractor<COMPONENT, R> implements AuthInteractor<R> {
+public abstract class BaseAuthInteractor<R> extends CommonInteractor<R> implements AuthInteractor<R> {
 
-    protected BaseAuthInteractor(HasComponent<? extends COMPONENT> hasComponent, SchedulersUtils.CoreScheduler scheduler) {
-        super(hasComponent, scheduler);
+    protected BaseAuthInteractor( SchedulersUtils.CoreScheduler scheduler) {
+        super(scheduler);
     }
 
     @Override
@@ -29,5 +28,5 @@ public abstract class BaseAuthInteractor<COMPONENT, R> extends CommonInteractor<
         execute(getAuthProvider().refreshToken(), subscriber);
     }
 
-    protected abstract AuthProvider<R> getAuthProvider();
+    protected abstract AuthProvider<? extends R> getAuthProvider();
 }
