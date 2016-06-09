@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'io.fabric'
 
 version "${versionMajor}.${versionMinor}.${versionPatch}"
 
@@ -11,7 +12,7 @@ android {
     defaultPublishConfig "debug"
 
     defaultConfig {
-        applicationId "com.mgrmobi.lunchdelivery.client"
+        applicationId "com.magorasystems.mafmodules"
         minSdkVersion version_sdk_min
         targetSdkVersion version_sdk_target
         versionCode gitVersion()
@@ -42,15 +43,6 @@ android {
             buildConfigField "int", "REQUESTS_COUNT", '2'
             buildConfigField "long", "NETWORK_DELAY_ATTEMPT", '5000'
             testCoverageEnabled = true
-        }
-    }
-
-    productFlavors {
-        mock {
-            applicationIdSuffix = ".mock"
-        }
-        prod {
-
         }
     }
 
@@ -125,6 +117,12 @@ dependencies {
 
     apt "com.google.dagger:dagger-compiler:$version_dagger"
 
+    compile("com.crashlytics.sdk.android:crashlytics:$version_crashlytics@aar") {
+        transitive = true;
+    }
+
+    retrolambdaConfig "net.orfjackal.retrolambda:retrolambda:$version_retrolambda"
+
     testCompile("junit:junit:$version_junit",
             "org.hamcrest:hamcrest-core:$version_hamcrest",
             "org.hamcrest:hamcrest-library:$version_hamcrest",
@@ -144,4 +142,6 @@ dependencies {
             "com.squareup.okhttp3:mockwebserver:$version_mockitoserver",
             "com.android.support.test.espresso:espresso-core:$version_espresso"
     )
+    androidTestCompile project(path: ':common-utils')
+    androidTestCompile project(path: ':common-network')
 }

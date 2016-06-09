@@ -24,11 +24,15 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "long", "NETWORK_DELAY_ATTEMPT", '3000'
+            buildConfigField "int", "NETWORK_RETRY_COUNT", '2'
         }
 
         debug {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "long", "NETWORK_DELAY_ATTEMPT", '3000'
+            buildConfigField "int", "NETWORK_RETRY_COUNT", '2'
         }
     }
 

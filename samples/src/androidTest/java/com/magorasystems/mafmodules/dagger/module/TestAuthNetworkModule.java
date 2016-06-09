@@ -16,7 +16,6 @@ import com.magorasystems.mafmodules.network.config.SimpleServerEndpoint;
 import com.magorasystems.mafmodules.network.config.SimpleTokenConfig;
 import com.magorasystems.mafmodules.network.interceptor.HeaderInterceptor;
 import com.magorasystems.mafmodules.network.store.SimpleMemoryTokenStorable;
-import com.magorasystems.mafmodules.network.store.StringApiTokenStorage;
 
 import javax.inject.Singleton;
 
@@ -33,7 +32,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @author Valentin S.Bolkonsky
  */
 @Module
-public class AuthNetworkModule implements BaseModule {
+public class TestAuthNetworkModule implements BaseModule {
 
     @Provides
     @Singleton
@@ -52,7 +51,7 @@ public class AuthNetworkModule implements BaseModule {
 
     @Provides
     @Singleton
-    protected HeaderInterceptor providerHeaderInterceptor(StringApiTokenStorage tokenStorable) {
+    protected HeaderInterceptor providerHeaderInterceptor(SimpleMemoryTokenStorable tokenStorable) {
         return new HeaderInterceptor(SimpleTokenConfig.HEADER_FIELD_NAME, tokenStorable);
     }
 

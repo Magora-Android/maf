@@ -9,6 +9,7 @@ import com.magorasystems.mafmodules.common.dagger.component.DaggerCommonModuleCo
 import com.magorasystems.mafmodules.common.dagger.module.ApplicationModule;
 import com.magorasystems.mafmodules.dagger.component.DaggerSampleComponent;
 import com.magorasystems.mafmodules.dagger.component.SampleComponent;
+import com.magorasystems.mafmodules.dagger.module.SampleModule;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -46,6 +47,7 @@ public class SampleApplication extends BaseComponentApplication<SampleComponent>
                 .build();
         SampleComponent sampleComponent = DaggerSampleComponent.builder()
                 .commonModuleComponent(component)
+                .sampleModule(new SampleModule(this))
                 .build();
         sampleComponent.inject(this);
         setComponent(sampleComponent);

@@ -1,5 +1,6 @@
 <manifest package="com.magorasystems.mafmodules"
           xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".application.SampleApplication"
@@ -14,6 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="8a5d009dc74f84bef1180c15b97a107936ebfd34" />
     </application>
 
 </manifest>

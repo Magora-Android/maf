@@ -49,7 +49,6 @@ public class AuthRestProvider extends RestBaseDataProvider<AuthApiClientWrapper,
                 .compose(converter())
                 .doOnNext(model -> {
                     if (model != null) {
-                        memoryTokenStorable.remove(SimpleTokenConfig.HEADER_FIELD_NAME);
                         memoryTokenStorable.storeObject(SimpleTokenConfig.HEADER_FIELD_NAME, new SimpleTokenConfig(model.getAccessToken(), model.getRefreshToken()));
                     }
                 })

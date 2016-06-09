@@ -1,7 +1,7 @@
-package com.magorasystems.mafmodules.dagger.module;
+package com.magorasystems.mafmodules.common.dagger.module;
 
-import com.magorasystems.mafmodules.common.dagger.module.BaseModule;
 import com.magorasystems.mafmodules.network.store.SimpleMemoryTokenStorable;
+import com.magorasystems.mafmodules.network.store.StringApiTokenStorage;
 
 import javax.inject.Singleton;
 
@@ -18,7 +18,7 @@ public class StorableModule implements BaseModule {
 
     @Provides
     @Singleton
-    protected SimpleMemoryTokenStorable providerMemoryTokenStorable() {
+    protected StringApiTokenStorage providerMemoryTokenStorable() {
         return new SimpleMemoryTokenStorable();
     }
 }

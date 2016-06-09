@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import javax.inject.Inject;
+
 /**
  * Developed by Magora Team (magora-systems.com). 2016.
  *
@@ -24,7 +26,14 @@ public class NetworkConnectionManager {
         return new Builder();
     }
 
-    private NetworkConnectionManager(Builder builder) {
+    @Inject
+    public NetworkConnectionManager(Context context) {
+        this(builder().context(context)
+                .count(2)
+                .delay(2000L));
+    }
+
+    protected NetworkConnectionManager(Builder builder) {
         context = builder.context;
         count = builder.count;
         delay = builder.delay;

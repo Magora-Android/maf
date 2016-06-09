@@ -20,7 +20,7 @@ public class SimpleAuthInteractorImpl extends BaseAuthInteractor<StringAuthInfo>
     @Inject
     protected SimpleAuthProvider authProvider;
 
-    protected SimpleAuthInteractorImpl(HasComponent<? extends SampleComponent> hasComponent, SchedulersUtils.CoreScheduler scheduler) {
+    public SimpleAuthInteractorImpl(HasComponent<? extends SampleComponent> hasComponent, SchedulersUtils.CoreScheduler scheduler) {
         super(scheduler);
         inject(hasComponent);
     }
