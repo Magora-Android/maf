@@ -20,7 +20,7 @@ public class NetworkModule implements BaseModule {
 
     @Provides
     @Singleton
-    protected NetworkConnectionManager providerNetworkConnectionManager(Context application) {
+    public NetworkConnectionManager providerNetworkConnectionManager(Context application) {
         return NetworkConnectionManager.builder()
                 .context(application)
                 .count(BuildConfig.NETWORK_RETRY_COUNT)

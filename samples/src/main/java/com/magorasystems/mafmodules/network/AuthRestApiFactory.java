@@ -7,7 +7,7 @@ package com.magorasystems.mafmodules.network;
  */
 public class AuthRestApiFactory extends GenericRestApiFactory<AuthApiClient> {
 
-    protected AuthRestApiFactory(Builder<AuthApiClient, ? extends RestApiFactory<AuthApiClient>> builder) {
+    public AuthRestApiFactory(Builder<AuthApiClient, ? extends RestApiFactory<AuthApiClient>> builder) {
         super(builder);
     }
 

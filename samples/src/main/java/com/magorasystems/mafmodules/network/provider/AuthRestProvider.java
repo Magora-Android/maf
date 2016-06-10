@@ -25,6 +25,7 @@ public class AuthRestProvider extends RestBaseDataProvider<AuthApiClientWrapper,
     @Inject
     protected SimpleMemoryTokenStorable memoryTokenStorable;
 
+    @Inject
     public AuthRestProvider(HasComponent<SampleComponent> hasComponent, SchedulersUtils.CoreScheduler scheduler, AuthApiClientWrapper restApiClientWrapper) {
         super(hasComponent, scheduler, restApiClientWrapper);
     }

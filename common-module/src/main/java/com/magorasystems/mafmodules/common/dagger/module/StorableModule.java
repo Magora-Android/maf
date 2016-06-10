@@ -18,7 +18,7 @@ public class StorableModule implements BaseModule {
 
     @Provides
     @Singleton
-    protected StringApiTokenStorage providerMemoryTokenStorable() {
+    public StringApiTokenStorage providerMemoryTokenStorable() {
         return new SimpleMemoryTokenStorable();
     }
 }

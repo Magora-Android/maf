@@ -5,15 +5,7 @@ package com.magorasystems.mafmodules.network;
  *
  * @author Valentin S.Bolkonsky
  */
-public class ApiClientWrapper<A> {
+public interface ApiClientWrapper<A> {
 
-    private final A client;
-
-    public ApiClientWrapper(A client) {
-        this.client = client;
-    }
-
-    public A getClient() {
-        return client;
-    }
+    public A getClient();
 }

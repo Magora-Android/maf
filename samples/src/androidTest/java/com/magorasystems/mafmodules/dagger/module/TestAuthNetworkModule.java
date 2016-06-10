@@ -6,9 +6,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.magorasystems.mafmodules.BuildConfig;
 import com.magorasystems.mafmodules.common.dagger.module.BaseModule;
+import com.magorasystems.mafmodules.dagger.scope.ApplicationScope;
 import com.magorasystems.mafmodules.network.AuthApiClient;
 import com.magorasystems.mafmodules.network.AuthApiClientWrapper;
+import com.magorasystems.mafmodules.network.AuthApiClientWrapperImpl;
 import com.magorasystems.mafmodules.network.AuthRestApiFactory;
+import com.magorasystems.mafmodules.network.MockAuthRestClient;
 import com.magorasystems.mafmodules.network.RestApiFactory;
 import com.magorasystems.mafmodules.network.client.LoggerOkHttpClientFactory;
 import com.magorasystems.mafmodules.network.config.ServerEndpoint;
@@ -17,7 +20,7 @@ import com.magorasystems.mafmodules.network.config.SimpleTokenConfig;
 import com.magorasystems.mafmodules.network.interceptor.HeaderInterceptor;
 import com.magorasystems.mafmodules.network.store.SimpleMemoryTokenStorable;
 
-import javax.inject.Singleton;
+import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
@@ -35,29 +38,29 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class TestAuthNetworkModule implements BaseModule {
 
     @Provides
-    @Singleton
-    protected Cache providerOkHttpCache(Context application) {
+    @ApplicationScope
+    public Cache providerOkHttpCache(Context application) {
         int cacheSize = 10 * 1024 * 1024; // 10 MiB
         Cache cache = new Cache(application.getCacheDir(), cacheSize);
         return cache;
     }
 
     @Provides
-    @Singleton
-    protected Gson providerGson() {
+    @ApplicationScope
+    public Gson providerGson() {
         GsonBuilder gsonBuilder = new GsonBuilder();
         return gsonBuilder.create();
     }
 
     @Provides
-    @Singleton
-    protected HeaderInterceptor providerHeaderInterceptor(SimpleMemoryTokenStorable tokenStorable) {
+    @ApplicationScope
+    public HeaderInterceptor providerHeaderInterceptor(SimpleMemoryTokenStorable tokenStorable) {
         return new HeaderInterceptor(SimpleTokenConfig.HEADER_FIELD_NAME, tokenStorable);
     }
 
     @Provides
-    @Singleton
-    protected OkHttpClient provideOkHttpClient(Cache cache, HeaderInterceptor headerInterceptor) {
+    @ApplicationScope
+    public OkHttpClient provideOkHttpClient(Cache cache, HeaderInterceptor headerInterceptor) {
         return LoggerOkHttpClientFactory.builder()
                 .registerInterceptor(headerInterceptor)
                 .isDebug(true)
@@ -68,8 +71,7 @@ public class TestAuthNetworkModule implements BaseModule {
     }
 
     @Provides
-    @Singleton
-    protected ServerEndpoint providerServerEndpoint() {
+    public ServerEndpoint providerServerEndpoint() {
         return new SimpleServerEndpoint.Builder()
                 .host(BuildConfig.REST_API_HOST)
                 .path(BuildConfig.REST_API_PATH)
@@ -78,7 +80,8 @@ public class TestAuthNetworkModule implements BaseModule {
     }
 
     @Provides
-    protected AuthApiClient providerAuthRestClient(ServerEndpoint serverEndpoint, Gson gson, OkHttpClient client) {
+    @Named(QUALIFIER_COMBAT)
+    public AuthApiClient providerAuthRestClient(ServerEndpoint serverEndpoint, Gson gson, OkHttpClient client) {
         return new RestApiFactory.Builder<>(AuthRestApiFactory.class)
                 .client(client)
                 .endpoint(serverEndpoint)
@@ -89,7 +92,22 @@ public class TestAuthNetworkModule implements BaseModule {
     }
 
     @Provides
-    protected AuthApiClientWrapper providerAuthClientWrapper(AuthApiClient apiClient) {
-        return new AuthApiClientWrapper(apiClient);
+    @ApplicationScope
+    @Named(QUALIFIER_COMBAT)
+    public AuthApiClientWrapper providerAuthClientWrapper(AuthApiClient apiClient) {
+        return new AuthApiClientWrapperImpl(apiClient);
+    }
+    @Provides
+    @ApplicationScope
+    @Named(QUALIFIER_MOCK)
+    protected AuthApiClient providerMockAuthRestClient(ServerEndpoint serverEndpoint, Gson gson, OkHttpClient client) {
+        return new MockAuthRestClient();
+    }
+
+    @Provides
+    @ApplicationScope
+    @Named(QUALIFIER_MOCK)
+    protected AuthApiClientWrapper providerMockAuthClientWrapper(@Named(QUALIFIER_MOCK) AuthApiClient apiClient) {
+        return new AuthApiClientWrapperImpl(apiClient);
     }
 }

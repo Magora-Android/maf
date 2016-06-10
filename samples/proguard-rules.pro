@@ -240,6 +240,12 @@
 -keep interface dagger.MembersInjector{
   *;
  }
+ -keep interface javax.inject.**{*;}
+ -keep class javax.inject.**{*;}
+ -keep enum javax.inject.**{*;}
+  -keep @interface javax.inject.**{
+     *;
+  }
 #---------------------------------------------------------------------------------------------------
 
 # Warnings

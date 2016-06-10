@@ -73,7 +73,7 @@ android {
         disable 'ExtraTranslation'
     }
     dexOptions {
-        incremental true
+        incremental false
         preDexLibraries = false
         javaMaxHeapSize "4g"
     }
@@ -140,7 +140,8 @@ dependencies {
             // Set this dependency to use JUnit 4 rules
             "com.android.support.test:rules:$version_support_test",
             "com.squareup.okhttp3:mockwebserver:$version_mockitoserver",
-            "com.android.support.test.espresso:espresso-core:$version_espresso"
+            "com.android.support.test.espresso:espresso-core:$version_espresso",
+            "com.github.blocoio:faker:1.2.3"
     )
     androidTestCompile project(path: ':common-utils')
     androidTestCompile project(path: ':common-network')

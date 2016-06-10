@@ -5,9 +5,7 @@ package com.magorasystems.mafmodules.network;
  *
  * @author Valentin S.Bolkonsky
  */
-public class AuthApiClientWrapper extends ApiClientWrapper<AuthApiClient> {
+public interface AuthApiClientWrapper extends ApiClientWrapper<AuthApiClient> {
 
-    public AuthApiClientWrapper(AuthApiClient client) {
-        super(client);
-    }
+
 }
