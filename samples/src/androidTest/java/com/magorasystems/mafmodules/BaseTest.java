@@ -11,6 +11,8 @@ import com.magorasystems.mafmodules.dagger.TestSampleComponent;
 import com.magorasystems.mafmodules.network.manager.NetworkConnectionManager;
 
 import org.junit.Before;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 
@@ -20,6 +22,8 @@ import javax.inject.Inject;
  * @author Valentin S. Bolkonsky
  */
 public class BaseTest implements HasComponent<TestSampleComponent> {
+
+    protected static final Logger LOGGER = LoggerFactory.getLogger(BaseTest.class);
 
     @Inject
     protected SampleApplication application;

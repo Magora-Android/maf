@@ -3,8 +3,12 @@ package com.magorasystems.mafmodules.utils;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.magorasystems.mafmodules.common.utils.MiscUtils;
 import com.magorasystems.mafmodules.protocolapi.auth.response.SimpleStringAuthSuccessResponse;
 import com.magorasystems.mafmodules.protocolapi.auth.response.StringAuthResponseData;
+import com.magorasystems.protocolapi.auth.dto.request.AuthRequest;
+import com.magorasystems.protocolapi.auth.dto.request.SimpleAuthMeta;
+import com.magorasystems.protocolapi.auth.dto.request.SimpleAuthRequest;
 import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
 
 import org.slf4j.Logger;
@@ -41,8 +45,19 @@ public class JsonStub {
         return gson.toJson(t);
     }
 
+    public static AuthRequest generateMetaAuthRequest() {
+        final Faker faker = new Faker(Locale.US.getLanguage());
+        final SimpleAuthMeta authMeta = new SimpleAuthMeta(
+                MiscUtils.getHardwareId(), faker.app.version(),
+                faker.internet.deviceToken());
+        final SimpleAuthRequest request = new SimpleAuthRequest(
+                faker.internet.freeEmail(), faker.internet.password(),
+                authMeta);
+        return generator(request);
+    }
+
     public static SimpleStringAuthSuccessResponse generateAuthSuccessResponse() {
-        final Faker faker = new Faker(Locale.US.getCountry());
+        final Faker faker = new Faker(Locale.US.getLanguage());
         final StringAuthInfo info = new StringAuthInfo(faker.name.name(), faker.number.number(7));
         final StringAuthResponseData responseData = new StringAuthResponseData(faker.number.number(20),
                 faker.date.forward(14).getTime(), faker.number.number(16), info);

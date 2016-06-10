@@ -73,9 +73,9 @@ android {
         disable 'ExtraTranslation'
     }
     dexOptions {
-        incremental false
+        incremental true
         preDexLibraries = false
-        javaMaxHeapSize "4g"
+        javaMaxHeapSize "6g"
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

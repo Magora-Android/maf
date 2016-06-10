@@ -1,8 +1,5 @@
 package com.magorasystems.mafmodules.dagger.scope;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-
 import javax.inject.Scope;
 
 /**
@@ -11,6 +8,5 @@ import javax.inject.Scope;
  * @author Valentin S.Bolkonsky
  */
 @Scope
-@Retention(RetentionPolicy.RUNTIME)
 public @interface ApplicationScope {
 }

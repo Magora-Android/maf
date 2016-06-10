@@ -8,4 +8,6 @@ import com.magorasystems.mafmodules.network.config.SimpleTokenConfig;
  * @author Valentin S.Bolkonsky
  */
 public interface StringApiTokenStorage extends ApiTokenStorable<SimpleTokenConfig>{
+
+
 }
