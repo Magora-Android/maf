@@ -5,7 +5,9 @@ import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
 import com.magorasystems.mafmodules.common.utils.component.HasComponent;
 import com.magorasystems.mafmodules.dagger.component.SampleComponent;
 import com.magorasystems.mafmodules.network.AuthApiClientWrapper;
+import com.magorasystems.mafmodules.network.RefreshTokenApiClient;
 import com.magorasystems.mafmodules.network.config.SimpleTokenConfig;
+import com.magorasystems.mafmodules.network.exception.RestApiException;
 import com.magorasystems.mafmodules.network.store.StringApiTokenStorage;
 import com.magorasystems.protocolapi.auth.dto.request.AuthRequest;
 import com.magorasystems.protocolapi.auth.dto.request.RefreshTokenRequest;
@@ -26,6 +28,9 @@ public class AuthRestProvider extends RestBaseDataProvider<AuthApiClientWrapper,
 
     @Inject
     protected StringApiTokenStorage tokenStorage;
+
+    @Inject
+    protected RefreshTokenApiClient refreshTokenApiClient;
 
     @Inject
     public AuthRestProvider(HasComponent<SampleComponent> hasComponent,
@@ -49,7 +54,11 @@ public class AuthRestProvider extends RestBaseDataProvider<AuthApiClientWrapper,
 
     @Override
     public Observable<StringAuthInfo> refreshToken() {
-        return restApiClientWrapper.getClient().refreshToken(
+        final SimpleTokenConfig tokenConfig = tokenStorage.restoreObject(SimpleTokenConfig.HEADER_FIELD_NAME);
+        if (tokenConfig == null) {
+            return Observable.error(new RestApiException("token config not set "));
+        }
+        return refreshTokenApiClient.refreshToken(
                 new RefreshTokenRequest(tokenStorage.restoreObject(SimpleTokenConfig.HEADER_FIELD_NAME)
                         .getRefreshToken()))
                 .compose(converter())

@@ -3,7 +3,6 @@ package com.magorasystems.mafmodules.network;
 import com.magorasystems.mafmodules.protocolapi.auth.response.SimpleStringAuthSuccessResponse;
 import com.magorasystems.mafmodules.utils.JsonStub;
 import com.magorasystems.protocolapi.auth.dto.request.AuthRequest;
-import com.magorasystems.protocolapi.auth.dto.request.RefreshTokenRequest;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,10 +20,5 @@ public class MockAuthRestClient implements AuthApiClient {
     public Observable<SimpleStringAuthSuccessResponse> authToken(@Body AuthRequest authorizationData) {
         final SimpleStringAuthSuccessResponse response = JsonStub.generateAuthSuccessResponse();
         return Observable.just(response).delay(1000L, TimeUnit.MILLISECONDS);
-    }
-
-    @Override
-    public Observable<SimpleStringAuthSuccessResponse> refreshToken(@Body RefreshTokenRequest refreshToken) {
-        return null;
     }
 }

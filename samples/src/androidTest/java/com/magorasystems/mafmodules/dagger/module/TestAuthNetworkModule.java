@@ -12,6 +12,8 @@ import com.magorasystems.mafmodules.network.AuthApiClientWrapper;
 import com.magorasystems.mafmodules.network.AuthApiClientWrapperImpl;
 import com.magorasystems.mafmodules.network.AuthRestApiFactory;
 import com.magorasystems.mafmodules.network.MockAuthRestClient;
+import com.magorasystems.mafmodules.network.MockRefreshTokenRestClient;
+import com.magorasystems.mafmodules.network.RefreshTokenApiClient;
 import com.magorasystems.mafmodules.network.RestApiFactory;
 import com.magorasystems.mafmodules.network.client.LoggerOkHttpClientFactory;
 import com.magorasystems.mafmodules.network.config.ServerEndpoint;
@@ -92,11 +94,17 @@ public class TestAuthNetworkModule implements BaseModule {
     }
 
     @Provides
+    protected RefreshTokenApiClient providerMockRefreshTokenApiClient(ServerEndpoint serverEndpoint, Gson gson, OkHttpClient client) {
+        return new MockRefreshTokenRestClient(serverEndpoint, gson, client);
+    }
+
+    @Provides
     @ApplicationScope
     @Named(QUALIFIER_COMBAT)
     public AuthApiClientWrapper providerAuthClientWrapper(AuthApiClient apiClient) {
         return new AuthApiClientWrapperImpl(apiClient);
     }
+
     @Provides
     @ApplicationScope
     @Named(QUALIFIER_MOCK)

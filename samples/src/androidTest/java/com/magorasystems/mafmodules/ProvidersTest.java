@@ -3,9 +3,9 @@ package com.magorasystems.mafmodules;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.SmallTest;
 
-import com.magorasystems.mafmodules.mvp.provider.impl.SimpleAuthProvider;
 import com.magorasystems.mafmodules.common.dagger.module.BaseModule;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
+import com.magorasystems.mafmodules.mvp.provider.impl.SimpleAuthProvider;
 import com.magorasystems.mafmodules.network.AuthApiClientWrapper;
 import com.magorasystems.mafmodules.network.RestApiTestSubscriber;
 import com.magorasystems.mafmodules.network.config.SimpleTokenConfig;
@@ -56,6 +56,26 @@ public class ProvidersTest extends BaseTest {
         Assert.assertNotNull("AuthProvider ", mockSimpleAuthProvider);
         final TestSubscriber<StringAuthInfo> testSubscriber = new RestApiTestSubscriber<>();
         mockSimpleAuthProvider.authToken(JsonStub.generateMetaAuthRequest())
+                .compose(SchedulersUtils.applySchedulers(coreScheduler))
+                .subscribe(testSubscriber);
+        testSubscriber.awaitTerminalEvent();
+        testSubscriber.assertNoErrors();
+        testSubscriber.assertValueCount(1);
+        StringAuthInfo authUser = testSubscriber.getOnNextEvents().get(0);
+        Assert.assertNotNull(authUser);
+        LOGGER.info("Auth User {} ", authUser);
+        LOGGER.info("stringApiTokenStorage {} ", stringApiTokenStorage);
+        SimpleTokenConfig config = stringApiTokenStorage.restoreObject(SimpleTokenConfig.HEADER_FIELD_NAME);
+        LOGGER.info("Config {} ", config);
+        Assert.assertNotNull("Config ", config);
+    }
+
+    @Test
+    public void testRefreshToken() throws Exception {
+        Assert.assertNotNull("AuthProvider ", mockSimpleAuthProvider);
+        final TestSubscriber<StringAuthInfo> testSubscriber = new RestApiTestSubscriber<>();
+        stringApiTokenStorage.storeObject(SimpleTokenConfig.HEADER_FIELD_NAME, JsonStub.generateTokenConfig());
+        mockSimpleAuthProvider.refreshToken()
                 .compose(SchedulersUtils.applySchedulers(coreScheduler))
                 .subscribe(testSubscriber);
         testSubscriber.awaitTerminalEvent();

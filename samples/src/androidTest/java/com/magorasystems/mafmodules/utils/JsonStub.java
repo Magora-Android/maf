@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.magorasystems.mafmodules.authmodule.model.AuthViewModel;
 import com.magorasystems.mafmodules.common.utils.MiscUtils;
+import com.magorasystems.mafmodules.network.config.SimpleTokenConfig;
 import com.magorasystems.mafmodules.protocolapi.auth.response.SimpleStringAuthSuccessResponse;
 import com.magorasystems.mafmodules.protocolapi.auth.response.StringAuthResponseData;
 import com.magorasystems.protocolapi.auth.dto.request.AuthRequest;
@@ -55,6 +56,11 @@ public class JsonStub {
                 faker.internet.freeEmail(), faker.internet.password(),
                 authMeta);
         return generator(request);
+    }
+
+    public static SimpleTokenConfig generateTokenConfig() {
+        final Faker faker = new Faker(Locale.US.getLanguage());
+        return new SimpleTokenConfig(faker.number.number(20), faker.number.number(16));
     }
 
     public static SimpleStringAuthSuccessResponse generateAuthSuccessResponse() {

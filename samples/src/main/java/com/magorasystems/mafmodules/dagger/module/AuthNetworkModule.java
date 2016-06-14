@@ -12,6 +12,8 @@ import com.magorasystems.mafmodules.network.AuthApiClient;
 import com.magorasystems.mafmodules.network.AuthApiClientWrapper;
 import com.magorasystems.mafmodules.network.AuthApiClientWrapperImpl;
 import com.magorasystems.mafmodules.network.AuthRestApiFactory;
+import com.magorasystems.mafmodules.network.RefreshTokenApiClient;
+import com.magorasystems.mafmodules.network.RefreshTokenRestApiFactory;
 import com.magorasystems.mafmodules.network.RestApiFactory;
 import com.magorasystems.mafmodules.network.client.LoggerOkHttpClientFactory;
 import com.magorasystems.mafmodules.network.config.ServerEndpoint;
@@ -79,6 +81,17 @@ public class AuthNetworkModule implements BaseModule {
     @Provides
     protected AuthApiClient providerAuthRestClient(ServerEndpoint serverEndpoint, Gson gson, OkHttpClient client) {
         return new RestApiFactory.Builder<>(AuthRestApiFactory.class)
+                .client(client)
+                .endpoint(serverEndpoint)
+                .registerCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .registerConverterFactory(GsonConverterFactory.create(gson))
+                .build()
+                .create();
+    }
+
+    @Provides
+    protected RefreshTokenApiClient providerRefreshTokenApiClient(ServerEndpoint serverEndpoint, Gson gson, OkHttpClient client) {
+        return new RestApiFactory.Builder<>(RefreshTokenRestApiFactory.class)
                 .client(client)
                 .endpoint(serverEndpoint)
                 .registerCallAdapterFactory(RxJavaCallAdapterFactory.create())
