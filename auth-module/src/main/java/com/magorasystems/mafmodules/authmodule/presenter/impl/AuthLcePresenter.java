@@ -6,7 +6,6 @@ import com.magorasystems.mafmodules.authmodule.presenter.AuthPresenter;
 import com.magorasystems.mafmodules.authmodule.router.AuthRouter;
 import com.magorasystems.mafmodules.authmodule.view.impl.StringAuthView;
 import com.magorasystems.mafmodules.common.mvp.presenter.BaseIteratorLcePresenter;
-import com.magorasystems.mafmodules.common.mvp.presenter.BaseLifecyclePresenter;
 import com.magorasystems.mafmodules.common.utils.rx.PresenterSubscriber;
 import com.magorasystems.protocolapi.auth.dto.request.AuthRequest;
 import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
@@ -18,7 +17,7 @@ import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
  */
 public class AuthLcePresenter<I extends AuthInteractor<StringAuthInfo>>
         extends BaseIteratorLcePresenter<StringAuthInfo, I, StringAuthView, AuthRouter>
-        implements AuthPresenter<StringAuthInfo, I>, BaseLifecyclePresenter<StringAuthView, AuthRouter> {
+        implements AuthPresenter<StringAuthInfo, I> {
 
     public AuthLcePresenter(I iterator) {
         super(iterator);
@@ -26,6 +25,7 @@ public class AuthLcePresenter<I extends AuthInteractor<StringAuthInfo>>
 
     @Override
     public void authorization(final AuthViewModel view) {
+        showProgress();
         getIteractor().executeAuthToken(new AuthRequest(view.getLogin(), view.getPassword()), new PresenterSubscriber<>(this));
     }
 

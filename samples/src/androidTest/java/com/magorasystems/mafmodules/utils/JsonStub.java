@@ -3,6 +3,7 @@ package com.magorasystems.mafmodules.utils;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.magorasystems.mafmodules.authmodule.model.AuthViewModel;
 import com.magorasystems.mafmodules.common.utils.MiscUtils;
 import com.magorasystems.mafmodules.protocolapi.auth.response.SimpleStringAuthSuccessResponse;
 import com.magorasystems.mafmodules.protocolapi.auth.response.StringAuthResponseData;
@@ -62,6 +63,16 @@ public class JsonStub {
         final StringAuthResponseData responseData = new StringAuthResponseData(faker.number.number(20),
                 faker.date.forward(14).getTime(), faker.number.number(16), info);
         return generator(new SimpleStringAuthSuccessResponse("sample.code.success", responseData));
+    }
+
+    public static AuthViewModel generateAuthViewModel() {
+        final Faker faker = new Faker(Locale.US.getLanguage());
+        final AuthViewModel viewModel = new AuthViewModel.Builder()
+                .login(faker.internet.email())
+                .password(faker.internet.password())
+                .build();
+        LOGGER.debug("authViewModel {} ", viewModel);
+        return viewModel;
     }
 
     public static <T> T generator(T response) {

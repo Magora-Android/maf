@@ -25,6 +25,14 @@ public class AuthViewModel implements BaseViewModel {
         return password;
     }
 
+    @Override
+    public String toString() {
+        return "AuthViewModel{" +
+                "login='" + login + '\'' +
+                ", password is set='" + (password != null) + '\'' +
+                '}';
+    }
+
     /**
      * {@code AuthViewModel} builder static inner class.
      */
