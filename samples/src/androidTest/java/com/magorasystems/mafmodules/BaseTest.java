@@ -1,6 +1,7 @@
 package com.magorasystems.mafmodules;
 
 import android.app.Instrumentation;
+import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 
 import com.magorasystems.mafmodules.application.SampleApplication;
@@ -9,6 +10,7 @@ import com.magorasystems.mafmodules.common.utils.component.HasComponent;
 import com.magorasystems.mafmodules.dagger.DaggerTestInner;
 import com.magorasystems.mafmodules.dagger.TestSampleComponent;
 import com.magorasystems.mafmodules.network.manager.NetworkConnectionManager;
+import com.magorasystems.mafmodules.network.store.StringApiTokenStorage;
 
 import org.junit.Before;
 import org.slf4j.Logger;
@@ -26,7 +28,10 @@ public class BaseTest implements HasComponent<TestSampleComponent> {
     protected static final Logger LOGGER = LoggerFactory.getLogger(BaseTest.class);
 
     @Inject
-    protected SampleApplication application;
+    protected Context application;
+
+    @Inject
+    protected StringApiTokenStorage stringApiTokenStorage;
 
     @Inject
     protected SchedulersUtils.CoreScheduler coreScheduler;

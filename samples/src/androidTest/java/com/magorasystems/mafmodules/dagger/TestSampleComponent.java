@@ -10,7 +10,6 @@ import com.magorasystems.mafmodules.dagger.module.TestAuthIteratorModule;
 import com.magorasystems.mafmodules.dagger.module.TestAuthNetworkModule;
 import com.magorasystems.mafmodules.dagger.module.TestAuthPresenterModule;
 import com.magorasystems.mafmodules.dagger.module.TestAuthProviderModule;
-import com.magorasystems.mafmodules.dagger.module.TestSampleModule;
 import com.magorasystems.mafmodules.dagger.scope.ApplicationScope;
 
 /**
@@ -19,7 +18,7 @@ import com.magorasystems.mafmodules.dagger.scope.ApplicationScope;
  * @author Valentin S.Bolkonsky
  */
 @dagger.Component(dependencies = CommonModuleComponent.class,
-                  modules = {TestSampleModule.class, TestAuthNetworkModule.class, TestAuthProviderModule.class,
+                  modules = {TestAuthNetworkModule.class, TestAuthProviderModule.class,
                           TestAuthPresenterModule.class, TestAuthIteratorModule.class})
 @ApplicationScope
 public interface TestSampleComponent extends SampleComponent {

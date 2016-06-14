@@ -20,7 +20,8 @@ public class AuthProviderModule implements BaseModule {
 
     @Provides
     protected SimpleAuthProvider providerAuthRestProvider(SampleApplication application,
-                                                          SchedulersUtils.CoreScheduler scheduler, AuthApiClientWrapper clientWrapper) {
+                                                          SchedulersUtils.CoreScheduler scheduler,
+                                                          AuthApiClientWrapper clientWrapper) {
         return new AuthRestProvider(application, scheduler, clientWrapper);
     }
 }

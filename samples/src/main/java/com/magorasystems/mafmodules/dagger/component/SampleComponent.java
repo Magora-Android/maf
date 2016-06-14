@@ -5,7 +5,6 @@ import com.magorasystems.mafmodules.common.dagger.component.CommonModuleComponen
 import com.magorasystems.mafmodules.dagger.module.AuthInteratorModule;
 import com.magorasystems.mafmodules.dagger.module.AuthNetworkModule;
 import com.magorasystems.mafmodules.dagger.module.AuthProviderModule;
-import com.magorasystems.mafmodules.dagger.module.SampleModule;
 import com.magorasystems.mafmodules.dagger.scope.ApplicationScope;
 import com.magorasystems.mafmodules.mvp.interactor.SimpleAuthInteractor;
 import com.magorasystems.mafmodules.mvp.presenter.SimpleAuthPresenter;
@@ -21,7 +20,7 @@ import dagger.Component;
  */
 
 @Component(dependencies = CommonModuleComponent.class,
-           modules = {SampleModule.class, AuthNetworkModule.class,
+           modules = {AuthNetworkModule.class,
                    AuthProviderModule.class, AuthInteratorModule.class,
                    AuthProviderModule.class})
 @ApplicationScope

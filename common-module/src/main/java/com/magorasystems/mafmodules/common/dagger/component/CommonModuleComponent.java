@@ -20,7 +20,6 @@ import dagger.Component;
  *
  * @author Valentin S.Bolkonsky
  */
-@Singleton
 @Component(
         modules = {
                 ApplicationModule.class,
@@ -28,6 +27,7 @@ import dagger.Component;
                 StorableModule.class
         }
 )
+@Singleton
 public interface CommonModuleComponent {
 
     LocationManager locationManager();
@@ -38,7 +38,7 @@ public interface CommonModuleComponent {
 
     SchedulersUtils.CoreScheduler coreScheduler();
 
-    StringApiTokenStorage stringApiTokenStorage();
+    StringApiTokenStorage memoryTokenStorable();
 
     void inject(SomeClass someClass);
 

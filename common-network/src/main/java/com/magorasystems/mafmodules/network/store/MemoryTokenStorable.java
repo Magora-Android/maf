@@ -51,4 +51,8 @@ public class MemoryTokenStorable<T extends TokenConfig> implements ApiTokenStora
         tokens.remove(key);
     }
 
+    @Override
+    public int size() {
+        return tokens != null ? tokens.size() : 0;
+    }
 }

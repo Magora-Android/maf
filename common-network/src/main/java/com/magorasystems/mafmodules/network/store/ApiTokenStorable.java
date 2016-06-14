@@ -13,4 +13,6 @@ public interface ApiTokenStorable<T extends TokenConfig> extends Storable<String
     void clear();
 
     boolean updateAccessToken(String key, String accessToken);
+
+    int size();
 }

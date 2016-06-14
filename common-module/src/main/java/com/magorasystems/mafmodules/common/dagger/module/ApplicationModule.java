@@ -5,6 +5,8 @@ import android.location.LocationManager;
 
 import com.magorasystems.mafmodules.common.application.ComponentApplication;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -22,16 +24,13 @@ public class ApplicationModule implements BaseModule {
     }
 
     @Provides
+    @Singleton
     public Context providerContext() {
         return this.application.getContext();
     }
 
     @Provides
-    public ComponentApplication<?> providerComponentApplication() {
-        return application;
-    }
-
-    @Provides
+    @Singleton
     public LocationManager providerLocationManager(Context context) {
         return (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
     }

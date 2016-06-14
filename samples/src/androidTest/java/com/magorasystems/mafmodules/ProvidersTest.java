@@ -9,7 +9,6 @@ import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
 import com.magorasystems.mafmodules.network.AuthApiClientWrapper;
 import com.magorasystems.mafmodules.network.RestApiTestSubscriber;
 import com.magorasystems.mafmodules.network.config.SimpleTokenConfig;
-import com.magorasystems.mafmodules.network.store.StringApiTokenStorage;
 import com.magorasystems.mafmodules.utils.JsonStub;
 import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
 
@@ -39,8 +38,6 @@ public class ProvidersTest extends BaseTest {
     @Named(BaseModule.QUALIFIER_MOCK)
     protected SimpleAuthProvider mockSimpleAuthProvider;
 
-    @Inject
-    protected StringApiTokenStorage stringApiTokenStorage;
 
     @Override
     public void setUp() throws Exception {
@@ -71,6 +68,6 @@ public class ProvidersTest extends BaseTest {
         LOGGER.info("stringApiTokenStorage {} ", stringApiTokenStorage);
         SimpleTokenConfig config = stringApiTokenStorage.restoreObject(SimpleTokenConfig.HEADER_FIELD_NAME);
         LOGGER.info("Config {} ", config);
-        Assert.assertNull("Config ", config);
+        Assert.assertNotNull("Config ", config);
     }
 }

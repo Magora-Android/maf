@@ -6,14 +6,11 @@ import com.magorasystems.mafmodules.common.utils.component.HasComponent;
 import com.magorasystems.mafmodules.dagger.component.SampleComponent;
 import com.magorasystems.mafmodules.network.AuthApiClientWrapper;
 import com.magorasystems.mafmodules.network.config.SimpleTokenConfig;
-import com.magorasystems.mafmodules.network.store.SimpleMemoryTokenStorable;
+import com.magorasystems.mafmodules.network.store.StringApiTokenStorage;
 import com.magorasystems.protocolapi.auth.dto.request.AuthRequest;
 import com.magorasystems.protocolapi.auth.dto.request.RefreshTokenRequest;
 import com.magorasystems.protocolapi.auth.dto.response.AuthResponseData;
 import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 
@@ -27,15 +24,13 @@ import rx.functions.Action1;
  */
 public class AuthRestProvider extends RestBaseDataProvider<AuthApiClientWrapper, SampleComponent> implements SimpleAuthProvider {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AuthRestProvider.class);
-
     @Inject
-    protected SimpleMemoryTokenStorable memoryTokenStorable;
+    protected StringApiTokenStorage tokenStorage;
 
-    @Inject
-    public AuthRestProvider(HasComponent<SampleComponent> hasComponent, SchedulersUtils.CoreScheduler scheduler, AuthApiClientWrapper restApiClientWrapper) {
+    public AuthRestProvider(HasComponent<SampleComponent> hasComponent,
+                            SchedulersUtils.CoreScheduler scheduler,
+                            AuthApiClientWrapper restApiClientWrapper) {
         super(hasComponent, scheduler, restApiClientWrapper);
-        LOGGER.debug("TokenStorage: {}", memoryTokenStorable);
     }
 
     @Override
@@ -54,7 +49,7 @@ public class AuthRestProvider extends RestBaseDataProvider<AuthApiClientWrapper,
     @Override
     public Observable<StringAuthInfo> refreshToken() {
         return restApiClientWrapper.getClient().refreshToken(
-                new RefreshTokenRequest(memoryTokenStorable.restoreObject(SimpleTokenConfig.HEADER_FIELD_NAME)
+                new RefreshTokenRequest(tokenStorage.restoreObject(SimpleTokenConfig.HEADER_FIELD_NAME)
                         .getRefreshToken()))
                 .compose(converter())
                 .doOnNext(saveTokensToStorage)
@@ -65,8 +60,11 @@ public class AuthRestProvider extends RestBaseDataProvider<AuthApiClientWrapper,
 
         @Override
         public void call(AuthResponseData<?> model) {
+            if (tokenStorage == null) {
+                return;
+            }
             if (model != null) {
-                memoryTokenStorable.storeObject(SimpleTokenConfig.HEADER_FIELD_NAME, new SimpleTokenConfig(model.getAccessToken(), model.getRefreshToken()));
+                tokenStorage.storeObject(SimpleTokenConfig.HEADER_FIELD_NAME, new SimpleTokenConfig(model.getAccessToken(), model.getRefreshToken()));
             }
         }
     };
