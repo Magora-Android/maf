@@ -1,9 +1,11 @@
 package com.magorasystems.mafmodules.dagger.module;
 
+import android.content.Context;
+
 import com.magorasystems.mafmodules.application.SampleApplication;
-import com.magorasystems.mafmodules.authmodule.provider.impl.SimpleAuthProvider;
 import com.magorasystems.mafmodules.common.dagger.module.BaseModule;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
+import com.magorasystems.mafmodules.mvp.provider.impl.SimpleAuthProvider;
 import com.magorasystems.mafmodules.network.AuthApiClientWrapper;
 import com.magorasystems.mafmodules.network.provider.AuthRestProvider;
 
@@ -19,9 +21,9 @@ import dagger.Provides;
 public class AuthProviderModule implements BaseModule {
 
     @Provides
-    protected SimpleAuthProvider providerAuthRestProvider(SampleApplication application,
+    protected SimpleAuthProvider providerAuthRestProvider(Context application,
                                                           SchedulersUtils.CoreScheduler scheduler,
                                                           AuthApiClientWrapper clientWrapper) {
-        return new AuthRestProvider(application, scheduler, clientWrapper);
+        return new AuthRestProvider((SampleApplication)application, scheduler, clientWrapper);
     }
 }

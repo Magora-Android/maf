@@ -6,8 +6,8 @@ import com.magorasystems.mafmodules.dagger.module.AuthInteratorModule;
 import com.magorasystems.mafmodules.dagger.module.AuthNetworkModule;
 import com.magorasystems.mafmodules.dagger.module.AuthProviderModule;
 import com.magorasystems.mafmodules.dagger.scope.ApplicationScope;
-import com.magorasystems.mafmodules.mvp.interactor.SimpleAuthInteractor;
-import com.magorasystems.mafmodules.mvp.presenter.SimpleAuthPresenter;
+import com.magorasystems.mafmodules.mvp.interactor.SimpleAuthInteractorImpl;
+import com.magorasystems.mafmodules.mvp.presenter.SimpleAuthPresenterImpl;
 import com.magorasystems.mafmodules.network.provider.AuthRestProvider;
 import com.magorasystems.mafmodules.ui.activity.SampleActivity;
 
@@ -34,7 +34,7 @@ public interface SampleComponent {
 
     void inject(AuthRestProvider provider);
 
-    void inject(SimpleAuthInteractor i);
+    void inject(SimpleAuthInteractorImpl i);
 
-    void inject(SimpleAuthPresenter p);
+    void inject(SimpleAuthPresenterImpl p);
 }

@@ -1,6 +1,6 @@
 package com.magorasystems.mafmodules.network.provider;
 
-import com.magorasystems.mafmodules.authmodule.provider.impl.SimpleAuthProvider;
+import com.magorasystems.mafmodules.mvp.provider.impl.SimpleAuthProvider;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
 import com.magorasystems.mafmodules.common.utils.component.HasComponent;
 import com.magorasystems.mafmodules.dagger.component.SampleComponent;
@@ -27,6 +27,7 @@ public class AuthRestProvider extends RestBaseDataProvider<AuthApiClientWrapper,
     @Inject
     protected StringApiTokenStorage tokenStorage;
 
+    @Inject
     public AuthRestProvider(HasComponent<SampleComponent> hasComponent,
                             SchedulersUtils.CoreScheduler scheduler,
                             AuthApiClientWrapper restApiClientWrapper) {

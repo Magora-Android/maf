@@ -3,7 +3,7 @@ package com.magorasystems.mafmodules;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.SmallTest;
 
-import com.magorasystems.mafmodules.authmodule.provider.impl.SimpleAuthProvider;
+import com.magorasystems.mafmodules.mvp.provider.impl.SimpleAuthProvider;
 import com.magorasystems.mafmodules.common.dagger.module.BaseModule;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
 import com.magorasystems.mafmodules.network.AuthApiClientWrapper;
@@ -35,7 +35,6 @@ public class ProvidersTest extends BaseTest {
     protected AuthApiClientWrapper mockAuthApiClientWrapper;
 
     @Inject
-    @Named(BaseModule.QUALIFIER_MOCK)
     protected SimpleAuthProvider mockSimpleAuthProvider;
 
 

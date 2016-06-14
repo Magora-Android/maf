@@ -2,6 +2,7 @@ package com.magorasystems.mafmodules.dagger;
 
 import com.magorasystems.mafmodules.BaseTest;
 import com.magorasystems.mafmodules.DaggerTest;
+import com.magorasystems.mafmodules.InteractorTest;
 import com.magorasystems.mafmodules.NetworkTest;
 import com.magorasystems.mafmodules.ProvidersTest;
 import com.magorasystems.mafmodules.common.dagger.component.CommonModuleComponent;
@@ -30,4 +31,6 @@ public interface TestSampleComponent extends SampleComponent {
     void inject(NetworkTest test);
 
     void inject(ProvidersTest test);
+
+    void inject(InteractorTest test);
 }

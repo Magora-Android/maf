@@ -1,5 +1,7 @@
 package com.magorasystems.mafmodules.dagger.module;
 
+import android.content.Context;
+
 import com.magorasystems.mafmodules.application.SampleApplication;
 import com.magorasystems.mafmodules.common.dagger.module.BaseModule;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
@@ -16,11 +18,13 @@ import dagger.Provides;
  * @author Valentin S.Bolkonsky
  */
 @Module
-public class TestAuthIteratorModule implements BaseModule{
+public class TestAuthIteratorModule implements BaseModule {
 
     @Provides
     @ApplicationScope
-    protected SimpleAuthInteractor providerAuthInteractor(SampleApplication application, SchedulersUtils.CoreScheduler scheduler) {
-        return new SimpleAuthInteractorImpl(application, scheduler);
+    protected SimpleAuthInteractor providerMockAuthInteractor(Context application,
+                                                          SchedulersUtils.CoreScheduler scheduler) {
+        return new SimpleAuthInteractorImpl(SampleApplication.get(application), scheduler);
     }
+
 }

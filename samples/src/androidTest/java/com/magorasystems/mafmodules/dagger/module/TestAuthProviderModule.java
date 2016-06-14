@@ -3,7 +3,8 @@ package com.magorasystems.mafmodules.dagger.module;
 import android.content.Context;
 
 import com.magorasystems.mafmodules.application.SampleApplication;
-import com.magorasystems.mafmodules.authmodule.provider.impl.SimpleAuthProvider;
+import com.magorasystems.mafmodules.dagger.scope.ApplicationScope;
+import com.magorasystems.mafmodules.mvp.provider.impl.SimpleAuthProvider;
 import com.magorasystems.mafmodules.common.dagger.module.BaseModule;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
 import com.magorasystems.mafmodules.network.AuthApiClientWrapper;
@@ -22,16 +23,9 @@ import dagger.Provides;
 @Module
 public class TestAuthProviderModule implements BaseModule {
 
-    @Provides
-    @Named(QUALIFIER_COMBAT)
-    public SimpleAuthProvider providerAuthRestProvider(Context application,
-                                                       SchedulersUtils.CoreScheduler scheduler,
-                                                       AuthApiClientWrapper clientWrapper) {
-        return new AuthRestProvider(SampleApplication.get(application), scheduler, clientWrapper);
-    }
 
     @Provides
-    @Named(QUALIFIER_MOCK)
+    @ApplicationScope
     protected SimpleAuthProvider providerMockAuthRestProvider(Context application,
                                                               SchedulersUtils.CoreScheduler scheduler,
                                                               @Named(QUALIFIER_MOCK) AuthApiClientWrapper clientWrapper) {
