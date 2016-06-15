@@ -13,6 +13,7 @@ import com.magorasystems.mafmodules.dagger.module.TestAuthNetworkModule;
 import com.magorasystems.mafmodules.dagger.module.TestAuthPresenterModule;
 import com.magorasystems.mafmodules.dagger.module.TestAuthProviderModule;
 import com.magorasystems.mafmodules.dagger.scope.ApplicationScope;
+import com.magorasystems.mafmodules.mvp.provider.impl.SimpleAuthProvider;
 
 /**
  * Developed by Magora Team (magora-systems.com). 2016.
@@ -24,6 +25,8 @@ import com.magorasystems.mafmodules.dagger.scope.ApplicationScope;
                           TestAuthPresenterModule.class, TestAuthIteratorModule.class})
 @ApplicationScope
 public interface TestSampleComponent extends SampleComponent {
+
+    SimpleAuthProvider getMockAuthRestProvider();
 
     void inject(BaseTest test);
 

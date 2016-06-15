@@ -3,7 +3,6 @@ package com.magorasystems.mafmodules;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.SmallTest;
 
-import com.magorasystems.mafmodules.common.dagger.module.BaseModule;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
 import com.magorasystems.mafmodules.mvp.provider.impl.SimpleAuthProvider;
 import com.magorasystems.mafmodules.network.AuthApiClientWrapper;
@@ -17,7 +16,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import rx.observers.TestSubscriber;
 
@@ -31,7 +29,6 @@ import rx.observers.TestSubscriber;
 public class ProvidersTest extends BaseTest {
 
     @Inject
-    @Named(BaseModule.QUALIFIER_MOCK)
     protected AuthApiClientWrapper mockAuthApiClientWrapper;
 
     @Inject

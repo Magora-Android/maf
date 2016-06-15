@@ -141,7 +141,8 @@ dependencies {
             "com.android.support.test:rules:$version_support_test",
             "com.squareup.okhttp3:mockwebserver:$version_mockitoserver",
             "com.android.support.test.espresso:espresso-core:$version_espresso",
-            "com.github.blocoio:faker:1.2.3"
+            "com.github.blocoio:faker:1.2.3",
+            "com.github.fabioCollini:DaggerMock:0.6"
     )
     androidTestCompile project(path: ':common-utils')
     androidTestCompile project(path: ':common-network')

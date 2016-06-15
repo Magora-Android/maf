@@ -10,11 +10,9 @@ import com.magorasystems.mafmodules.dagger.scope.ApplicationScope;
 import com.magorasystems.mafmodules.network.AuthApiClient;
 import com.magorasystems.mafmodules.network.AuthApiClientWrapper;
 import com.magorasystems.mafmodules.network.AuthApiClientWrapperImpl;
-import com.magorasystems.mafmodules.network.AuthRestApiFactory;
 import com.magorasystems.mafmodules.network.MockAuthRestClient;
 import com.magorasystems.mafmodules.network.MockRefreshTokenRestClient;
 import com.magorasystems.mafmodules.network.RefreshTokenApiClient;
-import com.magorasystems.mafmodules.network.RestApiFactory;
 import com.magorasystems.mafmodules.network.client.LoggerOkHttpClientFactory;
 import com.magorasystems.mafmodules.network.config.ServerEndpoint;
 import com.magorasystems.mafmodules.network.config.SimpleServerEndpoint;
@@ -22,14 +20,10 @@ import com.magorasystems.mafmodules.network.config.SimpleTokenConfig;
 import com.magorasystems.mafmodules.network.interceptor.HeaderInterceptor;
 import com.magorasystems.mafmodules.network.store.SimpleMemoryTokenStorable;
 
-import javax.inject.Named;
-
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Developed by Magora Team (magora-systems.com). 2016.
@@ -82,40 +76,18 @@ public class TestAuthNetworkModule implements BaseModule {
     }
 
     @Provides
-    @Named(QUALIFIER_COMBAT)
     public AuthApiClient providerAuthRestClient(ServerEndpoint serverEndpoint, Gson gson, OkHttpClient client) {
-        return new RestApiFactory.Builder<>(AuthRestApiFactory.class)
-                .client(client)
-                .endpoint(serverEndpoint)
-                .registerCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .registerConverterFactory(GsonConverterFactory.create(gson))
-                .build()
-                .create();
+        return new MockAuthRestClient();
     }
 
     @Provides
-    protected RefreshTokenApiClient providerMockRefreshTokenApiClient(ServerEndpoint serverEndpoint, Gson gson, OkHttpClient client) {
+    public RefreshTokenApiClient providerRefreshTokenApiClient(ServerEndpoint serverEndpoint, Gson gson, OkHttpClient client) {
         return new MockRefreshTokenRestClient(serverEndpoint, gson, client);
     }
 
     @Provides
     @ApplicationScope
-    @Named(QUALIFIER_COMBAT)
     public AuthApiClientWrapper providerAuthClientWrapper(AuthApiClient apiClient) {
-        return new AuthApiClientWrapperImpl(apiClient);
-    }
-
-    @Provides
-    @ApplicationScope
-    @Named(QUALIFIER_MOCK)
-    protected AuthApiClient providerMockAuthRestClient(ServerEndpoint serverEndpoint, Gson gson, OkHttpClient client) {
-        return new MockAuthRestClient();
-    }
-
-    @Provides
-    @ApplicationScope
-    @Named(QUALIFIER_MOCK)
-    protected AuthApiClientWrapper providerMockAuthClientWrapper(@Named(QUALIFIER_MOCK) AuthApiClient apiClient) {
         return new AuthApiClientWrapperImpl(apiClient);
     }
 }
