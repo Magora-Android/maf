@@ -3,7 +3,10 @@ package com.magorasystems.mafmodules.application;
 import android.content.Context;
 import android.location.LocationManager;
 
+import com.magorasystems.mafmodules.BuildConfig;
+import com.magorasystems.mafmodules.common.application.ApplicationSettings;
 import com.magorasystems.mafmodules.common.application.BaseComponentApplication;
+import com.magorasystems.mafmodules.common.application.CommonApplicationSettings;
 import com.magorasystems.mafmodules.common.dagger.component.CommonModuleComponent;
 import com.magorasystems.mafmodules.common.dagger.component.DaggerCommonModuleComponent;
 import com.magorasystems.mafmodules.common.dagger.module.ApplicationModule;
@@ -49,5 +52,18 @@ public class SampleApplication extends BaseComponentApplication<SampleComponent>
                 .build();
         sampleComponent.inject(this);
         setComponent(sampleComponent);
+    }
+
+    @Override
+    protected ApplicationSettings buildApplicationSettings() {
+        return new CommonApplicationSettings.Builder()
+                .apiHost(BuildConfig.REST_API_HOST)
+                .apiPath(BuildConfig.REST_API_PATH)
+                .apiVersion(BuildConfig.REST_API_VERSION)
+                .maxRequestCount(BuildConfig.REQUESTS_COUNT)
+                .networkDelayAttempt(BuildConfig.NETWORK_DELAY_ATTEMPT)
+                .networkRetryCount(BuildConfig.NETWORK_RETRY_COUNT)
+                .build();
+
     }
 }

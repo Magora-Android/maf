@@ -12,4 +12,6 @@ import com.magorasystems.mafmodules.common.utils.component.HasComponent;
 public interface ComponentApplication<COMPONENT> extends HasComponent<COMPONENT> {
 
     Context getContext();
+
+    ApplicationSettings getSettings();
 }

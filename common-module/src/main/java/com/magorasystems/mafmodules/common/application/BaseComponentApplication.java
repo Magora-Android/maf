@@ -16,6 +16,7 @@ public abstract class BaseComponentApplication<COMPONENT> extends Application
         implements ComponentApplication<COMPONENT> {
 
     private COMPONENT component;
+    private ApplicationSettings settings;
 
     public static <COMPONENT> ComponentApplication<COMPONENT> get(final Context context) {
         return (ComponentApplication<COMPONENT>) context.getApplicationContext();
@@ -24,6 +25,11 @@ public abstract class BaseComponentApplication<COMPONENT> extends Application
     @Override
     public final COMPONENT getComponent() {
         return component;
+    }
+
+    @Override
+    public ApplicationSettings getSettings() {
+        return settings;
     }
 
     @Override
@@ -44,8 +50,11 @@ public abstract class BaseComponentApplication<COMPONENT> extends Application
     public void onCreate() {
         super.onCreate();
         Fabric.with(this, new Crashlytics());
+        settings = buildApplicationSettings();
         buildGraphAndInject();
     }
 
     protected abstract void buildGraphAndInject();
+
+    protected abstract ApplicationSettings buildApplicationSettings();
 }
