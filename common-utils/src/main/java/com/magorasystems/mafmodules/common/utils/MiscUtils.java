@@ -9,7 +9,8 @@ import android.os.Build;
 public class MiscUtils {
 
     public static String getHardwareId() {
-        String hardwareId = "35" + // it starts with '35' for looking like IMEI
+
+        return "35" + // it starts with '35' for looking like IMEI
                 Build.BOARD.length() % 10 +
                 Build.BRAND.length() % 10 +
                 Build.DEVICE.length() % 10 +
@@ -22,7 +23,6 @@ public class MiscUtils {
                 Build.TAGS.length() % 10 +
                 Build.TYPE.length() % 10 +
                 Build.USER.length() % 10;
-
-        return hardwareId;
     }
 }
+

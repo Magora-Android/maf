@@ -21,7 +21,7 @@ buildscript {
         version_rx_preferences = '1.0.1'
         version_retrolambda_plugin = '3.2.4'
         version_retrolambda = '2.0.5'
-        version_butterknife = '7.0.1'
+        version_butterknife = '8.1.0'
         version_semver_git = '2.2.1'
         version_dagger = '2.0.2'
         version_jsr250 = '1.0'

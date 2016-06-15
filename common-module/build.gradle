@@ -89,6 +89,14 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':common-network')
 
+    compile(
+            "com.android.support:appcompat-v7:$version_appcompat",
+            "com.android.support:cardview-v7:$version_appcompat",
+            "com.android.support:recyclerview-v7:$version_appcompat",
+            "com.android.support:support-v13:$version_appcompat",
+            "com.android.support:design:$version_appcompat",
+            "com.android.support:support-annotations:$version_support_annotations"
+    )
 
     compile(
             "com.google.dagger:dagger:$version_dagger",
@@ -99,7 +107,8 @@ dependencies {
 
     compile(
             "io.reactivex:rxandroid:$version_rx_android",
-            "io.reactivex:rxjava:$version_rx_java"
+            "io.reactivex:rxjava:$version_rx_java",
+            "com.jakewharton.rxbinding:rxbinding:$version_rxbinding"
     )
 
     retrolambdaConfig "net.orfjackal.retrolambda:retrolambda:$version_retrolambda"
@@ -107,6 +116,8 @@ dependencies {
     compile("com.crashlytics.sdk.android:crashlytics:$version_crashlytics@aar") {
         transitive = true;
     }
+
+    compile "com.jakewharton:butterknife:$version_butterknife"
 
     testCompile("junit:junit:$version_junit",
             "org.hamcrest:hamcrest-core:$version_hamcrest",
@@ -124,4 +135,5 @@ dependencies {
             // Set this dependency to use JUnit 4 rules
             "com.android.support.test:rules:$version_support_test"
     )
+    compile project(path: ':common-utils')
 }
