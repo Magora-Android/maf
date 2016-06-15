@@ -1,0 +1,91 @@
+apply plugin: 'com.android.library'
+
+version "${versionMajor}.${versionMinor}.${versionPatch}"
+
+android {
+    compileSdkVersion version_sdk_target
+    buildToolsVersion version_buildTools
+
+    defaultPublishConfig "debug"
+
+    defaultConfig {
+        minSdkVersion version_sdk_min
+        targetSdkVersion version_sdk_target
+        group 'com.magorasystems.android'
+        versionCode gitVersion()
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/notice'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/license'
+    }
+    lintOptions {
+        abortOnError false
+        enable 'BackButton'
+        enable 'GradleDynamicVersion'
+        enable 'NewerVersionAvailable'
+
+        disable 'MissingTranslation'
+        disable 'InvalidPackage'
+        disable 'ExtraTranslation'
+    }
+    dexOptions {
+        incremental true
+        preDexLibraries = false
+        javaMaxHeapSize "4g"
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    // Always show the result of every unit test, even if it passes.
+    testOptions.unitTests.all {
+        testLogging {
+            events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+        }
+    }
+
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile project(':common-network')
+    compile project(':auth-protocol-api')
+
+    testCompile("junit:junit:$version_junit",
+            "org.hamcrest:hamcrest-core:$version_hamcrest",
+            "org.hamcrest:hamcrest-library:$version_hamcrest",
+            "org.mockito:mockito-core:$version_mockito")
+
+    androidTestCompile(
+            "com.android.support:support-annotations:$version_support_annotations",
+            "org.mockito:mockito-core:$version_mockito",
+            "com.google.dexmaker:dexmaker:$version_dexmaker",
+            "com.google.dexmaker:dexmaker-mockito:$version_dexmaker",
+            "com.android.support.test:runner:$version_support_test",
+            // Set this dependency to use JUnit 4 rules
+            "com.android.support.test:rules:$version_support_test"
+    )
+}

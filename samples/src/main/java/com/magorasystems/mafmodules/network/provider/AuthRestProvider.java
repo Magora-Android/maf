@@ -1,11 +1,11 @@
 package com.magorasystems.mafmodules.network.provider;
 
-import com.magorasystems.mafmodules.mvp.provider.impl.SimpleAuthProvider;
+import com.magorasystems.mafmodule.security.network.RefreshTokenApiClient;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
 import com.magorasystems.mafmodules.common.utils.component.HasComponent;
 import com.magorasystems.mafmodules.dagger.component.SampleComponent;
+import com.magorasystems.mafmodules.mvp.provider.impl.SimpleAuthProvider;
 import com.magorasystems.mafmodules.network.AuthApiClientWrapper;
-import com.magorasystems.mafmodules.network.RefreshTokenApiClient;
 import com.magorasystems.mafmodules.network.config.SimpleTokenConfig;
 import com.magorasystems.mafmodules.network.exception.RestApiException;
 import com.magorasystems.mafmodules.network.store.StringApiTokenStorage;

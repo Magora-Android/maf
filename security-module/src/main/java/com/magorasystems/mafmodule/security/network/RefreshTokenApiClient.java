@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.network;
+package com.magorasystems.mafmodule.security.network;
 
 import com.magorasystems.mafmodules.protocolapi.auth.response.SimpleStringAuthSuccessResponse;
 import com.magorasystems.protocolapi.auth.dto.request.RefreshTokenRequest;

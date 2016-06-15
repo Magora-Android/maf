@@ -101,6 +101,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':common-module')
     compile project(':auth-module')
+    compile project(':security-module')
 
     compile(
             "com.android.support:appcompat-v7:$version_appcompat",
@@ -146,4 +147,5 @@ dependencies {
     )
     androidTestCompile project(path: ':common-utils')
     androidTestCompile project(path: ':common-network')
+    androidTestCompile project(path: ':security-module')
 }

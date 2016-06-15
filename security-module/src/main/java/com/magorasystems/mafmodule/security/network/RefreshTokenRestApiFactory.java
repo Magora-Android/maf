@@ -1,4 +1,7 @@
-package com.magorasystems.mafmodules.network;
+package com.magorasystems.mafmodule.security.network;
+
+import com.magorasystems.mafmodules.network.GenericRestApiFactory;
+import com.magorasystems.mafmodules.network.RestApiFactory;
 
 /**
  * Developed by Magora Team (magora-systems.com). 2016.

@@ -1,13 +1,13 @@
 package com.magorasystems.mafmodules.dagger.module;
 
 import com.google.gson.Gson;
+import com.magorasystems.mafmodule.security.network.RefreshTokenApiClient;
+import com.magorasystems.mafmodule.security.network.RefreshTokenRestApiFactory;
 import com.magorasystems.mafmodules.common.dagger.module.BaseModule;
 import com.magorasystems.mafmodules.network.AuthApiClient;
 import com.magorasystems.mafmodules.network.AuthApiClientWrapper;
 import com.magorasystems.mafmodules.network.AuthApiClientWrapperImpl;
 import com.magorasystems.mafmodules.network.AuthRestApiFactory;
-import com.magorasystems.mafmodules.network.RefreshTokenApiClient;
-import com.magorasystems.mafmodules.network.RefreshTokenRestApiFactory;
 import com.magorasystems.mafmodules.network.RestApiFactory;
 import com.magorasystems.mafmodules.network.config.ServerEndpoint;
 
