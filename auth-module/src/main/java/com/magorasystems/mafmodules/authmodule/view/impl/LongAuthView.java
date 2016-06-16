@@ -1,6 +1,6 @@
 package com.magorasystems.mafmodules.authmodule.view.impl;
 
-import com.magorasystems.mafmodules.authmodule.view.AuthView;
+import com.magorasystems.mafmodules.authmodule.view.AuthLceView;
 import com.magorasystems.protocolapi.auth.dto.response.LongAuthInfo;
 
 /**
@@ -8,5 +8,5 @@ import com.magorasystems.protocolapi.auth.dto.response.LongAuthInfo;
  *
  * @author Valentin S.Bolkonsky
  */
-public interface LongAuthView extends AuthView<Long, LongAuthInfo> {
+public interface LongAuthView extends AuthLceView<Long, LongAuthInfo> {
 }

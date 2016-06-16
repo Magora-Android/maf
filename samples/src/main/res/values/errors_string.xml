@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_email_no_valid">Email указан не верно</string>
+    <string name="error_password_no_valid">Длина пароля меньше %d символов или содержит недопустимые символы</string>
+</resources>

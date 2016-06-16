@@ -1,6 +1,6 @@
 package com.magorasystems.mafmodules.authmodule.view.impl;
 
-import com.magorasystems.mafmodules.authmodule.view.AuthView;
+import com.magorasystems.mafmodules.authmodule.view.AuthLceView;
 import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
 
 /**
@@ -8,5 +8,5 @@ import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
  *
  * @author Valentin S.Bolkonsky
  */
-public interface StringAuthView extends AuthView<String, StringAuthInfo> {
+public interface StringAuthView extends AuthLceView<String, StringAuthInfo> {
 }

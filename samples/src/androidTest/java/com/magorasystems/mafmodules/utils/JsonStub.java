@@ -3,7 +3,7 @@ package com.magorasystems.mafmodules.utils;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.magorasystems.mafmodules.authmodule.model.AuthViewModel;
+import com.magorasystems.mafmodules.authmodule.performance.AuthViewModel;
 import com.magorasystems.mafmodules.common.utils.MiscUtils;
 import com.magorasystems.mafmodules.network.config.SimpleTokenConfig;
 import com.magorasystems.mafmodules.protocolapi.auth.response.SimpleStringAuthSuccessResponse;

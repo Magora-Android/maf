@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.authmodule.model;
+package com.magorasystems.mafmodules.authmodule.performance;
 
 import com.magorasystems.mafmodules.common.mvp.model.BaseViewModel;
 
@@ -13,8 +13,12 @@ public class AuthViewModel implements BaseViewModel {
     private final String password;
 
     private AuthViewModel(Builder builder) {
-        login = builder.login;
-        password = builder.password;
+        this(builder.login, builder.password);
+    }
+
+    protected AuthViewModel(String login, String password) {
+        this.login = login;
+        this.password = password;
     }
 
     public String getLogin() {

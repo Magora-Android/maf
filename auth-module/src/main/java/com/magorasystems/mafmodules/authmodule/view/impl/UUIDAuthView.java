@@ -1,6 +1,6 @@
 package com.magorasystems.mafmodules.authmodule.view.impl;
 
-import com.magorasystems.mafmodules.authmodule.view.AuthView;
+import com.magorasystems.mafmodules.authmodule.view.AuthLceView;
 import com.magorasystems.protocolapi.auth.dto.response.UUIDAuthInfo;
 
 import java.util.UUID;
@@ -10,5 +10,5 @@ import java.util.UUID;
  *
  * @author Valentin S.Bolkonsky
  */
-public interface UUIDAuthView extends AuthView<UUID, UUIDAuthInfo> {
+public interface UUIDAuthView extends AuthLceView<UUID, UUIDAuthInfo> {
 }

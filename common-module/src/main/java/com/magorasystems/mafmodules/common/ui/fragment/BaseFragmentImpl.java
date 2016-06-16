@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.common.base.Preconditions;
-import com.magorasystems.mafmodules.common.mvp.view.BaseView;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -22,7 +21,7 @@ import butterknife.Unbinder;
  *
  * @author Valentin S. Bolkonsky
  */
-public abstract class BaseFragmentImpl extends Fragment implements BaseFragment, BaseView {
+public abstract class BaseFragmentImpl extends Fragment implements BaseFragment {
 
     private static final AtomicInteger lastFragmentId = new AtomicInteger(0);
     private final int fragmentId;

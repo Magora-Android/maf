@@ -27,7 +27,7 @@ public abstract class GenericFragment<ROUTER extends BaseRouter> extends BaseFra
     @NonNull
     protected ROUTER router;
 
-    public abstract BasePresenter<? super BaseView, ? super BaseRouter> getPresenter();
+    protected abstract BasePresenter<? extends BaseView, ROUTER> getPresenter();
 
     @Override
     @SuppressWarnings("unchecked")
@@ -40,7 +40,6 @@ public abstract class GenericFragment<ROUTER extends BaseRouter> extends BaseFra
                     "\' must be implement \'BaseRouter\' interface");
         }
         router = (ROUTER) activity;
-        getPresenter().setRouter(router);
     }
 
     @Override
@@ -71,6 +70,16 @@ public abstract class GenericFragment<ROUTER extends BaseRouter> extends BaseFra
         if (presenter != null && presenter instanceof BaseLifecyclePresenter) {
             ((BaseLifecyclePresenter) presenter).onStart();
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        final BasePresenter presenter = getPresenter();
+        if (presenter != null) {
+            presenter.removeRouter();
+            presenter.detachView(false);
+        }
+        super.onDestroyView();
     }
 
     protected final void onSuperStart() {
