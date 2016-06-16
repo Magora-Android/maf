@@ -122,6 +122,9 @@ dependencies {
         transitive = true;
     }
 
+    compile "com.jakewharton:butterknife:$version_butterknife"
+    apt "com.jakewharton:butterknife-compiler:$version_butterknife"
+
     retrolambdaConfig "net.orfjackal.retrolambda:retrolambda:$version_retrolambda"
 
     testCompile("junit:junit:$version_junit",

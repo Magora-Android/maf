@@ -4,9 +4,11 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 
+import com.magorasystems.mafmodules.common.application.ComponentApplication;
 import com.magorasystems.mafmodules.common.mvp.router.BaseRouter;
 import com.magorasystems.mafmodules.common.ui.fragment.BaseFragmentImpl;
 import com.magorasystems.mafmodules.common.ui.widget.WidgetUtils;
+import com.magorasystems.mafmodules.common.utils.component.Injectable;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -16,15 +18,17 @@ import butterknife.Unbinder;
  *
  * @author Valentin S. Bolkonsky
  */
-public abstract class CommonBaseActivity<COMPONENT> extends BaseActivity<COMPONENT> implements CommonActivity, BaseRouter {
+public abstract class CommonBaseActivity<COMPONENT> extends BaseActivity<COMPONENT> implements Injectable<COMPONENT>, CommonActivity, BaseRouter {
 
     private Unbinder unbinder;
 
 
     @Override
+    @SuppressWarnings("unchecked")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         unbinder = ButterKnife.bind(this);
+        inject(((ComponentApplication<COMPONENT>) getApplication()));
     }
 
     @Override

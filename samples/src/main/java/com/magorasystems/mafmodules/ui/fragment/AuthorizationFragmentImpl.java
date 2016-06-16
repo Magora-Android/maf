@@ -1,5 +1,7 @@
 package com.magorasystems.mafmodules.ui.fragment;
 
+import android.os.Bundle;
+
 import com.magorasystems.mafmodules.common.utils.component.HasComponent;
 import com.magorasystems.mafmodules.dagger.component.SampleComponent;
 
@@ -14,6 +16,13 @@ import org.slf4j.LoggerFactory;
 public class AuthorizationFragmentImpl extends AuthorizationFragment<SampleComponent> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthorizationFragmentImpl.class);
+
+    public static AuthorizationFragmentImpl makeFragment() {
+        final AuthorizationFragmentImpl fragment = new AuthorizationFragmentImpl();
+        final Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void showError(Throwable e) {

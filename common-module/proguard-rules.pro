@@ -135,6 +135,43 @@
  }
 #---------------------------------------------------------------------------------------------------
 
+#Butterknife
+
+-keep class butterknife.** { *; }
+-dontwarn butterknife.internal.**
+-dontwarn butterknife.Views$InjectViewProcessor
+
+-keep class **$$ViewBinder { *; }
+
+-keepclasseswithmembernames class * {
+    @butterknife.* <fields>;
+}
+
+-keepclasseswithmembernames class * {
+    @butterknife.* <methods>;
+}
+
+-keepclasseswithmembernames class * {
+    @butterknife.BindInt* <fields>;
+}
+
+-keepclasseswithmembernames class * {
+    @butterknife.Bind* <fields>;
+}
+
+-keepclasseswithmembernames class * {
+    @butterknife.Bind* <methods>;
+}
+
+-keepnames class * {
+    @butterknife.Bind *;
+ }
+
+-keepnames class * {
+    @butterknife.BindInt *;
+ }
+#--------------------------------------------------------------------------------------------------
+
 # Warnings
 -dontwarn com.fernandocejas.**
 -dontwarn com.magorasystems.**

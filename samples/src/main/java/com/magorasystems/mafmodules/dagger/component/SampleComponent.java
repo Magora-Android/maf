@@ -10,6 +10,7 @@ import com.magorasystems.mafmodules.dagger.scope.ApplicationScope;
 import com.magorasystems.mafmodules.mvp.interactor.SimpleAuthInteractorImpl;
 import com.magorasystems.mafmodules.mvp.presenter.SimpleAuthPresenterImpl;
 import com.magorasystems.mafmodules.network.provider.AuthRestProvider;
+import com.magorasystems.mafmodules.ui.activity.AuthorizationActivity;
 import com.magorasystems.mafmodules.ui.activity.SampleActivity;
 import com.magorasystems.mafmodules.ui.fragment.AuthorizationFragmentImpl;
 
@@ -41,4 +42,6 @@ public interface SampleComponent {
     void inject(SimpleAuthPresenterImpl p);
 
     void inject(AuthorizationFragmentImpl f);
+
+    void inject(AuthorizationActivity a);
 }

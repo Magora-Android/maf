@@ -118,6 +118,7 @@ dependencies {
     }
 
     compile "com.jakewharton:butterknife:$version_butterknife"
+    apt "com.jakewharton:butterknife-compiler:$version_butterknife"
 
     testCompile("junit:junit:$version_junit",
             "org.hamcrest:hamcrest-core:$version_hamcrest",

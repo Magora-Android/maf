@@ -69,6 +69,11 @@ public abstract class AuthorizationFragment<COMPONENT> extends GenericFragment<A
                 .subscribe(getPresenter()::authorization);
     }
 
+    @OnClick(R.id.text_password_recover)
+    public void onPasswordRecover() {
+        LOGGER.debug("onPasswordRecover");
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

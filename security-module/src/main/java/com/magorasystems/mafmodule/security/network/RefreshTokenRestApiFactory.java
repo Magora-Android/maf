@@ -10,7 +10,7 @@ import com.magorasystems.mafmodules.network.RestApiFactory;
  */
 public class RefreshTokenRestApiFactory extends GenericRestApiFactory<RefreshTokenApiClient> {
 
-    protected RefreshTokenRestApiFactory(Builder<RefreshTokenApiClient, ? extends RestApiFactory<RefreshTokenApiClient>> builder) {
+    public RefreshTokenRestApiFactory(Builder<RefreshTokenApiClient, ? extends RestApiFactory<RefreshTokenApiClient>> builder) {
         super(builder);
     }
 }
