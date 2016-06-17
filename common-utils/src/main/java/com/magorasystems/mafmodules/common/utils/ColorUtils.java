@@ -1,10 +1,14 @@
 package com.magorasystems.mafmodules.common.utils;
 
 import android.content.Context;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
 import android.os.Build;
 import android.support.annotation.AttrRes;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
+import android.support.annotation.FloatRange;
 import android.support.annotation.NonNull;
 import android.util.TypedValue;
 
@@ -28,5 +32,15 @@ public class ColorUtils {
         final TypedValue value = new TypedValue();
         context.getTheme().resolveAttribute(attributeColor, value, true);
         return value.data;
+    }
+
+    public static Paint getSaturatedPaint(@FloatRange(from = 0, to = 1) float saturationValue) {
+        Paint paint = new Paint();
+        ColorMatrix colorMatrix = new ColorMatrix();
+        colorMatrix.setSaturation(saturationValue);
+        ColorMatrixColorFilter filter = new ColorMatrixColorFilter(colorMatrix);
+        paint.setColorFilter(filter);
+
+        return paint;
     }
 }

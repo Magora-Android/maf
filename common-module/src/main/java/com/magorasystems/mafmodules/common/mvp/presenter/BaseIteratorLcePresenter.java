@@ -31,6 +31,7 @@ public class BaseIteratorLcePresenter<M, I extends BaseInteractor<M>, V extends 
 
     @Override
     public void onError(Throwable e) {
+        showContent();
         showError(e);
     }
 

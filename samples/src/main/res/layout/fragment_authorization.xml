@@ -39,7 +39,8 @@
                 android:indeterminate="true"
                 android:padding="0dp"
                 android:theme="@style/LinearProgress"
-                android:visibility="visible"/>
+                android:visibility="invisible"
+                tools:visibility="visible"/>
 
             <com.magorasystems.mafmodules.ui.widget.AuthWidget
                 android:id="@+id/widget_authorization"
