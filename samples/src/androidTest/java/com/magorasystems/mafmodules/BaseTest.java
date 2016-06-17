@@ -1,6 +1,5 @@
 package com.magorasystems.mafmodules;
 
-import android.app.Instrumentation;
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 
@@ -48,10 +47,13 @@ public class BaseTest implements HasComponent<TestSampleComponent> {
 
     @Before
     public void setUp() throws Exception {
-        Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
-        SampleApplication app = (SampleApplication) instrumentation.getTargetContext().getApplicationContext();
+        SampleApplication app = getApp();
         component = (TestSampleComponent) DaggerTestInner.buildGraph(app);
         app.setComponent(component);
         component.inject(this);
+    }
+
+    public static SampleApplication getApp() {
+        return (SampleApplication) InstrumentationRegistry.getInstrumentation().getTargetContext().getApplicationContext();
     }
 }

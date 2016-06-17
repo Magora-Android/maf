@@ -12,7 +12,7 @@ import okhttp3.OkHttpClient;
  *
  * @author Valentin S.Bolkonsky
  */
-public class TestAuthNetworkWrongModule extends TestAuthNetworkModule {
+public class TestAuthNetworkWrongModule extends AuthNetworkModule {
 
     @Override
     public AuthApiClient providerAuthRestClient(ServerEndpoint serverEndpoint, Gson gson, OkHttpClient client) {
