@@ -1,7 +1,9 @@
 package com.magorasystems.mafmodules.ui.fragment;
 
 import android.os.Bundle;
+import android.view.View;
 
+import com.magorasystems.mafmodules.common.utils.ColorUtils;
 import com.magorasystems.mafmodules.common.utils.component.HasComponent;
 import com.magorasystems.mafmodules.dagger.component.SampleComponent;
 
@@ -27,10 +29,31 @@ public class AuthorizationFragmentImpl extends AuthorizationFragment<SampleCompo
     @Override
     public void showError(Throwable e) {
         LOGGER.error("some error ", e);
+        showErrorDialog(e.getMessage(), (v, i) -> {
+
+        });
     }
 
     @Override
     public void inject(HasComponent<? extends SampleComponent> hasComponent) {
         hasComponent.getComponent().inject(this);
+    }
+
+    @Override
+    public void showProgress() {
+        if (!isActivityDetached()) {
+            getActivity().getWindow().getDecorView()
+                    .setLayerType(View.LAYER_TYPE_HARDWARE, ColorUtils.getSaturatedPaint(0.5f));
+        }
+        super.showProgress();
+    }
+
+    @Override
+    public void showContent() {
+        if (!isActivityDetached()) {
+            getActivity().getWindow().getDecorView()
+                    .setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        }
+        super.showContent();
     }
 }
