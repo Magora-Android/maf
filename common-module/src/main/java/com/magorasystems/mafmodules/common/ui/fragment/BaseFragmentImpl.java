@@ -1,6 +1,7 @@
 package com.magorasystems.mafmodules.common.ui.fragment;
 
 import android.app.Fragment;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
@@ -59,7 +60,7 @@ public abstract class BaseFragmentImpl extends Fragment implements BaseFragment 
     public void onDestroyView() {
         super.onDestroyView();
         detachView();
-        if(unbinder != null) {
+        if (unbinder != null) {
             unbinder.unbind();
         }
     }
@@ -78,4 +79,12 @@ public abstract class BaseFragmentImpl extends Fragment implements BaseFragment 
     protected final boolean isActivityDetached() {
         return getActivity() == null || getActivity().isFinishing();
     }
+
+    protected final void updateDecorView(final Paint paint) {
+        if (!isActivityDetached()) {
+            getActivity().getWindow().getDecorView()
+                    .setLayerType(View.LAYER_TYPE_HARDWARE, paint);
+        }
+    }
+
 }

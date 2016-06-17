@@ -1,5 +1,7 @@
 package com.magorasystems.mafmodules.common.ui.widget;
 
+import java.util.Collection;
+
 import rx.Observable;
 
 /**
@@ -7,7 +9,9 @@ import rx.Observable;
  *
  * @author Valentin S. Bolkonsky
  */
-public interface ValidationWidget {
+public interface ValidationWidget<T> {
 
     Observable<Boolean> validation();
+
+    void updateRules(Collection<T> rules);
 }

@@ -1,7 +1,6 @@
 package com.magorasystems.mafmodules.ui.fragment;
 
 import android.os.Bundle;
-import android.view.View;
 
 import com.magorasystems.mafmodules.common.utils.ColorUtils;
 import com.magorasystems.mafmodules.common.utils.component.HasComponent;
@@ -41,19 +40,13 @@ public class AuthorizationFragmentImpl extends AuthorizationFragment<SampleCompo
 
     @Override
     public void showProgress() {
-        if (!isActivityDetached()) {
-            getActivity().getWindow().getDecorView()
-                    .setLayerType(View.LAYER_TYPE_HARDWARE, ColorUtils.getSaturatedPaint(0.5f));
-        }
+        updateDecorView(ColorUtils.getSaturatedPaint(0.5f));
         super.showProgress();
     }
 
     @Override
     public void showContent() {
-        if (!isActivityDetached()) {
-            getActivity().getWindow().getDecorView()
-                    .setLayerType(View.LAYER_TYPE_HARDWARE, null);
-        }
+        updateDecorView(null);
         super.showContent();
     }
 }

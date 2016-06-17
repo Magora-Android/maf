@@ -10,10 +10,13 @@ import android.widget.TextView;
 
 import com.magorasystems.mafmodules.R;
 import com.magorasystems.mafmodules.authmodule.performance.AuthViewModel;
+import com.magorasystems.mafmodules.common.ui.widget.ValidationTextRule;
 import com.magorasystems.mafmodules.common.utils.PatternsUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Collection;
 
 import butterknife.BindView;
 import rx.Observable;
@@ -36,6 +39,8 @@ public class AuthWidget extends BaseAuthWidget<AuthViewModel, AuthViewModel> {
     @BindView(R.id.text_input_password)
     protected TextInputLayout textInputPassword;
 
+    protected Collection<ValidationTextRule> textRules;
+
     public AuthWidget(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -48,7 +53,6 @@ public class AuthWidget extends BaseAuthWidget<AuthViewModel, AuthViewModel> {
     public AuthWidget(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
-
 
     @Override
     public Observable<AuthViewModel> model() {
@@ -64,8 +68,7 @@ public class AuthWidget extends BaseAuthWidget<AuthViewModel, AuthViewModel> {
 
     }
 
-    @Override
-    public Observable<Boolean> validation() {
+    public Observable<Boolean> defaultValidation() {
         final Observable<Boolean> emailValidator = validatorEmail();
         final Observable<Boolean> passwordValidator = validatorPassword(getContext().getResources().getInteger(R.integer.auth_password_min_length));
         return Observable.combineLatest(emailValidator, passwordValidator,
