@@ -17,7 +17,7 @@ android {
         targetSdkVersion version_sdk_target
         versionCode gitVersion()
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.magorasystems.mafmodules.runner.MockAndroidJUnitRunner"
     }
 
     buildTypes {
