@@ -23,5 +23,7 @@ public class MockSampleApplication extends SampleApplication {
     @Override
     protected void buildGraphAndInject() {
         setComponent(DaggerTestInner.buildGraph(this));
+        //getComponent().inject(this);
+
     }
 }

@@ -2,7 +2,6 @@ package com.magorasystems.mafmodules.dagger.module;
 
 import com.google.gson.Gson;
 import com.magorasystems.mafmodule.security.network.RefreshTokenApiClient;
-import com.magorasystems.mafmodules.common.dagger.module.BaseModule;
 import com.magorasystems.mafmodules.network.AuthApiClient;
 import com.magorasystems.mafmodules.network.AuthApiClientWrapper;
 import com.magorasystems.mafmodules.network.AuthApiClientWrapperImpl;
@@ -10,8 +9,6 @@ import com.magorasystems.mafmodules.network.MockAuthRestClient;
 import com.magorasystems.mafmodules.network.MockRefreshTokenRestClient;
 import com.magorasystems.mafmodules.network.config.ServerEndpoint;
 
-import dagger.Module;
-import dagger.Provides;
 import okhttp3.OkHttpClient;
 
 /**
@@ -19,20 +16,19 @@ import okhttp3.OkHttpClient;
  *
  * @author Valentin S.Bolkonsky
  */
-@Module
-public class TestAuthNetworkModule implements BaseModule {
+public class MockAuthNetworkModule extends AuthNetworkModule {
 
-    @Provides
+    @Override
     public AuthApiClient providerAuthRestClient(ServerEndpoint serverEndpoint, Gson gson, OkHttpClient client) {
         return new MockAuthRestClient();
     }
 
-    @Provides
+    @Override
     public RefreshTokenApiClient providerRefreshTokenApiClient(ServerEndpoint serverEndpoint, Gson gson, OkHttpClient client) {
         return new MockRefreshTokenRestClient(serverEndpoint, gson, client);
     }
 
-    @Provides
+    @Override
     public AuthApiClientWrapper providerAuthClientWrapper(AuthApiClient apiClient) {
         return new AuthApiClientWrapperImpl(apiClient);
     }

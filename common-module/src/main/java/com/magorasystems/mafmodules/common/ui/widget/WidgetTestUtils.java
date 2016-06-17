@@ -31,7 +31,7 @@ public class WidgetTestUtils {
                 .filter(filterByEmpty)
                 .map(TextViewTextChangeEvent::text)
                 .map(t -> t.toString().trim())
-                .map(t -> t.length() > count && (pattern == null || pattern.matcher(t).matches()));
+                .map(t -> t.length() >= count && (pattern == null || pattern.matcher(t).matches()));
     }
 
     public static Observable.Transformer<TextViewTextChangeEvent, Boolean> validationChangeTextViewTransformer(final Pattern pattern, final int count) {
