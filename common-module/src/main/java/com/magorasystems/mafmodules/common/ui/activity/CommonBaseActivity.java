@@ -28,6 +28,7 @@ public abstract class CommonBaseActivity<COMPONENT> extends BaseActivity<COMPONE
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         unbinder = ButterKnife.bind(this);
+        ButterKnife.setDebug(true);
         inject(((ComponentApplication<COMPONENT>) getApplication()));
     }
 

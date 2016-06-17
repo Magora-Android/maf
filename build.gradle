@@ -23,7 +23,7 @@ buildscript {
         version_retrolambda = '2.0.5'
         version_butterknife = '8.1.0'
         version_semver_git = '2.2.1'
-        version_dagger = '2.0.2'
+        version_dagger = '2.4'
         version_jsr250 = '1.0'
         version_guava = '19.0'
 

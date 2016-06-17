@@ -42,9 +42,8 @@ public class SampleActivity extends AppCompatActivity {
         LOGGER.debug("someclass: {} ", claz);
         LOGGER.debug("coreScheduler: {} ", coreScheduler);
 
-        findViewById(R.id.action_go_auth).setOnClickListener(v -> {
-            ActivityNavigator.startGenericActivity(SampleActivity.this, AuthorizationActivity.class, null, false, 0);
-        });
+        findViewById(R.id.action_go_auth).setOnClickListener(v ->
+                ActivityNavigator.startGenericActivity(SampleActivity.this, AuthorizationActivity.class, null, false, 0));
 
     }
 }
