@@ -58,6 +58,8 @@ buildscript {
         version_maf_protocol_api = '0.0.1'
         version_maf_auth_protocol_api = '0.0.1'
         version_maf_utils = '0.0.1'
+        version_maf_network = '0.0.1'
+        version_maf_module = '0.0.1'
 
         versionMajor = 0
         versionMinor = 0
