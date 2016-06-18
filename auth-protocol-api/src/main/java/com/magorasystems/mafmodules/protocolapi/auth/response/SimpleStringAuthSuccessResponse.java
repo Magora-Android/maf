@@ -4,7 +4,7 @@ package com.magorasystems.mafmodules.protocolapi.auth.response;
 import com.magorasystems.protocolapi.auth.dto.response.AuthSuccessResponse;
 
 /**
- * @Author: Valentin S. Bolkonsky
+ * @author: Valentin S. Bolkonsky
  * Developed by Magora Team (magora-systems.com). 2015.
  */
 public class SimpleStringAuthSuccessResponse extends AuthSuccessResponse<StringAuthResponseData> {

@@ -55,6 +55,7 @@ buildscript {
         //Magora Versions
         version_protocol_api = '2.2.0'
         version_protocol_auth_api_dto = '2.2.0'
+        version_maf_protocol_api = '0.0.1'
 
         versionMajor = 0
         versionMinor = 0
