@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">auth-module</string>
+    <string name="auth_email_hint">Электронная почта*</string>
+    <string name="auth_password_hint">Пароль*</string>
+
+    <string name="action_sign_in">Войти</string>
+    <string name="title_sign_in">Вход</string>
+    <string name="password_recover"><u>Забыли пароль?</u></string>
 </resources>
