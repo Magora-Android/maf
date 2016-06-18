@@ -51,9 +51,9 @@ nexus {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    //compile project(':common-protocol-api')
+    compile project(':common-protocol-api')
     compile group: "com.magorasystems.protocolapi", name: "protocol-api-auth-dto", version: "$version_protocol_auth_api_dto"
-    compile group: "com.magorasystems.android", name: "common-protocol-api", version: "$version_maf_protocol_api"
+    //compile group: "com.magorasystems.android", name: "common-protocol-api", version: "$version_maf_protocol_api"
 
     testCompile("junit:junit:$version_junit")
 }

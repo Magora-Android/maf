@@ -126,11 +126,11 @@ nexus {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    //compile project(':common-protocol-api')
-    //compile project(':common-utils')
+    compile project(':common-protocol-api')
+    compile project(':common-utils')
 
-    compile group: "com.magorasystems.android", name: "common-utils", version: "$version_maf_utils"
-    compile group: "com.magorasystems.android", name: "common-protocol-api", version: "$version_maf_auth_protocol_api"
+    //compile group: "com.magorasystems.android", name: "common-utils", version: "$version_maf_utils"
+    //compile group: "com.magorasystems.android", name: "common-protocol-api", version: "$version_maf_auth_protocol_api"
 
     compile(
             "com.google.dagger:dagger:$version_dagger",
