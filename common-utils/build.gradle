@@ -2,8 +2,10 @@ apply plugin: 'com.android.library'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'com.fernandocejas.frodo'
+apply plugin: 'com.bmuschko.nexus'
 
-version "${versionMajor}.${versionMinor}.${versionPatch}"
+
+version "0.0.1"
 
 android {
     compileSdkVersion version_sdk_target
@@ -70,6 +72,47 @@ android {
         incremental false
     }
 
+}
+
+modifyPom {
+    project {
+        name 'Magora Android Utils Library'
+        description 'The module contains the utilitarian methods'
+        url 'https://bitbucket.org/magora_karpenko/maf-modules'
+        inceptionYear '2016'
+
+        scm{
+            url 'https://bitbucket.org/magora_karpenko/maf-modules'
+            connection 'scm:https://bitbucket.org/magora_karpenko/maf-modules'
+            developerConnection 'scm:https://bitbucket.org/magora_karpenko/maf-modules'
+
+        }
+
+        developers{
+            developer {
+                id 'karpenko'
+                name 'Valentin S.Karpenko'
+                email 'karpenko@magora.systems'
+            }
+        }
+
+        organization {
+            name "Magora Systems"
+            url "http://magora-systems.com/"
+        }
+    }
+}
+
+extraArchive {
+    sources = true
+    tests = false
+    javadoc = true
+}
+
+nexus {
+    sign = false
+    repositoryUrl = 'http://nexus.java.magora.team/content/repositories/releases/'
+    snapshotRepositoryUrl = 'http://nexus.java.magora.team/content/repositories/snapshots/'
 }
 
 dependencies {

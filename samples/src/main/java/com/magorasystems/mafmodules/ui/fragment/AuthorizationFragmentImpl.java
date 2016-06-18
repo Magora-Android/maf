@@ -40,7 +40,7 @@ public class AuthorizationFragmentImpl extends AuthorizationFragment<SampleCompo
 
     @Override
     public void showProgress() {
-        updateDecorView(ColorUtils.getSaturatedPaint(0.5f));
+        updateDecorView(ColorUtils.getSaturatedPaint(0.0f));
         super.showProgress();
     }
 
