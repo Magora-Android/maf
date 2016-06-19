@@ -25,7 +25,7 @@ public class AuthProviderModule implements BaseModule {
     protected SimpleAuthProvider providerAuthRestProvider(Context application,
                                                           SchedulersUtils.CoreScheduler scheduler,
                                                           AuthApiClientWrapper clientWrapper) {
-        return new AuthRestProvider(((HasComponent<AuthComponent>) ((HasComponent<?>) application).getComponent())
-                , scheduler, clientWrapper);
+        AuthComponent component = (AuthComponent) ((HasComponent<?>) application).getComponent(AuthComponent.class.getSimpleName());
+        return new AuthRestProvider(component, scheduler, clientWrapper);
     }
 }

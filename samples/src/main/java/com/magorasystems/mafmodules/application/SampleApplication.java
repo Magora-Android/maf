@@ -4,14 +4,17 @@ import android.content.Context;
 import android.location.LocationManager;
 
 import com.magorasystems.mafmodules.BuildConfig;
+import com.magorasystems.mafmodules.authmodule.dagger.AuthDaggerInner;
+import com.magorasystems.mafmodules.authmodule.dagger.component.AuthComponent;
 import com.magorasystems.mafmodules.common.application.ApplicationSettings;
 import com.magorasystems.mafmodules.common.application.BaseComponentApplication;
 import com.magorasystems.mafmodules.common.application.CommonApplicationSettings;
 import com.magorasystems.mafmodules.common.dagger.component.CommonModuleComponent;
-import com.magorasystems.mafmodules.common.dagger.component.DaggerCommonModuleComponent;
-import com.magorasystems.mafmodules.common.dagger.module.ApplicationModule;
 import com.magorasystems.mafmodules.dagger.component.DaggerSampleComponent;
 import com.magorasystems.mafmodules.dagger.component.SampleComponent;
+import com.magorasystems.mafmodules.dagger.component.SampleComponents;
+import com.magorasystems.mafmodules.dagger.module.SampleApplicationModule;
+import com.magorasystems.mafmodules.dagger.scope.ApplicationScope;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -32,6 +35,7 @@ public class SampleApplication extends BaseComponentApplication<SampleComponent>
     protected LocationManager locationManager;
 
     @Inject
+    @ApplicationScope
     protected Context context;
 
     @Override
@@ -43,12 +47,24 @@ public class SampleApplication extends BaseComponentApplication<SampleComponent>
     }
 
     @Override
+    public Object getComponent(String key) {
+        switch (SampleComponents.find(key)) {
+            case AUTH_COMPONENT:
+                return getComponent().authComponent();
+            case COMMON_COMPONENT:
+                return getComponent().authComponent().commonModuleComponent();
+            default:
+                return getComponent();
+        }
+    }
+
+    @Override
     protected void buildGraphAndInject() {
-        CommonModuleComponent component = DaggerCommonModuleComponent.builder()
-                .applicationModule(new ApplicationModule(this))
-                .build();
+        CommonModuleComponent component = AuthDaggerInner.buildCommonModuleComponent(this);
+        AuthComponent authComponent = AuthDaggerInner.buildGraph(component);
         SampleComponent sampleComponent = DaggerSampleComponent.builder()
-                .commonModuleComponent(component)
+                .authComponent(authComponent)
+                .sampleApplicationModule(new SampleApplicationModule(this))
                 .build();
         sampleComponent.inject(this);
         setComponent(sampleComponent);

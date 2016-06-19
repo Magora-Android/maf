@@ -2,7 +2,6 @@ package com.magorasystems.mafmodules.authmodule.provider.rest;
 
 import com.magorasystems.mafmodules.authmodule.provider.AuthProvider;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
-import com.magorasystems.mafmodules.common.utils.component.HasComponent;
 import com.magorasystems.mafmodules.network.GenericApiClientWrapper;
 import com.magorasystems.mafmodules.network.provider.RestBaseDataProvider;
 
@@ -15,7 +14,7 @@ public abstract class RestBaseAuthProvider<A, T extends GenericApiClientWrapper<
         implements AuthProvider<R> {
 
 
-    public RestBaseAuthProvider(HasComponent<COMPONENT> hasComponent, SchedulersUtils.CoreScheduler scheduler, T restApiClientWrapper) {
-        super(hasComponent, scheduler, restApiClientWrapper);
+    public RestBaseAuthProvider(COMPONENT component, SchedulersUtils.CoreScheduler scheduler, T restApiClientWrapper) {
+        super(component, scheduler, restApiClientWrapper);
     }
 }

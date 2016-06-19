@@ -2,7 +2,6 @@ package com.magorasystems.mafmodules.network.provider;
 
 import com.google.common.base.Function;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
-import com.magorasystems.mafmodules.common.utils.component.HasComponent;
 import com.magorasystems.mafmodules.common.utils.component.Injectable;
 import com.magorasystems.mafmodules.network.manager.NetworkConnectionManager;
 import com.magorasystems.mafmodules.network.rx.RxRestApiFunctions;
@@ -26,8 +25,8 @@ public abstract class RestBaseDataProvider<T, COMPONENT> implements Injectable<C
     @Inject
     protected NetworkConnectionManager networkConnectionManager;
 
-    public RestBaseDataProvider(final HasComponent<COMPONENT> hasComponent, final SchedulersUtils.CoreScheduler scheduler, T restApiClientWrapper) {
-        inject(hasComponent);
+    public RestBaseDataProvider(final COMPONENT component, final SchedulersUtils.CoreScheduler scheduler, T restApiClientWrapper) {
+        inject(component);
         this.scheduler = scheduler;
         this.restApiClientWrapper = restApiClientWrapper;
     }

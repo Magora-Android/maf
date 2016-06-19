@@ -3,6 +3,7 @@ package com.magorasystems.mafmodules.authmodule.dagger;
 import com.magorasystems.mafmodules.authmodule.dagger.component.AuthComponent;
 import com.magorasystems.mafmodules.authmodule.dagger.component.DaggerAuthComponent;
 import com.magorasystems.mafmodules.common.application.ComponentApplication;
+import com.magorasystems.mafmodules.common.dagger.component.CommonModuleComponent;
 import com.magorasystems.mafmodules.common.dagger.component.DaggerCommonModuleComponent;
 import com.magorasystems.mafmodules.common.dagger.module.ApplicationModule;
 import com.magorasystems.mafmodules.common.dagger.module.DomainModule;
@@ -13,18 +14,28 @@ import com.magorasystems.mafmodules.common.dagger.module.StorableModule;
  *
  * @author Valentin S. Bolkonsky
  */
-public final class DaggerInner {
+public final class AuthDaggerInner {
 
-    private DaggerInner() {
+    private AuthDaggerInner() {
 
+    }
+
+    public static <COMPONENT> CommonModuleComponent buildCommonModuleComponent(final ComponentApplication<COMPONENT> context) {
+        return DaggerCommonModuleComponent.builder()
+                .applicationModule(new ApplicationModule(context))
+                .storableModule(new StorableModule())
+                .domainModule(new DomainModule()).build();
     }
 
     public static <COMPONENT> AuthComponent buildGraph(final ComponentApplication<COMPONENT> context) {
         return DaggerAuthComponent.builder()
-                .commonModuleComponent(DaggerCommonModuleComponent.builder()
-                        .applicationModule(new ApplicationModule(context))
-                        .storableModule(new StorableModule())
-                        .domainModule(new DomainModule()).build())
+                .commonModuleComponent(buildCommonModuleComponent(context))
+                .build();
+    }
+
+    public static AuthComponent buildGraph(final CommonModuleComponent component) {
+        return DaggerAuthComponent.builder()
+                .commonModuleComponent(component)
                 .build();
     }
 }

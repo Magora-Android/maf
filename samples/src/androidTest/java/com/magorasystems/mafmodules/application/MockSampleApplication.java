@@ -15,6 +15,11 @@ public class MockSampleApplication extends SampleApplication {
     private static final Logger LOGGER = LoggerFactory.getLogger(MockSampleApplication.class);
 
     @Override
+    public Object getComponent(String key) {
+        return null;
+    }
+
+    @Override
     public void onCreate() {
         LOGGER.info("Mock application is running...");
         super.onCreate();

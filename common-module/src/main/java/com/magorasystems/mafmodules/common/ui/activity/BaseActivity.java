@@ -35,4 +35,9 @@ public abstract class BaseActivity<COMPONENT> extends AppCompatActivity implemen
     public final COMPONENT getComponent() {
         return component;
     }
+
+    @Override
+    public Object getComponent(String key) {
+        return null;
+    }
 }

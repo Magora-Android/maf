@@ -38,12 +38,12 @@ public class SampleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sample);
         SampleComponent sampleComponent = ((SampleComponent) SampleApplication.get(this).getComponent());
         sampleComponent.inject(this);
-        SomeClass claz = new SomeClass(sampleComponent.commonModuleComponent());
+        SomeClass claz = new SomeClass(sampleComponent.authComponent().commonModuleComponent());
         LOGGER.debug("someclass: {} ", claz);
         LOGGER.debug("coreScheduler: {} ", coreScheduler);
 
         findViewById(R.id.action_go_auth).setOnClickListener(v ->
-                ActivityNavigator.startGenericActivity(SampleActivity.this, AuthorizationActivity.class, null, false, 0));
+                ActivityNavigator.startGenericActivity(SampleActivity.this, AuthorizationActivityImpl.class, null, false, 0));
 
     }
 }

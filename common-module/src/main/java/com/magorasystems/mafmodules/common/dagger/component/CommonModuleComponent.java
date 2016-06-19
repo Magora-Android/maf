@@ -38,6 +38,7 @@ import okhttp3.OkHttpClient;
 @Singleton
 public interface CommonModuleComponent {
 
+
     LocationManager locationManager();
 
     NetworkConnectionManager networkConnectionManager();

@@ -8,4 +8,6 @@ package com.magorasystems.mafmodules.common.utils.component;
 public interface HasComponent<T> {
 
     T getComponent();
+
+    Object getComponent(String key);
 }

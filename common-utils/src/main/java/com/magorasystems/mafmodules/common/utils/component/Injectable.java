@@ -7,5 +7,5 @@ package com.magorasystems.mafmodules.common.utils.component;
  */
 public interface Injectable<COMPONENT> {
 
-    void inject(HasComponent<? extends COMPONENT> hasComponent);
+    void inject(COMPONENT component);
 }

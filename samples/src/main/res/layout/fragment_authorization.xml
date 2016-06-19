@@ -42,7 +42,7 @@
                 android:visibility="invisible"
                 tools:visibility="visible"/>
 
-            <com.magorasystems.mafmodules.ui.widget.AuthWidget
+            <com.magorasystems.mafmodules.authmodule.widget.AuthWidget
                 android:id="@+id/widget_authorization"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

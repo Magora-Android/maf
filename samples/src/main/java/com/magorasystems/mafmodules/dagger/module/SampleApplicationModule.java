@@ -4,10 +4,7 @@ import android.content.Context;
 
 import com.magorasystems.mafmodules.application.SampleApplication;
 import com.magorasystems.mafmodules.common.dagger.module.BaseModule;
-import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
 import com.magorasystems.mafmodules.dagger.scope.ApplicationScope;
-import com.magorasystems.mafmodules.mvp.interactor.SimpleAuthInteractor;
-import com.magorasystems.mafmodules.mvp.interactor.SimpleAuthInteractorImpl;
 
 import dagger.Module;
 import dagger.Provides;
@@ -18,11 +15,17 @@ import dagger.Provides;
  * @author Valentin S.Bolkonsky
  */
 @Module
-public class AuthInteratorModule implements BaseModule{
+public class SampleApplicationModule implements BaseModule {
+
+    private final SampleApplication application;
+
+    public SampleApplicationModule(final SampleApplication application) {
+        this.application = application;
+    }
 
     @Provides
     @ApplicationScope
-    public SimpleAuthInteractor providerAuthInteractor(Context application, SchedulersUtils.CoreScheduler scheduler) {
-        return new SimpleAuthInteractorImpl((SampleApplication)application, scheduler);
+    public Context providerContext() {
+        return this.application.getContext();
     }
 }

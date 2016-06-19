@@ -4,7 +4,6 @@ package com.magorasystems.mafmodules.authmodule.presenter;
 import com.magorasystems.mafmodules.authmodule.dagger.component.AuthComponent;
 import com.magorasystems.mafmodules.authmodule.interactor.impl.SimpleAuthInteractor;
 import com.magorasystems.mafmodules.authmodule.presenter.impl.AuthLcePresenter;
-import com.magorasystems.mafmodules.common.utils.component.HasComponent;
 
 /**
  * Developed by Magora Team (magora-systems.com). 2016.
@@ -18,7 +17,7 @@ public class SimpleAuthPresenterImpl extends AuthLcePresenter<SimpleAuthInteract
     }
 
     @Override
-    public void inject(HasComponent<? extends AuthComponent> hasComponent) {
-        hasComponent.getComponent().inject(this);
+    public void inject(AuthComponent component) {
+        component.inject(this);
     }
 }

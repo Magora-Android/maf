@@ -4,7 +4,6 @@ import com.magorasystems.mafmodules.authmodule.dagger.component.AuthComponent;
 import com.magorasystems.mafmodules.authmodule.interactor.BaseAuthInteractor;
 import com.magorasystems.mafmodules.authmodule.provider.impl.SimpleAuthProvider;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
-import com.magorasystems.mafmodules.common.utils.component.HasComponent;
 import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
 
 import javax.inject.Inject;
@@ -20,9 +19,9 @@ public class SimpleAuthInteractorImpl extends BaseAuthInteractor<StringAuthInfo>
     protected SimpleAuthProvider authProvider;
 
     @Inject
-    public SimpleAuthInteractorImpl(HasComponent<? extends AuthComponent> hasComponent, SchedulersUtils.CoreScheduler scheduler) {
+    public SimpleAuthInteractorImpl(AuthComponent component, SchedulersUtils.CoreScheduler scheduler) {
         super(scheduler);
-        inject(hasComponent);
+        inject(component);
     }
 
     @Override
@@ -31,7 +30,7 @@ public class SimpleAuthInteractorImpl extends BaseAuthInteractor<StringAuthInfo>
     }
 
     @Override
-    public void inject(HasComponent<? extends AuthComponent> hasComponent) {
-        hasComponent.getComponent().inject(this);
+    public void inject(AuthComponent component) {
+        component.inject(this);
     }
 }

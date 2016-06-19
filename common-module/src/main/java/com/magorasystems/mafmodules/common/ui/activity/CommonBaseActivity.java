@@ -29,7 +29,7 @@ public abstract class CommonBaseActivity<COMPONENT> extends BaseActivity<COMPONE
         super.onCreate(savedInstanceState);
         unbinder = ButterKnife.bind(this);
         ButterKnife.setDebug(true);
-        inject(((ComponentApplication<COMPONENT>) getApplication()));
+        inject(((ComponentApplication<COMPONENT>) getApplication()).getComponent());
     }
 
     @Override

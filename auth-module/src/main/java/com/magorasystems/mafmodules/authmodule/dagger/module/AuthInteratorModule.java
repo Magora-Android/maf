@@ -23,8 +23,8 @@ public class AuthInteratorModule implements BaseModule {
 
     @Provides
     @AuthScope
-    @SuppressWarnings("unchecked")
     public SimpleAuthInteractor providerAuthInteractor(Context application, SchedulersUtils.CoreScheduler scheduler) {
-        return new SimpleAuthInteractorImpl((HasComponent<? extends AuthComponent>) ((HasComponent<?>) application).getComponent(), scheduler);
+        Object component = ((HasComponent<?>) application).getComponent(AuthComponent.class.getSimpleName());
+        return new SimpleAuthInteractorImpl((AuthComponent) component, scheduler);
     }
 }

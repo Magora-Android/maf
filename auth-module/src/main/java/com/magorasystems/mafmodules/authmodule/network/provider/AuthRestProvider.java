@@ -5,7 +5,6 @@ import com.magorasystems.mafmodules.authmodule.dagger.component.AuthComponent;
 import com.magorasystems.mafmodules.authmodule.network.AuthApiClientWrapper;
 import com.magorasystems.mafmodules.authmodule.provider.impl.SimpleAuthProvider;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
-import com.magorasystems.mafmodules.common.utils.component.HasComponent;
 import com.magorasystems.mafmodules.network.config.SimpleTokenConfig;
 import com.magorasystems.mafmodules.network.exception.RestApiException;
 import com.magorasystems.mafmodules.network.provider.RestBaseDataProvider;
@@ -34,15 +33,15 @@ public class AuthRestProvider extends RestBaseDataProvider<AuthApiClientWrapper,
     protected RefreshTokenApiClient refreshTokenApiClient;
 
     @Inject
-    public AuthRestProvider(HasComponent<AuthComponent> hasComponent,
+    public AuthRestProvider(AuthComponent component,
                             SchedulersUtils.CoreScheduler scheduler,
                             AuthApiClientWrapper restApiClientWrapper) {
-        super(hasComponent, scheduler, restApiClientWrapper);
+        super(component, scheduler, restApiClientWrapper);
     }
 
     @Override
-    public void inject(HasComponent<? extends AuthComponent> hasComponent) {
-        hasComponent.getComponent().inject(this);
+    public void inject(AuthComponent component) {
+        component.inject(this);
     }
 
     @Override
