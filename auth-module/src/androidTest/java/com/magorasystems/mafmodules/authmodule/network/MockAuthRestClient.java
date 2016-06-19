@@ -1,8 +1,7 @@
-package com.magorasystems.mafmodules.network;
+package com.magorasystems.mafmodules.authmodule.network;
 
-import com.magorasystems.mafmodules.authmodule.network.AuthApiClient;
+import com.magorasystems.mafmodules.authmodule.utils.JsonStub;
 import com.magorasystems.mafmodules.protocolapi.auth.response.SimpleStringAuthSuccessResponse;
-import com.magorasystems.mafmodules.utils.JsonStub;
 import com.magorasystems.protocolapi.auth.dto.request.AuthRequest;
 
 import java.util.concurrent.TimeUnit;

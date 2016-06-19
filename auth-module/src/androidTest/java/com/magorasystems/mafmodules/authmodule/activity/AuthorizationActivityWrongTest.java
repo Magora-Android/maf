@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.ui.activity;
+package com.magorasystems.mafmodules.authmodule.activity;
 
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.IdlingPolicies;
@@ -6,10 +6,10 @@ import android.support.test.espresso.IdlingResource;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.rule.ActivityTestRule;
 
-import com.magorasystems.mafmodules.R;
-import com.magorasystems.mafmodules.dagger.module.MockAuthNetworkWrongModule;
-import com.magorasystems.mafmodules.dagger.rules.DaggerSampleMockRule;
-import com.magorasystems.mafmodules.idle.ElapsedTimeIdlingResource;
+import com.magorasystems.mafmodules.authmodule.R;
+import com.magorasystems.mafmodules.authmodule.dagger.module.MockAuthNetworkWrongModule;
+import com.magorasystems.mafmodules.authmodule.dagger.rules.DaggerSampleMockRule;
+import com.magorasystems.mafmodules.authmodule.idle.ElapsedTimeIdlingResource;
 
 import org.junit.Rule;
 import org.junit.Test;

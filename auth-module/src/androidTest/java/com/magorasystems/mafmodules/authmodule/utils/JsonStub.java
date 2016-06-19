@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.utils;
+package com.magorasystems.mafmodules.authmodule.utils;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;

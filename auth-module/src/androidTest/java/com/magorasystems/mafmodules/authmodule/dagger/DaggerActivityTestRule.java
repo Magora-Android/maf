@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.dagger;
+package com.magorasystems.mafmodules.authmodule.dagger;
 
 import android.app.Activity;
 import android.app.Application;

@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.idle;
+package com.magorasystems.mafmodules.authmodule.idle;
 
 import android.support.test.espresso.IdlingResource;
 

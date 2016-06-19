@@ -1,8 +1,8 @@
-package com.magorasystems.mafmodules.dagger.module;
+package com.magorasystems.mafmodules.authmodule.dagger.module;
 
 import com.google.gson.Gson;
-import com.magorasystems.mafmodules.network.AuthApiClient;
-import com.magorasystems.mafmodules.network.MockWrongAuthRestClient;
+import com.magorasystems.mafmodules.authmodule.network.AuthApiClient;
+import com.magorasystems.mafmodules.authmodule.network.MockWrongAuthRestClient;
 import com.magorasystems.mafmodules.network.config.ServerEndpoint;
 
 import okhttp3.OkHttpClient;
