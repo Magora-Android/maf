@@ -57,9 +57,9 @@ buildscript {
         version_protocol_auth_api_dto = '2.2.0'
         version_maf_protocol_api = '0.0.1'
         version_maf_auth_protocol_api = '0.0.1'
-        version_maf_utils = '0.0.1'
-        version_maf_network = '0.0.1'
-        version_maf_module = '0.0.1'
+        version_maf_utils = '0.0.2'
+        version_maf_network = '0.0.2'
+        version_maf_module = '0.0.2'
 
         versionMajor = 0
         versionMinor = 0
