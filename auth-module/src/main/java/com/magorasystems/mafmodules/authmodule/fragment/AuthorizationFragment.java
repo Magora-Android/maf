@@ -8,9 +8,12 @@ import android.view.View;
 import com.google.common.collect.Lists;
 import com.magorasystems.mafmodules.authmodule.R;
 import com.magorasystems.mafmodules.authmodule.dagger.component.AuthComponent;
+import com.magorasystems.mafmodules.authmodule.performance.AuthViewModel;
 import com.magorasystems.mafmodules.authmodule.presenter.SimpleAuthPresenter;
 import com.magorasystems.mafmodules.authmodule.router.AuthRouter;
 import com.magorasystems.mafmodules.authmodule.view.impl.StringAuthView;
+import com.magorasystems.mafmodules.authmodule.view.input.AuthInteractiveView;
+import com.magorasystems.mafmodules.authmodule.view.input.AuthInteractiveViewImpl;
 import com.magorasystems.mafmodules.authmodule.widget.AuthWidget;
 import com.magorasystems.mafmodules.common.ui.fragment.GenericFragment;
 import com.magorasystems.mafmodules.common.ui.widget.ValidationTextRule;
@@ -28,6 +31,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import rx.subjects.PublishSubject;
+
 /**
  * Developed by Magora Team (magora-systems.com). 2016.
  *
@@ -44,6 +49,9 @@ public abstract class AuthorizationFragment extends GenericFragment<AuthRouter> 
 
     protected abstract View getSignInView();
 
+    protected abstract View getRecoverPassword();
+
+    private AuthInteractiveView authInteractiveView;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -51,6 +59,14 @@ public abstract class AuthorizationFragment extends GenericFragment<AuthRouter> 
         inject((AuthComponent) ((HasComponent<?>) getActivity().getApplication()).getComponent(AuthComponent.class.getSimpleName()));
         getPresenter().attachView(this);
         getPresenter().setRouter(router);
+        final PublishSubject<AuthViewModel> subject = PublishSubject.create();
+        authInteractiveView = new AuthInteractiveViewImpl(getAuthWidget(), getRecoverPassword(),
+                subject, getRules());
+        subject.doOnNext(authViewModel -> getSignInView().setEnabled(false))
+                .doOnNext(authViewModel -> WidgetUtils.hideSoftKeyboard(getActivity()))
+                .subscribe(authViewModel -> {
+                    LOGGER.debug("viewModel: {}", authViewModel);
+                });
     }
 
     @Override
@@ -67,10 +83,12 @@ public abstract class AuthorizationFragment extends GenericFragment<AuthRouter> 
     }
 
     public void onSignIn() {
-        getAuthWidget().model()
+       /* getAuthWidget().model()
                 .doOnNext(authViewModel -> getSignInView().setEnabled(false))
                 .doOnNext(authViewModel -> getAuthWidget().setEnabled(false))
                 .doOnNext(authViewModel -> WidgetUtils.hideSoftKeyboard(getActivity()))
+                .subscribe(getPresenter()::authorization);*/
+        authInteractiveView.model()
                 .subscribe(getPresenter()::authorization);
     }
 

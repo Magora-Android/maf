@@ -20,7 +20,7 @@ import butterknife.OnClick;
  *
  * @author Valentin S.Bolkonsky
  */
-public class AuthorizationFragmentImpl extends AuthorizationFragment{
+public class AuthorizationFragmentImpl extends AuthorizationFragment {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthorizationFragmentImpl.class);
 
@@ -61,7 +61,6 @@ public class AuthorizationFragmentImpl extends AuthorizationFragment{
     }
 
 
-
     @Override
     public void showProgress() {
         updateDecorView(ColorUtils.getSaturatedPaint(0.0f));
@@ -72,6 +71,11 @@ public class AuthorizationFragmentImpl extends AuthorizationFragment{
     public void showContent() {
         updateDecorView(null);
         super.showContent();
+    }
+
+    @Override
+    protected View getRecoverPassword() {
+        return textPasswordRecover;
     }
 
     @Override
