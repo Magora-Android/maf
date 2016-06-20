@@ -65,6 +65,12 @@ public class AuthWidget extends BaseAuthWidget<AuthViewModel, AuthViewModel> {
     }
 
     @Override
+    public void setEnabled(boolean enabled) {
+        textEmail.setEnabled(enabled);
+        textPassword.setEnabled(enabled);
+    }
+
+    @Override
     protected void onViewCreated(View view) {
         super.onViewCreated(view);
         textEmail = (TextView) view.findViewById(R.id.text_email);

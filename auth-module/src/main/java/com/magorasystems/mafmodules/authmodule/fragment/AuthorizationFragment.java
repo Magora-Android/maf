@@ -68,7 +68,8 @@ public abstract class AuthorizationFragment extends GenericFragment<AuthRouter> 
 
     public void onSignIn() {
         getAuthWidget().model()
-                .doOnNext(authViewMode -> getSignInView().setEnabled(false))
+                .doOnNext(authViewModel -> getSignInView().setEnabled(false))
+                .doOnNext(authViewModel -> getAuthWidget().setEnabled(false))
                 .doOnNext(authViewModel -> WidgetUtils.hideSoftKeyboard(getActivity()))
                 .subscribe(getPresenter()::authorization);
     }
@@ -91,6 +92,7 @@ public abstract class AuthorizationFragment extends GenericFragment<AuthRouter> 
     @Override
     public void showContent() {
         getSignInView().setEnabled(true);
+        getAuthWidget().setEnabled(true);
         getProgressView().setVisibility(View.GONE);
     }
 
