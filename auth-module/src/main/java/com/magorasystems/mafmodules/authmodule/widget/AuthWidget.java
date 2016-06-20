@@ -11,13 +11,10 @@ import android.widget.TextView;
 
 import com.magorasystems.mafmodules.authmodule.R;
 import com.magorasystems.mafmodules.authmodule.performance.AuthViewModel;
-import com.magorasystems.mafmodules.common.ui.widget.ValidationTextRule;
 import com.magorasystems.mafmodules.common.utils.PatternsUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Collection;
 
 import rx.Observable;
 
@@ -34,8 +31,6 @@ public class AuthWidget extends BaseAuthWidget<AuthViewModel, AuthViewModel> {
     protected TextInputLayout textInputEmail;
     protected TextView textPassword;
     protected TextInputLayout textInputPassword;
-
-    protected Collection<ValidationTextRule> textRules;
 
     public AuthWidget(Context context, AttributeSet attrs) {
         super(context, attrs);
