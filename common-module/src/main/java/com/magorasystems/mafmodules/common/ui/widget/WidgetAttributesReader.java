@@ -12,19 +12,20 @@ import com.magorasystems.mafmodules.common.R;
  *
  * @author Valentin S.Bolkonsky
  */
-public class WidgetAttributesReader {
+public class WidgetAttributesReader extends AbstractWidgetAttributesReader {
 
-    protected WidgetAttributesReader() {
-
+    public WidgetAttributesReader(Context context, AttributeSet attributeSet) {
+        super(context, attributeSet);
     }
 
-    public static WidgetAttributes read(Context context, AttributeSet attributeSet) {
-        final TypedArray a = context.obtainStyledAttributes(attributeSet, R.styleable.BaseWidget);
+    @Override
+    public WidgetAttributes read() {
+        final TypedArray a = getContext().obtainStyledAttributes(getAttributeSet(), R.styleable.BaseWidget);
         @LayoutRes int layoutId = a.getResourceId(R.styleable.BaseWidget_root_layout, 0);
         if (layoutId == 0) {
             throw new IllegalArgumentException("BaseWidget_root_layout wrong");
         }
-        final WidgetAttributes widgetAttributes = WidgetAttributes.create(layoutId);
+        final WidgetAttributes widgetAttributes = new WidgetAttributes(layoutId);
         a.recycle();
         return widgetAttributes;
     }

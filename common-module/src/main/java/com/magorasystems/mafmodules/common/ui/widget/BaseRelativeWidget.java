@@ -27,6 +27,8 @@ public abstract class BaseRelativeWidget<M extends BaseViewModel, T> extends Rel
 
     private WidgetAttributes widgetAttributes;
 
+    protected abstract WidgetAttributes readWidgetAttributes(Context context, AttributeSet attributeSet);
+
     public BaseRelativeWidget(Context context, @LayoutRes int layoutId) {
         super(context);
         createView(layoutId);
@@ -50,10 +52,14 @@ public abstract class BaseRelativeWidget<M extends BaseViewModel, T> extends Rel
     }
 
     protected void readAttributes(Context context, AttributeSet attributeSet) {
-        widgetAttributes = WidgetAttributesReader.read(context, attributeSet);
+        widgetAttributes = readWidgetAttributes(context, attributeSet);
         createView(widgetAttributes.getLayoutId());
     }
 
+    @Override
+    public WidgetAttributes getWidgetAttributes() {
+        return widgetAttributes;
+    }
 
     protected void onViewCreated(final View view) {
 

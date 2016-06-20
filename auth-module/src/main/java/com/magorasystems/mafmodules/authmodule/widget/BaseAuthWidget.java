@@ -15,7 +15,9 @@ import com.magorasystems.mafmodules.authmodule.performance.AuthViewModel;
 import com.magorasystems.mafmodules.common.ui.widget.BaseLinearWidget;
 import com.magorasystems.mafmodules.common.ui.widget.ValidationTextRule;
 import com.magorasystems.mafmodules.common.ui.widget.ValidationWidget;
-import com.magorasystems.mafmodules.common.ui.widget.WidgetTestUtils;
+import com.magorasystems.mafmodules.common.ui.widget.WidgetAttributes;
+import com.magorasystems.mafmodules.common.ui.widget.WidgetAttributesReader;
+import com.magorasystems.mafmodules.common.ui.widget.WidgetTextUtils;
 
 import java.util.Collection;
 import java.util.List;
@@ -48,6 +50,11 @@ public abstract class BaseAuthWidget<M extends AuthViewModel, T> extends BaseLin
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public BaseAuthWidget(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+    }
+
+    @Override
+    protected WidgetAttributes readWidgetAttributes(Context context, AttributeSet attributeSet) {
+        return new AuthWidgetAttributesReader(new WidgetAttributesReader(context, attributeSet)).read();
     }
 
     @Override
@@ -94,7 +101,7 @@ public abstract class BaseAuthWidget<M extends AuthViewModel, T> extends BaseLin
 
     public static Observable<Boolean> validator(TextView textView, Pattern pattern, int minLength,
                                                 CompositeSubscription subscription, Action1<Boolean> func) {
-        final Observable<Boolean> validator = WidgetTestUtils.validationTextView(textView, pattern, minLength);
+        final Observable<Boolean> validator = WidgetTextUtils.validationTextView(textView, pattern, minLength);
         subscription.add(validator
                 .doOnNext(func)
                 .subscribe());
@@ -102,12 +109,15 @@ public abstract class BaseAuthWidget<M extends AuthViewModel, T> extends BaseLin
     }
 
 
-    public static void setError(boolean isValid, TextInputLayout textInputLayout, String message) {
+    public void setError(boolean isValid, TextInputLayout textInputLayout, String message) {
         if (textInputLayout == null) {
             return;
         }
-        textInputLayout.setError(isValid ? null : message);
-        textInputLayout.setErrorEnabled(!isValid);
+        final boolean isShowError = ((AuthWidgetAttributes) getWidgetAttributes()).isShowError();
+        if (isShowError) {
+            textInputLayout.setError(isValid ? null : message);
+            textInputLayout.setErrorEnabled(!isValid);
+        }
     }
 
     @Override

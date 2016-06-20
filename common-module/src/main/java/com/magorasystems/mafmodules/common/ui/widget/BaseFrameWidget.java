@@ -27,6 +27,8 @@ public abstract class BaseFrameWidget<M extends BaseViewModel, T> extends FrameL
 
     private WidgetAttributes widgetAttributes;
 
+    protected abstract WidgetAttributes readWidgetAttributes(Context context, AttributeSet attributeSet);
+
     public BaseFrameWidget(Context context, @LayoutRes int layoutId) {
         super(context);
         createView(layoutId);
@@ -50,10 +52,14 @@ public abstract class BaseFrameWidget<M extends BaseViewModel, T> extends FrameL
     }
 
     protected void readAttributes(Context context, AttributeSet attributeSet) {
-        widgetAttributes = WidgetAttributesReader.read(context, attributeSet);
+        widgetAttributes = readWidgetAttributes(context, attributeSet);
         createView(widgetAttributes.getLayoutId());
     }
 
+    @Override
+    public WidgetAttributes getWidgetAttributes() {
+        return widgetAttributes;
+    }
 
     protected void onViewCreated(final View view) {
 

@@ -15,9 +15,9 @@ import rx.functions.Func1;
  *
  * @author Valentin S.Bolkonsky
  */
-public class WidgetTestUtils {
+public class WidgetTextUtils {
 
-    private WidgetTestUtils() {
+    private WidgetTextUtils() {
 
     }
 

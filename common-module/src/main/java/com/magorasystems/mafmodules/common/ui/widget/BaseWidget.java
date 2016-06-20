@@ -16,5 +16,7 @@ public interface BaseWidget<M extends BaseViewModel, T> {
 
     void destroyWidget();
 
+    WidgetAttributes getWidgetAttributes();
+
     void update(T model);
 }

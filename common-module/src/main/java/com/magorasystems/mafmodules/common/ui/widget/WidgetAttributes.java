@@ -12,21 +12,12 @@ public class WidgetAttributes {
     @LayoutRes
     private int layoutId;
 
-    private WidgetAttributes() {
-
-    }
-
-    public static WidgetAttributes create(@LayoutRes int layoutId) {
-        final WidgetAttributes widgetAttributes = new WidgetAttributes();
-        widgetAttributes.setLayoutId(layoutId);
-        return widgetAttributes;
+    public WidgetAttributes(@LayoutRes int layoutId) {
+        this.layoutId = layoutId;
     }
 
     public int getLayoutId() {
         return layoutId;
     }
 
-    public void setLayoutId(int layoutId) {
-        this.layoutId = layoutId;
-    }
 }
