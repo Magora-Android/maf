@@ -4,7 +4,6 @@ import android.content.Context;
 import android.location.LocationManager;
 
 import com.google.gson.Gson;
-import com.magorasystems.mafmodules.common.SomeClass;
 import com.magorasystems.mafmodules.common.application.ApplicationSettings;
 import com.magorasystems.mafmodules.common.dagger.module.ApplicationModule;
 import com.magorasystems.mafmodules.common.dagger.module.DomainModule;
@@ -61,7 +60,7 @@ public interface CommonModuleComponent {
 
     Gson gson();
 
-    void inject(SomeClass someClass);
+    void inject(CommonComponentProvider provider);
 
 
 }

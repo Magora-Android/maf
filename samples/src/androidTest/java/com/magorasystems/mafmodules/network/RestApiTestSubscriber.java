@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.authmodule.network;
+package com.magorasystems.mafmodules.network;
 
 import com.magorasystems.mafmodules.network.exception.NetworkErrorException;
 import com.magorasystems.mafmodules.network.exception.NetworkErrorExceptionFactory;

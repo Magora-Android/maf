@@ -8,7 +8,6 @@ import com.magorasystems.mafmodules.R;
 import com.magorasystems.mafmodules.authmodule.fragment.AuthorizationFragment;
 import com.magorasystems.mafmodules.authmodule.widget.AuthWidget;
 import com.magorasystems.mafmodules.common.utils.ColorUtils;
-import com.magorasystems.mafmodules.dagger.component.SampleComponent;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +20,7 @@ import butterknife.OnClick;
  *
  * @author Valentin S.Bolkonsky
  */
-public class AuthorizationFragmentImpl extends AuthorizationFragment<SampleComponent> {
+public class AuthorizationFragmentImpl extends AuthorizationFragment{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthorizationFragmentImpl.class);
 
@@ -31,6 +30,7 @@ public class AuthorizationFragmentImpl extends AuthorizationFragment<SampleCompo
         fragment.setArguments(args);
         return fragment;
     }
+
 
     @BindView(R.id.widget_authorization)
     protected AuthWidget authWidget;
@@ -60,10 +60,7 @@ public class AuthorizationFragmentImpl extends AuthorizationFragment<SampleCompo
         LOGGER.debug("onPasswordRecover");
     }
 
-    @Override
-    public void inject(SampleComponent component) {
-        component.inject(this);
-    }
+
 
     @Override
     public void showProgress() {

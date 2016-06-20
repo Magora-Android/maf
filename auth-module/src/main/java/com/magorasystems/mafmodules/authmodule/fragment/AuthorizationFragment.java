@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.google.common.collect.Lists;
 import com.magorasystems.mafmodules.authmodule.R;
+import com.magorasystems.mafmodules.authmodule.dagger.component.AuthComponent;
 import com.magorasystems.mafmodules.authmodule.presenter.SimpleAuthPresenter;
 import com.magorasystems.mafmodules.authmodule.router.AuthRouter;
 import com.magorasystems.mafmodules.authmodule.view.impl.StringAuthView;
@@ -32,7 +33,7 @@ import javax.inject.Inject;
  *
  * @author Valentin S. Bolkonsky
  */
-public abstract class AuthorizationFragment<COMPONENT> extends GenericFragment<AuthRouter> implements StringAuthView, Injectable<COMPONENT> {
+public abstract class AuthorizationFragment extends GenericFragment<AuthRouter> implements StringAuthView, Injectable<AuthComponent> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthorizationFragment.class);
 
@@ -47,9 +48,14 @@ public abstract class AuthorizationFragment<COMPONENT> extends GenericFragment<A
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        inject((COMPONENT) ((HasComponent<?>) getActivity().getApplication()).getComponent());
+        inject((AuthComponent) ((HasComponent<?>) getActivity().getApplication()).getComponent(AuthComponent.class.getSimpleName()));
         getPresenter().attachView(this);
         getPresenter().setRouter(router);
+    }
+
+    @Override
+    public void inject(AuthComponent component) {
+        component.inject(this);
     }
 
     @Override

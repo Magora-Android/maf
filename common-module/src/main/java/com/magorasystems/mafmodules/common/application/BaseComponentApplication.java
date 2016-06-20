@@ -4,6 +4,9 @@ import android.app.Application;
 import android.content.Context;
 
 import com.crashlytics.android.Crashlytics;
+import com.google.common.collect.Maps;
+
+import java.util.Map;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -17,6 +20,7 @@ public abstract class BaseComponentApplication<COMPONENT> extends Application
 
     private COMPONENT component;
     private ApplicationSettings settings;
+    protected Map<String, Object> subcomponents;
 
     public static <COMPONENT> ComponentApplication<COMPONENT> get(final Context context) {
         return (ComponentApplication<COMPONENT>) context.getApplicationContext();
@@ -49,6 +53,7 @@ public abstract class BaseComponentApplication<COMPONENT> extends Application
     @Override
     public void onCreate() {
         super.onCreate();
+        subcomponents = Maps.newHashMap();
         Fabric.with(this, new Crashlytics());
         settings = buildApplicationSettings();
         buildGraphAndInject();

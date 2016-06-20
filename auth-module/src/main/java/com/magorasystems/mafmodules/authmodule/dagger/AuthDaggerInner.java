@@ -20,14 +20,14 @@ public final class AuthDaggerInner {
 
     }
 
-    public static <COMPONENT> CommonModuleComponent buildCommonModuleComponent(final ComponentApplication<COMPONENT> context) {
+    public static CommonModuleComponent buildCommonModuleComponent(final ComponentApplication<?> context) {
         return DaggerCommonModuleComponent.builder()
                 .applicationModule(new ApplicationModule(context))
                 .storableModule(new StorableModule())
                 .domainModule(new DomainModule()).build();
     }
 
-    public static <COMPONENT> AuthComponent buildGraph(final ComponentApplication<COMPONENT> context) {
+    public static  AuthComponent buildGraph(final ComponentApplication<?> context) {
         return DaggerAuthComponent.builder()
                 .commonModuleComponent(buildCommonModuleComponent(context))
                 .build();

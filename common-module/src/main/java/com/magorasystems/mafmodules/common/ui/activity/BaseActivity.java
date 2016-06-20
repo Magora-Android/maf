@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
+import com.magorasystems.mafmodules.common.application.ComponentApplication;
 import com.magorasystems.mafmodules.common.ui.fragment.BaseFragmentImpl;
 import com.magorasystems.mafmodules.common.utils.component.HasComponent;
 
@@ -38,6 +39,6 @@ public abstract class BaseActivity<COMPONENT> extends AppCompatActivity implemen
 
     @Override
     public Object getComponent(String key) {
-        return null;
+        return ((ComponentApplication<?>)getApplication()).getComponent(key);
     }
 }

@@ -4,7 +4,6 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 
-import com.magorasystems.mafmodules.common.application.ComponentApplication;
 import com.magorasystems.mafmodules.common.mvp.router.BaseRouter;
 import com.magorasystems.mafmodules.common.ui.fragment.BaseFragmentImpl;
 import com.magorasystems.mafmodules.common.ui.widget.WidgetUtils;
@@ -23,13 +22,16 @@ public abstract class CommonBaseActivity<COMPONENT> extends BaseActivity<COMPONE
     private Unbinder unbinder;
 
 
+    protected abstract COMPONENT createComponent();
+
     @Override
     @SuppressWarnings("unchecked")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         unbinder = ButterKnife.bind(this);
         ButterKnife.setDebug(true);
-        inject(((ComponentApplication<COMPONENT>) getApplication()).getComponent());
+        setComponent(createComponent());
+        inject(getComponent());
     }
 
     @Override

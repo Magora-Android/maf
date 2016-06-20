@@ -17,7 +17,7 @@ android {
         targetSdkVersion version_sdk_target
         versionCode gitVersion()
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
-        testInstrumentationRunner "com.magorasystems.mafmodules.runner.MockAndroidJUnitRunner"
+        testInstrumentationRunner "com.magorasystems.mafmodules.runner.MockAuthAndroidJUnitRunner"
     }
 
     buildTypes {
@@ -75,7 +75,7 @@ android {
     dexOptions {
         incremental true
         preDexLibraries = false
-        javaMaxHeapSize "6g"
+        javaMaxHeapSize "4g"
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -86,7 +86,7 @@ android {
         javaVersion JavaVersion.VERSION_1_7
         defaultMethods false
         jvmArgs '-noverify'
-        incremental false
+        incremental true
     }
 
     // Always show the result of every unit test, even if it passes.

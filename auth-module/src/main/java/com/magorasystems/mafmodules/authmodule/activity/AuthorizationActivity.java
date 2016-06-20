@@ -3,6 +3,7 @@ package com.magorasystems.mafmodules.authmodule.activity;
 import android.os.Bundle;
 
 import com.magorasystems.mafmodules.authmodule.R;
+import com.magorasystems.mafmodules.authmodule.dagger.component.AuthComponent;
 import com.magorasystems.mafmodules.authmodule.fragment.AuthorizationFragment;
 import com.magorasystems.mafmodules.authmodule.router.AuthRouter;
 import com.magorasystems.mafmodules.common.ui.activity.CommonBaseActivity;
@@ -14,7 +15,7 @@ import com.magorasystems.mafmodules.common.ui.widget.WidgetUtils;
  *
  * @author Valentin S.Bolkonsky
  */
-public abstract class AuthorizationActivity<COMPONENT> extends CommonBaseActivity<COMPONENT> implements AuthRouter {
+public abstract class AuthorizationActivity extends CommonBaseActivity<AuthComponent> implements AuthRouter {
 
 
     @Override
@@ -38,6 +39,11 @@ public abstract class AuthorizationActivity<COMPONENT> extends CommonBaseActivit
         setFragment(R.id.fragment_container, fragment);
     }
 
-    protected abstract AuthorizationFragment<COMPONENT> makeFragment();
+    @Override
+    public void inject(AuthComponent component) {
+        component.inject(this);
+    }
+
+    protected abstract AuthorizationFragment makeFragment();
 
 }

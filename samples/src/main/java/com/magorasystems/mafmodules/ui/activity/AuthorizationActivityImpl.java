@@ -1,8 +1,9 @@
 package com.magorasystems.mafmodules.ui.activity;
 
+import com.magorasystems.mafmodules.application.SampleApplication;
 import com.magorasystems.mafmodules.authmodule.activity.AuthorizationActivity;
+import com.magorasystems.mafmodules.authmodule.dagger.component.AuthComponent;
 import com.magorasystems.mafmodules.authmodule.fragment.AuthorizationFragment;
-import com.magorasystems.mafmodules.dagger.component.SampleComponent;
 import com.magorasystems.mafmodules.ui.fragment.AuthorizationFragmentImpl;
 
 /**
@@ -10,15 +11,15 @@ import com.magorasystems.mafmodules.ui.fragment.AuthorizationFragmentImpl;
  *
  * @author Valentin S.Bolkonsky
  */
-public class AuthorizationActivityImpl extends AuthorizationActivity<SampleComponent> {
+public class AuthorizationActivityImpl extends AuthorizationActivity {
 
     @Override
-    protected AuthorizationFragment<SampleComponent> makeFragment() {
+    protected AuthorizationFragment makeFragment() {
         return AuthorizationFragmentImpl.makeFragment();
     }
 
     @Override
-    public void inject(SampleComponent sampleComponent) {
-        sampleComponent.inject(this);
+    protected AuthComponent createComponent() {
+        return (AuthComponent) SampleApplication.get(this).getComponent(AuthComponent.class.getSimpleName());
     }
 }

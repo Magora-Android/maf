@@ -1,10 +1,10 @@
-package com.magorasystems.mafmodules.authmodule.network;
+package com.magorasystems.mafmodules.network;
 
 import com.google.gson.Gson;
 import com.magorasystems.mafmodule.security.network.RefreshTokenApiClient;
-import com.magorasystems.mafmodules.authmodule.utils.JsonStub;
 import com.magorasystems.mafmodules.network.config.ServerEndpoint;
 import com.magorasystems.mafmodules.protocolapi.auth.response.SimpleStringAuthSuccessResponse;
+import com.magorasystems.mafmodules.utils.JsonStub;
 import com.magorasystems.protocolapi.auth.dto.request.RefreshTokenRequest;
 
 import org.slf4j.Logger;

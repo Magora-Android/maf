@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.authmodule.idle;
+package com.magorasystems.mafmodules.idle;
 
 import android.support.test.espresso.IdlingResource;
 
@@ -11,7 +11,7 @@ public class ElapsedTimeIdlingResource implements IdlingResource {
 
     private final long startTime;
     private final long waitingTime;
-    private IdlingResource.ResourceCallback resourceCallback;
+    private ResourceCallback resourceCallback;
 
     public ElapsedTimeIdlingResource(long waitingTime) {
         this.startTime = System.currentTimeMillis();
