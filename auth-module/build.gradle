@@ -4,7 +4,7 @@ apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'com.fernandocejas.frodo'
 apply plugin: 'com.bmuschko.nexus'
 
-version "0.0.2"
+version "0.1.0"
 
 android {
     compileSdkVersion version_sdk_target
