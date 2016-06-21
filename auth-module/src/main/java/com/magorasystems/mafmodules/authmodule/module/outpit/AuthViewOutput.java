@@ -1,5 +1,6 @@
-package com.magorasystems.mafmodules.authmodule.view.outpit;
+package com.magorasystems.mafmodules.authmodule.module.outpit;
 
+import com.magorasystems.mafmodules.common.module.output.ViewOutput;
 import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
 
 /**

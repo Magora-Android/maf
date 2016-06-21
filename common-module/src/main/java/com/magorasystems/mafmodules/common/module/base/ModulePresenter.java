@@ -1,9 +1,8 @@
-package com.magorasystems.mafmodules.authmodule.module.base;
+package com.magorasystems.mafmodules.common.module.base;
 
-import com.magorasystems.mafmodules.authmodule.module.impl.AbstractModuleInput;
-import com.magorasystems.mafmodules.authmodule.view.input.ViewInput;
-import com.magorasystems.mafmodules.authmodule.view.outpit.AuthViewOutput;
-import com.magorasystems.mafmodules.authmodule.view.outpit.ViewOutput;
+import com.magorasystems.mafmodules.common.module.impl.AbstractModuleInput;
+import com.magorasystems.mafmodules.common.module.input.ViewInput;
+import com.magorasystems.mafmodules.common.module.output.ViewOutput;
 import com.magorasystems.mafmodules.common.mvp.router.BaseRouter;
 import com.magorasystems.mafmodules.common.utils.component.Injectable;
 
@@ -22,7 +21,7 @@ public interface ModulePresenter<COMPONENT, R extends BaseRouter, VI extends Vie
 
     void input(I input);
 
-    void output(Observable<AuthViewOutput> output);
+    void output(Observable<VO> output);
 
     void destroy(boolean retainInstance);
 }

@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.authmodule.view.outpit;
+package com.magorasystems.mafmodules.common.module.output;
 
 /**
  * Developed by Magora Team (magora-systems.com). 2016.

@@ -5,7 +5,7 @@ import com.fernandocejas.frodo.annotation.RxLogObservable;
 import com.magorasystems.mafmodules.authmodule.dagger.component.AuthComponent;
 import com.magorasystems.mafmodules.authmodule.interactor.impl.SimpleAuthInteractor;
 import com.magorasystems.mafmodules.authmodule.presenter.impl.AuthLcePresenter;
-import com.magorasystems.mafmodules.authmodule.view.outpit.AuthViewOutput;
+import com.magorasystems.mafmodules.authmodule.module.outpit.AuthViewOutput;
 import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
 
 import rx.Observable;

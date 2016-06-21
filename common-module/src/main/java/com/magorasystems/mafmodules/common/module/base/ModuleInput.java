@@ -1,6 +1,6 @@
-package com.magorasystems.mafmodules.authmodule.module.base;
+package com.magorasystems.mafmodules.common.module.base;
 
-import com.magorasystems.mafmodules.authmodule.view.input.ViewInput;
+import com.magorasystems.mafmodules.common.module.input.ViewInput;
 import com.magorasystems.mafmodules.common.mvp.router.BaseRouter;
 
 /**

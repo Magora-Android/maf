@@ -1,10 +1,10 @@
-package com.magorasystems.mafmodules.authmodule.module.base;
+package com.magorasystems.mafmodules.common.module.base;
 
 import android.content.Context;
 
-import com.magorasystems.mafmodules.authmodule.module.impl.AbstractModuleInput;
-import com.magorasystems.mafmodules.authmodule.view.input.ViewInput;
-import com.magorasystems.mafmodules.authmodule.view.outpit.ViewOutput;
+import com.magorasystems.mafmodules.common.module.impl.AbstractModuleInput;
+import com.magorasystems.mafmodules.common.module.input.ViewInput;
+import com.magorasystems.mafmodules.common.module.output.ViewOutput;
 import com.magorasystems.mafmodules.common.mvp.presenter.BaseLifecyclePresenter;
 import com.magorasystems.mafmodules.common.mvp.router.BaseRouter;
 import com.magorasystems.mafmodules.common.mvp.view.BaseView;

@@ -3,12 +3,12 @@ package com.magorasystems.mafmodules.authmodule.module.impl;
 import android.content.Context;
 
 import com.magorasystems.mafmodules.authmodule.dagger.component.AuthComponent;
-import com.magorasystems.mafmodules.authmodule.module.base.AbstractModulePresenter;
+import com.magorasystems.mafmodules.authmodule.module.input.AuthInteractiveView;
+import com.magorasystems.mafmodules.authmodule.module.input.StringAuthViewInput;
+import com.magorasystems.mafmodules.authmodule.module.outpit.AuthViewOutput;
 import com.magorasystems.mafmodules.authmodule.presenter.SimpleAuthPresenter;
 import com.magorasystems.mafmodules.authmodule.router.AuthRouter;
-import com.magorasystems.mafmodules.authmodule.view.input.AuthInteractiveView;
-import com.magorasystems.mafmodules.authmodule.view.input.StringAuthViewInput;
-import com.magorasystems.mafmodules.authmodule.view.outpit.AuthViewOutput;
+import com.magorasystems.mafmodules.common.module.base.AbstractModulePresenter;
 
 import javax.inject.Inject;
 

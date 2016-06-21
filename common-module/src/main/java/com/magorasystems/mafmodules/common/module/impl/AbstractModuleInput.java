@@ -1,7 +1,7 @@
-package com.magorasystems.mafmodules.authmodule.module.impl;
+package com.magorasystems.mafmodules.common.module.impl;
 
-import com.magorasystems.mafmodules.authmodule.module.base.ModuleInput;
-import com.magorasystems.mafmodules.authmodule.view.input.ViewInput;
+import com.magorasystems.mafmodules.common.module.base.ModuleInput;
+import com.magorasystems.mafmodules.common.module.input.ViewInput;
 import com.magorasystems.mafmodules.common.mvp.router.BaseRouter;
 
 import java.lang.ref.WeakReference;

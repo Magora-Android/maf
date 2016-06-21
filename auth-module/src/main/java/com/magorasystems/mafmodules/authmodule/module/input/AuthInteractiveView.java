@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.authmodule.view.input;
+package com.magorasystems.mafmodules.authmodule.module.input;
 
 import com.magorasystems.mafmodules.authmodule.performance.AuthViewModel;
 

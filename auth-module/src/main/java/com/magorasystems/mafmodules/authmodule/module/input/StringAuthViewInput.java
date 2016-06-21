@@ -1,6 +1,7 @@
-package com.magorasystems.mafmodules.authmodule.view.input;
+package com.magorasystems.mafmodules.authmodule.module.input;
 
 import com.magorasystems.mafmodules.authmodule.view.impl.StringAuthView;
+import com.magorasystems.mafmodules.common.module.input.ViewInput;
 
 /**
  * Developed by Magora Team (magora-systems.com). 2016.
