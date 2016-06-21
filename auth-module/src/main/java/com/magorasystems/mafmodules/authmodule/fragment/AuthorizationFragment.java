@@ -52,8 +52,6 @@ public abstract class AuthorizationFragment extends GenericFragment<AuthRouter> 
 
     protected abstract View getRecoverPassword();
 
-    private AuthInteractiveView authInteractiveView;
-
     private Subscription subscription;
 
     @Override
@@ -64,7 +62,7 @@ public abstract class AuthorizationFragment extends GenericFragment<AuthRouter> 
         getPresenter().setRouter(router);
         final PublishSubject<AuthViewModel> subject = PublishSubject.create();
         getAuthWidget().updateRules(getRules());
-        authInteractiveView = new AuthInteractiveViewImpl(
+        AuthInteractiveView authInteractiveView = new AuthInteractiveViewImpl(
                 getAuthWidget(),
                 getRecoverPassword(),
                 getSignInView(),

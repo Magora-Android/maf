@@ -10,10 +10,11 @@ import com.magorasystems.mafmodules.authmodule.presenter.impl.AuthLcePresenter;
  *
  * @author Valentin S.Bolkonsky
  */
-public class SimpleAuthPresenterImpl extends AuthLcePresenter<SimpleAuthInteractor> implements SimpleAuthPresenter{
+public class SimpleAuthPresenterImpl extends AuthLcePresenter<SimpleAuthInteractor> implements SimpleAuthPresenter {
 
-    public SimpleAuthPresenterImpl(SimpleAuthInteractor iterator) {
+    public SimpleAuthPresenterImpl(AuthComponent component, SimpleAuthInteractor iterator) {
         super(iterator);
+        inject(component);
     }
 
     @Override

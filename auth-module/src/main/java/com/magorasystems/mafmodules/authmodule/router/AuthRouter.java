@@ -10,4 +10,6 @@ import com.magorasystems.mafmodules.common.mvp.router.BaseRouter;
 public interface AuthRouter extends BaseRouter {
 
     void onAfterAuth();
+
+    void onRecoverPassword();
 }

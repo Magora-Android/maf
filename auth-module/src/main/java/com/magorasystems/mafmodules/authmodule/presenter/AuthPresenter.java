@@ -15,4 +15,6 @@ public interface AuthPresenter<V  extends StringAuthView, RT, I extends AuthInte
 
     void authorization(AuthViewModel view);
 
+    void passwordRecover(Void v);
+
 }

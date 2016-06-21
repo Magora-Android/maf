@@ -30,6 +30,14 @@ public class AuthLcePresenter<I extends AuthInteractor<StringAuthInfo>>
     }
 
     @Override
+    public void passwordRecover(Void v) {
+        AuthRouter router = getRouter();
+        if (router != null) {
+            router.onRecoverPassword();
+        }
+    }
+
+    @Override
     public void onStart() {
 
     }

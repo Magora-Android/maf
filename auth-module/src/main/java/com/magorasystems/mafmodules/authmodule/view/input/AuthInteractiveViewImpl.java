@@ -40,7 +40,8 @@ public class AuthInteractiveViewImpl implements AuthInteractiveView {
 
     @Override
     public Observable<Boolean> validation() {
-        return authWidget.validation();
+        return authWidget.validation()
+                .doOnNext(actionAuthorization::setEnabled);
     }
 
     @Override

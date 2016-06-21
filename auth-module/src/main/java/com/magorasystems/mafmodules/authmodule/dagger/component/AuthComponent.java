@@ -11,6 +11,7 @@ import com.magorasystems.mafmodules.authmodule.dagger.scope.AuthScope;
 import com.magorasystems.mafmodules.authmodule.fragment.AuthorizationFragment;
 import com.magorasystems.mafmodules.authmodule.interactor.impl.SimpleAuthInteractor;
 import com.magorasystems.mafmodules.authmodule.interactor.impl.SimpleAuthInteractorImpl;
+import com.magorasystems.mafmodules.authmodule.module.impl.AuthModulePresenterImp;
 import com.magorasystems.mafmodules.authmodule.network.AuthApiClient;
 import com.magorasystems.mafmodules.authmodule.network.AuthApiClientWrapper;
 import com.magorasystems.mafmodules.authmodule.network.provider.AuthRestProvider;
@@ -57,5 +58,7 @@ public interface AuthComponent {
     void inject(SimpleAuthInteractorImpl i);
 
     void inject(SimpleAuthPresenterImpl p);
+
+    void inject(AuthModulePresenterImp module);
 
 }
