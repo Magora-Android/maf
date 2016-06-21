@@ -31,6 +31,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import rx.Subscription;
 import rx.subjects.PublishSubject;
 
 /**
@@ -53,6 +54,8 @@ public abstract class AuthorizationFragment extends GenericFragment<AuthRouter> 
 
     private AuthInteractiveView authInteractiveView;
 
+    private Subscription subscription;
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -60,13 +63,21 @@ public abstract class AuthorizationFragment extends GenericFragment<AuthRouter> 
         getPresenter().attachView(this);
         getPresenter().setRouter(router);
         final PublishSubject<AuthViewModel> subject = PublishSubject.create();
-        authInteractiveView = new AuthInteractiveViewImpl(getAuthWidget(), getRecoverPassword(),
-                subject, getRules());
-        subject.doOnNext(authViewModel -> getSignInView().setEnabled(false))
+        getAuthWidget().updateRules(getRules());
+        authInteractiveView = new AuthInteractiveViewImpl(
+                getAuthWidget(),
+                getRecoverPassword(),
+                getSignInView(),
+                subject);
+        subscription = subject.doOnNext(authViewModel -> getSignInView().setEnabled(false))
                 .doOnNext(authViewModel -> WidgetUtils.hideSoftKeyboard(getActivity()))
                 .subscribe(authViewModel -> {
                     LOGGER.debug("viewModel: {}", authViewModel);
                 });
+        authInteractiveView.model()
+                .subscribe(getPresenter()::authorization);
+        authInteractiveView.passwordRecover()
+                .subscribe(v -> LOGGER.debug("onPasswordRecover"));
     }
 
     @Override
@@ -80,16 +91,6 @@ public abstract class AuthorizationFragment extends GenericFragment<AuthRouter> 
         getAuthWidget().updateRules(getRules());
         getAuthWidget().validation()
                 .subscribe(getSignInView()::setEnabled);
-    }
-
-    public void onSignIn() {
-       /* getAuthWidget().model()
-                .doOnNext(authViewModel -> getSignInView().setEnabled(false))
-                .doOnNext(authViewModel -> getAuthWidget().setEnabled(false))
-                .doOnNext(authViewModel -> WidgetUtils.hideSoftKeyboard(getActivity()))
-                .subscribe(getPresenter()::authorization);*/
-        authInteractiveView.model()
-                .subscribe(getPresenter()::authorization);
     }
 
     @Override
@@ -121,6 +122,9 @@ public abstract class AuthorizationFragment extends GenericFragment<AuthRouter> 
 
     @Override
     public void detachView() {
+        if (subscription != null && !subscription.isUnsubscribed()) {
+            subscription.unsubscribe();
+        }
         getAuthWidget().destroyWidget();
     }
 

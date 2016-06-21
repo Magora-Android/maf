@@ -13,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * Developed by Magora Team (magora-systems.com). 2016.
@@ -47,17 +46,6 @@ public class AuthorizationFragmentImpl extends AuthorizationFragment {
         showErrorDialog(e.getMessage(), (v, i) -> {
 
         });
-    }
-
-    @Override
-    @OnClick(R.id.button_sign_in)
-    public void onSignIn() {
-        super.onSignIn();
-    }
-
-    @OnClick(R.id.text_password_recover)
-    public void onPasswordRecover() {
-        LOGGER.debug("onPasswordRecover");
     }
 
 
