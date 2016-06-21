@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import com.magorasystems.mafmodules.authmodule.R;
 import com.magorasystems.mafmodules.authmodule.dagger.component.AuthComponent;
-import com.magorasystems.mafmodules.authmodule.fragment.AuthorizationFragment;
 import com.magorasystems.mafmodules.authmodule.router.AuthRouter;
 import com.magorasystems.mafmodules.common.ui.activity.CommonBaseActivity;
 import com.magorasystems.mafmodules.common.ui.fragment.BaseFragmentImpl;
@@ -44,6 +43,6 @@ public abstract class AuthorizationActivity extends CommonBaseActivity<AuthCompo
         component.inject(this);
     }
 
-    protected abstract AuthorizationFragment makeFragment();
+    protected abstract BaseFragmentImpl makeFragment();
 
 }

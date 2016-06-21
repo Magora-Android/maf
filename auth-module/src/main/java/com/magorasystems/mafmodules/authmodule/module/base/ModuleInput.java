@@ -13,4 +13,6 @@ public interface ModuleInput<V extends ViewInput<?, ?>, R extends BaseRouter> {
     V getViewInput();
 
     R getRouter();
+
+    void clear();
 }

@@ -4,11 +4,13 @@ package com.magorasystems.mafmodules.authmodule.dagger.component;
 import com.magorasystems.mafmodule.security.network.RefreshTokenApiClient;
 import com.magorasystems.mafmodules.authmodule.activity.AuthorizationActivity;
 import com.magorasystems.mafmodules.authmodule.dagger.module.AuthInteratorModule;
+import com.magorasystems.mafmodules.authmodule.dagger.module.AuthModulePresenterModule;
 import com.magorasystems.mafmodules.authmodule.dagger.module.AuthNetworkModule;
 import com.magorasystems.mafmodules.authmodule.dagger.module.AuthPresenterModule;
 import com.magorasystems.mafmodules.authmodule.dagger.module.AuthProviderModule;
 import com.magorasystems.mafmodules.authmodule.dagger.scope.AuthScope;
 import com.magorasystems.mafmodules.authmodule.fragment.AuthorizationFragment;
+import com.magorasystems.mafmodules.authmodule.fragment.AuthorizationModuleFragment;
 import com.magorasystems.mafmodules.authmodule.interactor.impl.SimpleAuthInteractor;
 import com.magorasystems.mafmodules.authmodule.interactor.impl.SimpleAuthInteractorImpl;
 import com.magorasystems.mafmodules.authmodule.module.impl.AuthModulePresenterImp;
@@ -31,7 +33,7 @@ import dagger.Component;
 @Component(dependencies = CommonModuleComponent.class,
            modules = {AuthNetworkModule.class,
                    AuthProviderModule.class, AuthInteratorModule.class,
-                   AuthPresenterModule.class})
+                   AuthPresenterModule.class, AuthModulePresenterModule.class})
 @AuthScope
 public interface AuthComponent {
 
@@ -60,5 +62,7 @@ public interface AuthComponent {
     void inject(SimpleAuthPresenterImpl p);
 
     void inject(AuthModulePresenterImp module);
+
+    void inject(AuthorizationModuleFragment f);
 
 }

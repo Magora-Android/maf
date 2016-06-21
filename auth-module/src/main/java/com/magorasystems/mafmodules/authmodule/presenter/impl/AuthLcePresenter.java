@@ -46,4 +46,13 @@ public class AuthLcePresenter<I extends AuthInteractor<StringAuthInfo>>
     public void onStop() {
         getIteractor().unsubscribe();
     }
+
+    @Override
+    public void onNext(StringAuthInfo stringAuthInfo) {
+        super.onNext(stringAuthInfo);
+        final AuthRouter router = getRouter();
+        if (router != null) {
+            router.onAfterAuth();
+        }
+    }
 }

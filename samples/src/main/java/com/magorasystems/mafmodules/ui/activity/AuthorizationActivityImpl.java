@@ -25,7 +25,8 @@ public class AuthorizationActivityImpl extends AuthorizationActivity {
 
     @Override
     protected AuthComponent createComponent() {
-        return (AuthComponent) SampleApplication.get(this).getComponent(AuthComponent.class.getSimpleName());
+        return (AuthComponent) SampleApplication.get(this)
+                .getComponent(AuthComponent.class.getSimpleName());
     }
 
     @Override

@@ -36,6 +36,7 @@ public class SampleActivity extends AppCompatActivity {
 
         findViewById(R.id.action_go_auth).setOnClickListener(v ->
                 ActivityNavigator.startGenericActivity(SampleActivity.this, AuthorizationActivityImpl.class, null, false, 0));
-
+        findViewById(R.id.action_go_module_auth).setOnClickListener(v ->
+                ActivityNavigator.startGenericActivity(SampleActivity.this, AuthorizationModuleActivity.class, null, false, 0));
     }
 }

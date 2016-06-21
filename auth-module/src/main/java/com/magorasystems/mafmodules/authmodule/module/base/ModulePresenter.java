@@ -17,4 +17,6 @@ public interface ModulePresenter<COMPONENT, I extends AbstractModuleInput<String
     void stop();
 
     void input(I input);
+
+    void destroy(boolean retainInstance);
 }

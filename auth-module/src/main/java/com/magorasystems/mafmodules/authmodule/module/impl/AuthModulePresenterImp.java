@@ -35,27 +35,43 @@ public class AuthModulePresenterImp extends AbstractModulePresenter<AuthComponen
     }
 
     @Override
+    public void input(AuthModuleInput input) {
+        super.input(input);
+        getPresenter().setRouter(input.getRouter());
+        getPresenter().attachView(input.getViewInput().getPassiveView());
+    }
+
+    @Override
     public void start() {
-        getPresenter().setRouter(getModuleInput().getRouter());
-        getPresenter().attachView(getModuleInput().getViewInput().getPassiveView());
+        super.start();
         final AuthInteractiveView interactiveView = getModuleInput().getViewInput()
                 .getInteractiveView();
-        subscription.add(interactiveView.model()
-                .subscribe(getPresenter()::authorization));
-        subscription.add(interactiveView.passwordRecover()
-                .subscribe(getPresenter()::passwordRecover));
+        if (interactiveView != null) {
+            subscription.add(interactiveView.model()
+                    .subscribe(getPresenter()::authorization));
+            subscription.add(interactiveView.passwordRecover()
+                    .subscribe(getPresenter()::passwordRecover));
+            subscription.add(interactiveView.validation()
+                    .subscribe());
+        }
     }
 
     @Override
     public void stop() {
         super.stop();
-        if (subscription.hasSubscriptions()) {
-            subscription.unsubscribe();
-        }
     }
 
     @Override
     protected SimpleAuthPresenter getPresenter() {
         return presenter;
+    }
+
+    @Override
+    public void destroy(boolean retainInstance) {
+        super.destroy(retainInstance);
+        if (subscription.hasSubscriptions()) {
+            subscription.unsubscribe();
+            subscription.clear();
+        }
     }
 }

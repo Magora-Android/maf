@@ -17,4 +17,6 @@ public interface AuthInteractiveView {
 
     Observable<Void> passwordRecover();
 
+    void destroy();
+
 }

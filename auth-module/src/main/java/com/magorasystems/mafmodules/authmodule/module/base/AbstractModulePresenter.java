@@ -5,7 +5,7 @@ import android.content.Context;
 import com.magorasystems.mafmodules.authmodule.module.impl.AbstractModuleInput;
 import com.magorasystems.mafmodules.authmodule.router.AuthRouter;
 import com.magorasystems.mafmodules.authmodule.view.input.StringAuthViewInput;
-import com.magorasystems.mafmodules.common.mvp.presenter.BasePresenter;
+import com.magorasystems.mafmodules.common.mvp.presenter.BaseLifecyclePresenter;
 import com.magorasystems.mafmodules.common.mvp.router.BaseRouter;
 import com.magorasystems.mafmodules.common.mvp.view.BaseView;
 import com.magorasystems.mafmodules.common.utils.component.HasComponent;
@@ -34,10 +34,22 @@ public abstract class AbstractModulePresenter<COMPONENT, I extends AbstractModul
     }
 
     @Override
-    public void stop() {
-        getPresenter().detachView(false);
-        getPresenter().removeRouter();
+    public void start() {
+        getPresenter().onStart();
     }
 
-    protected abstract BasePresenter<? extends BaseView, ? extends BaseRouter> getPresenter();
+    @Override
+    public void stop() {
+        getPresenter().onStop();
+    }
+
+    protected abstract BaseLifecyclePresenter<? extends BaseView, ? extends BaseRouter> getPresenter();
+
+    @Override
+    public void destroy(boolean retainInstance) {
+        getPresenter().detachView(retainInstance);
+        getPresenter().removeRouter();
+        moduleInput.clear();
+        moduleInput = null;
+    }
 }

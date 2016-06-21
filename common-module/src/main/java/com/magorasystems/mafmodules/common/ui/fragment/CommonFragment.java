@@ -1,7 +1,5 @@
 package com.magorasystems.mafmodules.common.ui.fragment;
 
-import android.content.DialogInterface;
-
 import com.magorasystems.mafmodules.common.mvp.router.BaseRouter;
 
 /**
@@ -11,5 +9,4 @@ import com.magorasystems.mafmodules.common.mvp.router.BaseRouter;
  */
 public interface CommonFragment<T extends BaseRouter> extends BaseFragment {
 
-    void showErrorDialog(final String message, final DialogInterface.OnClickListener clickListener);
 }

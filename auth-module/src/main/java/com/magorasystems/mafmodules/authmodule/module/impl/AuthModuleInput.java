@@ -10,7 +10,7 @@ import com.magorasystems.mafmodules.authmodule.view.input.StringAuthViewInput;
  */
 public class AuthModuleInput extends AbstractModuleInput<StringAuthViewInput, AuthRouter> {
 
-    protected AuthModuleInput(StringAuthViewInput viewInput, AuthRouter router) {
+    public AuthModuleInput(StringAuthViewInput viewInput, AuthRouter router) {
         super(viewInput, router);
     }
 }

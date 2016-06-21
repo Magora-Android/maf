@@ -1,12 +1,9 @@
 package com.magorasystems.mafmodules.common.ui.fragment;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
-import android.view.View;
 
 import com.magorasystems.mafmodules.common.mvp.presenter.BaseLifecyclePresenter;
 import com.magorasystems.mafmodules.common.mvp.presenter.BasePresenter;
@@ -43,18 +40,6 @@ public abstract class GenericFragment<ROUTER extends BaseRouter> extends BaseFra
     }
 
     @Override
-    public void showErrorDialog(String message, DialogInterface.OnClickListener clickListener) {
-        if (getActivity().isFinishing()) {
-            return;
-        }
-        new AlertDialog.Builder(getActivity())
-                .setMessage(message)
-                .setCancelable(false)
-                .setPositiveButton(android.R.string.ok, clickListener)
-                .show();
-    }
-
-    @Override
     public void onStart() {
         onSuperStart();
         final BasePresenter presenter = getPresenter();
@@ -81,16 +66,6 @@ public abstract class GenericFragment<ROUTER extends BaseRouter> extends BaseFra
         }
         super.onDestroyView();
     }
-
-    protected final void onSuperStart() {
-        super.onStart();
-    }
-
-    protected final void onSuperStop() {
-        super.onStart();
-    }
-
-    protected abstract View getProgressView();
 
 
 }

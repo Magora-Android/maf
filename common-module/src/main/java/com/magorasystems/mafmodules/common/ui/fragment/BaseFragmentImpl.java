@@ -1,11 +1,13 @@
 package com.magorasystems.mafmodules.common.ui.fragment;
 
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,6 +78,18 @@ public abstract class BaseFragmentImpl extends Fragment implements BaseFragment 
         }
     }
 
+    @Override
+    public void showErrorDialog(String message, DialogInterface.OnClickListener clickListener) {
+        if (getActivity().isFinishing()) {
+            return;
+        }
+        new AlertDialog.Builder(getActivity())
+                .setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton(android.R.string.ok, clickListener)
+                .show();
+    }
+
     protected final boolean isActivityDetached() {
         return getActivity() == null || getActivity().isFinishing();
     }
@@ -86,5 +100,17 @@ public abstract class BaseFragmentImpl extends Fragment implements BaseFragment 
                     .setLayerType(View.LAYER_TYPE_HARDWARE, paint);
         }
     }
+
+
+    protected final void onSuperStart() {
+        super.onStart();
+    }
+
+    protected final void onSuperStop() {
+        super.onStart();
+    }
+
+    protected abstract View getProgressView();
+
 
 }
