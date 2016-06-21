@@ -5,10 +5,14 @@ import android.content.Context;
 import com.magorasystems.mafmodules.authmodule.dagger.component.AuthComponent;
 import com.magorasystems.mafmodules.authmodule.module.base.AbstractModulePresenter;
 import com.magorasystems.mafmodules.authmodule.presenter.SimpleAuthPresenter;
+import com.magorasystems.mafmodules.authmodule.router.AuthRouter;
 import com.magorasystems.mafmodules.authmodule.view.input.AuthInteractiveView;
+import com.magorasystems.mafmodules.authmodule.view.input.StringAuthViewInput;
+import com.magorasystems.mafmodules.authmodule.view.outpit.AuthViewOutput;
 
 import javax.inject.Inject;
 
+import rx.Observable;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -16,7 +20,7 @@ import rx.subscriptions.CompositeSubscription;
  *
  * @author Valentin S.Bolkonsky
  */
-public class AuthModulePresenterImp extends AbstractModulePresenter<AuthComponent, AuthModuleInput> implements AuthModulePresenter {
+public class AuthModulePresenterImp extends AbstractModulePresenter<AuthComponent, AuthRouter, StringAuthViewInput, AuthViewOutput, AuthModuleInput> implements AuthModulePresenter {
 
     @Inject
     protected SimpleAuthPresenter presenter;
@@ -32,6 +36,21 @@ public class AuthModulePresenterImp extends AbstractModulePresenter<AuthComponen
     @Override
     public void inject(AuthComponent authComponent) {
         authComponent.inject(this);
+    }
+
+    @Override
+    public void output(Observable<AuthViewOutput> output) {
+        subscription.add(output.subscribe(authViewOutput -> {
+            AuthRouter router = getModuleInput().getRouter();
+            if (router != null) {
+                router.onAfterAuth();
+            }
+        }, throwable -> {
+            AuthRouter router = getModuleInput().getRouter();
+            if (router != null) {
+                router.onShowError(throwable);
+            }
+        }));
     }
 
     @Override
@@ -54,6 +73,7 @@ public class AuthModulePresenterImp extends AbstractModulePresenter<AuthComponen
             subscription.add(interactiveView.validation()
                     .subscribe());
         }
+        output(getPresenter().output());
     }
 
     @Override

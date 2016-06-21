@@ -3,8 +3,8 @@ package com.magorasystems.mafmodules.authmodule.module.base;
 import android.content.Context;
 
 import com.magorasystems.mafmodules.authmodule.module.impl.AbstractModuleInput;
-import com.magorasystems.mafmodules.authmodule.router.AuthRouter;
-import com.magorasystems.mafmodules.authmodule.view.input.StringAuthViewInput;
+import com.magorasystems.mafmodules.authmodule.view.input.ViewInput;
+import com.magorasystems.mafmodules.authmodule.view.outpit.ViewOutput;
 import com.magorasystems.mafmodules.common.mvp.presenter.BaseLifecyclePresenter;
 import com.magorasystems.mafmodules.common.mvp.router.BaseRouter;
 import com.magorasystems.mafmodules.common.mvp.view.BaseView;
@@ -15,7 +15,8 @@ import com.magorasystems.mafmodules.common.utils.component.HasComponent;
  *
  * @author Valentin S.Bolkonsky
  */
-public abstract class AbstractModulePresenter<COMPONENT, I extends AbstractModuleInput<StringAuthViewInput, AuthRouter>> implements ModulePresenter<COMPONENT, I> {
+public abstract class AbstractModulePresenter<COMPONENT, R extends BaseRouter, VI extends ViewInput<?, ?>,
+        VO extends ViewOutput<?>, I extends AbstractModuleInput<VI, R>> implements ModulePresenter<COMPONENT, R, VI, VO, I> {
 
     private I moduleInput;
 
@@ -28,6 +29,7 @@ public abstract class AbstractModulePresenter<COMPONENT, I extends AbstractModul
         return moduleInput;
     }
 
+    @SuppressWarnings("unchecked")
     protected final void injectComponent(Context context, Class<COMPONENT> clazz) {
         COMPONENT component = (COMPONENT) ((HasComponent<?>) context).getComponent(clazz.getSimpleName());
         inject(component);

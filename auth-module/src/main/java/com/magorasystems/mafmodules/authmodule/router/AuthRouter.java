@@ -12,4 +12,6 @@ public interface AuthRouter extends BaseRouter {
     void onAfterAuth();
 
     void onRecoverPassword();
+
+    void onShowError(Throwable throwable);
 }

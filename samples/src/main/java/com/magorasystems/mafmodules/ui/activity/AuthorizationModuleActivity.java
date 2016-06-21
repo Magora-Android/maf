@@ -33,4 +33,9 @@ public class AuthorizationModuleActivity extends AuthorizationActivity {
         return (AuthComponent) SampleApplication.get(this)
                 .getComponent(AuthComponent.class.getSimpleName());
     }
+
+    @Override
+    public void onShowError(Throwable throwable) {
+        LOGGER.error("onShowError ", throwable);
+    }
 }

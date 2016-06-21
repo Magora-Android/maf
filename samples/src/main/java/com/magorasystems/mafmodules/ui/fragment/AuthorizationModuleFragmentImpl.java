@@ -109,4 +109,9 @@ public class AuthorizationModuleFragmentImpl extends AuthorizationModuleFragment
             getActivity().onBackPressed();
         }
     }
+
+    @Override
+    public void onShowError(Throwable throwable) {
+        LOGGER.error("onShowError ", throwable);
+    }
 }

@@ -33,4 +33,9 @@ public class AuthorizationActivityImpl extends AuthorizationActivity {
     public void onRecoverPassword() {
         LOGGER.debug("onRecoverPassword");
     }
+
+    @Override
+    public void onShowError(Throwable throwable) {
+        LOGGER.error("onShowError ", throwable);
+    }
 }
