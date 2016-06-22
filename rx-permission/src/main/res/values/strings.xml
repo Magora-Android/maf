@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">rx-permission</string>
+    <string name="button_accept_rationale">Accept</string>
+    <string name="button_decline_rationale">Decline</string>
+</resources>

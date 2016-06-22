@@ -42,9 +42,11 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile project(':rx-activityresult')
     compile(
             "com.android.support:support-annotations:$version_support_annotations",
-            "com.android.support:appcompat-v7:$version_appcompat"
+            "com.android.support:appcompat-v7:$version_appcompat",
+            "com.android.support:cardview-v7:$version_appcompat"
     )
     compile(
             "io.reactivex:rxjava:$version_rx_java"

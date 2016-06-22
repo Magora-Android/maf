@@ -19,8 +19,8 @@ package com.magorasystems.rx.activityresult;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
+import android.support.annotation.IdRes;
 import android.support.annotation.IntDef;
-import android.support.annotation.LayoutRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -52,6 +52,10 @@ public class RxActivityResult {
         return new Builder<>(fragment);
     }
 
+    public static <T extends android.app.Fragment> Builder<T> on(T fragment, @IdRes int resourceId) {
+        return new Builder<>(fragment).fragmentContainer(resourceId);
+    }
+
 
     @IntDef({UI_TARGET_ACTIVITY, UI_TARGET_FRAGMENT, UI_TARGET_SUPPORT_FRAGMENT})
     @Retention(RetentionPolicy.SOURCE)
@@ -63,7 +67,7 @@ public class RxActivityResult {
         private final
         @UiTargetMode
         int uiTargetMode;
-        @LayoutRes
+        @IdRes
         int resourceId;
         private Subscriber<? super Result<T>> subscriber;
 
@@ -84,7 +88,7 @@ public class RxActivityResult {
             }
         }
 
-        public Builder<T> fragmentContainer(@LayoutRes int id) {
+        public Builder<T> fragmentContainer(@IdRes int id) {
             this.resourceId = id;
             return this;
         }

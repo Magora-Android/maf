@@ -15,6 +15,7 @@ import com.magorasystems.mafmodules.dagger.component.SampleComponents;
 import com.magorasystems.mafmodules.dagger.module.SampleApplicationModule;
 import com.magorasystems.mafmodules.dagger.scope.ApplicationScope;
 import com.magorasystems.rx.activityresult.RxActivityResult;
+import com.magorasystems.rx.permission.RxResult;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -38,7 +39,7 @@ public class SampleApplication extends BaseComponentApplication<SampleComponent>
     @Override
     public void onCreate() {
         super.onCreate();
-        RxActivityResult.register(this);
+        RxResult.register(this);
         LOGGER.debug("Inject Context {}", context);
         LOGGER.debug("{}", StringUtils.isBlank(""));
     }
