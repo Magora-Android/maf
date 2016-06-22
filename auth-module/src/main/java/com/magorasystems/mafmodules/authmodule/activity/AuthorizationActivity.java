@@ -7,6 +7,7 @@ import com.magorasystems.mafmodules.authmodule.dagger.component.AuthComponent;
 import com.magorasystems.mafmodules.authmodule.router.AuthRouter;
 import com.magorasystems.mafmodules.common.ui.activity.CommonBaseActivity;
 import com.magorasystems.mafmodules.common.ui.fragment.BaseFragmentImpl;
+import com.magorasystems.mafmodules.common.ui.fragment.BaseSupportFragmentImpl;
 import com.magorasystems.mafmodules.common.ui.widget.WidgetUtils;
 
 /**
@@ -20,7 +21,6 @@ public abstract class AuthorizationActivity extends CommonBaseActivity<AuthCompo
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setFragment(makeFragment());
     }
 
     @Override
@@ -36,6 +36,11 @@ public abstract class AuthorizationActivity extends CommonBaseActivity<AuthCompo
     @Override
     protected void setFragment(BaseFragmentImpl fragment) {
         setFragment(R.id.fragment_container, fragment);
+    }
+
+    @Override
+    protected void setSupportFragment(BaseSupportFragmentImpl fragment) {
+        setSupportFragment(R.id.fragment_container, fragment);
     }
 
     @Override

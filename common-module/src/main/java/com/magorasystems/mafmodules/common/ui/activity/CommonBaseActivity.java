@@ -6,6 +6,7 @@ import android.support.annotation.IdRes;
 
 import com.magorasystems.mafmodules.common.mvp.router.BaseRouter;
 import com.magorasystems.mafmodules.common.ui.fragment.BaseFragmentImpl;
+import com.magorasystems.mafmodules.common.ui.fragment.BaseSupportFragmentImpl;
 import com.magorasystems.mafmodules.common.ui.widget.WidgetUtils;
 import com.magorasystems.mafmodules.common.utils.component.Injectable;
 
@@ -71,5 +72,14 @@ public abstract class CommonBaseActivity<COMPONENT> extends BaseActivity<COMPONE
                 .commit();
     }
 
-
+    protected void setSupportFragment(@IdRes int resource, BaseSupportFragmentImpl fragment) {
+        if (isFinishing()) {
+            return;
+        }
+        final android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager()
+                .beginTransaction();
+        ft.replace(resource, fragment)
+                .addToBackStack(fragment.getFragmentName())
+                .commit();
+    }
 }

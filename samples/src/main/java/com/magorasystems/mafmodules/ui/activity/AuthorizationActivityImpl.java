@@ -1,5 +1,7 @@
 package com.magorasystems.mafmodules.ui.activity;
 
+import android.os.Bundle;
+
 import com.magorasystems.mafmodules.application.SampleApplication;
 import com.magorasystems.mafmodules.authmodule.activity.AuthorizationActivity;
 import com.magorasystems.mafmodules.authmodule.dagger.component.AuthComponent;
@@ -17,6 +19,12 @@ import org.slf4j.LoggerFactory;
 public class AuthorizationActivityImpl extends AuthorizationActivity {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthorizationActivityImpl.class);
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setFragment(makeFragment());
+    }
 
     @Override
     protected AuthorizationFragment makeFragment() {

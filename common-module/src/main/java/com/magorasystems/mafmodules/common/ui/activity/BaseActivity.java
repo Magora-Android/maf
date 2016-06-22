@@ -6,6 +6,7 @@ import android.view.Window;
 
 import com.magorasystems.mafmodules.common.application.ComponentApplication;
 import com.magorasystems.mafmodules.common.ui.fragment.BaseFragmentImpl;
+import com.magorasystems.mafmodules.common.ui.fragment.BaseSupportFragmentImpl;
 import com.magorasystems.mafmodules.common.utils.component.HasComponent;
 
 /**
@@ -20,6 +21,8 @@ public abstract class BaseActivity<COMPONENT> extends AppCompatActivity implemen
     protected abstract int getResourceLayout();
 
     protected abstract void setFragment(final BaseFragmentImpl fragment);
+
+    protected abstract void setSupportFragment(final BaseSupportFragmentImpl fragment);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,6 @@ public abstract class BaseActivity<COMPONENT> extends AppCompatActivity implemen
 
     @Override
     public Object getComponent(String key) {
-        return ((ComponentApplication<?>)getApplication()).getComponent(key);
+        return ((ComponentApplication<?>) getApplication()).getComponent(key);
     }
 }
