@@ -100,9 +100,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile project(':common-module')
     compile project(':auth-module')
-    compile project(':security-module')
     compile project(':rx-permission')
 
     compile(
@@ -150,7 +148,7 @@ dependencies {
             "com.github.blocoio:faker:1.2.3",
             "com.github.fabioCollini:DaggerMock:0.6"
     )
-    androidTestCompile project(path: ':common-utils')
-    androidTestCompile project(path: ':common-network')
-    androidTestCompile project(path: ':security-module')
+    androidTestCompile project(path: ':auth-module')
+    //androidTestCompile project(path: ':common-network')
+    //androidTestCompile project(path: ':security-module')
 }

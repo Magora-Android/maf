@@ -143,8 +143,5 @@ dependencies {
     //Guava
     compile "com.google.guava:guava:$version_guava"
 
-    testCompile("junit:junit:$version_junit",
-            "org.hamcrest:hamcrest-core:$version_hamcrest",
-            "org.hamcrest:hamcrest-library:$version_hamcrest",
-            "org.mockito:mockito-core:$version_mockito")
+    testCompile("junit:junit:$version_junit")
 }

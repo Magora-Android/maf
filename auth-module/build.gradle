@@ -152,28 +152,7 @@ dependencies {
 
     retrolambdaConfig "net.orfjackal.retrolambda:retrolambda:$version_retrolambda"
 
-    testCompile("junit:junit:$version_junit",
-            "org.hamcrest:hamcrest-core:$version_hamcrest",
-            "org.hamcrest:hamcrest-library:$version_hamcrest",
-            "org.mockito:mockito-core:$version_mockito",
-            "com.squareup.okhttp3:mockwebserver:$version_mockitoserver")
+    testCompile("junit:junit:$version_junit")
 
-    androidTestApt "com.google.dagger:dagger-compiler:$version_dagger"
 
-    androidTestCompile(
-            "com.android.support:support-annotations:$version_support_annotations",
-            "org.mockito:mockito-core:$version_mockito",
-            "com.google.dexmaker:dexmaker:$version_dexmaker",
-            "com.google.dexmaker:dexmaker-mockito:$version_dexmaker",
-            "com.android.support.test:runner:$version_support_test",
-            // Set this dependency to use JUnit 4 rules
-            "com.android.support.test:rules:$version_support_test",
-            "com.squareup.okhttp3:mockwebserver:$version_mockitoserver",
-            "com.android.support.test.espresso:espresso-core:$version_espresso",
-            "com.github.blocoio:faker:1.2.3",
-            "com.github.fabioCollini:DaggerMock:0.6"
-    )
-    androidTestCompile project(path: ':common-utils')
-    androidTestCompile project(path: ':common-network')
-    androidTestCompile project(path: ':security-module')
 }

@@ -163,20 +163,6 @@ dependencies {
     compile "com.jakewharton:butterknife:$version_butterknife"
     apt "com.jakewharton:butterknife-compiler:$version_butterknife"
 
-    testCompile("junit:junit:$version_junit",
-            "org.hamcrest:hamcrest-core:$version_hamcrest",
-            "org.hamcrest:hamcrest-library:$version_hamcrest",
-            "org.mockito:mockito-core:$version_mockito")
+    testCompile("junit:junit:$version_junit")
 
-    androidTestApt "com.google.dagger:dagger-compiler:$version_dagger"
-
-    androidTestCompile(
-            "com.android.support:support-annotations:$version_support_annotations",
-            "org.mockito:mockito-core:$version_mockito",
-            "com.google.dexmaker:dexmaker:$version_dexmaker",
-            "com.google.dexmaker:dexmaker-mockito:$version_dexmaker",
-            "com.android.support.test:runner:$version_support_test",
-            // Set this dependency to use JUnit 4 rules
-            "com.android.support.test:rules:$version_support_test"
-    )
 }
