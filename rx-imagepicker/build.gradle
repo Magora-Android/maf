@@ -41,13 +41,13 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':rx-activityresult')
+    compile project(':rx-permission')
     compile(
             "com.android.support:support-annotations:$version_support_annotations",
             "com.android.support:appcompat-v7:$version_appcompat",
     )
     compile(
-            "io.reactivex:rxjava:$version_rx_java"
+            "io.reactivex:rxandroid:$version_rx_android",
     )
     testCompile "junit:junit:$version_junit"
 
