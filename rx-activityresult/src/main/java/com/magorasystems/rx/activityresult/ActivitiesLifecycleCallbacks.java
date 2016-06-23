@@ -7,7 +7,6 @@ import android.os.Bundle;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
-import rx.functions.Func1;
 
 class ActivitiesLifecycleCallbacks {
     private final Application application;
@@ -73,31 +72,18 @@ class ActivitiesLifecycleCallbacks {
     Observable<Activity> getOLiveActivity() {
         emitted = false;
         return Observable.interval(50, 50, TimeUnit.MILLISECONDS)
-                .map(new Func1<Long, Activity>() {
-                    @Override
-                    public Activity call(Long aLong) {
-                        return liveActivityOrNull;
+                .map(aLong -> liveActivityOrNull)
+                .takeWhile(activity -> {
+                    boolean continueEmitting = true;
+                    if (emitted) {
+                        continueEmitting = false;
                     }
+                    if (activity != null) {
+                        emitted = true;
+                    }
+                    return continueEmitting;
                 })
-                .takeWhile(new Func1<Activity, Boolean>() {
-                    @Override
-                    public Boolean call(Activity activity) {
-                        boolean continueEmitting = true;
-                        if (emitted) {
-                            continueEmitting = false;
-                        }
-                        if (activity != null) {
-                            emitted = true;
-                        }
-                        return continueEmitting;
-                    }
-                })
-                .filter(new Func1<Activity, Boolean>() {
-                    @Override
-                    public Boolean call(Activity activity) {
-                        return activity != null;
-                    }
-                });
+                .filter(activity -> activity != null);
     }
 
 }

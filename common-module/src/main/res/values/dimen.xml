@@ -4,4 +4,7 @@
     <dimen name="standard_screen_margin_vertical">16dp</dimen>
     <dimen name="standard_screen_padding_horizontal">16dp</dimen>
     <dimen name="standard_screen_padding_vertical">16dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">8dp</dimen>
 </resources>

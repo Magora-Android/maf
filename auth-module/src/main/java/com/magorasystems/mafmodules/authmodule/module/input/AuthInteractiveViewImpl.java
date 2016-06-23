@@ -34,7 +34,7 @@ public class AuthInteractiveViewImpl implements AuthInteractiveView {
     @Override
     @RxLogObservable
     public Observable<AuthViewModel> model() {
-        return RxView.clickEvents(actionAuthorization)
+        return RxView.clicks(actionAuthorization)
                 .flatMap(viewClickEvent -> authWidget.model()
                         .doOnNext(authViewModel -> authWidget.setEnabled(false))
                         .doOnNext(authViewModel -> actionAuthorization.setEnabled(false))
@@ -51,8 +51,7 @@ public class AuthInteractiveViewImpl implements AuthInteractiveView {
     @Override
     @RxLogObservable
     public Observable<Void> passwordRecover() {
-        return RxView.clickEvents(passwordRecover)
-                .map(viewClickEvent -> null);
+        return RxView.clicks(passwordRecover);
     }
 
     @Override

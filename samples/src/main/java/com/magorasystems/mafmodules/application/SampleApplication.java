@@ -2,6 +2,7 @@ package com.magorasystems.mafmodules.application;
 
 import android.content.Context;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.magorasystems.mafmodules.BuildConfig;
 import com.magorasystems.mafmodules.authmodule.dagger.AuthDaggerInner;
 import com.magorasystems.mafmodules.authmodule.dagger.component.AuthComponent;
@@ -14,7 +15,6 @@ import com.magorasystems.mafmodules.dagger.component.SampleComponent;
 import com.magorasystems.mafmodules.dagger.component.SampleComponents;
 import com.magorasystems.mafmodules.dagger.module.SampleApplicationModule;
 import com.magorasystems.mafmodules.dagger.scope.ApplicationScope;
-import com.magorasystems.rx.activityresult.RxActivityResult;
 import com.magorasystems.rx.permission.RxResult;
 
 import org.apache.commons.lang3.StringUtils;
@@ -40,6 +40,7 @@ public class SampleApplication extends BaseComponentApplication<SampleComponent>
     public void onCreate() {
         super.onCreate();
         RxResult.register(this);
+        Fresco.initialize(this);
         LOGGER.debug("Inject Context {}", context);
         LOGGER.debug("{}", StringUtils.isBlank(""));
     }

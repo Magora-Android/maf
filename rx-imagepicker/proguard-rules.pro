@@ -85,7 +85,15 @@
 
 #---------------------------------------------------------------------------------------------------
 
+## Retrolambda specific rules ##
+# as per official recommendation: https://github.com/evant/gradle-retrolambda#proguard
+-dontwarn java.lang.invoke.*
+-keep class sun.misc.Unsafe { *; }
+
+#---------------------------------------------------------------------------------------------------
+
 # Warnings
+-dontwarn java.lang.invoke.*
 -dontwarn com.magorasystems.**
 -dontwarn android.support.v4.**
 -dontwarn javax.annotation.**

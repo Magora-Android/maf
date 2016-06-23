@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">rx-imagepicker</string>
+    <string name="write_storage_permission_title">Запись во внешнюю память</string>
+    <string name="write_storage_permission_message">Приложение необходим доступ ко внешней памяти чтобы сделать снимок</string>
+    <string name="read_storage_permission_title">Чтение из внешнюю память</string>
+    <string name="read_storage_permission_message">Приложение необходим доступ к вашей галереи</string>
 </resources>

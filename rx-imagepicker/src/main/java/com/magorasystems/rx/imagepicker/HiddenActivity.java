@@ -1,17 +1,15 @@
 package com.magorasystems.rx.imagepicker;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
+
+import com.magorasystems.rx.permission.PermissionInfo;
+import com.magorasystems.rx.permission.RxResult;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,7 +18,8 @@ import java.util.Date;
 import java.util.Locale;
 
 public class HiddenActivity extends Activity {
-    public static String IMAGE_SOURCE = "image_source";
+    public final static String IMAGE_SOURCE = "image_source";
+
 
     private static String TAG = "RxImagePicker";
 
@@ -40,16 +39,6 @@ public class HiddenActivity extends Activity {
     @Override
     protected void onNewIntent(Intent intent) {
         handleIntent(intent);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (grantResults.length > 0
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            handleIntent(getIntent());
-        } else {
-            finish();
-        }
     }
 
     @Override
@@ -74,47 +63,59 @@ public class HiddenActivity extends Activity {
     }
 
     private void handleIntent(Intent intent) {
-        Sources sourceType = Sources.values()[intent.getIntExtra(IMAGE_SOURCE, 0)];
-        int chooseCode = 0;
-        Intent pictureChooseIntent = null;
+        final Sources sourceType = Sources.values()[intent.getIntExtra(IMAGE_SOURCE, 0)];
         switch (sourceType) {
             case CAMERA:
-                cameraPictureUrl = Uri.fromFile(createImageFile());
-                pictureChooseIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                pictureChooseIntent.putExtra(MediaStore.EXTRA_OUTPUT, cameraPictureUrl);
-                chooseCode = TAKE_PHOTO;
+                RxResult.checkPermissions(this, PermissionInfo.writeToExternalStorage(
+                        getString(R.string.write_storage_permission_title),
+                        getString(R.string.write_storage_permission_message),
+                        getString(android.R.string.ok),
+                        getString(android.R.string.cancel)))
+                        .subscribe(permission -> {
+                            if (permission.granted()) {
+                                takeCameraPhoto();
+                                return;
+                            }
+                            finish();
+                        });
                 break;
             case GALLERY:
-                if (!checkPermission()) {
-                    return;
-                }
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    pictureChooseIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                    pictureChooseIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false);
-                    pictureChooseIntent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
-                } else {
-                    pictureChooseIntent = new Intent(Intent.ACTION_GET_CONTENT);
-                }
-                pictureChooseIntent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-                pictureChooseIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                pictureChooseIntent.setType("image/*");
-                chooseCode = SELECT_PHOTO;
+                RxResult.checkPermissions(this, PermissionInfo.readExternalStorage(
+                        getString(R.string.read_storage_permission_title),
+                        getString(R.string.read_storage_permission_message),
+                        getString(android.R.string.ok),
+                        getString(android.R.string.cancel)))
+                        .subscribe(permission -> {
+                            if (permission.granted()) {
+                                takeGallery();
+                                return;
+                            }
+                            finish();
+                        });
                 break;
         }
-        startActivityForResult(pictureChooseIntent, chooseCode);
     }
 
-    private boolean checkPermission() {
-        if (ContextCompat.checkSelfPermission(HiddenActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
-                PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(HiddenActivity.this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    0);
-            return false;
+    private void takeCameraPhoto() {
+        cameraPictureUrl = Uri.fromFile(createImageFile());
+        Intent pictureChooseIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        pictureChooseIntent.putExtra(MediaStore.EXTRA_OUTPUT, cameraPictureUrl);
+        startActivityForResult(pictureChooseIntent, TAKE_PHOTO);
+    }
+
+    private void takeGallery() {
+        Intent pictureChooseIntent;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            pictureChooseIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            pictureChooseIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false);
+            pictureChooseIntent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
         } else {
-            return true;
+            pictureChooseIntent = new Intent(Intent.ACTION_GET_CONTENT);
         }
+        pictureChooseIntent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+        pictureChooseIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        pictureChooseIntent.setType("image/*");
+        startActivityForResult(pictureChooseIntent, SELECT_PHOTO);
     }
 
     private File createImageFile() {
@@ -131,20 +132,6 @@ public class HiddenActivity extends Activity {
             Log.e(TAG, ex.toString());
         }
         return imageTempFile;
-    }
-
-    private String getImagePath(Uri uri) {
-        String result = null;
-        String[] projection = {MediaStore.Images.Media.DATA};
-        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
-        if (cursor != null) {
-            int column_index = cursor
-                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            cursor.moveToFirst();
-            result = cursor.getString(column_index);
-            cursor.close();
-        }
-        return result;
     }
 
 }

@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'me.tatarka.retrolambda'
 
 version "0.0.1"
 
@@ -32,10 +33,41 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/notice'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/license'
+    }
+    lintOptions {
+        abortOnError false
+        enable 'BackButton'
+        enable 'GradleDynamicVersion'
+        enable 'NewerVersionAvailable'
+
+        disable 'MissingTranslation'
+        disable 'InvalidPackage'
+        disable 'ExtraTranslation'
+    }
+
     dexOptions {
         incremental true
         preDexLibraries = false
         javaMaxHeapSize "4g"
+    }
+    retrolambda {
+        javaVersion JavaVersion.VERSION_1_7
+        jdk System.getenv("JAVA8_HOME")
+        oldJdk System.getenv("JAVA7_HOME")
+        defaultMethods false
+        jvmArgs '-noverify'
+        incremental true
     }
 }
 
@@ -47,8 +79,12 @@ dependencies {
             "com.android.support:appcompat-v7:$version_appcompat",
     )
     compile(
+            "io.reactivex:rxjava:$version_rx_java",
             "io.reactivex:rxandroid:$version_rx_android",
     )
+
+    retrolambdaConfig "net.orfjackal.retrolambda:retrolambda:$version_retrolambda"
+
     testCompile "junit:junit:$version_junit"
 
 }

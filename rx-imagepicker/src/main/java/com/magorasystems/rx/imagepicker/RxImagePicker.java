@@ -33,6 +33,10 @@ public class RxImagePicker {
 
     void onImagePicked(Uri uri) {
         if (publishSubject != null) {
+            if (uri == null) {
+                publishSubject.onError(new RuntimeException("image picker return null uri "));
+                return;
+            }
             publishSubject.onNext(uri);
             publishSubject.onCompleted();
         }
@@ -41,14 +45,17 @@ public class RxImagePicker {
     void onDestroy() {
         if (publishSubject != null) {
             publishSubject.onCompleted();
+            publishSubject = null;
         }
+        instance = null;
     }
 
     private void startImagePickHiddenActivity(int imageSource) {
-        Intent intent = new Intent(context, HiddenActivity.class);
+        final Intent intent = new Intent(context, HiddenActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra(HiddenActivity.IMAGE_SOURCE, imageSource);
         context.startActivity(intent);
+
     }
 
 }

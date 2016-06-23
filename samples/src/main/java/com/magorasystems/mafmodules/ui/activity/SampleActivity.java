@@ -38,5 +38,8 @@ public class SampleActivity extends AppCompatActivity {
                 ActivityNavigator.startGenericActivity(SampleActivity.this, AuthorizationActivityImpl.class, null, false, 0));
         findViewById(R.id.action_go_module_auth).setOnClickListener(v ->
                 ActivityNavigator.startGenericActivity(SampleActivity.this, AuthorizationModuleActivity.class, null, false, 0));
+
+        findViewById(R.id.action_go_take_photo).setOnClickListener(v ->
+                ActivityNavigator.startGenericActivity(SampleActivity.this, RegistrationActivity.class, null, false, 0));
     }
 }
