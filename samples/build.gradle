@@ -17,6 +17,7 @@ android {
         targetSdkVersion version_sdk_target
         versionCode gitVersion()
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+        vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "com.magorasystems.mafmodules.runner.MockAuthAndroidJUnitRunner"
     }
 

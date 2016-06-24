@@ -41,5 +41,8 @@ public class SampleActivity extends AppCompatActivity {
 
         findViewById(R.id.action_go_take_photo).setOnClickListener(v ->
                 ActivityNavigator.startGenericActivity(SampleActivity.this, RegistrationActivity.class, null, false, 0));
+
+        findViewById(R.id.action_go_profile).setOnClickListener(v ->
+                ActivityNavigator.startGenericActivity(SampleActivity.this, ProfileActivity.class, null, false, 0));
     }
 }

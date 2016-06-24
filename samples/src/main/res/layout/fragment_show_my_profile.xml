@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout android:id="@+id/coordinator_layout"
+                                                 xmlns:android="http://schemas.android.com/apk/res/android"
+                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                 xmlns:tools="http://schemas.android.com/tools"
+                                                 android:layout_width="match_parent"
+                                                 android:layout_height="match_parent"
+                                                 tools:targetApi="lollipop">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        style="@style/BackgroundWhite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        app:layout_behavior="@string/behavior_app_bar_fixed">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:collapsedTitleGravity="left|center_vertical"
+            app:collapsedTitleTextAppearance="@style/TextAppearance.AppCompat.Display1"
+            app:contentScrim="@color/colorPrimary"
+            app:expandedTitleGravity="left|bottom"
+            app:expandedTitleMarginBottom="@dimen/activity_horizontal_margin"
+            app:expandedTitleMarginEnd="@dimen/activity_horizontal_margin"
+            app:expandedTitleMarginStart="@dimen/activity_horizontal_margin"
+            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Headline"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:statusBarScrim="@color/colorPrimary"
+            app:titleEnabled="true"
+            app:toolbarId="@+id/toolbar">
+
+            <com.magorasystems.mafmodules.ui.widget.SquaredDraweeView
+                android:id="@+id/drawee_avatar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/cd_user_avatar"
+                android:fitsSystemWindows="true"
+                android:scaleType="centerCrop"
+                android:tint="@color/color_drawee_tint_black"
+                app:actualImageScaleType="centerCrop"
+                app:fadeDuration="@integer/default_drawee_fade_duration"
+                app:layout_collapseMode="parallax"
+                app:placeholderImage="@color/color_drawee_tint_black"
+                tools:background="@color/color_06"/>
+
+            <com.magorasystems.widgets.ProgressBarAccentTinted
+                android:id="@+id/progress_view"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:indeterminate="true"
+                android:visibility="gone"
+                tools:visibility="visible"/>
+
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                style="@style/CommonToolbar"
+                android:background="@android:color/transparent"
+                android:elevation="0dp"
+                android:gravity="bottom"
+                app:contentInsetStart="0dp"
+                app:elevation="0dp"
+                app:layout_collapseMode="pin">
+
+               <!-- <ImageButton
+                    android:id="@+id/button_menu"
+                    style="@style/MainMenuButtonStyle"
+                    android:importantForAccessibility="no"
+                    app:srcCompat="@drawable/ic_menu_black_24dp"/>-->
+
+                <ImageButton
+                    android:id="@+id/button_edit_profile"
+                    style="@style/CommonImageButtonBorderless"
+                    android:layout_gravity="end|center_vertical"
+                    android:contentDescription="@string/cd_button_edit_profile"
+                    app:srcCompat="@drawable/ic_create_black_24dp"/>
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="?colorAccent"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/color_text_primary"
+            app:tabTextColor="@color/color_text_grey"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <com.magorasystems.widgets.pager.FixedPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@null"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+</android.support.design.widget.CoordinatorLayout>

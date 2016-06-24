@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="color_registration_buttons_not_pressed">#51ffffff</color>
+    <color name="color_registration_buttons_pressed">#78ffffff</color>
+
+    <color name="color_text_primary">#d7212121</color>
+    <color name="color_text_secondary">#e0e0e0</color>
+
+    <color name="color_00">#673AB7</color>
+    <color name="color_01">#3F51B5</color>
+    <color name="color_02">#2196F3</color>
+    <color name="color_03">#03A9F4</color>
+    <color name="color_04">#00BCD4</color>
+    <color name="color_05">#009688</color>
+    <color name="color_06">#4CAF50</color>
+    <color name="color_07">#8BC34A</color>
+    <color name="color_08">#FFC107</color>
+    <color name="color_09">#FF9800</color>
+    <color name="color_10">#FF5722</color>
+    <color name="color_11">#F44336</color>
+    <color name="color_12">#9C27B0</color>
+</resources>
