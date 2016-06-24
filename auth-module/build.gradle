@@ -4,7 +4,7 @@ apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'com.fernandocejas.frodo'
 apply plugin: 'com.bmuschko.nexus'
 
-version "0.1.1"
+version "0.1.2"
 
 android {
     compileSdkVersion version_sdk_target
@@ -130,25 +130,12 @@ dependencies {
     compile project(':security-module')
 
     compile(
-            "com.android.support:appcompat-v7:$version_appcompat",
-            "com.android.support:cardview-v7:$version_appcompat",
-            "com.android.support:recyclerview-v7:$version_appcompat",
-            "com.android.support:support-v13:$version_appcompat",
-            "com.android.support:design:$version_appcompat",
-            "com.android.support:support-annotations:$version_support_annotations"
-    )
-
-    compile(
             "com.google.dagger:dagger:$version_dagger",
             "javax.annotation:jsr250-api:$version_jsr250"
     )
 
     apt "com.google.dagger:dagger-compiler:$version_dagger"
 
-    compile(
-            "io.reactivex:rxandroid:$version_rx_android",
-            "io.reactivex:rxjava:$version_rx_java"
-    )
 
     retrolambdaConfig "net.orfjackal.retrolambda:retrolambda:$version_retrolambda"
 
