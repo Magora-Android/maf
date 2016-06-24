@@ -68,7 +68,7 @@ android {
         javaVersion JavaVersion.VERSION_1_7
         defaultMethods false
         jvmArgs '-noverify'
-        incremental true
+        incremental false
     }
 
     // Always show the result of every unit test, even if it passes.

@@ -1,5 +1,6 @@
 package com.magorasystems.mafmodules.authmodule.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 
@@ -17,11 +18,11 @@ import com.magorasystems.mafmodules.authmodule.view.impl.StringAuthViewImpl;
 import com.magorasystems.mafmodules.authmodule.widget.AuthWidget;
 import com.magorasystems.mafmodules.common.mvp.view.BaseModelView;
 import com.magorasystems.mafmodules.common.ui.fragment.GenericModuleSupportFragment;
-import com.magorasystems.widgets.ValidationTextRule;
-import com.magorasystems.widgets.WidgetUtils;
 import com.magorasystems.mafmodules.common.utils.component.HasComponent;
 import com.magorasystems.mafmodules.common.utils.component.Injectable;
 import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
+import com.magorasystems.widgets.ValidationTextRule;
+import com.magorasystems.widgets.WidgetUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +31,7 @@ import java.util.Collection;
 
 import javax.inject.Inject;
 
+import rx.Observable;
 import rx.Subscription;
 import rx.subjects.PublishSubject;
 
@@ -51,7 +53,9 @@ public abstract class AuthorizationModuleSupportFragment extends GenericModuleSu
     protected abstract Collection<ValidationTextRule> getRules();
 
     @Inject
-    protected AuthModulePresenter modulePresenter;
+    protected Observable<AuthModulePresenter> modulePresenterObservable;
+
+    private AuthModulePresenter modulePresenter;
 
     private Subscription subscription;
     private AuthInteractiveView authInteractiveView;
@@ -74,9 +78,6 @@ public abstract class AuthorizationModuleSupportFragment extends GenericModuleSu
                 }, this::showError);
         authPassiveView = new StringAuthViewImpl(getActivity().getWindow().getDecorView(),
                 getAuthWidget(), this);
-        modulePresenter.input(new AuthModuleInput(
-                new StringAuthViewInput(authPassiveView, authInteractiveView),
-                this));
 
     }
 
@@ -86,16 +87,27 @@ public abstract class AuthorizationModuleSupportFragment extends GenericModuleSu
     }
 
     @Override
+    @SuppressLint("MissingSuperCall")
     public void onStart() {
-        onSuperStart();
+        super.onSuperStart();
         if (modulePresenter != null) {
             modulePresenter.start();
+        } else {
+            modulePresenterObservable.subscribe(authModulePresenter -> {
+                modulePresenter = authModulePresenter;
+                modulePresenter.input(new AuthModuleInput(
+                        new StringAuthViewInput(authPassiveView, authInteractiveView),
+                        AuthorizationModuleSupportFragment.this));
+                modulePresenter.start();
+            });
         }
     }
 
+
     @Override
+    @SuppressLint("MissingSuperCall")
     public void onStop() {
-        onSuperStop();
+        super.onSuperStop();
         if (modulePresenter != null) {
             modulePresenter.stop();
         }
@@ -131,5 +143,10 @@ public abstract class AuthorizationModuleSupportFragment extends GenericModuleSu
     @Override
     public void inject(AuthComponent component) {
         component.inject(this);
+    }
+
+    @Override
+    protected AuthModulePresenter getModulePresenter() {
+        return modulePresenter;
     }
 }
