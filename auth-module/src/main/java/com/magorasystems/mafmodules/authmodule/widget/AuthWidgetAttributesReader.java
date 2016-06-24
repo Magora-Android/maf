@@ -3,9 +3,9 @@ package com.magorasystems.mafmodules.authmodule.widget;
 import android.content.res.TypedArray;
 
 import com.magorasystems.mafmodules.authmodule.R;
-import com.magorasystems.mafmodules.common.ui.widget.AttributesReader;
-import com.magorasystems.mafmodules.common.ui.widget.WidgetAttributes;
-import com.magorasystems.mafmodules.common.ui.widget.WidgetAttributesReader;
+import com.magorasystems.widgets.AttributesReader;
+import com.magorasystems.widgets.WidgetAttributes;
+import com.magorasystems.widgets.WidgetAttributesReader;
 
 /**
  * Developed by Magora Team (magora-systems.com). 2016.

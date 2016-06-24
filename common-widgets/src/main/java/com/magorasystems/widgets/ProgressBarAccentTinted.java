@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.common.ui.widget;
+package com.magorasystems.widgets;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -8,8 +8,8 @@ import android.support.annotation.ColorInt;
 import android.util.AttributeSet;
 import android.widget.ProgressBar;
 
-import com.magorasystems.mafmodules.common.R;
-import com.magorasystems.mafmodules.common.utils.ColorUtils;
+import com.magorasystems.widgets.utils.ColorUtils;
+
 
 /**
  * @author bobrischev

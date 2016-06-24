@@ -7,7 +7,7 @@ import android.support.annotation.IdRes;
 import com.magorasystems.mafmodules.common.mvp.router.BaseRouter;
 import com.magorasystems.mafmodules.common.ui.fragment.BaseFragmentImpl;
 import com.magorasystems.mafmodules.common.ui.fragment.BaseSupportFragmentImpl;
-import com.magorasystems.mafmodules.common.ui.widget.WidgetUtils;
+import com.magorasystems.widgets.WidgetUtils;
 import com.magorasystems.mafmodules.common.utils.component.Injectable;
 
 import butterknife.ButterKnife;

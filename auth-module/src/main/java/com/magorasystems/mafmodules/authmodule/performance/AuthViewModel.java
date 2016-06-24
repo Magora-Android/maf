@@ -1,6 +1,6 @@
 package com.magorasystems.mafmodules.authmodule.performance;
 
-import com.magorasystems.mafmodules.common.mvp.model.BaseViewModel;
+import com.magorasystems.widgets.model.BaseViewModel;
 
 /**
  * Developed by Magora Team (magora-systems.com). 2016.

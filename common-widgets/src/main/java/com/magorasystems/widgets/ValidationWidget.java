@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.common.ui.widget;
+package com.magorasystems.widgets;
 
 import java.util.Collection;
 

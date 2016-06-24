@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.common.ui.widget;
+package com.magorasystems.widgets;
 
 import android.app.Activity;
 import android.content.Context;

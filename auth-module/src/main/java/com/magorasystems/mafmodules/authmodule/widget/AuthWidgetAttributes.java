@@ -2,7 +2,7 @@ package com.magorasystems.mafmodules.authmodule.widget;
 
 import android.support.annotation.LayoutRes;
 
-import com.magorasystems.mafmodules.common.ui.widget.WidgetAttributes;
+import com.magorasystems.widgets.WidgetAttributes;
 
 /**
  * Developed by Magora Team (magora-systems.com). 2016.

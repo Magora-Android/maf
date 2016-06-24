@@ -1,7 +1,6 @@
-package com.magorasystems.mafmodules.common.ui.widget;
+package com.magorasystems.widgets;
 
-
-import com.magorasystems.mafmodules.common.mvp.model.BaseViewModel;
+import com.magorasystems.widgets.model.BaseViewModel;
 
 import rx.Observable;
 

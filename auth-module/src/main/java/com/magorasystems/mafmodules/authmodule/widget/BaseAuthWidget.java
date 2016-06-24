@@ -12,12 +12,12 @@ import android.widget.TextView;
 
 import com.google.common.collect.Lists;
 import com.magorasystems.mafmodules.authmodule.performance.AuthViewModel;
-import com.magorasystems.mafmodules.common.ui.widget.BaseLinearWidget;
-import com.magorasystems.mafmodules.common.ui.widget.ValidationTextRule;
-import com.magorasystems.mafmodules.common.ui.widget.ValidationWidget;
-import com.magorasystems.mafmodules.common.ui.widget.WidgetAttributes;
-import com.magorasystems.mafmodules.common.ui.widget.WidgetAttributesReader;
-import com.magorasystems.mafmodules.common.ui.widget.WidgetTextUtils;
+import com.magorasystems.widgets.BaseLinearWidget;
+import com.magorasystems.widgets.ValidationTextRule;
+import com.magorasystems.widgets.ValidationWidget;
+import com.magorasystems.widgets.WidgetAttributes;
+import com.magorasystems.widgets.WidgetAttributesReader;
+import com.magorasystems.widgets.WidgetTextUtils;
 
 import java.util.Collection;
 import java.util.List;

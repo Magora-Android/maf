@@ -9,8 +9,8 @@ import com.google.common.collect.Lists;
 import com.magorasystems.mafmodules.R;
 import com.magorasystems.mafmodules.authmodule.fragment.AuthorizationModuleSupportFragment;
 import com.magorasystems.mafmodules.authmodule.widget.AuthWidget;
-import com.magorasystems.mafmodules.common.ui.widget.ValidationTextRule;
-import com.magorasystems.mafmodules.common.ui.widget.WidgetUtils;
+import com.magorasystems.widgets.ValidationTextRule;
+import com.magorasystems.widgets.WidgetUtils;
 import com.magorasystems.mafmodules.common.utils.PatternsUtils;
 
 import org.slf4j.Logger;

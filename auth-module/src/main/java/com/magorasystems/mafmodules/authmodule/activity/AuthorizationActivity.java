@@ -8,7 +8,7 @@ import com.magorasystems.mafmodules.authmodule.router.AuthRouter;
 import com.magorasystems.mafmodules.common.ui.activity.CommonBaseActivity;
 import com.magorasystems.mafmodules.common.ui.fragment.BaseFragmentImpl;
 import com.magorasystems.mafmodules.common.ui.fragment.BaseSupportFragmentImpl;
-import com.magorasystems.mafmodules.common.ui.widget.WidgetUtils;
+import com.magorasystems.widgets.WidgetUtils;
 
 /**
  * Developed by Magora Team (magora-systems.com). 2016.

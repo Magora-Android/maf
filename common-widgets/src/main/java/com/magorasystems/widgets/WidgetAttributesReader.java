@@ -1,11 +1,9 @@
-package com.magorasystems.mafmodules.common.ui.widget;
+package com.magorasystems.widgets;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.LayoutRes;
 import android.util.AttributeSet;
-
-import com.magorasystems.mafmodules.common.R;
 
 /**
  * Developed by Magora Team (magora-systems.com). 2016.

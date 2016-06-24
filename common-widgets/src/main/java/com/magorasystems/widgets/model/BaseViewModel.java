@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.common.mvp.model;
+package com.magorasystems.widgets.model;
 
 import java.io.Serializable;
 
