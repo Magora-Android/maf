@@ -5,7 +5,6 @@ import android.app.Application;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 
-import com.magorasystems.rx.activityresult.Result;
 import com.magorasystems.rx.activityresult.RxActivityResult;
 
 import rx.Observable;
@@ -54,58 +53,39 @@ public class RxResult {
 
     public static Observable<Permission> request(Activity activity, final String permission) {
         return RxPermissions.getInstance(activity).request(permission)
-                .map(new Func1<Boolean, Permission>() {
-                    @Override
-                    public Permission call(Boolean granted) {
-                        return new Permission(permission, granted ? Permission.STATUS_GRANTED : Permission.STATUS_DENIED);
-                    }
-                });
+                .map(granted -> new Permission(permission, granted ? Permission.STATUS_GRANTED : Permission.STATUS_DENIED));
     }
 
     public static Observable.Transformer<Permission, Permission> composeWithPermissionsRequest(final Activity activity,
                                                                                                final PermissionInfo permissionInfo) {
-        return new Observable.Transformer<Permission, Permission>() {
-            @Override
-            public Observable<Permission> call(final Observable<Permission> permissionObservable) {
-                return permissionObservable.flatMap(new Func1<Permission, Observable<? extends Permission>>() {
-                    @Override
-                    public Observable<? extends Permission> call(final Permission permission) {
-                        if (permission.shouldRequest()) {
-                            return RxResult.request(activity, permission.name);
-                        } else if (permission.shouldShowRationale()) {
-                            return showRationale(activity, permission, permissionInfo)
-                                    .flatMap(new Func1<Permission, Observable<Permission>>() {
-                                        @Override
-                                        public Observable<Permission> call(Permission afterRationale) {
-                                            if (afterRationale.getStatus() == Permission.STATUS_RATIONALE_DECLINED) {
-                                                permission.updateStatus(Permission.STATUS_DENIED);
-                                                return Observable.just(permission);
-                                            } else {
-                                                return RxResult.request(activity, permission.name);
-                                            }
-                                        }
-                                    });
-                        } else {
-                            return Observable.just(permission);
-                        }
-                    }
-                });
+        return permissionObservable -> permissionObservable.flatMap((Func1<Permission, Observable<? extends Permission>>) permission -> {
+            if (permission.shouldRequest()) {
+                return RxResult.request(activity, permission.name);
+            } else if (permission.shouldShowRationale()) {
+                return showRationale(activity, permission, permissionInfo)
+                        .flatMap(afterRationale -> {
+                            if (afterRationale.getStatus() == Permission.STATUS_RATIONALE_DECLINED) {
+                                permission.updateStatus(Permission.STATUS_DENIED);
+                                return Observable.just(permission);
+                            } else {
+                                return RxResult.request(activity, permission.name);
+                            }
+                        });
+            } else {
+                return Observable.just(permission);
             }
-        };
+        });
     }
 
     protected static Observable<Permission> showRationale(final Activity activity, final Permission permission,
                                                           PermissionInfo permissionInfo) {
         return RxActivityResult.on(activity).startIntent(ActivityPermissionsRationale.createIntent(activity, permissionInfo))
-                .flatMap(new Func1<Result<Activity>, Observable<Permission>>() {
-                    @Override
-                    public Observable<Permission> call(Result<Activity> activityResult) {
-                        permission.updateStatus(
-                                activityResult.resultCode() == Activity.RESULT_OK ?
-                                        Permission.STATUS_RATIONALE_ACCEPTED :
-                                        Permission.STATUS_RATIONALE_DECLINED);
-                        return Observable.just(permission);
-                    }
+                .flatMap(activityResult -> {
+                    permission.updateStatus(
+                            activityResult.resultCode() == Activity.RESULT_OK ?
+                                    Permission.STATUS_RATIONALE_ACCEPTED :
+                                    Permission.STATUS_RATIONALE_DECLINED);
+                    return Observable.just(permission);
                 });
     }
 }

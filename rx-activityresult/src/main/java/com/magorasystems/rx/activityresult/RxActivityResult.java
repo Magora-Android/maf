@@ -31,7 +31,6 @@ import java.util.List;
 
 import rx.Observable;
 import rx.Subscriber;
-import rx.functions.Action1;
 
 public class RxActivityResult {
     private static ActivitiesLifecycleCallbacks activitiesLifecycle;
@@ -117,11 +116,8 @@ public class RxActivityResult {
 
             ActivityForResult.setRequest(new Request(intent, onResult));
 
-            activitiesLifecycle.getOLiveActivity().subscribe(new Action1<Activity>() {
-                @Override
-                public void call(Activity activity) {
-                    activity.startActivity(new Intent(activity, ActivityForResult.class));
-                }
+            activitiesLifecycle.getOLiveActivity().subscribe(activity -> {
+                activity.startActivity(new Intent(activity, ActivityForResult.class));
             });
 
             return observable;
@@ -129,96 +125,87 @@ public class RxActivityResult {
 
         @SuppressWarnings("unchecked")
         private OnResult onResultActivity() {
-            return new OnResult() {
-                @Override
-                public void response(int resultCode, Intent data) {
-                    if (activitiesLifecycle.getLiveActivity() == null) {
-                        return;
-                    }
-
-                    //If true it means some other activity has been stacked as a secondary process.
-                    //Wait until the current activity be the target activity
-                    if (activitiesLifecycle.getLiveActivity().getClass() != clazz) {
-                        return;
-                    }
-                    T activity = (T) activitiesLifecycle.getLiveActivity();
-                    subscriber.onNext(new Result<>(activity, resultCode, data));
-                    subscriber.onCompleted();
+            return (OnResult) (resultCode, data) -> {
+                if (activitiesLifecycle.getLiveActivity() == null) {
+                    return;
                 }
+
+                //If true it means some other activity has been stacked as a secondary process.
+                //Wait until the current activity be the target activity
+                if (activitiesLifecycle.getLiveActivity().getClass() != clazz) {
+                    return;
+                }
+                T activity = (T) activitiesLifecycle.getLiveActivity();
+                subscriber.onNext(new Result<>(activity, resultCode, data));
+                subscriber.onCompleted();
             };
         }
 
         @SuppressWarnings("unchecked")
         private OnResult onResultFragment() {
-            return new OnResult() {
-                @Override
-                public void response(int resultCode, Intent data) {
-                    if (activitiesLifecycle.getLiveActivity() == null) {
-                        return;
-                    }
-
-                    Activity activity = activitiesLifecycle.getLiveActivity();
-
-
-                    FragmentActivity fragmentActivity = (FragmentActivity) activity;
-                    android.app.FragmentManager fragmentManager = fragmentActivity.getFragmentManager();
-
-                    if (resourceId != 0) {
-                        final android.app.Fragment fragment = fragmentManager.findFragmentById(resourceId);
-                        if (fragment != null && fragment.isVisible() && fragment.getClass() == clazz) {
-                            subscriber.onNext(new Result<>((T) fragment, resultCode, data));
-                            subscriber.onCompleted();
-                            return;
-                        }
-                        return;
-                    }
-
-                    final int fragmentCount = fragmentManager.getBackStackEntryCount();
-                    for (int i = 0; i < fragmentCount; i++) {
-                        int fragmentId = fragmentManager.getBackStackEntryAt(i).getId();
-                        android.app.Fragment fragment = fragmentManager.findFragmentById(fragmentId);
-                        if (fragment != null && fragment.isVisible() && fragment.getClass() == clazz) {
-                            subscriber.onNext(new Result<>((T) fragment, resultCode, data));
-                            subscriber.onCompleted();
-                            return;
-                        }
-                    }
-
-                    //If code reaches this point it means some other activity has been stacked as a secondary process.
-                    //Wait until the current activity be the target activity to get the associated fragment
+            return (OnResult) (resultCode, data) -> {
+                if (activitiesLifecycle.getLiveActivity() == null) {
+                    return;
                 }
+
+                Activity activity = activitiesLifecycle.getLiveActivity();
+
+
+                FragmentActivity fragmentActivity = (FragmentActivity) activity;
+                android.app.FragmentManager fragmentManager = fragmentActivity.getFragmentManager();
+
+                if (resourceId != 0) {
+                    final android.app.Fragment fragment = fragmentManager.findFragmentById(resourceId);
+                    if (fragment != null && fragment.isVisible() && fragment.getClass() == clazz) {
+                        subscriber.onNext(new Result<>((T) fragment, resultCode, data));
+                        subscriber.onCompleted();
+                        return;
+                    }
+                    return;
+                }
+
+                final int fragmentCount = fragmentManager.getBackStackEntryCount();
+                for (int i = 0; i < fragmentCount; i++) {
+                    int fragmentId = fragmentManager.getBackStackEntryAt(i).getId();
+                    android.app.Fragment fragment = fragmentManager.findFragmentById(fragmentId);
+                    if (fragment != null && fragment.isVisible() && fragment.getClass() == clazz) {
+                        subscriber.onNext(new Result<>((T) fragment, resultCode, data));
+                        subscriber.onCompleted();
+                        return;
+                    }
+                }
+
+                //If code reaches this point it means some other activity has been stacked as a secondary process.
+                //Wait until the current activity be the target activity to get the associated fragment
             };
         }
 
         @SuppressWarnings("unchecked")
         private OnResult onResultSupportFragment() {
-            return new OnResult() {
-                @Override
-                public void response(int resultCode, Intent data) {
-                    if (activitiesLifecycle.getLiveActivity() == null) {
-                        return;
-                    }
+            return (OnResult) (resultCode, data) -> {
+                if (activitiesLifecycle.getLiveActivity() == null) {
+                    return;
+                }
 
-                    Activity activity = activitiesLifecycle.getLiveActivity();
+                Activity activity = activitiesLifecycle.getLiveActivity();
 
-                    FragmentActivity fragmentActivity = (FragmentActivity) activity;
-                    FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();
+                FragmentActivity fragmentActivity = (FragmentActivity) activity;
+                FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();
 
-                    List<Fragment> fragments = fragmentManager.getFragments();
+                List<Fragment> fragments = fragmentManager.getFragments();
 
-                    if (fragments != null) {
-                        for (Fragment fragment : fragments) {
-                            if (fragment != null && fragment.isVisible() && fragment.getClass() == clazz) {
-                                subscriber.onNext(new Result<>((T) fragment, resultCode, data));
-                                subscriber.onCompleted();
-                                return;
-                            }
+                if (fragments != null) {
+                    for (Fragment fragment : fragments) {
+                        if (fragment != null && fragment.isVisible() && fragment.getClass() == clazz) {
+                            subscriber.onNext(new Result<>((T) fragment, resultCode, data));
+                            subscriber.onCompleted();
+                            return;
                         }
                     }
-
-                    //If code reaches this point it means some other activity has been stacked as a secondary process.
-                    //Wait until the current activity be the target activity to get the associated fragment
                 }
+
+                //If code reaches this point it means some other activity has been stacked as a secondary process.
+                //Wait until the current activity be the target activity to get the associated fragment
             };
         }
     }

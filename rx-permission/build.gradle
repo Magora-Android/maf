@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.bmuschko.nexus'
 
 version "0.0.1"
 
@@ -49,6 +50,48 @@ android {
         incremental true
     }
 }
+
+modifyPom {
+    project {
+        name 'Rx Permissions'
+        description 'Module for work with android permissions'
+        url 'https://bitbucket.org/magora_karpenko/maf-modules'
+        inceptionYear '2016'
+
+        scm{
+            url 'https://bitbucket.org/magora_karpenko/maf-modules'
+            connection 'scm:https://bitbucket.org/magora_karpenko/maf-modules'
+            developerConnection 'scm:https://bitbucket.org/magora_karpenko/maf-modules'
+
+        }
+
+        developers{
+            developer {
+                id 'karpenko'
+                name 'Valentin S.Karpenko'
+                email 'karpenko@magora.systems'
+            }
+        }
+
+        organization {
+            name "Magora Systems"
+            url "http://magora-systems.com/"
+        }
+    }
+}
+
+extraArchive {
+    sources = true
+    tests = false
+    javadoc = true
+}
+
+nexus {
+    sign = false
+    repositoryUrl = 'http://nexus.java.magora.team/content/repositories/releases/'
+    snapshotRepositoryUrl = 'http://nexus.java.magora.team/content/repositories/snapshots/'
+}
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
