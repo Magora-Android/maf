@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.bmuschko.nexus'
 
 version "0.0.1"
@@ -51,6 +52,7 @@ android {
         disable 'InvalidPackage'
         disable 'ExtraTranslation'
     }
+
     dexOptions {
         incremental true
         preDexLibraries = false
@@ -61,11 +63,11 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    // Always show the result of every unit test, even if it passes.
-    testOptions.unitTests.all {
-        testLogging {
-            events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
-        }
+    retrolambda {
+        javaVersion JavaVersion.VERSION_1_7
+        defaultMethods false
+        jvmArgs '-noverify'
+        incremental false
     }
 
 }
@@ -121,6 +123,8 @@ dependencies {
             "org.hamcrest:hamcrest-core:$version_hamcrest",
             "org.hamcrest:hamcrest-library:$version_hamcrest",
             "org.mockito:mockito-core:$version_mockito")
+
+    retrolambdaConfig "net.orfjackal.retrolambda:retrolambda:$version_retrolambda"
 
     androidTestCompile(
             "com.android.support:support-annotations:$version_support_annotations",

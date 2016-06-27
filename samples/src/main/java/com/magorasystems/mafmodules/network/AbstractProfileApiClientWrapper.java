@@ -5,7 +5,7 @@ package com.magorasystems.mafmodules.network;
  *
  * @author Valentin S.Bolkonsky
  */
-public abstract class AbstractProfileApiClientWrapper<CLIENT, P> implements ProfileApiClientWrapper<CLIENT, P> {
+public abstract class AbstractProfileApiClientWrapper<CLIENT, P> implements ProfileApiClientWrapper<P> {
 
     private CLIENT apiClient;
 

@@ -1,8 +1,5 @@
 package com.magorasystems.mafmodules.application;
 
-import com.magorasystems.mafmodules.dagger.DaggerTestInner;
-import com.magorasystems.mafmodules.dagger.component.SampleComponent;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,13 +21,7 @@ public class MockAuthApplication extends SampleApplication {
 
     @Override
     protected void buildGraphAndInject() {
-        //final CommonModuleComponent commonModuleComponent = AuthDaggerInner.buildCommonModuleComponent(this);
-        final SampleComponent sampleComponent = DaggerTestInner.buildGraph(this);
-        subcomponents.put(SampleComponent.class.getSimpleName(), sampleComponent);
-        //subcomponents.put(CommonModuleComponent.class.getSimpleName(), commonModuleComponent);
-        //subcomponents.put(AuthComponent.class.getSimpleName(), AuthDaggerInner.buildGraph(commonModuleComponent));
-        setComponent(sampleComponent);
-        getComponent().inject(this);
+        super.buildGraphAndInject();
     }
 
     public void putComponent(String name, Object component) {

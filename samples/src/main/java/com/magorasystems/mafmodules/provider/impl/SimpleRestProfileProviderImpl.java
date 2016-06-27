@@ -1,12 +1,18 @@
 package com.magorasystems.mafmodules.provider.impl;
 
+import android.content.Context;
+
 import com.magorasystems.mafmodule.security.network.RefreshTokenApiClient;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
+import com.magorasystems.mafmodules.common.utils.component.HasComponent;
 import com.magorasystems.mafmodules.dagger.component.ProfileComponent;
 import com.magorasystems.mafmodules.model.UserProfile;
 import com.magorasystems.mafmodules.network.UserProfileApiClientWrapper;
 import com.magorasystems.mafmodules.network.response.ProfileSuccessResponse;
-import com.magorasystems.mafmodules.network.store.SimpleMemoryTokenStorable;
+import com.magorasystems.mafmodules.network.store.StringApiTokenStorage;
+import com.magorasystems.mafmodules.provider.SimpleRestProfileProvider;
+
+import javax.inject.Inject;
 
 import rx.Observable;
 
@@ -15,13 +21,16 @@ import rx.Observable;
  *
  * @author Valentin S.Bolkonsky
  */
-public class SimpleRestProfileProvider extends BaseRestProfileDataProvider<ProfileComponent, UserProfileApiClientWrapper, UserProfile> {
+public class SimpleRestProfileProviderImpl extends BaseRestProfileDataProvider<ProfileComponent,
+        UserProfileApiClientWrapper, UserProfile> implements SimpleRestProfileProvider {
 
-    public SimpleRestProfileProvider(ProfileComponent component, SchedulersUtils.CoreScheduler scheduler,
-                                     UserProfileApiClientWrapper restApiClientWrapper,
-                                     RefreshTokenApiClient refreshTokenApiClient,
-                                     SimpleMemoryTokenStorable storable) {
-        super(component, scheduler, restApiClientWrapper, refreshTokenApiClient, storable);
+    @Inject
+    public SimpleRestProfileProviderImpl(Context context, SchedulersUtils.CoreScheduler scheduler,
+                                         UserProfileApiClientWrapper restApiClientWrapper,
+                                         RefreshTokenApiClient refreshTokenApiClient,
+                                         StringApiTokenStorage storable) {
+        super((ProfileComponent) ((HasComponent<?>) context).getComponent(ProfileComponent.class.getSimpleName()),
+                scheduler, restApiClientWrapper, refreshTokenApiClient, storable);
     }
 
     @Override

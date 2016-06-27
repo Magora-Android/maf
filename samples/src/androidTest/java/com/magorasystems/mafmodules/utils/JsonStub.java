@@ -5,7 +5,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.magorasystems.mafmodules.authmodule.performance.AuthViewModel;
 import com.magorasystems.mafmodules.common.utils.MiscUtils;
+import com.magorasystems.mafmodules.model.UserProfile;
 import com.magorasystems.mafmodules.network.config.SimpleTokenConfig;
+import com.magorasystems.mafmodules.network.response.ProfileSuccessResponse;
 import com.magorasystems.mafmodules.protocolapi.auth.response.SimpleStringAuthSuccessResponse;
 import com.magorasystems.mafmodules.protocolapi.auth.response.StringAuthResponseData;
 import com.magorasystems.protocolapi.auth.dto.request.AuthRequest;
@@ -69,6 +71,14 @@ public class JsonStub {
         final StringAuthResponseData responseData = new StringAuthResponseData(faker.number.number(20),
                 faker.date.forward(14).getTime(), faker.number.number(16), info);
         return generator(new SimpleStringAuthSuccessResponse("sample.code.success", responseData));
+    }
+
+    public static ProfileSuccessResponse generateProfileSuccessResponse() {
+        final Faker faker = new Faker(Locale.US.getLanguage());
+        final UserProfile profile = UserProfile.create(faker.number.positive(1L, 10000L),
+                faker.number.number(10), faker.name.name(), faker.name.firstName(),
+                faker.name.lastName(), faker.phoneNumber.phoneNumber());
+        return generator(new ProfileSuccessResponse(profile));
     }
 
     public static AuthViewModel generateAuthViewModel() {

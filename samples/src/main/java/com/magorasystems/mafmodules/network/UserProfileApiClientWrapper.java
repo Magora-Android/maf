@@ -10,14 +10,8 @@ import rx.Observable;
  *
  * @author Valentin S.Bolkonsky
  */
-public class UserProfileApiClientWrapper extends AbstractProfileApiClientWrapper<ProfileApiClient, UserProfile> {
-
-    public UserProfileApiClientWrapper(ProfileApiClient profileApiClient) {
-        super(profileApiClient);
-    }
+public interface UserProfileApiClientWrapper extends ProfileApiClientWrapper<UserProfile> {
 
     @Override
-    public Observable<ProfileSuccessResponse> getMyProfile() {
-        return getClient().getMyProfile();
-    }
+    Observable<ProfileSuccessResponse> getMyProfile();
 }

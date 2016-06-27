@@ -2,9 +2,7 @@ package com.magorasystems.mafmodules.dagger.component;
 
 import com.magorasystems.mafmodules.common.utils.component.HasComponent;
 import com.magorasystems.mafmodules.common.utils.component.Injectable;
-import com.magorasystems.mafmodules.model.UserProfile;
-import com.magorasystems.mafmodules.network.ProfileApiClient;
-import com.magorasystems.mafmodules.network.ProfileApiClientWrapper;
+import com.magorasystems.mafmodules.network.UserProfileApiClientWrapper;
 
 import javax.inject.Inject;
 
@@ -16,7 +14,7 @@ import javax.inject.Inject;
 public class ProfileComponentProvider implements Injectable<ProfileComponent> {
 
     @Inject
-    protected ProfileApiClientWrapper<ProfileApiClient, UserProfile> apiClientWrapper;
+    protected UserProfileApiClientWrapper apiClientWrapper;
 
     public ProfileComponentProvider(HasComponent<?> hasComponent) {
         final Object object = hasComponent.getComponent(ProfileComponent.class.getSimpleName());
@@ -31,7 +29,7 @@ public class ProfileComponentProvider implements Injectable<ProfileComponent> {
 
     }
 
-    public ProfileApiClientWrapper<ProfileApiClient, UserProfile> getApiClientWrapper() {
+    public UserProfileApiClientWrapper getApiClientWrapper() {
         return apiClientWrapper;
     }
 

@@ -9,9 +9,9 @@ import rx.Observable;
  *
  * @author Valentin S.Bolkonsky
  */
-public interface ProfileApiClientWrapper<CLIENT, P> {
+public interface ProfileApiClientWrapper<P> {
 
-    Observable<? extends SuccessResponse<P>> getMyProfile();
+    Observable<? extends SuccessResponse<? super P>> getMyProfile();
 
 
 }

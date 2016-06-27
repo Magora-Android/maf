@@ -1,14 +1,15 @@
 package com.magorasystems.mafmodules.dagger.module;
 
 import com.google.gson.Gson;
+import com.magorasystems.mafmodule.security.network.RefreshTokenApiClient;
+import com.magorasystems.mafmodule.security.network.RefreshTokenRestApiFactory;
 import com.magorasystems.mafmodules.common.dagger.module.BaseModule;
 import com.magorasystems.mafmodules.dagger.scope.ProfileScope;
-import com.magorasystems.mafmodules.model.UserProfile;
 import com.magorasystems.mafmodules.network.ProfileApiClient;
-import com.magorasystems.mafmodules.network.ProfileApiClientWrapper;
 import com.magorasystems.mafmodules.network.ProfileRestApiFactory;
 import com.magorasystems.mafmodules.network.RestApiFactory;
 import com.magorasystems.mafmodules.network.UserProfileApiClientWrapper;
+import com.magorasystems.mafmodules.network.UserProfileApiClientWrapperImpl;
 import com.magorasystems.mafmodules.network.config.ServerEndpoint;
 
 import dagger.Module;
@@ -39,7 +40,19 @@ public class ProfileNetworkModule implements BaseModule {
 
     @Provides
     @ProfileScope
-    protected ProfileApiClientWrapper<ProfileApiClient, UserProfile> providerClientWrapper(ProfileApiClient apiClient) {
-        return new UserProfileApiClientWrapper(apiClient);
+    protected UserProfileApiClientWrapper providerClientWrapper(ProfileApiClient apiClient) {
+        return new UserProfileApiClientWrapperImpl(apiClient);
+    }
+
+    @Provides
+    @ProfileScope
+    protected RefreshTokenApiClient providerRefreshTokenApiClient(ServerEndpoint serverEndpoint, Gson gson, OkHttpClient client) {
+        return new RestApiFactory.Builder<>(RefreshTokenRestApiFactory.class)
+                .client(client)
+                .endpoint(serverEndpoint)
+                .registerCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .registerConverterFactory(GsonConverterFactory.create(gson))
+                .build()
+                .create();
     }
 }

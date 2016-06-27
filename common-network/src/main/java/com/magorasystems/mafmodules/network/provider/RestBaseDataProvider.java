@@ -43,5 +43,6 @@ public abstract class RestBaseDataProvider<T, COMPONENT> implements Injectable<C
                 .retryWhen(RxRestApiFunctions.networkNoAvailableRetry(observable, networkConnectionManager))
                 .map(SuccessResponse::getData);
 
+
     }
 }
