@@ -8,14 +8,16 @@ package com.magorasystems.mafmodules.model;
 public class UserProfile {
 
     private Long id;
+    private String uid;
     private String name;
     private String firstName;
     private String lastName;
     private String phone;
 
-    public static UserProfile create(Long id, String name, String firstName, String lastName, String phone) {
+    public static UserProfile create(Long id, String uid, String name, String firstName, String lastName, String phone) {
         final UserProfile userProfile = new UserProfile();
         userProfile.id = id;
+        userProfile.uid = uid;
         userProfile.name = name;
         userProfile.firstName = firstName;
         userProfile.lastName = lastName;
@@ -43,10 +45,15 @@ public class UserProfile {
         return phone;
     }
 
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
     @Override
     public String toString() {
         return "UserProfile{" +
                 "id='" + id + '\'' +
+                ", uid='" + uid + '\'' +
                 ", name='" + name + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +

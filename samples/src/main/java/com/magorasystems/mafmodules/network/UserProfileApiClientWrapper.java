@@ -12,7 +12,7 @@ import rx.Observable;
  */
 public class UserProfileApiClientWrapper extends AbstractProfileApiClientWrapper<ProfileApiClient, UserProfile> {
 
-    protected UserProfileApiClientWrapper(ProfileApiClient profileApiClient) {
+    public UserProfileApiClientWrapper(ProfileApiClient profileApiClient) {
         super(profileApiClient);
     }
 

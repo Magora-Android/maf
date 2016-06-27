@@ -2,11 +2,13 @@ package com.magorasystems.mafmodules.network.rx;
 
 import com.magorasystems.mafmodules.network.exception.NetworkErrorExceptionFactory;
 import com.magorasystems.mafmodules.network.manager.NetworkConnectionManager;
+import com.magorasystems.protocolapi.dto.response.SuccessResponse;
 
 import java.util.concurrent.TimeUnit;
 
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Observable;
+import rx.Subscriber;
 import rx.functions.Func1;
 
 /**
@@ -43,6 +45,25 @@ public class RxRestApiFunctions {
                             }
                             return Observable.error(throwable);
                         });
+            }
+        };
+    }
+
+    public static <S extends SuccessResponse<R>, R> Func1<S, Observable<R>> responseDataMapping() {
+        return new Func1<S, Observable<R>>() {
+            @Override
+            public Observable<R> call(final S response) {
+                return Observable.create(new Observable.OnSubscribe<R>() {
+                    @Override
+                    public void call(Subscriber<? super R> subscriber) {
+                        if (subscriber.isUnsubscribed()) {
+                            subscriber.onCompleted();
+                            return;
+                        }
+                        subscriber.onNext(response.getData());
+                        subscriber.onCompleted();
+                    }
+                });
             }
         };
     }
