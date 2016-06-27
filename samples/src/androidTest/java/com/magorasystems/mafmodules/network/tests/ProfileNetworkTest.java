@@ -23,7 +23,7 @@ public class ProfileNetworkTest {
 
     @Rule
     public DaggerProfileComponentRule daggerProfileComponentRule =
-            new DaggerProfileComponentRule(new MockProfileNetworkModule());
+            new DaggerProfileComponentRule(new MockProfileNetworkModule(0));
 
     @Test
     public void testMyProfile() throws Exception {

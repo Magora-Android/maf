@@ -16,9 +16,15 @@ import okhttp3.OkHttpClient;
  */
 public class MockProfileNetworkModule extends ProfileNetworkModule {
 
+    private int useCase;
+
+    public MockProfileNetworkModule(int useCase) {
+        this.useCase = useCase;
+    }
+
     @Override
     protected ProfileApiClient providerProfileApiClient(ServerEndpoint serverEndpoint, Gson gson, OkHttpClient client) {
-        return new MockProfileRestClient();
+        return new MockProfileRestClient(useCase);
     }
 
     @Override

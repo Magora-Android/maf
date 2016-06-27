@@ -2,6 +2,7 @@ package com.magorasystems.mafmodules.provider.impl;
 
 import android.content.Context;
 
+import com.fernandocejas.frodo.annotation.RxLogObservable;
 import com.magorasystems.mafmodule.security.network.RefreshTokenApiClient;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
 import com.magorasystems.mafmodules.common.utils.component.HasComponent;
@@ -39,19 +40,21 @@ public class SimpleRestProfileProviderImpl extends BaseRestProfileDataProvider<P
     }
 
     @Override
+    @RxLogObservable
     public Observable<UserProfile> getMyProfile() {
-        Observable<ProfileSuccessResponse> observable = callMyProvider();
         if (refreshTokenApiClient == null) {
-            return observable.compose(converter());
+            return callMyProvider().compose(converter());
         } else {
-            return observable.onBackpressureDrop().subscribeOn(scheduler.backgroundThread())
-                    .compose(commonTransformer(Observable.defer(this::callMyProvider), refreshToken()));
+            return callMyProvider().compose(
+                    commonTransformer(callMyProvider(),
+                            refreshToken()));
 
         }
     }
 
     @Override
+    @RxLogObservable
     protected Observable<ProfileSuccessResponse> callMyProvider() {
-        return restApiClientWrapper.getMyProfile();
+        return Observable.defer(restApiClientWrapper::getMyProfile);
     }
 }

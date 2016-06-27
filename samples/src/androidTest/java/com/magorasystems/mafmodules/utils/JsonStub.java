@@ -13,11 +13,15 @@ import com.magorasystems.mafmodules.protocolapi.auth.response.StringAuthResponse
 import com.magorasystems.protocolapi.auth.dto.request.AuthRequest;
 import com.magorasystems.protocolapi.auth.dto.request.SimpleAuthMeta;
 import com.magorasystems.protocolapi.auth.dto.request.SimpleAuthRequest;
+import com.magorasystems.protocolapi.auth.dto.response.AuthResponseCodes;
 import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
+import com.magorasystems.protocolapi.dto.response.ErrorResponse;
+import com.magorasystems.protocolapi.dto.response.ResponseErrorField;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Collections;
 import java.util.Locale;
 
 import io.bloco.faker.Faker;
@@ -80,6 +84,15 @@ public class JsonStub {
                 faker.name.lastName(), faker.phoneNumber.phoneNumber());
         return generator(new ProfileSuccessResponse(profile));
     }
+
+    public static String generateTokenErrorResponse() {
+        final Faker faker = new Faker(Locale.US.getLanguage());
+        return create(new ErrorResponse(AuthResponseCodes.ACCESS_TOKEN_INVALID_ERROR,
+                Collections.singletonList(new ResponseErrorField(
+                        AuthResponseCodes.ACCESS_TOKEN_INVALID_ERROR,
+                        "Access token is expired", "accessToken")), ""));
+    }
+
 
     public static AuthViewModel generateAuthViewModel() {
         final Faker faker = new Faker(Locale.US.getLanguage());

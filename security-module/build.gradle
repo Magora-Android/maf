@@ -64,12 +64,19 @@ android {
     }
 
     retrolambda {
+        jdk System.getenv("JAVA8_HOME")
+        oldJdk System.getenv("JAVA7_HOME")
         javaVersion JavaVersion.VERSION_1_7
         defaultMethods false
         jvmArgs '-noverify'
         incremental false
     }
 
+    tasks.whenTaskAdded { task ->
+        if (task.name.startsWith("lint")) {
+            task.enabled = false
+        }
+    }
 }
 
 modifyPom {

@@ -4,6 +4,7 @@ import com.magorasystems.mafmodules.application.MockAuthApplication;
 import com.magorasystems.mafmodules.common.dagger.component.CommonModuleComponent;
 import com.magorasystems.mafmodules.common.dagger.module.ApplicationModule;
 import com.magorasystems.mafmodules.dagger.component.ProfileComponent;
+import com.magorasystems.mafmodules.dagger.module.MockStorableModule;
 import com.magorasystems.mafmodules.dagger.module.ProfileNetworkModule;
 import com.magorasystems.mafmodules.model.UserProfile;
 import com.magorasystems.mafmodules.provider.ProfileDataProvider;
@@ -22,7 +23,9 @@ public class DaggerProfileComponentRule extends DaggerMockRule<ProfileComponent>
 
     public DaggerProfileComponentRule(ProfileNetworkModule networkModule) {
         super(ProfileComponent.class, networkModule);
-        addComponentDependency(CommonModuleComponent.class, new ApplicationModule(DaggerSampleMockRule.getApp()));
+        addComponentDependency(CommonModuleComponent.class,
+                new ApplicationModule(DaggerSampleMockRule.getApp()),
+                new MockStorableModule());
         set(profileComponent -> {
             final MockAuthApplication app = DaggerSampleMockRule.getApp();
             app.putComponent(ProfileComponent.class.getSimpleName(), profileComponent);
