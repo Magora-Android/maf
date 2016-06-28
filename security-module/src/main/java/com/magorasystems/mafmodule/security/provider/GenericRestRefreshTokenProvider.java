@@ -63,7 +63,7 @@ public abstract class GenericRestRefreshTokenProvider<W, COMPONENT, TOKEN extend
                                     if (code / 100 == 4) {
                                         final NetworkErrorException networkErrorException = NetworkErrorExceptionFactory.fromHttpException((HttpException) throwable);
                                         if (networkErrorException.isTokenExpired()) {
-                                            return refresher.flatMap((Func1<RESPONSE, Observable<?>>) r -> {
+                                            return refresher.flatMap(r -> {
                                                 final TOKEN token = getTokenConfig();
                                                 token.setAccessToken(r.getAccessToken());
                                                 token.setRefreshToken(r.getRefreshToken());
@@ -75,7 +75,8 @@ public abstract class GenericRestRefreshTokenProvider<W, COMPONENT, TOKEN extend
                                         }
                                     }
                                 }
-                                return Observable.empty();
+                                return Observable.timer(networkConnectionManager.getDelay(),
+                                        TimeUnit.MILLISECONDS);
                             }
                             return Observable.error(throwable);
 
@@ -85,7 +86,8 @@ public abstract class GenericRestRefreshTokenProvider<W, COMPONENT, TOKEN extend
     }
 
     protected final <RESPONSE extends SuccessResponse<REF>, AUTH extends AuthResponseData<?>, REF> Observable.Transformer<RESPONSE, REF> commonTransformer(final Observable<RESPONSE> toBeResumed,
-                                                                                                                                                           final Observable<AUTH> refresher) {
+
+                                                                                                                                                     final Observable<AUTH> refresher) {
         return observable -> observable
                 .onBackpressureDrop()
                 .subscribeOn(scheduler.backgroundThread())

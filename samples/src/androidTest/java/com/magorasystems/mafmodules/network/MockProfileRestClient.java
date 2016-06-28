@@ -44,6 +44,8 @@ public class MockProfileRestClient implements ProfileApiClient {
                 useCase = 0;
                 return Observable.error(new HttpException(Response.error(HttpCodes.HTTP_SECURITY_FORBIDDEN,
                         ResponseBody.create(MediaType.parse("application/json"), JsonStub.generateTokenErrorResponse()))));
+            case 2:
+                return Observable.error(new RuntimeException("unknown exception"));
             default:
                 return Observable.empty();
         }

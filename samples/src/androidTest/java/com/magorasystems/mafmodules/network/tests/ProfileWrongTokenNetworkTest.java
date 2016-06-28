@@ -8,9 +8,8 @@ import com.magorasystems.mafmodules.dagger.module.MockProfileNetworkModule;
 import com.magorasystems.mafmodules.dagger.rules.DaggerProfileComponentRule;
 import com.magorasystems.mafmodules.model.UserProfile;
 import com.magorasystems.mafmodules.network.RestApiTestSubscriber;
-import com.magorasystems.mafmodules.network.exception.NetworkErrorException;
-import com.magorasystems.protocolapi.auth.dto.response.AuthResponseCodes;
 
+import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,9 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import rx.observers.TestSubscriber;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Developed by Magora Team (magora-systems.com). 2016.
@@ -45,10 +41,9 @@ public class ProfileWrongTokenNetworkTest {
                 .subscribe(testSubscriber);
 
         testSubscriber.awaitTerminalEvent();
-        assertEquals("Number of errors", 1, testSubscriber.getOnErrorEvents().size());
-        LOGGER.error("Exception: ", testSubscriber.getOnErrorEvents().get(0));
-        assertTrue("Exception is not NetworkErrorException", testSubscriber.getOnErrorEvents().get(0) instanceof NetworkErrorException);
-        assertEquals("Access token invalid error", AuthResponseCodes.ACCESS_TOKEN_INVALID_ERROR,
-                ((NetworkErrorException) testSubscriber.getOnErrorEvents().get(0)).getCode());
+        testSubscriber.assertNoErrors();
+        final UserProfile userProfile = testSubscriber.getOnNextEvents().get(0);
+        LOGGER.debug("{}", userProfile);
+        Assert.assertNotNull("User profile is null", userProfile);
     }
 }

@@ -51,6 +51,7 @@ public class NetworkConnectionManager {
                 return (urlc.getResponseCode() == 200);
             } catch (IOException e) {
                 Log.e("network", "Error checking internet connection", e);
+                e.printStackTrace();
             }
         } else {
             Log.d("network", "No network available!");
