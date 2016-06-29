@@ -1,24 +1,24 @@
 package com.magorasystems.mafmodules.common.module.base;
 
-import android.content.Context;
-
-import com.magorasystems.mafmodules.common.module.impl.AbstractModuleInput;
 import com.magorasystems.mafmodules.common.module.input.ViewInput;
 import com.magorasystems.mafmodules.common.module.output.ViewOutput;
 import com.magorasystems.mafmodules.common.mvp.presenter.BaseLifecyclePresenter;
 import com.magorasystems.mafmodules.common.mvp.router.BaseRouter;
 import com.magorasystems.mafmodules.common.mvp.view.BaseView;
-import com.magorasystems.mafmodules.common.utils.component.HasComponent;
+
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Developed by Magora Team (magora-systems.com). 2016.
  *
  * @author Valentin S.Bolkonsky
  */
-public abstract class AbstractModulePresenter<COMPONENT, R extends BaseRouter, VI extends ViewInput<?, ?>,
-        VO extends ViewOutput<?>, I extends AbstractModuleInput<VI, R>> implements ModulePresenter<COMPONENT, R, VI, VO, I> {
+public abstract class AbstractModulePresenter<R extends BaseRouter, VI extends ViewInput<?, ?>,
+        VO extends ViewOutput<?>, I extends ModuleInput<VI, R>> implements ModulePresenter<R, VI, VO, I> {
 
     private I moduleInput;
+
+    protected final CompositeSubscription subscription = new CompositeSubscription();
 
     @Override
     public void input(I input) {
@@ -27,12 +27,6 @@ public abstract class AbstractModulePresenter<COMPONENT, R extends BaseRouter, V
 
     protected final I getModuleInput() {
         return moduleInput;
-    }
-
-    @SuppressWarnings("unchecked")
-    protected final void injectComponent(Context context, Class<COMPONENT> clazz) {
-        COMPONENT component = (COMPONENT) ((HasComponent<?>) context).getComponent(clazz.getSimpleName());
-        inject(component);
     }
 
     @Override
@@ -53,5 +47,9 @@ public abstract class AbstractModulePresenter<COMPONENT, R extends BaseRouter, V
         getPresenter().removeRouter();
         moduleInput.clear();
         moduleInput = null;
+        if (subscription.hasSubscriptions()) {
+            subscription.unsubscribe();
+            subscription.clear();
+        }
     }
 }

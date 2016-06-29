@@ -46,4 +46,9 @@ public class ProfileActivity extends CommonBaseActivity<SampleComponent> {
     public void inject(SampleComponent sampleComponent) {
 
     }
+
+    @Override
+    public void onShowError(Throwable throwable) {
+
+    }
 }

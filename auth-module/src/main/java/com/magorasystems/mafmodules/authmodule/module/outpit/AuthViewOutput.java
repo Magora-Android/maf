@@ -1,6 +1,6 @@
 package com.magorasystems.mafmodules.authmodule.module.outpit;
 
-import com.magorasystems.mafmodules.common.module.output.ViewOutput;
+import com.magorasystems.mafmodules.common.module.output.AbstractViewOutput;
 import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
 
 /**
@@ -8,16 +8,9 @@ import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
  *
  * @author Valentin S.Bolkonsky
  */
-public class AuthViewOutput implements ViewOutput<StringAuthInfo> {
-
-    private StringAuthInfo model;
+public class AuthViewOutput extends AbstractViewOutput<StringAuthInfo> {
 
     public AuthViewOutput(StringAuthInfo model) {
-        this.model = model;
-    }
-
-    @Override
-    public StringAuthInfo getModel() {
-        return model;
+        super(model);
     }
 }

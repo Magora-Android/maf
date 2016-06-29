@@ -8,10 +8,12 @@ import com.magorasystems.mafmodules.dagger.module.ProfileProviderModule;
 import com.magorasystems.mafmodules.dagger.scope.ProfileScope;
 import com.magorasystems.mafmodules.interactor.impl.SimpleProfileInteractor;
 import com.magorasystems.mafmodules.interactor.impl.SimpleProfileInteractorImpl;
+import com.magorasystems.mafmodules.module.UserProfilePresenterModuleImpl;
 import com.magorasystems.mafmodules.presenter.impl.SimpleProfilePresenter;
 import com.magorasystems.mafmodules.presenter.impl.SimpleProfilePresenterImpl;
 import com.magorasystems.mafmodules.provider.SimpleRestProfileProvider;
 import com.magorasystems.mafmodules.provider.impl.SimpleRestProfileProviderImpl;
+import com.magorasystems.mafmodules.ui.fragment.ShowProfileFragment;
 
 import dagger.Component;
 
@@ -43,4 +45,8 @@ public interface ProfileComponent {
     void inject(SimpleProfileInteractorImpl i);
 
     void inject(SimpleProfilePresenterImpl p);
+
+    void inject(UserProfilePresenterModuleImpl m);
+
+    void inject(ShowProfileFragment f);
 }

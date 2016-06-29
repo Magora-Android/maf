@@ -17,6 +17,8 @@ public abstract class GenericModuleFragment extends BaseFragmentImpl implements 
         super();
     }
 
-    protected abstract ModulePresenter<?, ? extends BaseRouter,
-            ? extends ViewInput<?,?>, ? extends ViewOutput<?>,? extends ModuleInput<?,?>> getModulePresenter();
+    protected abstract ModulePresenter<? extends BaseRouter,
+            ? extends ViewInput<?, ?>,
+            ? extends ViewOutput<?>,
+            ? extends ModuleInput<?, ?>> getModulePresenter();
 }

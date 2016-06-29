@@ -8,30 +8,5 @@ import com.magorasystems.mafmodules.view.ProfileLceView;
  *
  * @author Valentin S.Bolkonsky
  */
-public class UserProfileLceView implements ProfileLceView<UserProfile> {
-
-    @Override
-    public void showProgress() {
-
-    }
-
-    @Override
-    public void showContent() {
-
-    }
-
-    @Override
-    public void setModel(UserProfile model) {
-
-    }
-
-    @Override
-    public void detachView() {
-
-    }
-
-    @Override
-    public void showError(Throwable e) {
-
-    }
+public interface UserProfileLceView extends ProfileLceView<UserProfile> {
 }

@@ -9,23 +9,23 @@ import com.magorasystems.mafmodules.authmodule.module.outpit.AuthViewOutput;
 import com.magorasystems.mafmodules.authmodule.presenter.SimpleAuthPresenter;
 import com.magorasystems.mafmodules.authmodule.router.AuthRouter;
 import com.magorasystems.mafmodules.common.module.base.AbstractModulePresenter;
+import com.magorasystems.mafmodules.common.utils.component.HasComponent;
+import com.magorasystems.mafmodules.common.utils.component.Injectable;
 
 import javax.inject.Inject;
 
 import rx.Observable;
-import rx.subscriptions.CompositeSubscription;
 
 /**
  * Developed by Magora Team (magora-systems.com). 2016.
  *
  * @author Valentin S.Bolkonsky
  */
-public class AuthModulePresenterImp extends AbstractModulePresenter<AuthComponent, AuthRouter, StringAuthViewInput, AuthViewOutput, AuthModuleInput> implements AuthModulePresenter {
+public class AuthModulePresenterImp extends AbstractModulePresenter<AuthRouter, StringAuthViewInput, AuthViewOutput, AuthModuleInput>
+        implements AuthModulePresenter, Injectable<AuthComponent> {
 
     @Inject
     protected SimpleAuthPresenter presenter;
-
-    private final CompositeSubscription subscription = new CompositeSubscription();
 
     @Inject
     public AuthModulePresenterImp(Context context) {
@@ -86,12 +86,17 @@ public class AuthModulePresenterImp extends AbstractModulePresenter<AuthComponen
         return presenter;
     }
 
-    @Override
-    public void destroy(boolean retainInstance) {
-        super.destroy(retainInstance);
-        if (subscription.hasSubscriptions()) {
-            subscription.unsubscribe();
-            subscription.clear();
+
+    protected final void injectComponent(Context context, Class<AuthComponent> clazz) {
+        if (context instanceof HasComponent<?>) {
+            final Object component = ((HasComponent<?>) context).getComponent(clazz.getSimpleName());
+            if (component != null) {
+                if (component instanceof AuthComponent) {
+                    inject((AuthComponent) component);
+                    return;
+                }
+            }
         }
+        throw new IllegalArgumentException("Context has not implement \"" + clazz.getSimpleName() + "\" component");
     }
 }

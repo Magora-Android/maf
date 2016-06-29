@@ -89,13 +89,12 @@ public class ProfileWrongTokenNetworkTest {
 
         @Override
         public void showContent() {
-            super.showContent();
             signalLifecycle.countDown();
         }
 
         @Override
         public void setModel(UserProfile model) {
-            super.setModel(model);
+
             signalLifecycle.countDown();
             Assert.assertNotNull("Moder is null", model);
             LOGGER.debug("UserProfile: " + model);
@@ -104,6 +103,11 @@ public class ProfileWrongTokenNetworkTest {
         @Override
         public void detachView() {
             signalDetach.countDown();
+        }
+
+        @Override
+        public void showError(Throwable e) {
+
         }
     };
 }

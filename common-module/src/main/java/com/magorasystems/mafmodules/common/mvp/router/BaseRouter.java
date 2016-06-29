@@ -8,4 +8,6 @@ package com.magorasystems.mafmodules.common.mvp.router;
 public interface BaseRouter {
 
     void onBack();
+
+    void onShowError(Throwable throwable);
 }

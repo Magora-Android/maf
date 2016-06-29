@@ -10,4 +10,6 @@ import com.magorasystems.mafmodules.common.mvp.router.BaseRouter;
 public interface ProfileRouter<P> extends BaseRouter {
 
     void onEditProfile(P model);
+
+    void onUpdateProfile(P model);
 }
