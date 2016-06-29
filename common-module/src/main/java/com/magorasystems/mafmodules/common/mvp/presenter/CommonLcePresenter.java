@@ -8,7 +8,7 @@ import com.magorasystems.mafmodules.common.mvp.view.BaseLceView;
  *
  * @author Valentin S.Bolkonsky
  */
-public abstract class CommonLcePresenter<M, V extends BaseLceView<M>, R extends BaseRouter> extends CommonPresenter<V, R> {
+public abstract class CommonLcePresenter<M, V extends BaseLceView<? super M>, R extends BaseRouter> extends CommonPresenter<V, R> {
 
     protected final void showProgress() {
         if(!isViewAttached()) {

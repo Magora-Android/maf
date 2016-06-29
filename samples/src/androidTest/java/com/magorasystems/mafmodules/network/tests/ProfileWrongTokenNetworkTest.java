@@ -9,6 +9,8 @@ import com.magorasystems.mafmodules.dagger.module.MockProfileNetworkModule;
 import com.magorasystems.mafmodules.dagger.rules.DaggerProfileComponentRule;
 import com.magorasystems.mafmodules.model.UserProfile;
 import com.magorasystems.mafmodules.network.RestApiTestSubscriber;
+import com.magorasystems.mafmodules.presenter.impl.SimpleProfilePresenter;
+import com.magorasystems.mafmodules.view.impl.UserProfileLceView;
 
 import org.junit.Assert;
 import org.junit.Rule;
@@ -16,6 +18,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import rx.observers.TestSubscriber;
 
@@ -28,6 +33,9 @@ import rx.observers.TestSubscriber;
 public class ProfileWrongTokenNetworkTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProfileWrongTokenNetworkTest.class);
+
+    final CountDownLatch signalLifecycle = new CountDownLatch(3);
+    final CountDownLatch signalDetach = new CountDownLatch(1);
 
     @Rule
     public DaggerProfileComponentRule daggerProfileComponentRule =
@@ -60,4 +68,42 @@ public class ProfileWrongTokenNetworkTest {
         Assert.assertNotNull("User profile is null", userProfile);
 
     }
+
+    @Test
+    public void testMyProfilePresenter() throws Exception {
+
+        final SimpleProfilePresenter profilePresenter = daggerProfileComponentRule.getProfilePresenter();
+
+        profilePresenter.attachView(lceView);
+        profilePresenter.takeMyProfile();
+        signalLifecycle.await(60, TimeUnit.SECONDS);
+        profilePresenter.detachView(false);
+        signalDetach.await(5, TimeUnit.SECONDS);
+    }
+
+    private final UserProfileLceView lceView = new UserProfileLceView() {
+        @Override
+        public void showProgress() {
+            signalLifecycle.countDown();
+        }
+
+        @Override
+        public void showContent() {
+            super.showContent();
+            signalLifecycle.countDown();
+        }
+
+        @Override
+        public void setModel(UserProfile model) {
+            super.setModel(model);
+            signalLifecycle.countDown();
+            Assert.assertNotNull("Moder is null", model);
+            LOGGER.debug("UserProfile: " + model);
+        }
+
+        @Override
+        public void detachView() {
+            signalDetach.countDown();
+        }
+    };
 }

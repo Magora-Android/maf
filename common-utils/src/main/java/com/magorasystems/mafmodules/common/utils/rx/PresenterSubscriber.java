@@ -10,7 +10,7 @@ import rx.Subscriber;
  */
 public class PresenterSubscriber<T> extends Subscriber<T> {
 
-    private final Observer<T> internalObserver;
+    private final Observer<? super T> internalObserver;
 
     public PresenterSubscriber(Observer<T> internalObserver) {
         this.internalObserver = internalObserver;

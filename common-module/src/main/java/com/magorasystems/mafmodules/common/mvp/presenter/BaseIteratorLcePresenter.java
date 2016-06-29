@@ -11,7 +11,7 @@ import rx.Observer;
  *
  * @author Valentin S.Bolkonsky
  */
-public class BaseIteratorLcePresenter<M, I extends BaseInteractor<M>, V extends BaseLceView<M>, R extends BaseRouter>
+public abstract class BaseIteratorLcePresenter<M, I extends BaseInteractor<? super M>, V extends BaseLceView<? super M>, R extends BaseRouter>
         extends CommonLcePresenter<M, V, R> implements Observer<M> {
 
     private I iteractor;

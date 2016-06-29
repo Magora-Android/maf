@@ -8,6 +8,7 @@ import com.magorasystems.mafmodules.dagger.module.MockStorableModule;
 import com.magorasystems.mafmodules.dagger.module.ProfileNetworkModule;
 import com.magorasystems.mafmodules.interactor.impl.SimpleProfileInteractor;
 import com.magorasystems.mafmodules.model.UserProfile;
+import com.magorasystems.mafmodules.presenter.impl.SimpleProfilePresenter;
 import com.magorasystems.mafmodules.provider.ProfileDataProvider;
 import com.magorasystems.mafmodules.provider.SimpleRestProfileProvider;
 
@@ -22,6 +23,7 @@ public class DaggerProfileComponentRule extends DaggerMockRule<ProfileComponent>
 
     private SimpleRestProfileProvider profileProvider;
     private SimpleProfileInteractor profileInteractor;
+    private SimpleProfilePresenter profilePresenter;
 
     public DaggerProfileComponentRule(ProfileNetworkModule networkModule) {
         super(ProfileComponent.class, networkModule);
@@ -33,6 +35,7 @@ public class DaggerProfileComponentRule extends DaggerMockRule<ProfileComponent>
             app.putComponent(ProfileComponent.class.getSimpleName(), profileComponent);
             profileProvider = profileComponent.getRestApiProvider();
             profileInteractor = profileComponent.getProfileInteractor();
+            profilePresenter = profileComponent.getProfilePresneter();
         });
     }
 
@@ -42,5 +45,9 @@ public class DaggerProfileComponentRule extends DaggerMockRule<ProfileComponent>
 
     public SimpleProfileInteractor getProfileInteractor() {
         return profileInteractor;
+    }
+
+    public SimpleProfilePresenter getProfilePresenter() {
+        return profilePresenter;
     }
 }

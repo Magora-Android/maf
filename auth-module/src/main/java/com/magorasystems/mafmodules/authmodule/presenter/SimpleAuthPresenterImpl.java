@@ -59,6 +59,7 @@ public class SimpleAuthPresenterImpl extends AuthLcePresenter<SimpleAuthInteract
     public void onStop() {
         super.onStop();
         if (outputPublisher != null) {
+            outputPublisher.onCompleted();
             outputPublisher = null;
         }
     }
