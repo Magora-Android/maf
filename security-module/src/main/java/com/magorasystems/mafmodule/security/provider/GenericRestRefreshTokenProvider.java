@@ -30,6 +30,14 @@ public abstract class GenericRestRefreshTokenProvider<W, COMPONENT, TOKEN extend
 
     protected S tokenStorage;
 
+    /**
+     *
+     * @param component - dagger component
+     * @param scheduler - background worker
+     * @param restApiClientWrapper - wrapper for profile api
+     * @param refreshTokenApiClient - client for refresh token
+     * @param tokenStorage - storage for tokens
+     */
     public GenericRestRefreshTokenProvider(COMPONENT component, SchedulersUtils.CoreScheduler scheduler,
                                            W restApiClientWrapper,
                                            R refreshTokenApiClient,

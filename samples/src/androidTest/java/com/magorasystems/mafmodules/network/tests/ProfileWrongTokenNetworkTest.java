@@ -3,6 +3,7 @@ package com.magorasystems.mafmodules.network.tests;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
+import com.magorasystems.mafmodules.common.utils.rx.PresenterSubscriber;
 import com.magorasystems.mafmodules.common.utils.rx.TestCoreScheduler;
 import com.magorasystems.mafmodules.dagger.module.MockProfileNetworkModule;
 import com.magorasystems.mafmodules.dagger.rules.DaggerProfileComponentRule;
@@ -33,7 +34,7 @@ public class ProfileWrongTokenNetworkTest {
             new DaggerProfileComponentRule(new MockProfileNetworkModule(1));
 
     @Test
-    public void testMyProfile() throws Exception {
+    public void testMyProfileProvider() throws Exception {
         final TestSubscriber<UserProfile> testSubscriber = new RestApiTestSubscriber<>();
         daggerProfileComponentRule.getProfileProvider()
                 .getMyProfile()
@@ -45,5 +46,18 @@ public class ProfileWrongTokenNetworkTest {
         final UserProfile userProfile = testSubscriber.getOnNextEvents().get(0);
         LOGGER.debug("{}", userProfile);
         Assert.assertNotNull("User profile is null", userProfile);
+    }
+
+    @Test
+    public void testMyProfileInteractor() throws Exception {
+        final TestSubscriber<UserProfile> testSubscriber = new RestApiTestSubscriber<>();
+        daggerProfileComponentRule.getProfileInteractor()
+                .executeMyProfile(new PresenterSubscriber<>(testSubscriber));
+        testSubscriber.awaitTerminalEvent();
+        testSubscriber.assertNoErrors();
+        final UserProfile userProfile = testSubscriber.getOnNextEvents().get(0);
+        LOGGER.debug("{}", userProfile);
+        Assert.assertNotNull("User profile is null", userProfile);
+
     }
 }
