@@ -56,7 +56,7 @@ public class ShowProfileFragment extends GenericModuleFragment implements Inject
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         toolbar.setTitle(getTitle());
-        profileLceView = new UserProfileLceViewImpl(progressView, content, content);
+        profileLceView = new UserProfileLceViewImpl(progressView, content);
         profileInteractiveView = new UserProfileInteractiveView(null, buttonEditProfile);
     }
 
@@ -88,6 +88,15 @@ public class ShowProfileFragment extends GenericModuleFragment implements Inject
                 modulePresenter.input(new UserProfileModuleInputImpl(viewInput, this));
                 modulePresenter.start();
             });
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (modulePresenter != null) {
+            modulePresenter.stop();
+            modulePresenter = null;
         }
     }
 
