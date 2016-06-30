@@ -39,7 +39,7 @@ public abstract class AbstractModulePresenter<R extends BaseRouter, VI extends V
         getPresenter().onStop();
     }
 
-    protected abstract BaseLifecyclePresenter<? extends BaseView, ? extends BaseRouter> getPresenter();
+    protected abstract BaseLifecyclePresenter<? extends BaseView, ? extends BaseRouter, ?> getPresenter();
 
     @Override
     public void destroy(boolean retainInstance) {

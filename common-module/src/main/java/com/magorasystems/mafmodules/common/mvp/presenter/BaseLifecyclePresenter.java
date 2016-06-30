@@ -9,7 +9,7 @@ import com.magorasystems.mafmodules.common.mvp.view.BaseView;
  *
  * @author Valentin S. Bolkonsky
  */
-public interface BaseLifecyclePresenter<V extends BaseView, R extends BaseRouter> extends BasePresenter<V,R>{
+public interface BaseLifecyclePresenter<V extends BaseView, R extends BaseRouter, M> extends BasePresenter<V,R,M>{
 
     void onStart();
 

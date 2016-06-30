@@ -15,9 +15,9 @@ import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
  *
  * @author Valentin S.Bolkonsky
  */
-public class AuthLcePresenter<I extends AuthInteractor<StringAuthInfo>>
+public abstract class AuthLcePresenter<I extends AuthInteractor<StringAuthInfo>>
         extends BaseIteratorLcePresenter<StringAuthInfo, I, StringAuthView, AuthRouter>
-        implements AuthPresenter<StringAuthView, AuthRouter> {
+        implements AuthPresenter<StringAuthView, AuthRouter,StringAuthInfo> {
 
     public AuthLcePresenter(I iterator) {
         super(iterator);

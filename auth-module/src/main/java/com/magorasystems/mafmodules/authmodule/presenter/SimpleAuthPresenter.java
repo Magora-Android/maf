@@ -6,6 +6,7 @@ import com.magorasystems.mafmodules.authmodule.router.AuthRouter;
 import com.magorasystems.mafmodules.authmodule.view.impl.StringAuthView;
 import com.magorasystems.mafmodules.common.mvp.presenter.BasePresenter;
 import com.magorasystems.mafmodules.common.utils.component.Injectable;
+import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
 
 import rx.Observable;
 
@@ -14,8 +15,9 @@ import rx.Observable;
  *
  * @author Valentin S.Bolkonsky
  */
-public interface SimpleAuthPresenter extends AuthPresenter<StringAuthView, AuthRouter>,
-        Injectable<AuthComponent>, BasePresenter<StringAuthView, AuthRouter> {
+public interface SimpleAuthPresenter extends AuthPresenter<StringAuthView, AuthRouter, StringAuthInfo>,
+        Injectable<AuthComponent>, BasePresenter<StringAuthView, AuthRouter, StringAuthInfo> {
 
     Observable<AuthViewOutput> output();
+
 }

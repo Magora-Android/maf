@@ -24,7 +24,7 @@ public abstract class GenericFragment<ROUTER extends BaseRouter> extends BaseFra
     @NonNull
     protected ROUTER router;
 
-    protected abstract BasePresenter<? extends BaseView, ROUTER> getPresenter();
+    protected abstract BasePresenter<? extends BaseView, ROUTER,?> getPresenter();
 
     @Override
     @SuppressWarnings("unchecked")

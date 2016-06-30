@@ -10,7 +10,7 @@ import com.magorasystems.mafmodules.view.ProfileView;
  * @author Valentin S.Bolkonsky
  */
 public interface ProfilePresenter<M, V extends ProfileView<? super M>, R extends ProfileRouter<? super M>>
-        extends BaseLifecyclePresenter<V, R> {
+        extends BaseLifecyclePresenter<V, R, M> {
 
     void takeMyProfile();
 

@@ -10,7 +10,7 @@ import com.magorasystems.mafmodules.common.mvp.presenter.BaseLifecyclePresenter;
  *
  * @author Valentin S.Bolkonsky
  */
-public interface AuthPresenter<V  extends StringAuthView,R extends AuthRouter> extends BaseLifecyclePresenter<V, R> {
+public interface AuthPresenter<V  extends StringAuthView,R extends AuthRouter, M> extends BaseLifecyclePresenter<V, R, M> {
 
     void authorization(AuthViewModel view);
 

@@ -12,7 +12,7 @@ import java.lang.ref.WeakReference;
  *
  * @author Valentin S. Bolkonsky
  */
-public abstract class CommonPresenter<V extends BaseView, R extends BaseRouter> implements BasePresenter<V, R> {
+public abstract class CommonPresenter<V extends BaseView, R extends BaseRouter,M> implements BasePresenter<V, R, M> {
 
     private WeakReference<V> viewRef;
     private WeakReference<R> routerRef;
