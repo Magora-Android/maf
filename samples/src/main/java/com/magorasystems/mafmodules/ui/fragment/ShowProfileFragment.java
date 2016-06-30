@@ -1,9 +1,10 @@
 package com.magorasystems.mafmodules.ui.fragment;
 
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.view.View;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.magorasystems.mafmodules.R;
 import com.magorasystems.mafmodules.common.ui.fragment.GenericModuleFragment;
 import com.magorasystems.mafmodules.common.utils.component.HasComponent;
@@ -41,8 +42,10 @@ public class ShowProfileFragment extends GenericModuleFragment implements Inject
     protected View content;
     @BindView(R.id.button_edit_profile)
     protected View buttonEditProfile;
-    @BindView(R.id.toolbar)
-    protected Toolbar toolbar;
+    @BindView(R.id.collapsing_toolbar)
+    protected CollapsingToolbarLayout collapsingToolbar;
+    @BindView(R.id.drawee_avatar)
+    protected SimpleDraweeView draweeAvatar;
 
     @Inject
     protected Observable<UserProfilePresenterModule> moduleObservable;
@@ -55,8 +58,8 @@ public class ShowProfileFragment extends GenericModuleFragment implements Inject
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        toolbar.setTitle(getTitle());
-        profileLceView = new UserProfileLceViewImpl(progressView, content);
+        collapsingToolbar.setTitle(getTitle());
+        profileLceView = new UserProfileLceViewImpl(progressView, content, draweeAvatar, collapsingToolbar);
         profileInteractiveView = new UserProfileInteractiveView(null, buttonEditProfile);
     }
 

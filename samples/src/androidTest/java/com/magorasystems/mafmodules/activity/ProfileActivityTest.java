@@ -44,11 +44,11 @@ public class ProfileActivityTest {
         profileActivityActivityTestRule.launchActivity(null);
         IdlingPolicies.setMasterPolicyTimeout(WAIT * 60 * 60 * 60 * 2, TimeUnit.MILLISECONDS);
         IdlingPolicies.setIdlingResourceTimeout(WAIT * 60 * 60 * 60 * 2, TimeUnit.MILLISECONDS);
-        IdlingResource idlingResource = new ElapsedTimeIdlingResource(60 * WAIT);
+        IdlingResource idlingResource = new ElapsedTimeIdlingResource(20 * WAIT);
+        Espresso.registerIdlingResources(idlingResource);
         onView(withId(R.id.button_edit_profile))
                 .check(matches(isEnabled()))
                 .perform(click());
-        Espresso.registerIdlingResources(idlingResource);
         Espresso.unregisterIdlingResources(idlingResource);
 
     }

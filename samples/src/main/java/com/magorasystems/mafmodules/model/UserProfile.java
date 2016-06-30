@@ -13,8 +13,11 @@ public class UserProfile {
     private String firstName;
     private String lastName;
     private String phone;
+    private String avatarPath;
 
-    public static UserProfile create(Long id, String uid, String name, String firstName, String lastName, String phone) {
+    public static UserProfile create(Long id, String uid, String name,
+                                     String firstName, String lastName,
+                                     String phone, String avatar) {
         final UserProfile userProfile = new UserProfile();
         userProfile.id = id;
         userProfile.uid = uid;
@@ -22,6 +25,7 @@ public class UserProfile {
         userProfile.firstName = firstName;
         userProfile.lastName = lastName;
         userProfile.phone = phone;
+        userProfile.avatarPath = avatar;
         return userProfile;
     }
 
@@ -45,8 +49,12 @@ public class UserProfile {
         return phone;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public String getUid() {
+        return uid;
+    }
+
+    public String getAvatar() {
+        return avatarPath;
     }
 
     @Override
@@ -58,6 +66,7 @@ public class UserProfile {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", phone='" + phone + '\'' +
+                ", avatar='" + avatarPath + '\'' +
                 '}';
     }
 }

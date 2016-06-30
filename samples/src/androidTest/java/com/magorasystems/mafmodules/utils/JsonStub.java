@@ -81,7 +81,7 @@ public class JsonStub {
         final Faker faker = new Faker(Locale.US.getLanguage());
         final UserProfile profile = UserProfile.create(faker.number.positive(1L, 10000L),
                 faker.number.number(10), faker.name.name(), faker.name.firstName(),
-                faker.name.lastName(), faker.phoneNumber.phoneNumber());
+                faker.name.lastName(), faker.phoneNumber.phoneNumber(),faker.avatar.image());
         return generator(new ProfileSuccessResponse(profile));
     }
 
