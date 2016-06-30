@@ -6,6 +6,8 @@ import com.magorasystems.mafmodules.common.mvp.presenter.BaseLifecyclePresenter;
 import com.magorasystems.mafmodules.common.mvp.router.BaseRouter;
 import com.magorasystems.mafmodules.common.mvp.view.BaseView;
 
+import rx.Observable;
+import rx.Subscriber;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -19,6 +21,7 @@ public abstract class AbstractModulePresenter<R extends BaseRouter, VI extends V
     private I moduleInput;
 
     protected final CompositeSubscription subscription = new CompositeSubscription();
+    private Subscriber<? super VO> outSubscriber;
 
     @Override
     public void input(I input) {
@@ -42,6 +45,15 @@ public abstract class AbstractModulePresenter<R extends BaseRouter, VI extends V
     protected abstract BaseLifecyclePresenter<? extends BaseView, ? extends BaseRouter, ?> getPresenter();
 
     @Override
+    public void output(Observable<VO> output) {
+        if (outSubscriber != null && !outSubscriber.isUnsubscribed()) {
+            outSubscriber.unsubscribe();
+        }
+        outSubscriber = outputSubscriber();
+        subscription.add(output.subscribe(outSubscriber));
+    }
+
+    @Override
     public void destroy(boolean retainInstance) {
         getPresenter().detachView(retainInstance);
         getPresenter().removeRouter();
@@ -51,5 +63,46 @@ public abstract class AbstractModulePresenter<R extends BaseRouter, VI extends V
             subscription.unsubscribe();
             subscription.clear();
         }
+    }
+
+    @Override
+    public void onCompleted() {
+
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    @Override
+    public void onNext(VO vo) {
+
+    }
+
+    protected Subscriber<? super VO> outputSubscriber() {
+        return new Subscriber<VO>() {
+            @Override
+            public void onCompleted() {
+                if (!isUnsubscribed()) {
+                    AbstractModulePresenter.this.onCompleted();
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                if (!isUnsubscribed()) {
+                    AbstractModulePresenter.this.onError(e);
+                }
+            }
+
+            @Override
+            public void onNext(VO vo) {
+                if (!isUnsubscribed()) {
+                    AbstractModulePresenter.this.onNext(vo);
+                }
+            }
+        };
+
     }
 }

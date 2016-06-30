@@ -2,6 +2,7 @@ package com.magorasystems.mafmodules.store;
 
 import com.google.gson.Gson;
 import com.magorasystems.mafmodules.model.UserProfile;
+import com.magorasystems.mafmodules.profile.store.PreferencesProfileStorable;
 
 import me.henrytao.rxsharedpreferences.RxSharedPreferences;
 

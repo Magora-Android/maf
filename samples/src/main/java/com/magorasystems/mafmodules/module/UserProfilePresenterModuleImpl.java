@@ -10,7 +10,7 @@ import com.magorasystems.mafmodules.model.UserProfile;
 import com.magorasystems.mafmodules.module.input.impl.UserProfileViewInput;
 import com.magorasystems.mafmodules.module.output.UserProfileViewOutput;
 import com.magorasystems.mafmodules.presenter.impl.SimpleProfilePresenter;
-import com.magorasystems.mafmodules.router.ProfileRouter;
+import com.magorasystems.mafmodules.profile.router.ProfileRouter;
 import com.magorasystems.mafmodules.store.UserProfilePreferencesStorage;
 import com.magorasystems.mafmodules.view.impl.UserProfileInteractiveView;
 
@@ -18,8 +18,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-
-import rx.Observable;
 
 /**
  * Developed by Magora Team (magora-systems.com). 2016.
@@ -48,20 +46,22 @@ public class UserProfilePresenterModuleImpl extends AbstractModulePresenter<Prof
         return presenter;
     }
 
+
     @Override
-    public void output(Observable<UserProfileViewOutput> output) {
-        subscription.add(output.subscribe(profile -> {
-            preferencesStorage.storeObject("my", profile.getModel());
-            final ProfileRouter<UserProfile> router = getModuleInput().getRouter();
-            if (router != null) {
-                router.onUpdateProfile(profile.getModel());
-            }
-        }, throwable -> {
-            final ProfileRouter<UserProfile> router = getModuleInput().getRouter();
-            if (router != null) {
-                router.onShowError(throwable);
-            }
-        }));
+    public void onError(Throwable e) {
+        final ProfileRouter<UserProfile> router = getModuleInput().getRouter();
+        if (router != null) {
+            router.onShowError(e);
+        }
+    }
+
+    @Override
+    public void onNext(UserProfileViewOutput profile) {
+        preferencesStorage.storeObject("my", profile.getModel());
+        final ProfileRouter<UserProfile> router = getModuleInput().getRouter();
+        if (router != null) {
+            router.onUpdateProfile(profile.getModel());
+        }
     }
 
     @Override

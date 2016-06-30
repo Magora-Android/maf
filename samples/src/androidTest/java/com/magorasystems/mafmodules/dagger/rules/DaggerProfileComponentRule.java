@@ -9,7 +9,7 @@ import com.magorasystems.mafmodules.dagger.module.ProfileNetworkModule;
 import com.magorasystems.mafmodules.interactor.impl.SimpleProfileInteractor;
 import com.magorasystems.mafmodules.model.UserProfile;
 import com.magorasystems.mafmodules.presenter.impl.SimpleProfilePresenter;
-import com.magorasystems.mafmodules.provider.ProfileDataProvider;
+import com.magorasystems.mafmodules.profile.provider.ProfileDataProvider;
 import com.magorasystems.mafmodules.provider.SimpleRestProfileProvider;
 
 import it.cosenonjaviste.daggermock.DaggerMockRule;

@@ -1,0 +1,145 @@
+apply plugin: 'com.android.library'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'com.fernandocejas.frodo'
+apply plugin: 'com.bmuschko.nexus'
+
+version "0.0.1"
+
+android {
+    compileSdkVersion version_sdk_target
+    buildToolsVersion version_buildTools
+
+    defaultPublishConfig "debug"
+
+    defaultConfig {
+        minSdkVersion version_sdk_min
+        targetSdkVersion version_sdk_target
+        group 'com.magorasystems.android'
+        versionCode gitVersion()
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/notice'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/license'
+    }
+    lintOptions {
+        abortOnError false
+        enable 'BackButton'
+        enable 'GradleDynamicVersion'
+        enable 'NewerVersionAvailable'
+
+        disable 'MissingTranslation'
+        disable 'InvalidPackage'
+        disable 'ExtraTranslation'
+    }
+    dexOptions {
+        incremental true
+        preDexLibraries = false
+        javaMaxHeapSize "4g"
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    retrolambda {
+        javaVersion JavaVersion.VERSION_1_7
+        defaultMethods false
+        jvmArgs '-noverify'
+        incremental false
+    }
+
+    // Always show the result of every unit test, even if it passes.
+    testOptions.unitTests.all {
+        testLogging {
+            events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+        }
+    }
+
+}
+
+modifyPom {
+    project {
+        name 'Profile Module'
+        description 'Constrains base profile widget, fragment, activity'
+        url 'https://bitbucket.org/magora_karpenko/maf-modules'
+        inceptionYear '2016'
+
+        scm{
+            url 'https://bitbucket.org/magora_karpenko/maf-modules'
+            connection 'scm:https://bitbucket.org/magora_karpenko/maf-modules'
+            developerConnection 'scm:https://bitbucket.org/magora_karpenko/maf-modules'
+
+        }
+
+        developers{
+            developer {
+                id 'karpenko'
+                name 'Valentin S.Karpenko'
+                email 'karpenko@magora.systems'
+            }
+        }
+
+        organization {
+            name "Magora Systems"
+            url "http://magora-systems.com/"
+        }
+    }
+}
+
+extraArchive {
+    sources = true
+    tests = false
+    javadoc = true
+}
+
+nexus {
+    sign = false
+    repositoryUrl = 'http://nexus.java.magora.team/content/repositories/releases/'
+    snapshotRepositoryUrl = 'http://nexus.java.magora.team/content/repositories/snapshots/'
+}
+
+
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile project(':common-module')
+    compile project(':security-module')
+
+    compile(
+            "com.google.dagger:dagger:$version_dagger",
+            "javax.annotation:jsr250-api:$version_jsr250"
+    )
+
+
+    apt "com.google.dagger:dagger-compiler:$version_dagger"
+
+
+    retrolambdaConfig "net.orfjackal.retrolambda:retrolambda:$version_retrolambda"
+
+    testCompile("junit:junit:$version_junit")
+
+
+}

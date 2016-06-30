@@ -2,6 +2,7 @@ package com.magorasystems.mafmodules.network;
 
 import com.magorasystems.mafmodules.model.UserProfile;
 import com.magorasystems.mafmodules.network.response.ProfileSuccessResponse;
+import com.magorasystems.mafmodules.profile.network.AbstractProfileApiClientWrapper;
 
 import rx.Observable;
 

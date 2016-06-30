@@ -11,6 +11,7 @@ import com.magorasystems.mafmodules.model.UserProfile;
 import com.magorasystems.mafmodules.network.UserProfileApiClientWrapper;
 import com.magorasystems.mafmodules.network.response.ProfileSuccessResponse;
 import com.magorasystems.mafmodules.network.store.StringApiTokenStorage;
+import com.magorasystems.mafmodules.profile.provider.BaseRestProfileDataProvider;
 import com.magorasystems.mafmodules.provider.SimpleRestProfileProvider;
 
 import javax.inject.Inject;

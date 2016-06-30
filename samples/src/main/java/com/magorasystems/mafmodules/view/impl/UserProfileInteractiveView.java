@@ -4,7 +4,7 @@ import android.view.View;
 
 import com.fernandocejas.frodo.annotation.RxLogObservable;
 import com.jakewharton.rxbinding.view.RxView;
-import com.magorasystems.mafmodules.module.input.ProfileInteractiveView;
+import com.magorasystems.mafmodules.profile.module.input.ProfileInteractiveView;
 
 import rx.Observable;
 

@@ -1,4 +1,4 @@
-include ':samples', ':common-widgets',
+include ':samples', ':common-widgets', ':profile-module',
         ':common-module',
         ':common-utils',
         ':common-protocol-api',

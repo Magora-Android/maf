@@ -2,8 +2,8 @@ package com.magorasystems.mafmodules.presenter.impl;
 
 import com.magorasystems.mafmodules.model.UserProfile;
 import com.magorasystems.mafmodules.module.output.UserProfileViewOutput;
-import com.magorasystems.mafmodules.presenter.ProfilePresenter;
-import com.magorasystems.mafmodules.router.ProfileRouter;
+import com.magorasystems.mafmodules.profile.presenter.ProfilePresenter;
+import com.magorasystems.mafmodules.profile.router.ProfileRouter;
 import com.magorasystems.mafmodules.view.impl.UserProfileLceView;
 
 import rx.Observable;
@@ -17,3 +17,4 @@ public interface SimpleProfilePresenter extends ProfilePresenter<UserProfile, Us
 
     Observable<UserProfileViewOutput> output();
 }
+

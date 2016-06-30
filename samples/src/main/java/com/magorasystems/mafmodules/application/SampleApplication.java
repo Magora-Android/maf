@@ -19,10 +19,6 @@ import com.magorasystems.mafmodules.dagger.component.SampleComponents;
 import com.magorasystems.mafmodules.dagger.module.ProfileNetworkModule;
 import com.magorasystems.mafmodules.dagger.module.SampleApplicationModule;
 import com.magorasystems.mafmodules.dagger.scope.ApplicationScope;
-import com.magorasystems.mafmodules.dagger.scope.ProfileScope;
-import com.magorasystems.mafmodules.model.UserProfile;
-import com.magorasystems.mafmodules.network.ProfileApiClient;
-import com.magorasystems.mafmodules.network.ProfileApiClientWrapper;
 import com.magorasystems.rx.permission.RxResult;
 
 import org.apache.commons.lang3.StringUtils;

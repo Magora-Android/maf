@@ -14,8 +14,6 @@ import com.magorasystems.mafmodules.common.utils.component.Injectable;
 
 import javax.inject.Inject;
 
-import rx.Observable;
-
 /**
  * Developed by Magora Team (magora-systems.com). 2016.
  *
@@ -38,19 +36,21 @@ public class AuthModulePresenterImp extends AbstractModulePresenter<AuthRouter, 
         authComponent.inject(this);
     }
 
+
     @Override
-    public void output(Observable<AuthViewOutput> output) {
-        subscription.add(output.subscribe(authViewOutput -> {
-            AuthRouter router = getModuleInput().getRouter();
-            if (router != null) {
-                router.onAfterAuth();
-            }
-        }, throwable -> {
-            AuthRouter router = getModuleInput().getRouter();
-            if (router != null) {
-                router.onShowError(throwable);
-            }
-        }));
+    public void onError(Throwable e) {
+        final AuthRouter router = getModuleInput().getRouter();
+        if (router != null) {
+            router.onShowError(e);
+        }
+    }
+
+    @Override
+    public void onNext(AuthViewOutput authViewOutput) {
+        final AuthRouter router = getModuleInput().getRouter();
+        if (router != null) {
+            router.onAfterAuth();
+        }
     }
 
     @Override
@@ -62,7 +62,6 @@ public class AuthModulePresenterImp extends AbstractModulePresenter<AuthRouter, 
 
     @Override
     public void start() {
-        super.start();
         final AuthInteractiveView interactiveView = getModuleInput().getViewInput()
                 .getInteractiveView();
         if (interactiveView != null) {
@@ -74,6 +73,7 @@ public class AuthModulePresenterImp extends AbstractModulePresenter<AuthRouter, 
                     .subscribe());
         }
         output(getPresenter().output());
+        super.start();
     }
 
     @Override

@@ -3,7 +3,7 @@ package com.magorasystems.mafmodules.module;
 import com.magorasystems.mafmodules.common.module.impl.AbstractModuleInput;
 import com.magorasystems.mafmodules.model.UserProfile;
 import com.magorasystems.mafmodules.module.input.impl.UserProfileViewInput;
-import com.magorasystems.mafmodules.router.ProfileRouter;
+import com.magorasystems.mafmodules.profile.router.ProfileRouter;
 
 /**
  * Developed by Magora Team (magora-systems.com). 2016.

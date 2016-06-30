@@ -5,13 +5,15 @@ import com.magorasystems.mafmodules.common.module.output.ViewOutput;
 import com.magorasystems.mafmodules.common.mvp.router.BaseRouter;
 
 import rx.Observable;
+import rx.Observer;
 
 /**
  * Developed by Magora Team (magora-systems.com). 2016.
  *
  * @author Valentin S.Bolkonsky
  */
-public interface ModulePresenter<R extends BaseRouter, VI extends ViewInput<?, ?>, VO extends ViewOutput<?>, I extends ModuleInput<VI, R>> {
+public interface ModulePresenter<R extends BaseRouter, VI extends ViewInput<?, ?>, VO extends ViewOutput<?>, I extends ModuleInput<VI, R>>
+        extends Observer<VO> {
 
     void start();
 

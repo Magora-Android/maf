@@ -1,7 +1,7 @@
 package com.magorasystems.mafmodules.module.input.impl;
 
 import com.magorasystems.mafmodules.model.UserProfile;
-import com.magorasystems.mafmodules.module.input.ProfileViewInput;
+import com.magorasystems.mafmodules.profile.module.input.ProfileViewInput;
 import com.magorasystems.mafmodules.view.impl.UserProfileInteractiveView;
 import com.magorasystems.mafmodules.view.impl.UserProfileLceView;
 

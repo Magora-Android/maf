@@ -15,6 +15,6 @@ public interface ProfileApiClient {
     String RESOURCE_PROFILE = "profile";
     String RESOURCE_PROFILE_AVATAR = "profile/avatar";
 
-    @GET("profile/")
+    @GET(RESOURCE_PROFILE)
     public Observable<ProfileSuccessResponse> getMyProfile();
 }
