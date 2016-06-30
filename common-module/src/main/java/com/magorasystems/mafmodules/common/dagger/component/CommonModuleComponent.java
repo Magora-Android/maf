@@ -18,6 +18,7 @@ import com.magorasystems.mafmodules.network.store.StringApiTokenStorage;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import me.henrytao.rxsharedpreferences.RxSharedPreferences;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 
@@ -59,6 +60,8 @@ public interface CommonModuleComponent {
     ServerEndpoint serverEndpoint();
 
     Gson gson();
+
+    RxSharedPreferences sharedPreferences();
 
     void inject(CommonComponentProvider provider);
 

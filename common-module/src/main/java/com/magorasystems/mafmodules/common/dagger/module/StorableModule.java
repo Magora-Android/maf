@@ -1,6 +1,7 @@
 package com.magorasystems.mafmodules.common.dagger.module;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.magorasystems.mafmodules.network.store.SimpleMemoryTokenStorable;
 import com.magorasystems.mafmodules.network.store.StringApiTokenStorage;
@@ -12,6 +13,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import me.henrytao.rxsharedpreferences.RxSharedPreferences;
 
 /**
  * Developed by Magora Team (magora-systems.com). 2016.
@@ -28,5 +30,13 @@ public class StorableModule implements BaseModule {
     public StringApiTokenStorage providerMemoryTokenStorable(Context context) {
         LOGGER.debug("create new instance for StringApiTokenStorage");
         return new SimpleMemoryTokenStorable();
+    }
+
+    @Provides
+    @Singleton
+    public RxSharedPreferences providerPreferenceStorage(Context context) {
+        LOGGER.debug("create new instance for RxSharedPreferences");
+        final SharedPreferences preferences = context.getSharedPreferences(context.getPackageName() + "PREFS", Context.MODE_PRIVATE);
+        return new RxSharedPreferences(preferences);
     }
 }

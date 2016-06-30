@@ -11,6 +11,7 @@ import com.magorasystems.mafmodules.module.input.impl.UserProfileViewInput;
 import com.magorasystems.mafmodules.module.output.UserProfileViewOutput;
 import com.magorasystems.mafmodules.presenter.impl.SimpleProfilePresenter;
 import com.magorasystems.mafmodules.router.ProfileRouter;
+import com.magorasystems.mafmodules.store.UserProfilePreferencesStorage;
 import com.magorasystems.mafmodules.view.impl.UserProfileInteractiveView;
 
 import org.slf4j.Logger;
@@ -34,6 +35,9 @@ public class UserProfilePresenterModuleImpl extends AbstractModulePresenter<Prof
     private SimpleProfilePresenter presenter;
 
     @Inject
+    protected UserProfilePreferencesStorage preferencesStorage;
+
+    @Inject
     public UserProfilePresenterModuleImpl(Context application, SimpleProfilePresenter presenter) {
         this.presenter = presenter;
         injectComponent(application, ProfileComponent.class);
@@ -47,6 +51,7 @@ public class UserProfilePresenterModuleImpl extends AbstractModulePresenter<Prof
     @Override
     public void output(Observable<UserProfileViewOutput> output) {
         subscription.add(output.subscribe(profile -> {
+            preferencesStorage.storeObject("my", profile.getModel());
             final ProfileRouter<UserProfile> router = getModuleInput().getRouter();
             if (router != null) {
                 router.onUpdateProfile(profile.getModel());
@@ -78,7 +83,7 @@ public class UserProfilePresenterModuleImpl extends AbstractModulePresenter<Prof
             subscription.add(interactiveView.model()
                     .subscribe(v -> getPresenter().takeMyProfile(), this::log, () -> log("complete")));
             subscription.add(interactiveView.edit()
-                    .subscribe(v -> getPresenter().editProfile(null), this::log, () -> log("complete")));
+                    .subscribe(v -> getPresenter().editProfile(preferencesStorage.restoreObject("my")), this::log, () -> log("complete")));
         }
         output(getPresenter().output());
         super.start();

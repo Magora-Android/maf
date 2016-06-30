@@ -5,6 +5,7 @@ import com.magorasystems.mafmodules.dagger.module.ProfileInteractorModule;
 import com.magorasystems.mafmodules.dagger.module.ProfileNetworkModule;
 import com.magorasystems.mafmodules.dagger.module.ProfilePresenterModule;
 import com.magorasystems.mafmodules.dagger.module.ProfileProviderModule;
+import com.magorasystems.mafmodules.dagger.module.ProfileStoreModule;
 import com.magorasystems.mafmodules.dagger.scope.ProfileScope;
 import com.magorasystems.mafmodules.interactor.impl.SimpleProfileInteractor;
 import com.magorasystems.mafmodules.interactor.impl.SimpleProfileInteractorImpl;
@@ -27,7 +28,8 @@ import dagger.Component;
                    ProfileNetworkModule.class,
                    ProfileProviderModule.class,
                    ProfileInteractorModule.class,
-                   ProfilePresenterModule.class
+                   ProfilePresenterModule.class,
+                   ProfileStoreModule.class
            })
 @ProfileScope
 public interface ProfileComponent {

@@ -5,6 +5,7 @@ import com.magorasystems.mafmodules.common.utils.component.Injectable;
 import com.magorasystems.mafmodules.module.UserProfilePresenterModule;
 import com.magorasystems.mafmodules.network.UserProfileApiClientWrapper;
 import com.magorasystems.mafmodules.presenter.impl.SimpleProfilePresenter;
+import com.magorasystems.mafmodules.store.UserProfilePreferencesStorage;
 
 import javax.inject.Inject;
 
@@ -25,6 +26,9 @@ public class ProfileComponentProvider implements Injectable<ProfileComponent> {
 
     @Inject
     protected Observable<UserProfilePresenterModule> presenterModuleObservable;
+
+    @Inject
+    protected UserProfilePreferencesStorage preferencesStorage;
 
     protected UserProfilePresenterModule profilePresenterModule;
 
@@ -52,6 +56,10 @@ public class ProfileComponentProvider implements Injectable<ProfileComponent> {
 
     public UserProfilePresenterModule getProfilePresenterModule() {
         return profilePresenterModule;
+    }
+
+    public UserProfilePreferencesStorage getPreferencesStorage() {
+        return preferencesStorage;
     }
 
     @Override

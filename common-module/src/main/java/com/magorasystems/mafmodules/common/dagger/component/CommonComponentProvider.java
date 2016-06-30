@@ -9,6 +9,8 @@ import com.magorasystems.mafmodules.network.store.StringApiTokenStorage;
 
 import javax.inject.Inject;
 
+import me.henrytao.rxsharedpreferences.RxSharedPreferences;
+
 /**
  * Developed by Magora Team (magora-systems.com). 2016.
  *
@@ -30,6 +32,9 @@ public class CommonComponentProvider {
 
     @Inject
     protected ServerEndpoint serverEndpoint;
+
+    @Inject
+    protected RxSharedPreferences sharedPreferences;
 
     public CommonComponentProvider(CommonModuleComponent component) {
         component.inject(this);
@@ -53,5 +58,9 @@ public class CommonComponentProvider {
 
     public ServerEndpoint getServerEndpoint() {
         return serverEndpoint;
+    }
+
+    public RxSharedPreferences getSharedPreferences() {
+        return sharedPreferences;
     }
 }
