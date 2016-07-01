@@ -1,9 +1,10 @@
 apply plugin: 'com.android.library'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'com.fernandocejas.frodo'
 apply plugin: 'com.bmuschko.nexus'
 
-version "0.0.2"
+version "0.0.1"
 
 android {
     compileSdkVersion version_sdk_target
@@ -14,10 +15,11 @@ android {
     defaultConfig {
         minSdkVersion version_sdk_min
         targetSdkVersion version_sdk_target
-        group 'com.magorasystems.android'
+        group  'com.magorasystems.android'
         versionCode gitVersion()
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -53,7 +55,6 @@ android {
         disable 'InvalidPackage'
         disable 'ExtraTranslation'
     }
-
     dexOptions {
         incremental true
         preDexLibraries = false
@@ -65,25 +66,18 @@ android {
     }
 
     retrolambda {
-        jdk System.getenv("JAVA8_HOME")
-        oldJdk System.getenv("JAVA7_HOME")
         javaVersion JavaVersion.VERSION_1_7
         defaultMethods false
         jvmArgs '-noverify'
         incremental true
     }
 
-    tasks.whenTaskAdded { task ->
-        if (task.name.startsWith("lint")) {
-            task.enabled = false
-        }
-    }
 }
 
 modifyPom {
     project {
-        name 'Security Module'
-        description 'Security Module'
+        name 'Digital keyboard Widget'
+        description 'Digital keyboard Widget'
         url 'https://bitbucket.org/magora_karpenko/maf-modules'
         inceptionYear '2016'
 
@@ -121,26 +115,26 @@ nexus {
     snapshotRepositoryUrl = 'http://nexus.java.magora.team/content/repositories/snapshots/'
 }
 
-
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':common-network')
-    compile project(':auth-protocol-api')
 
-    testCompile("junit:junit:$version_junit",
-            "org.hamcrest:hamcrest-core:$version_hamcrest",
-            "org.hamcrest:hamcrest-library:$version_hamcrest",
-            "org.mockito:mockito-core:$version_mockito")
+    compile(
+            "com.android.support:support-annotations:$version_support_annotations"
+    )
+
+    compile(
+            "io.reactivex:rxandroid:$version_rx_android",
+            "io.reactivex:rxjava:$version_rx_java",
+            "com.jakewharton.rxbinding:rxbinding:$version_rxbinding"
+    )
+
+    compile "com.jakewharton:butterknife:$version_butterknife"
+    apt "com.jakewharton:butterknife-compiler:$version_butterknife"
+
+    compile 'com.github.ozodrukh:RippleDrawable:2.0.0'
 
     retrolambdaConfig "net.orfjackal.retrolambda:retrolambda:$version_retrolambda"
 
-    androidTestCompile(
-            "com.android.support:support-annotations:$version_support_annotations",
-            "org.mockito:mockito-core:$version_mockito",
-            "com.google.dexmaker:dexmaker:$version_dexmaker",
-            "com.google.dexmaker:dexmaker-mockito:$version_dexmaker",
-            "com.android.support.test:runner:$version_support_test",
-            // Set this dependency to use JUnit 4 rules
-            "com.android.support.test:rules:$version_support_test"
-    )
+    testCompile("junit:junit:$version_junit")
+
 }

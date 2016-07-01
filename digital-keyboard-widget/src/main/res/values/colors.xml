@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_text_primary_1">#000000</color>
+    <color name="color_text_primary_2">#000000</color>
+    <color name="color_text_secondary_1">#000000</color>
+    <color name="color_text_secondary_2">#000000</color>
+
+    <color name="color_ripple_light">#1f000000</color>
+    <color name="color_ripple_background">#FFFFFF</color>
+    <color name="color_icon_tint">#000000</color>
+    <color name="color_key_background_grey">#b3b3b3</color>
+</resources>

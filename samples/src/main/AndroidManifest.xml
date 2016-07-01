@@ -37,6 +37,10 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"/>
 
+        <activity
+            android:name=".ui.activity.DigitalKeyboardActivity"
+            android:windowSoftInputMode="stateHidden"/>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="8a5d009dc74f84bef1180c15b97a107936ebfd34"/>

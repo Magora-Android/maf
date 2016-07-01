@@ -104,6 +104,7 @@ dependencies {
     compile project(':auth-module')
     compile project(':profile-module')
     compile project(':rx-imagepicker')
+    compile project(':digital-keyboard-widget')
 
     compile(
             "com.android.support:appcompat-v7:$version_appcompat",
@@ -152,6 +153,7 @@ dependencies {
     )
     androidTestCompile project(path: ':auth-module')
     androidTestCompile project(path: ':profile-module')
+    androidTestCompile project(path: ':digital-keyboard-widget')
     //androidTestCompile project(path: ':common-network')
     //androidTestCompile project(path: ':security-module')
 }

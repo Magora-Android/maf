@@ -141,6 +141,6 @@ dependencies {
 
     retrolambdaConfig "net.orfjackal.retrolambda:retrolambda:$version_retrolambda"
 
-    testCompile 'junit:junit:4.12'
+    testCompile("junit:junit:$version_junit")
 
 }
