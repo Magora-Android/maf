@@ -38,10 +38,21 @@ public abstract class BaseFragmentImpl extends Fragment implements BaseFragment 
         fragmentId = lastFragmentId.incrementAndGet();
     }
 
+    /**
+     * @return Returns the id of the fragment (its serial number) as a string.
+     * This can be understood as the tag of the fragment
+     */
     public String getFragmentName() {
         return Long.toString(fragmentId);
     }
 
+
+    /**
+     * Checks that the method @getResourceLayout() is overridden right, and by default not return 0.
+     * <p>
+     * If {@code getResourceLayout()} return 0 than call {@code super.onCreateView(inflater, container, savedInstanceState) }
+     * else set layout for fragment
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -52,12 +63,21 @@ public abstract class BaseFragmentImpl extends Fragment implements BaseFragment 
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
+    /**
+     * Bind Butterknife
+     *
+     * @param view               layout of fragment
+     * @param savedInstanceState savedInstanceState
+     */
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         unbinder = ButterKnife.bind(this, view);
     }
 
+    /**
+     * Unbind Butterknife and detach view
+     */
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -78,6 +98,12 @@ public abstract class BaseFragmentImpl extends Fragment implements BaseFragment 
         }
     }
 
+    /**
+     * Instanced and show new non-cancelable AlertDialog with positive button
+     *
+     * @param message       message for dialog
+     * @param clickListener click listener for positive button with text "Ok"
+     */
     @Override
     public void showErrorDialog(String message, DialogInterface.OnClickListener clickListener) {
         if (getActivity().isFinishing()) {

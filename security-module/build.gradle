@@ -70,7 +70,7 @@ android {
         javaVersion JavaVersion.VERSION_1_7
         defaultMethods false
         jvmArgs '-noverify'
-        incremental false
+        incremental true
     }
 
     tasks.whenTaskAdded { task ->
