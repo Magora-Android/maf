@@ -10,10 +10,12 @@ import com.magorasystems.mafmodules.profile.view.ProfileView;
  *
  * @author Valentin S.Bolkonsky
  */
-public interface ProfilePresenter<M, V extends ProfileView<? super M>, R extends ProfileRouter<? super M>,VO extends ProfileViewOutput<? extends M>>
-        extends BaseLifecyclePresenter<V, R, M,VO> {
+public interface ProfilePresenter<M, V extends ProfileView<? super M>, R extends ProfileRouter<? super M>, VO extends ProfileViewOutput<? extends M>>
+        extends BaseLifecyclePresenter<V, R, M, VO> {
 
     void takeMyProfile();
 
     void editProfile(M model);
+
+    void updateProfile(M model);
 }

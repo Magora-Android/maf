@@ -28,6 +28,11 @@ public abstract class GenericProfilePresenter<M, V extends ProfileLceView<? supe
     }
 
     @Override
+    public void updateProfile(M model) {
+        setModel(model);
+    }
+
+    @Override
     public void onStop() {
         getIteractor().unsubscribe();
         destroy();

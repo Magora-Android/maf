@@ -86,6 +86,10 @@ public class UserProfilePresenterModuleImpl extends AbstractModulePresenter<Prof
                     .subscribe(v -> getPresenter().editProfile(preferencesStorage.restoreObject("my")), this::log, () -> log("complete")));
         }
         output(getPresenter().output());
+        final UserProfile profile = preferencesStorage.restoreObject("my");
+        if (profile != null) {
+            getPresenter().updateProfile(profile);
+        }
         super.start();
     }
 
