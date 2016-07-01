@@ -2,6 +2,7 @@ package com.magorasystems.mafmodules.profile.presenter;
 
 import com.magorasystems.mafmodules.common.mvp.presenter.BaseIteratorLcePresenter;
 import com.magorasystems.mafmodules.profile.interactor.ProfileInteractor;
+import com.magorasystems.mafmodules.profile.module.output.ProfileViewOutput;
 import com.magorasystems.mafmodules.profile.router.ProfileRouter;
 import com.magorasystems.mafmodules.profile.view.ProfileLceView;
 
@@ -11,8 +12,8 @@ import com.magorasystems.mafmodules.profile.view.ProfileLceView;
  * @author Valentin S.Bolkonsky
  */
 public abstract class GenericProfilePresenter<M, V extends ProfileLceView<? super M>,
-        I extends ProfileInteractor<? super M>, R extends ProfileRouter<? super M>>
-        extends BaseIteratorLcePresenter<M, I, V, R> implements ProfilePresenter<M, V, R> {
+        I extends ProfileInteractor<? super M>, R extends ProfileRouter<? super M>, VO extends ProfileViewOutput<? extends M>>
+        extends BaseIteratorLcePresenter<M, I, V, R, VO> implements ProfilePresenter<M, V, R, VO> {
 
     public GenericProfilePresenter(I interactor) {
         super(interactor);
@@ -29,5 +30,6 @@ public abstract class GenericProfilePresenter<M, V extends ProfileLceView<? supe
     @Override
     public void onStop() {
         getIteractor().unsubscribe();
+        destroy();
     }
 }

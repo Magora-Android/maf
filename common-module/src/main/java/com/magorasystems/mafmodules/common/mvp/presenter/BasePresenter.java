@@ -12,7 +12,7 @@ import rx.Observable;
  *
  * @author Valentin S. Bolkonsky
  */
-public interface BasePresenter<V extends BaseView, R extends BaseRouter, M> {
+public interface BasePresenter<V extends BaseView, R extends BaseRouter, M, VO extends ViewOutput<? extends M>> {
 
     void attachView(V view);
 
@@ -22,5 +22,7 @@ public interface BasePresenter<V extends BaseView, R extends BaseRouter, M> {
 
     void removeRouter();
 
-    Observable<? extends ViewOutput<M>> output();
+    Observable<VO> output();
+
+    void destroy();
 }

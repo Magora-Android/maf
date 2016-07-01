@@ -13,7 +13,7 @@ import rx.Observable;
  *
  * @author Valentin S.Bolkonsky
  */
-public interface SimpleProfilePresenter extends ProfilePresenter<UserProfile, UserProfileLceView, ProfileRouter<UserProfile>> {
+public interface SimpleProfilePresenter extends ProfilePresenter<UserProfile, UserProfileLceView, ProfileRouter<UserProfile>,UserProfileViewOutput> {
 
     Observable<UserProfileViewOutput> output();
 }

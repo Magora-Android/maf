@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.magorasystems.mafmodules.common.module.output.ViewOutput;
 import com.magorasystems.mafmodules.common.mvp.presenter.BaseLifecyclePresenter;
 import com.magorasystems.mafmodules.common.mvp.presenter.BasePresenter;
 import com.magorasystems.mafmodules.common.mvp.router.BaseRouter;
@@ -24,7 +25,7 @@ public abstract class GenericFragment<ROUTER extends BaseRouter> extends BaseFra
     @NonNull
     protected ROUTER router;
 
-    protected abstract BasePresenter<? extends BaseView, ROUTER,?> getPresenter();
+    protected abstract BasePresenter<? extends BaseView, ROUTER,?, ? extends ViewOutput<?>> getPresenter();
 
     @Override
     @SuppressWarnings("unchecked")

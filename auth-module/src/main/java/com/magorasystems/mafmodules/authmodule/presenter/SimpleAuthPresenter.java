@@ -15,8 +15,8 @@ import rx.Observable;
  *
  * @author Valentin S.Bolkonsky
  */
-public interface SimpleAuthPresenter extends AuthPresenter<StringAuthView, AuthRouter, StringAuthInfo>,
-        Injectable<AuthComponent>, BasePresenter<StringAuthView, AuthRouter, StringAuthInfo> {
+public interface SimpleAuthPresenter extends AuthPresenter<StringAuthView, AuthRouter, StringAuthInfo, AuthViewOutput>,
+        Injectable<AuthComponent>, BasePresenter<StringAuthView, AuthRouter, StringAuthInfo,AuthViewOutput> {
 
     Observable<AuthViewOutput> output();
 

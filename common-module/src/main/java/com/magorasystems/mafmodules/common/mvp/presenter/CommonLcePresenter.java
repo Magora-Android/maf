@@ -1,5 +1,6 @@
 package com.magorasystems.mafmodules.common.mvp.presenter;
 
+import com.magorasystems.mafmodules.common.module.output.ViewOutput;
 import com.magorasystems.mafmodules.common.mvp.router.BaseRouter;
 import com.magorasystems.mafmodules.common.mvp.view.BaseLceView;
 
@@ -8,7 +9,7 @@ import com.magorasystems.mafmodules.common.mvp.view.BaseLceView;
  *
  * @author Valentin S.Bolkonsky
  */
-public abstract class CommonLcePresenter<M, V extends BaseLceView<? super M>, R extends BaseRouter> extends CommonPresenter<V, R,M> {
+public abstract class CommonLcePresenter<M, V extends BaseLceView<? super M>, R extends BaseRouter, VO extends ViewOutput<? extends M>> extends CommonPresenter<V, R,M, VO> {
 
     protected final void showProgress() {
         if(!isViewAttached()) {

@@ -42,7 +42,7 @@ public abstract class AbstractModulePresenter<R extends BaseRouter, VI extends V
         getPresenter().onStop();
     }
 
-    protected abstract BaseLifecyclePresenter<? extends BaseView, ? extends BaseRouter, ?> getPresenter();
+    protected abstract BaseLifecyclePresenter<? extends BaseView, ? extends BaseRouter, ?, ? extends VO> getPresenter();
 
     @Override
     public void output(Observable<VO> output) {

@@ -2,6 +2,7 @@ package com.magorasystems.mafmodules.common.mvp.presenter;
 
 import android.support.annotation.Nullable;
 
+import com.magorasystems.mafmodules.common.module.output.ViewOutput;
 import com.magorasystems.mafmodules.common.mvp.router.BaseRouter;
 import com.magorasystems.mafmodules.common.mvp.view.BaseView;
 
@@ -12,7 +13,7 @@ import java.lang.ref.WeakReference;
  *
  * @author Valentin S. Bolkonsky
  */
-public abstract class CommonPresenter<V extends BaseView, R extends BaseRouter,M> implements BasePresenter<V, R, M> {
+public abstract class CommonPresenter<V extends BaseView, R extends BaseRouter,M, VO extends ViewOutput<? extends M>> implements BasePresenter<V, R, M, VO> {
 
     private WeakReference<V> viewRef;
     private WeakReference<R> routerRef;

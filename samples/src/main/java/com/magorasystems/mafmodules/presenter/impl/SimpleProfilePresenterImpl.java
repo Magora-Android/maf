@@ -14,9 +14,6 @@ import com.magorasystems.mafmodules.profile.presenter.GenericProfilePresenter;
 import com.magorasystems.mafmodules.profile.router.ProfileRouter;
 import com.magorasystems.mafmodules.view.impl.UserProfileLceView;
 
-import rx.Observable;
-import rx.subjects.PublishSubject;
-
 /**
  * Developed by Magora Team (magora-systems.com). 2016.
  *
@@ -25,11 +22,9 @@ import rx.subjects.PublishSubject;
 public class SimpleProfilePresenterImpl extends GenericProfilePresenter<UserProfile,
         UserProfileLceView,
         SimpleProfileInteractor,
-        ProfileRouter<UserProfile>>
+        ProfileRouter<UserProfile>,
+        UserProfileViewOutput>
         implements SimpleProfilePresenter, Injectable<ProfileComponent> {
-
-    private PublishSubject<UserProfileViewOutput> outputPublisher;
-
 
     public SimpleProfilePresenterImpl(Context context, SimpleProfileInteractor interactor) {
         super(interactor);
@@ -43,14 +38,6 @@ public class SimpleProfilePresenterImpl extends GenericProfilePresenter<UserProf
     }
 
     @Override
-    public Observable<UserProfileViewOutput> output() {
-        if (outputPublisher == null) {
-            outputPublisher = PublishSubject.create();
-        }
-        return outputPublisher;
-    }
-
-    @Override
     public void onStart() {
         takeMyProfile();
     }
@@ -61,27 +48,7 @@ public class SimpleProfilePresenterImpl extends GenericProfilePresenter<UserProf
     }
 
     @Override
-    public void onNext(UserProfile profile) {
-        super.onNext(profile);
-        if (outputPublisher != null) {
-            outputPublisher.onNext(new UserProfileViewOutputImpl(profile));
-        }
-    }
-
-    @Override
-    public void onError(Throwable e) {
-        super.onError(e);
-        if (outputPublisher != null) {
-            outputPublisher.onError(e);
-        }
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (outputPublisher != null) {
-            outputPublisher.onCompleted();
-            outputPublisher = null;
-        }
+    protected UserProfileViewOutput newEvent(UserProfile model) {
+        return new UserProfileViewOutputImpl(model);
     }
 }

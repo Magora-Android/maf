@@ -1,6 +1,7 @@
 package com.magorasystems.mafmodules.authmodule.presenter.impl;
 
 import com.magorasystems.mafmodules.authmodule.interactor.AuthInteractor;
+import com.magorasystems.mafmodules.authmodule.module.outpit.AuthViewOutput;
 import com.magorasystems.mafmodules.authmodule.performance.AuthViewModel;
 import com.magorasystems.mafmodules.authmodule.presenter.AuthPresenter;
 import com.magorasystems.mafmodules.authmodule.router.AuthRouter;
@@ -16,8 +17,8 @@ import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
  * @author Valentin S.Bolkonsky
  */
 public abstract class AuthLcePresenter<I extends AuthInteractor<StringAuthInfo>>
-        extends BaseIteratorLcePresenter<StringAuthInfo, I, StringAuthView, AuthRouter>
-        implements AuthPresenter<StringAuthView, AuthRouter,StringAuthInfo> {
+        extends BaseIteratorLcePresenter<StringAuthInfo, I, StringAuthView, AuthRouter, AuthViewOutput>
+        implements AuthPresenter<StringAuthView, AuthRouter, StringAuthInfo, AuthViewOutput> {
 
     public AuthLcePresenter(I iterator) {
         super(iterator);
@@ -45,6 +46,7 @@ public abstract class AuthLcePresenter<I extends AuthInteractor<StringAuthInfo>>
     @Override
     public void onStop() {
         getIteractor().unsubscribe();
+        destroy();
     }
 
     @Override
@@ -55,4 +57,6 @@ public abstract class AuthLcePresenter<I extends AuthInteractor<StringAuthInfo>>
             router.onAfterAuth();
         }
     }
+
+
 }

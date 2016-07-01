@@ -1,6 +1,7 @@
 package com.magorasystems.mafmodules.common.mvp.presenter;
 
 
+import com.magorasystems.mafmodules.common.module.output.ViewOutput;
 import com.magorasystems.mafmodules.common.mvp.router.BaseRouter;
 import com.magorasystems.mafmodules.common.mvp.view.BaseView;
 
@@ -9,7 +10,7 @@ import com.magorasystems.mafmodules.common.mvp.view.BaseView;
  *
  * @author Valentin S. Bolkonsky
  */
-public interface BaseLifecyclePresenter<V extends BaseView, R extends BaseRouter, M> extends BasePresenter<V,R,M>{
+public interface BaseLifecyclePresenter<V extends BaseView, R extends BaseRouter, M, VO extends ViewOutput<? extends M>> extends BasePresenter<V,R,M,VO>{
 
     void onStart();
 

@@ -1,6 +1,7 @@
 package com.magorasystems.mafmodules.common.mvp.presenter;
 
 
+import com.magorasystems.mafmodules.common.module.output.ViewOutput;
 import com.magorasystems.mafmodules.common.mvp.router.BaseRouter;
 import com.magorasystems.mafmodules.common.mvp.view.BaseLceView;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
@@ -13,8 +14,8 @@ import rx.Subscriber;
  *
  * @author Valentin S. Bolkonsky
  */
-public abstract class RxCommonPresenter<V extends BaseLceView<M>, R extends BaseRouter, M>
-        extends CommonLcePresenter<M, V, R> {
+public abstract class RxCommonPresenter<V extends BaseLceView<M>, R extends BaseRouter, M, VO extends ViewOutput<? extends M>>
+        extends CommonLcePresenter<M, V, R, VO> {
 
     protected Subscriber<M> subscriber;
     protected SchedulersUtils.CoreScheduler coreScheduler;
