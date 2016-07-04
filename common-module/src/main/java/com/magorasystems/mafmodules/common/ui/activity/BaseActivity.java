@@ -24,6 +24,12 @@ public abstract class BaseActivity<COMPONENT> extends AppCompatActivity implemen
 
     protected abstract void setSupportFragment(final BaseSupportFragmentImpl fragment);
 
+    /**
+     * {@link #requestWindowFeature(int)} with int = {@link Window#FEATURE_NO_TITLE}, <br>
+     * that turning off the title at the top of the screen. <br>
+     * Also {@link #setContentView(int)}
+     * @param savedInstanceState saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
