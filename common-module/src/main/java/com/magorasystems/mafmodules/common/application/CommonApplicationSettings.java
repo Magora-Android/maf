@@ -66,6 +66,9 @@ public class CommonApplicationSettings implements ApplicationSettings {
         private int networkRetryCount;
         private long networkDelayAttempt;
 
+        /**
+         * Initialize Builder() with default {@code maxRequestCount} == 1
+         */
         public Builder() {
             maxRequestCount = 1;
         }
