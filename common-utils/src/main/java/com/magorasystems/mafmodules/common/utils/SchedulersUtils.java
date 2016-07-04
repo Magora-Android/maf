@@ -21,11 +21,23 @@ public class SchedulersUtils {
 
     }
 
+    /**
+     * @param coreScheduler instance of CoreScheduler
+     * @param <T>           first and result arguments of Observable for Transformer
+     * @return Observable.Transformer that subscribeOn {@link CoreScheduler#backgroundThread()} and observeOn {@link CoreScheduler#mainThread()}
+     */
     public static <T> Observable.Transformer<T, T> applySchedulers(final CoreScheduler coreScheduler) {
         return observable -> observable.subscribeOn(coreScheduler.backgroundThread())
                 .observeOn(coreScheduler.mainThread());
     }
 
+    /**
+     * @param mapper a function to apply to all elements of {@code list}
+     * @param <F>    first argument for Func1 (type of List)
+     * @param <T>    result type (type of Collection)
+     * @return a {@code Func1} that applies {@code mapper} to each element of {@code list}. <br>
+     * If {@code list} is null, that collection be empty.
+     */
     public static <F, T> Func1<List<F>, Collection<T>> applyMapper(final Func1<F, T> mapper) {
         return list -> {
             if (null == list) {
@@ -44,7 +56,6 @@ public class SchedulersUtils {
         Scheduler mainThread();
 
         Scheduler backgroundThread();
-
 
     }
 }
