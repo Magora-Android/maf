@@ -15,6 +15,12 @@ public class NetworkUtils {
 
     }
 
+    /**
+     * Check network connection. Needed permission {@link android.Manifest.permission#ACCESS_NETWORK_STATE}
+     *
+     * @param context for access to {@link Context#getSystemService(Class)}
+     * @return <b>true</b> if default network is currently active
+     */
     public static boolean isNetworkAvailable(Context context) {
         final ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
