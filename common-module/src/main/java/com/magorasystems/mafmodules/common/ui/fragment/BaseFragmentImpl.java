@@ -87,6 +87,13 @@ public abstract class BaseFragmentImpl extends Fragment implements BaseFragment 
         }
     }
 
+    /**
+     * Set fragment with tag, and commit after an activity's state is saved.
+     *
+     * @param resource     container for the fragment
+     * @param fragment     the new fragment to place in the container
+     * @param fragmentName tag name for the fragment
+     */
     @Override
     public void setFragment(@IdRes int resource, Fragment fragment, String fragmentName) {
         Preconditions.checkNotNull(fragment);
@@ -116,10 +123,19 @@ public abstract class BaseFragmentImpl extends Fragment implements BaseFragment 
                 .show();
     }
 
+    /**
+     * @return <b>true</b> if activity not null or is finishing <br>
+     * <b>false</b> otherwise
+     */
     protected final boolean isActivityDetached() {
         return getActivity() == null || getActivity().isFinishing();
     }
 
+    /**
+     * Update decor view with custom paint with hardware acceleration
+     *
+     * @param paint paint
+     */
     protected final void updateDecorView(final Paint paint) {
         if (!isActivityDetached()) {
             getActivity().getWindow().getDecorView()
@@ -133,10 +149,9 @@ public abstract class BaseFragmentImpl extends Fragment implements BaseFragment 
     }
 
     protected final void onSuperStop() {
-        super.onStart();
+        super.onStart(); //fixme why this super.onStart()?
     }
 
     protected abstract View getProgressView();
-
 
 }

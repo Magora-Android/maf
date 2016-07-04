@@ -25,8 +25,14 @@ public abstract class GenericFragment<ROUTER extends BaseRouter> extends BaseFra
     @NonNull
     protected ROUTER router;
 
-    protected abstract BasePresenter<? extends BaseView, ROUTER,?, ? extends ViewOutput<?>> getPresenter();
+    protected abstract BasePresenter<? extends BaseView, ROUTER, ?, ? extends ViewOutput<?>> getPresenter();
 
+    /**
+     * {@code setRetaineInstance(true)} and cast and set router from activity
+     *
+     * @param savedInstanceState saved instance state
+     * @throws IllegalArgumentException if activity not implement {@link BaseRouter} interface
+     */
     @Override
     @SuppressWarnings("unchecked")
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -40,6 +46,11 @@ public abstract class GenericFragment<ROUTER extends BaseRouter> extends BaseFra
         router = (ROUTER) activity;
     }
 
+    /**
+     * Call {@link #onSuperStart()} <br>
+     * and if presenter not null and it`s instance of {@link BaseLifecyclePresenter} <br>
+     * and call {@link BaseLifecyclePresenter#onStart()}
+     */
     @Override
     public void onStart() {
         onSuperStart();
@@ -49,6 +60,11 @@ public abstract class GenericFragment<ROUTER extends BaseRouter> extends BaseFra
         }
     }
 
+    /**
+     * Call {@link #onSuperStop()} <br>
+     * and if presenter not null and it`s instance of {@link BaseLifecyclePresenter} <br>
+     * and call {@link BaseLifecyclePresenter#onStart()}
+     */
     @Override
     public void onStop() {
         onSuperStop();
@@ -58,6 +74,9 @@ public abstract class GenericFragment<ROUTER extends BaseRouter> extends BaseFra
         }
     }
 
+    /**
+     * If presenter not null, remove router and detach view from it
+     */
     @Override
     public void onDestroyView() {
         final BasePresenter presenter = getPresenter();
