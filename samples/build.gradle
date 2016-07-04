@@ -74,7 +74,7 @@ android {
         disable 'ExtraTranslation'
     }
     dexOptions {
-        incremental true
+        incremental false
         preDexLibraries = false
         javaMaxHeapSize "4g"
     }
@@ -87,7 +87,7 @@ android {
         javaVersion JavaVersion.VERSION_1_7
         defaultMethods false
         jvmArgs '-noverify'
-        incremental true
+        incremental false
     }
 
     // Always show the result of every unit test, even if it passes.
@@ -105,6 +105,14 @@ dependencies {
     compile project(':profile-module')
     compile project(':rx-imagepicker')
     compile project(':digital-keyboard-widget')
+
+    compile("com.magorasystems.android:android-common-social:$version_social_common@aar") {
+        transitive = true
+    }
+
+    compile("com.magorasystems.android:vkontakte:$version_magora_social@aar") {
+        transitive = true
+    }
 
     compile(
             "com.android.support:appcompat-v7:$version_appcompat",

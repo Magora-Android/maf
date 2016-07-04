@@ -62,6 +62,9 @@ buildscript {
         version_maf_network = '0.0.2'
         version_maf_module = '0.0.2'
 
+        version_social_common = '0.1.0'
+        version_magora_social = '0.1.4'
+
         versionMajor = 0
         versionMinor = 0
         versionPatch = 0

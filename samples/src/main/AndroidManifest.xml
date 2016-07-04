@@ -38,6 +38,10 @@
             android:windowSoftInputMode="adjustResize"/>
 
         <activity
+            android:name=".ui.activity.SocialAuthorizationActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
             android:name=".ui.activity.DigitalKeyboardActivity"
             android:windowSoftInputMode="stateHidden"/>
 

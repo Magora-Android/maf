@@ -47,5 +47,8 @@ public class SampleActivity extends AppCompatActivity {
 
         findViewById(R.id.action_go_digital_keyboard).setOnClickListener(v ->
                 ActivityNavigator.startGenericActivity(SampleActivity.this, DigitalKeyboardActivity.class, null, false, 0));
+
+        findViewById(R.id.action_go_social).setOnClickListener(v ->
+                ActivityNavigator.startGenericActivity(SampleActivity.this, SocialAuthorizationActivity.class, null, false, 0));
     }
 }
