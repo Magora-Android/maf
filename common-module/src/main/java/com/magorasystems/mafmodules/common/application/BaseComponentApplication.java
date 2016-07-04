@@ -26,16 +26,25 @@ public abstract class BaseComponentApplication<COMPONENT> extends Application
         return (ComponentApplication<COMPONENT>) context.getApplicationContext();
     }
 
+    /**
+     * @return yout component
+     */
     @Override
     public final COMPONENT getComponent() {
         return component;
     }
 
+    /**
+     * @return settings for application
+     */
     @Override
     public ApplicationSettings getSettings() {
         return settings;
     }
 
+    /**
+     * @return {@link #getApplicationContext()}
+     */
     @Override
     public Context getContext() {
         return getApplicationContext();
@@ -50,6 +59,12 @@ public abstract class BaseComponentApplication<COMPONENT> extends Application
         this.component = component;
     }
 
+    /**
+     * init Crashlytics <br>
+     * init mutable, empty hashMap for {@code subcomponent} <br>
+     * call {@link #buildApplicationSettings()} and set it to {@code settings}<br>
+     * call {@link #buildGraphAndInject()} <br>
+     */
     @Override
     public void onCreate() {
         super.onCreate();
