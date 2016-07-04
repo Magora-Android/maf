@@ -1,5 +1,6 @@
 package com.magorasystems.mafmodules.common.mvp.presenter;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.magorasystems.mafmodules.common.module.output.ViewOutput;
 import com.magorasystems.mafmodules.common.mvp.interactor.BaseInteractor;
 import com.magorasystems.mafmodules.common.mvp.router.BaseRouter;

@@ -3,9 +3,9 @@ package com.magorasystems.mafmodules.common.module.input;
 import rx.Observable;
 
 /**
- * Developed by Magora Team (magora-systems.com). 2016.
- *
+ * @param <P> parameter of Observable model extends from this argument P\
  * @author Valentin S.Bolkonsky
+ *         Developed by Magora Team (magora-systems.com). 2016.
  */
 public interface InteractiveView<P> {
 
