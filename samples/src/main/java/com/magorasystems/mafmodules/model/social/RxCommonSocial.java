@@ -30,20 +30,21 @@ public class RxCommonSocial {
     private static final Logger LOGGER = LoggerFactory.getLogger(RxCommonSocial.class);
 
     private AndroidBaseSocialNetwork socialNetwork;
+    private Activity activity;
 
     private RxCommonSocial() {
 
     }
 
-    public static RxCommonSocial create(AndroidBaseSocialNetwork socialNetwork) {
+    public static RxCommonSocial create(AndroidBaseSocialNetwork socialNetwork, Activity activity) {
         RxCommonSocial commonSocial = new RxCommonSocial();
         commonSocial.socialNetwork = socialNetwork;
         commonSocial.socialNetwork.setLogger(LOGGER::debug);
+        commonSocial.activity = activity;
         return commonSocial;
     }
 
-    public Observable<RxSocialAuthResult<String>> login(Activity activity) {
-        //socialNetwork.logout();
+    public Observable<RxSocialAuthResult<String>> login() {
         return Observable.create((Observable.OnSubscribe<RxSocialAuthResult<String>>) subscriber -> {
             this.socialNetwork.setAuthorizationListener(new SocialAuthorizationListener() {
                 @Override

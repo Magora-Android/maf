@@ -72,8 +72,8 @@ public class SocialAuthorizationFragment extends GenericFragment<SocialRouter> i
                     .setScope(new String[]{"photos", "wall", "email", "status", "friends"})
                     .create();
         }
-        rxCommonSocial = RxCommonSocial.create(socialNetwork);
-        rxCommonSocial.login(getActivity())
+        rxCommonSocial = RxCommonSocial.create(socialNetwork, getActivity());
+        rxCommonSocial.login()
                 .compose(SchedulersUtils.applySchedulers(scheduler))
                 .subscribe(this::socialAuthSuccess, this::socialFailed);
     }
