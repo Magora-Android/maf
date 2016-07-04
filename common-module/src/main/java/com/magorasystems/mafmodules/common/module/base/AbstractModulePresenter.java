@@ -11,9 +11,12 @@ import rx.Subscriber;
 import rx.subscriptions.CompositeSubscription;
 
 /**
- * Developed by Magora Team (magora-systems.com). 2016.
- *
+ * @param <R>  router, that must extends {@link BaseRouter}
+ * @param <VI> view input, that must extends {@link ViewInput}
+ * @param <VO> view output, that must extends {@link ViewOutput}
+ * @param <I>  module input, that must extends {@link ModuleInput}
  * @author Valentin S.Bolkonsky
+ *         Developed by Magora Team (magora-systems.com). 2016.
  */
 public abstract class AbstractModulePresenter<R extends BaseRouter, VI extends ViewInput<?, ?>,
         VO extends ViewOutput<?>, I extends ModuleInput<VI, R>> implements ModulePresenter<R, VI, VO, I> {
@@ -23,20 +26,34 @@ public abstract class AbstractModulePresenter<R extends BaseRouter, VI extends V
     protected final CompositeSubscription subscription = new CompositeSubscription();
     private Subscriber<? super VO> outSubscriber;
 
+    /**
+     * Setting module input
+     *
+     * @param input your module input
+     */
     @Override
     public void input(I input) {
         this.moduleInput = input;
     }
 
+    /**
+     * @return module input
+     */
     protected final I getModuleInput() {
         return moduleInput;
     }
 
+    /**
+     * Start presenter
+     */
     @Override
     public void start() {
         getPresenter().onStart();
     }
 
+    /**
+     * Stop presenter
+     */
     @Override
     public void stop() {
         getPresenter().onStop();
@@ -53,6 +70,13 @@ public abstract class AbstractModulePresenter<R extends BaseRouter, VI extends V
         subscription.add(output.subscribe(outSubscriber));
     }
 
+    /**
+     * Detach view and remove router from presenter
+     * clear and set to null {@code moduleInput} <br>
+     * unsubscribe all subscribers (if has) and clear CompositeSubscriptions
+     *
+     * @param retainInstance answer
+     */
     @Override
     public void destroy(boolean retainInstance) {
         getPresenter().detachView(retainInstance);
@@ -65,21 +89,36 @@ public abstract class AbstractModulePresenter<R extends BaseRouter, VI extends V
         }
     }
 
+    /**
+     * do nothing
+     */
     @Override
     public void onCompleted() {
 
     }
 
+    /**
+     * do nothing
+     */
     @Override
     public void onError(Throwable e) {
 
     }
 
+    /**
+     * do nothing
+     */
     @Override
     public void onNext(VO vo) {
 
     }
 
+    /**
+     * Call lifecycle methods of {@link Subscriber} from {@link AbstractModulePresenter} <br>
+     * if its not unsubscribed
+     *
+     * @return subcriber
+     */
     protected Subscriber<? super VO> outputSubscriber() {
         return new Subscriber<VO>() {
             @Override
