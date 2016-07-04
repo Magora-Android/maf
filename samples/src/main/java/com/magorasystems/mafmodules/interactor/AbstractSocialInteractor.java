@@ -5,10 +5,10 @@ import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
 import com.magorasystems.mafmodules.model.social.RxCommonSocial;
 import com.magorasystems.mafmodules.provider.social.SocialProvider;
 import com.magorasystems.protocolapi.auth.dto.response.AuthInfo;
-import com.magorasystems.protocolapi.auth.dto.response.AuthResponseData;
 
 import java.io.Serializable;
 
+import rx.Observable;
 import rx.Subscriber;
 
 /**
@@ -16,16 +16,21 @@ import rx.Subscriber;
  *
  * @author Valentin S.Bolkonsky
  */
-public abstract class AbstractSocialInteractor<ID extends Serializable> extends CommonInteractor<AuthResponseData<? extends AuthInfo<ID>>> implements SocialInteractor<ID> {
+public abstract class AbstractSocialInteractor<ID extends Serializable,M  extends AuthInfo<ID>> extends CommonInteractor<M> implements SocialInteractor<ID, M> {
 
     protected AbstractSocialInteractor(SchedulersUtils.CoreScheduler scheduler) {
         super(scheduler);
     }
 
     @Override
-    public void executeSocialAuthorization(RxCommonSocial social, Subscriber<AuthResponseData<? extends AuthInfo<ID>>> subscriber) {
+    public void executeSocialAuthorization(RxCommonSocial social, Subscriber<M> subscriber) {
         execute(getProvider().authorization(social), subscriber);
     }
 
-    protected abstract SocialProvider<ID> getProvider();
+    @Override
+    public void execute(Observable<? extends M> observer, Subscriber<M> subscriber) {
+        super.execute(observer, subscriber);
+    }
+
+    protected abstract SocialProvider<ID,M> getProvider();
 }

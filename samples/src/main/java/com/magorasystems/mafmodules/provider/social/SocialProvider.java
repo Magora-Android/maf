@@ -3,7 +3,6 @@ package com.magorasystems.mafmodules.provider.social;
 import com.magorasystems.mafmodules.common.mvp.provider.BaseProvider;
 import com.magorasystems.mafmodules.model.social.RxCommonSocial;
 import com.magorasystems.protocolapi.auth.dto.response.AuthInfo;
-import com.magorasystems.protocolapi.auth.dto.response.AuthResponseData;
 
 import java.io.Serializable;
 
@@ -14,7 +13,7 @@ import rx.Observable;
  *
  * @author Valentin S.Bolkonsky
  */
-public interface SocialProvider<ID extends Serializable> extends BaseProvider<AuthInfo<ID>> {
+public interface SocialProvider<ID extends Serializable,M  extends AuthInfo<ID>> extends BaseProvider<M> {
 
-    Observable<? extends AuthResponseData<? extends AuthInfo<ID>>> authorization(RxCommonSocial rxCommonSocial);
+    Observable<M> authorization(RxCommonSocial rxCommonSocial);
 }

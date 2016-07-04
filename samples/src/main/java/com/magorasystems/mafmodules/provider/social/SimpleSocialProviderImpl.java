@@ -5,8 +5,7 @@ import com.magorasystems.mafmodules.dagger.component.SampleComponent;
 import com.magorasystems.mafmodules.model.social.RxCommonSocial;
 import com.magorasystems.mafmodules.network.request.SocialRequest;
 import com.magorasystems.mafmodules.network.request.SocialRequestMeta;
-import com.magorasystems.mafmodules.protocolapi.auth.response.StringAuthResponseData;
-import com.magorasystems.protocolapi.dto.response.SuccessResponse;
+import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
 
 import rx.Observable;
 
@@ -15,7 +14,7 @@ import rx.Observable;
  *
  * @author Valentin S.Bolkonsky
  */
-public class SimpleSocialProviderImpl extends AbstractSocialProvider<SampleComponent, SimpleSocialApiClientWrapper, String>
+public class SimpleSocialProviderImpl extends AbstractSocialProvider<SampleComponent, SimpleSocialApiClientWrapper, String, StringAuthInfo>
         implements SimpleSocialProvider {
 
     public SimpleSocialProviderImpl(SampleComponent sampleComponent, SchedulersUtils.CoreScheduler scheduler, SimpleSocialApiClientWrapper restApiClientWrapper) {
@@ -28,7 +27,7 @@ public class SimpleSocialProviderImpl extends AbstractSocialProvider<SampleCompo
     }
 
     @Override
-    public Observable<StringAuthResponseData> authorization(RxCommonSocial rxCommonSocial) {
+    public Observable<StringAuthInfo> authorization(RxCommonSocial rxCommonSocial) {
         final SocialRequest.Builder<SocialRequestMeta> builder = new SocialRequest.Builder<>();
         return rxCommonSocial.login()
                 .compose(SchedulersUtils.applySchedulers(scheduler))
@@ -44,6 +43,7 @@ public class SimpleSocialProviderImpl extends AbstractSocialProvider<SampleCompo
                                 .lastName(profile.getSocialUser().getLastName())
                                 .nickName(profile.getSocialUser().getName())
                                 .build()).build())
-                .flatMap(socialRequest -> restApiClientWrapper.authorization(socialRequest).map(SuccessResponse::getData));
+                .flatMap(socialRequest -> restApiClientWrapper.authorization(socialRequest)
+                        .compose(converter()).map(this::receiveData));
     }
 }
