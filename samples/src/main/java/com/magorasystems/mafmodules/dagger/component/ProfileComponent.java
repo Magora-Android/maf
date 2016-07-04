@@ -7,7 +7,7 @@ import com.magorasystems.mafmodules.dagger.module.ProfilePresenterModule;
 import com.magorasystems.mafmodules.dagger.module.ProfileProviderModule;
 import com.magorasystems.mafmodules.dagger.module.ProfileStoreModule;
 import com.magorasystems.mafmodules.dagger.scope.ProfileScope;
-import com.magorasystems.mafmodules.interactor.impl.SimpleProfileInteractor;
+import com.magorasystems.mafmodules.interactor.SimpleProfileInteractor;
 import com.magorasystems.mafmodules.interactor.impl.SimpleProfileInteractorImpl;
 import com.magorasystems.mafmodules.module.UserProfilePresenterModuleImpl;
 import com.magorasystems.mafmodules.presenter.impl.SimpleProfilePresenter;

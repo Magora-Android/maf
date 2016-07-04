@@ -6,7 +6,7 @@ import com.magorasystems.mafmodules.common.utils.component.HasComponent;
 import com.magorasystems.mafmodules.common.utils.component.Injectable;
 import com.magorasystems.mafmodules.common.utils.rx.PresenterSubscriber;
 import com.magorasystems.mafmodules.dagger.component.ProfileComponent;
-import com.magorasystems.mafmodules.interactor.impl.SimpleProfileInteractor;
+import com.magorasystems.mafmodules.interactor.SimpleProfileInteractor;
 import com.magorasystems.mafmodules.model.UserProfile;
 import com.magorasystems.mafmodules.module.output.UserProfileViewOutput;
 import com.magorasystems.mafmodules.module.output.UserProfileViewOutputImpl;

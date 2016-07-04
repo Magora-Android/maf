@@ -12,6 +12,7 @@ import com.mgrmobi.sdk.social.base.SocialAuthorizationListener;
 import com.mgrmobi.sdk.social.base.SocialCancelReason;
 import com.mgrmobi.sdk.social.base.SocialNetwork;
 import com.mgrmobi.sdk.social.base.SocialProfileListener;
+import com.mgrmobi.sdk.social.base.SocialType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,10 @@ public class RxCommonSocial {
 
     private RxCommonSocial() {
 
+    }
+
+    public SocialType getType() {
+        return socialNetwork.getSocialType();
     }
 
     public static RxCommonSocial create(AndroidBaseSocialNetwork socialNetwork, Activity activity) {

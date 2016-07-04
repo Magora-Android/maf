@@ -6,7 +6,7 @@ import com.magorasystems.mafmodules.common.dagger.module.ApplicationModule;
 import com.magorasystems.mafmodules.dagger.component.ProfileComponent;
 import com.magorasystems.mafmodules.dagger.module.MockStorableModule;
 import com.magorasystems.mafmodules.dagger.module.ProfileNetworkModule;
-import com.magorasystems.mafmodules.interactor.impl.SimpleProfileInteractor;
+import com.magorasystems.mafmodules.interactor.SimpleProfileInteractor;
 import com.magorasystems.mafmodules.model.UserProfile;
 import com.magorasystems.mafmodules.presenter.impl.SimpleProfilePresenter;
 import com.magorasystems.mafmodules.profile.provider.ProfileDataProvider;

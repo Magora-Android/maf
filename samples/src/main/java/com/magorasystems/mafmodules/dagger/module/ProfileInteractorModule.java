@@ -5,7 +5,7 @@ import android.content.Context;
 import com.magorasystems.mafmodules.common.dagger.module.BaseModule;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
 import com.magorasystems.mafmodules.dagger.scope.ProfileScope;
-import com.magorasystems.mafmodules.interactor.impl.SimpleProfileInteractor;
+import com.magorasystems.mafmodules.interactor.SimpleProfileInteractor;
 import com.magorasystems.mafmodules.interactor.impl.SimpleProfileInteractorImpl;
 import com.magorasystems.mafmodules.provider.SimpleRestProfileProvider;
 
