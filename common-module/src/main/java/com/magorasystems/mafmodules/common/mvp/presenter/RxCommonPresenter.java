@@ -72,6 +72,9 @@ public abstract class RxCommonPresenter<V extends BaseLceView<M>, R extends Base
                 .subscribe(subscriber);
     }
 
+    /**
+     * @return <b>true</b> if subscriber not null and subscribed
+     */
     public boolean isSubscribed() {
         return subscriber != null && !subscriber.isUnsubscribed();
     }
