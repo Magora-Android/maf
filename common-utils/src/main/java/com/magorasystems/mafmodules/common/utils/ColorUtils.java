@@ -18,6 +18,11 @@ import android.util.TypedValue;
  */
 public class ColorUtils {
 
+    /**
+     * @param context for access to Resources
+     * @param colorId id of needed color in Resources
+     * @return Returned int color
+     */
     @ColorInt
     public static int getColorFromResources(Context context, @ColorRes int colorId) {
         if (Build.VERSION.SDK_INT >= 23) {
@@ -27,6 +32,11 @@ public class ColorUtils {
         }
     }
 
+    /**
+     * @param context        for access to resources {@code getTheme().resolveAttribute(...)}
+     * @param attributeColor id of your attribute
+     * @return the color of the your attribute
+     */
     @ColorInt
     public static int getThemeColor(@NonNull final Context context, @AttrRes final int attributeColor) {
         final TypedValue value = new TypedValue();
@@ -34,6 +44,10 @@ public class ColorUtils {
         return value.data;
     }
 
+    /**
+     * @param saturationValue value from 0 to 1, where 0 - grey-scale and 1 - identity.
+     * @return instance of saturated Paint.
+     */
     public static Paint getSaturatedPaint(@FloatRange(from = 0, to = 1) float saturationValue) {
         Paint paint = new Paint();
         ColorMatrix colorMatrix = new ColorMatrix();
