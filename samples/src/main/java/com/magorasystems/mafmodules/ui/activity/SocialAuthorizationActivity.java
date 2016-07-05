@@ -12,6 +12,7 @@ import com.magorasystems.mafmodules.common.ui.fragment.BaseSupportFragmentImpl;
 import com.magorasystems.mafmodules.dagger.component.SampleComponent;
 import com.magorasystems.mafmodules.router.SocialRouter;
 import com.magorasystems.mafmodules.ui.fragment.SocialAuthorizationFragment;
+import com.magorasystems.protocolapi.auth.dto.response.AuthInfo;
 
 
 /**
@@ -19,7 +20,7 @@ import com.magorasystems.mafmodules.ui.fragment.SocialAuthorizationFragment;
  *
  * @author Valentin S.Bolkonsky
  */
-public class SocialAuthorizationActivity extends CommonBaseActivity<SampleComponent> implements SocialRouter {
+public class SocialAuthorizationActivity extends CommonBaseActivity<SampleComponent> implements SocialRouter<String> {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,11 @@ public class SocialAuthorizationActivity extends CommonBaseActivity<SampleCompon
 
     @Override
     public void onShowError(Throwable throwable) {
+
+    }
+
+    @Override
+    public void onAfterSocialAuth(AuthInfo<String> authInfo) {
 
     }
 

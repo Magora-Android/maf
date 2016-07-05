@@ -1,5 +1,6 @@
 package com.magorasystems.mafmodules.common.module.base;
 
+import com.magorasystems.mafmodules.common.module.input.InteractiveView;
 import com.magorasystems.mafmodules.common.module.input.ViewInput;
 import com.magorasystems.mafmodules.common.module.output.ViewOutput;
 import com.magorasystems.mafmodules.common.mvp.presenter.BaseLifecyclePresenter;
@@ -15,7 +16,7 @@ import rx.subscriptions.CompositeSubscription;
  *
  * @author Valentin S.Bolkonsky
  */
-public abstract class AbstractModulePresenter<R extends BaseRouter, VI extends ViewInput<?, ?>,
+public abstract class AbstractModulePresenter<R extends BaseRouter, VI extends ViewInput<? extends BaseView, ? extends InteractiveView<?>>,
         VO extends ViewOutput<?>, I extends ModuleInput<VI, R>> implements ModulePresenter<R, VI, VO, I> {
 
     private I moduleInput;
@@ -78,6 +79,36 @@ public abstract class AbstractModulePresenter<R extends BaseRouter, VI extends V
     @Override
     public void onNext(VO vo) {
 
+    }
+
+    protected R getRouter() {
+        if (moduleInput != null) {
+            return moduleInput.getRouter();
+        }
+        return null;
+    }
+
+    protected  BaseView getPassiveView() {
+        final VI vi = getInputView();
+        if (vi == null) {
+            return null;
+        }
+        return vi.getPassiveView();
+    }
+
+    protected InteractiveView<?> getInteractiveView() {
+        final VI vi = getInputView();
+        if (vi == null) {
+            return null;
+        }
+        return vi.getInteractiveView();
+    }
+
+    protected VI getInputView() {
+        if (moduleInput == null) {
+            return null;
+        }
+        return moduleInput.getViewInput();
     }
 
     protected Subscriber<? super VO> outputSubscriber() {

@@ -8,6 +8,7 @@ import com.magorasystems.mafmodules.authmodule.module.input.StringAuthViewInput;
 import com.magorasystems.mafmodules.authmodule.module.outpit.AuthViewOutput;
 import com.magorasystems.mafmodules.authmodule.presenter.SimpleAuthPresenter;
 import com.magorasystems.mafmodules.authmodule.router.AuthRouter;
+import com.magorasystems.mafmodules.authmodule.view.impl.StringAuthView;
 import com.magorasystems.mafmodules.common.module.base.AbstractModulePresenter;
 import com.magorasystems.mafmodules.common.utils.component.HasComponent;
 import com.magorasystems.mafmodules.common.utils.component.Injectable;
@@ -39,7 +40,7 @@ public class AuthModulePresenterImp extends AbstractModulePresenter<AuthRouter, 
 
     @Override
     public void onError(Throwable e) {
-        final AuthRouter router = getModuleInput().getRouter();
+        final AuthRouter router = getRouter();
         if (router != null) {
             router.onShowError(e);
         }
@@ -47,7 +48,7 @@ public class AuthModulePresenterImp extends AbstractModulePresenter<AuthRouter, 
 
     @Override
     public void onNext(AuthViewOutput authViewOutput) {
-        final AuthRouter router = getModuleInput().getRouter();
+        final AuthRouter router = getRouter();
         if (router != null) {
             router.onAfterAuth();
         }
@@ -56,14 +57,13 @@ public class AuthModulePresenterImp extends AbstractModulePresenter<AuthRouter, 
     @Override
     public void input(AuthModuleInput input) {
         super.input(input);
-        getPresenter().setRouter(input.getRouter());
-        getPresenter().attachView(input.getViewInput().getPassiveView());
+        getPresenter().setRouter(getRouter());
+        getPresenter().attachView(getPassiveView());
     }
 
     @Override
     public void start() {
-        final AuthInteractiveView interactiveView = getModuleInput().getViewInput()
-                .getInteractiveView();
+        final AuthInteractiveView interactiveView = getInteractiveView();
         if (interactiveView != null) {
             subscription.add(interactiveView.model()
                     .subscribe(getPresenter()::authorization));
@@ -86,6 +86,23 @@ public class AuthModulePresenterImp extends AbstractModulePresenter<AuthRouter, 
         return presenter;
     }
 
+    @Override
+    protected StringAuthView getPassiveView() {
+        final Object obj = super.getPassiveView();
+        if (obj == null) {
+            return null;
+        }
+        return (StringAuthView) obj;
+    }
+
+    @Override
+    protected AuthInteractiveView getInteractiveView() {
+        final Object obj = super.getInteractiveView();
+        if (obj != null) {
+            return (AuthInteractiveView) obj;
+        }
+        return null;
+    }
 
     protected final void injectComponent(Context context, Class<AuthComponent> clazz) {
         if (context instanceof HasComponent<?>) {

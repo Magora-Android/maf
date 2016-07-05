@@ -3,7 +3,9 @@ package com.magorasystems.mafmodules.presenter;
 import com.magorasystems.mafmodules.authmodule.view.AuthLceView;
 import com.magorasystems.mafmodules.common.module.output.ViewOutput;
 import com.magorasystems.mafmodules.common.mvp.presenter.BaseIteratorLcePresenter;
+import com.magorasystems.mafmodules.common.utils.rx.PresenterSubscriber;
 import com.magorasystems.mafmodules.interactor.SocialInteractor;
+import com.magorasystems.mafmodules.model.social.RxCommonSocial;
 import com.magorasystems.mafmodules.router.SocialRouter;
 import com.magorasystems.protocolapi.auth.dto.response.AuthInfo;
 
@@ -22,5 +24,23 @@ public abstract class AbstractSocialPresenter<ID extends Serializable,
 
     protected AbstractSocialPresenter(I interactor) {
         super(interactor);
+    }
+
+
+    @Override
+    public void authorizationBySocial(RxCommonSocial rxCommonSocial) {
+        showProgress();
+        getIteractor().executeSocialAuthorization(rxCommonSocial, new PresenterSubscriber<>(this));
+    }
+
+    @Override
+    public void onStart() {
+
+    }
+
+    @Override
+    public void onStop() {
+        getIteractor().unsubscribe();
+        destroy();
     }
 }
