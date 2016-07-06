@@ -52,6 +52,12 @@ public class SimpleSocialPresenterModuleImpl extends AbstractSocialPresenterModu
     }
 
     @Override
+    public void onError(Throwable e) {
+        super.onError(e);
+        output(getPresenter().output());
+    }
+
+    @Override
     protected SimpleSocialPresenter getPresenter() {
         return presenter;
     }

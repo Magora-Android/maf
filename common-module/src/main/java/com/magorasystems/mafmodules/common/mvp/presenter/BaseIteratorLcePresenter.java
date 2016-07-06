@@ -48,10 +48,8 @@ public abstract class BaseIteratorLcePresenter<M, I extends BaseInteractor<? sup
     @Override
     @RxLogObservable
     public Observable<VO> output() {
-        if (outputPublisher == null) {
-            outputPublisher = PublishSubject.create();
-        }
-        return outputPublisher;
+        destroyPublisher();
+        return outputPublisher = PublishSubject.create();
     }
 
     @Override
@@ -65,6 +63,10 @@ public abstract class BaseIteratorLcePresenter<M, I extends BaseInteractor<? sup
 
     @Override
     public void destroy() {
+        destroyPublisher();
+    }
+
+    protected final void destroyPublisher() {
         if (outputPublisher != null) {
             outputPublisher.onCompleted();
             outputPublisher = null;

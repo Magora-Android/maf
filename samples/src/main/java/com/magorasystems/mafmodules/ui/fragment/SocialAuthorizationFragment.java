@@ -130,6 +130,7 @@ public class SocialAuthorizationFragment extends GenericModuleFragment<SocialCom
     }
 
     protected void startModule(SimpleSocialPresenterModule module) {
+        modulePresenter = module;
         module.input(new SimpleSocialModuleInputImpl(
                 new SimpleSocialViewInputImpl(getPassiveView(), getInteractiveView()),
                 this));
