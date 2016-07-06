@@ -6,21 +6,17 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.magorasystems.mafmodules.R;
-import com.magorasystems.mafmodules.common.module.output.ViewOutput;
-import com.magorasystems.mafmodules.common.mvp.presenter.BasePresenter;
-import com.magorasystems.mafmodules.common.mvp.view.BaseView;
-import com.magorasystems.mafmodules.common.ui.fragment.GenericFragment;
-import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
-import com.magorasystems.mafmodules.common.utils.component.HasComponent;
-import com.magorasystems.mafmodules.common.utils.component.Injectable;
-import com.magorasystems.mafmodules.dagger.component.SampleComponent;
-import com.magorasystems.mafmodules.model.social.RxCommonSocial;
-import com.magorasystems.mafmodules.model.social.model.RxSocialAuthResult;
+import com.magorasystems.mafmodules.authmodule.view.impl.StringAuthView;
+import com.magorasystems.mafmodules.common.ui.fragment.GenericModuleFragment;
+import com.magorasystems.mafmodules.dagger.component.SocialComponent;
+import com.magorasystems.mafmodules.module.SimpleSocialModuleInputImpl;
+import com.magorasystems.mafmodules.module.SimpleSocialPresenterModule;
+import com.magorasystems.mafmodules.module.input.SocialInteractiveView;
+import com.magorasystems.mafmodules.module.input.impl.SimpleSocialViewInputImpl;
 import com.magorasystems.mafmodules.router.SocialRouter;
-import com.mgrmobi.sdk.social.android.AndroidBaseSocialNetwork;
-import com.mgrmobi.sdk.social.base.SocialNetworkManager;
-import com.mgrmobi.sdk.social.base.SocialType;
-import com.mgrmobi.sdk.social.vk.VKSocialNetwork;
+import com.magorasystems.mafmodules.view.impl.SimpleSocialInteractiveView;
+import com.magorasystems.mafmodules.view.impl.SimpleSocialLceView;
+import com.magorasystems.protocolapi.auth.dto.response.AuthInfo;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,14 +24,14 @@ import org.slf4j.LoggerFactory;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.OnClick;
+import rx.Observable;
 
 /**
  * Developed 2016.
  *
  * @author Valentin S.Bolkonsky
  */
-public class SocialAuthorizationFragment extends GenericFragment<SocialRouter> implements Injectable<SampleComponent> {
+public class SocialAuthorizationFragment extends GenericModuleFragment<SocialComponent> implements SocialRouter<String> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SocialAuthorizationFragment.class);
 
@@ -48,54 +44,59 @@ public class SocialAuthorizationFragment extends GenericFragment<SocialRouter> i
 
     @BindView(R.id.progress_view)
     protected View progressView;
+    @BindView(R.id.button_connect_vk)
+    protected View buttonVK;
+    @BindView(R.id.content_layout)
+    protected View contentView;
 
     @Inject
-    protected SchedulersUtils.CoreScheduler scheduler;
+    protected Observable<SimpleSocialPresenterModule> moduleObservable;
 
-    private RxCommonSocial rxCommonSocial;
+    private SimpleSocialPresenterModule modulePresenter;
+
+    private StringAuthView passiveView;
+    private SocialInteractiveView interactiveView;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        inject((SampleComponent) ((HasComponent<?>) getActivity().getApplication()).getComponent());
-    }
-
-    @OnClick(R.id.button_connect_vk)
-    protected void onVKClick() {
-        getProgressView().setVisibility(View.VISIBLE);
-        final AndroidBaseSocialNetwork socialNetwork;
-        if (SocialNetworkManager.isRegistered(SocialType.VK)) {
-            socialNetwork = (AndroidBaseSocialNetwork) SocialNetworkManager.getNetwork(SocialType.VK);
-        } else {
-            socialNetwork = new VKSocialNetwork.Builder()
-                    .setContext(getActivity())
-                    .setScope(new String[]{"photos", "wall", "email", "status", "friends"})
-                    .create();
-        }
-        rxCommonSocial = RxCommonSocial.create(socialNetwork, getActivity());
-        rxCommonSocial.login()
-                .compose(SchedulersUtils.applySchedulers(scheduler))
-                .subscribe(this::socialAuthSuccess, this::socialFailed);
-    }
-
-    private void socialAuthSuccess(RxSocialAuthResult<String> result) {
-        LOGGER.debug("onAuthorizationSuccess " + result.getSocialType() + ", token: " + result.getToken());
-        if (rxCommonSocial != null) {
-            rxCommonSocial.profile()
-                    .compose(SchedulersUtils.applySchedulers(scheduler))
-                    .subscribe(rxSocialProfileResult -> {
-                        LOGGER.debug(String.valueOf(rxSocialProfileResult));
-                    }, this::socialFailed);
-        }
-    }
-
-    private void socialFailed(Throwable throwable) {
-        LOGGER.error("social failed ", throwable);
+        injectComponent(getActivity(), SocialComponent.class);
     }
 
     @Override
-    protected BasePresenter<? extends BaseView, SocialRouter, ?, ? extends ViewOutput<?>> getPresenter() {
-        return null;
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initialization();
+    }
+
+    @Override
+    protected void initialization() {
+        interactiveView = new SimpleSocialInteractiveView(getActivity(), buttonVK);
+        passiveView = new SimpleSocialLceView(getProgressView(), getContentView());
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (modulePresenter != null) {
+            modulePresenter.start();
+        } else {
+            moduleObservable.subscribe(this::startModule);
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (modulePresenter != null) {
+            modulePresenter.stop();
+            modulePresenter = null;
+        }
+    }
+
+    @Override
+    public void onAfterSocialAuth(AuthInfo<String> authInfo) {
+        LOGGER.debug("onAfterSocialAuth {} ", authInfo);
     }
 
     @Override
@@ -108,31 +109,48 @@ public class SocialAuthorizationFragment extends GenericFragment<SocialRouter> i
         return progressView;
     }
 
+    protected View getContentView() {
+        return contentView;
+    }
+
     @Override
     public String getTitle() {
-        return null;
+        return "";
+    }
+
+
+    @Override
+    public void inject(SocialComponent socialComponent) {
+        socialComponent.inject(this);
     }
 
     @Override
-    public void detachView() {
-
+    protected SimpleSocialPresenterModule getModulePresenter() {
+        return modulePresenter;
     }
 
-    @Override
-    public void showError(Throwable e) {
-
-    }
-
-    @Override
-    public void inject(SampleComponent sampleComponent) {
-        sampleComponent.inject(this);
+    protected void startModule(SimpleSocialPresenterModule module) {
+        module.input(new SimpleSocialModuleInputImpl(
+                new SimpleSocialViewInputImpl(getPassiveView(), getInteractiveView()),
+                this));
+        module.start();
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         getProgressView().setVisibility(View.GONE);
-        if (rxCommonSocial != null) {
-            rxCommonSocial.onActivityResult(requestCode, requestCode, data);
+        if (interactiveView != null) {
+            ((SimpleSocialInteractiveView) interactiveView).onActivityResult(requestCode, resultCode, data);
         }
     }
+
+    protected StringAuthView getPassiveView() {
+        return passiveView;
+    }
+
+    protected SocialInteractiveView getInteractiveView() {
+        return interactiveView;
+    }
 }
+
+

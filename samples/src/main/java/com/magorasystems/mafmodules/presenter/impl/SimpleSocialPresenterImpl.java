@@ -8,14 +8,18 @@ import com.magorasystems.mafmodules.presenter.AbstractSocialPresenter;
 import com.magorasystems.mafmodules.router.SocialRouter;
 import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
 
+import javax.inject.Inject;
+
 /**
  * Developed 2016.
  *
  * @author Valentin S.Bolkonsky
  */
 public class SimpleSocialPresenterImpl
-        extends AbstractSocialPresenter<String, StringAuthInfo, SimpleSocialInteractor, StringAuthView, SocialRouter, AuthViewOutput> {
+        extends AbstractSocialPresenter<String, StringAuthInfo, SimpleSocialInteractor, StringAuthView, SocialRouter, AuthViewOutput>
+        implements SimpleSocialPresenter {
 
+    @Inject
     public SimpleSocialPresenterImpl(SimpleSocialInteractor interactor) {
         super(interactor);
     }

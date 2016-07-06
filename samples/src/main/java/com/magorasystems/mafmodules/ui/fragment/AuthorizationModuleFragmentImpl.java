@@ -102,16 +102,4 @@ public class AuthorizationModuleFragmentImpl extends AuthorizationModuleFragment
         return progressView;
     }
 
-
-    @Override
-    public void onBack() {
-        if (!isActivityDetached()) {
-            getActivity().onBackPressed();
-        }
-    }
-
-    @Override
-    public void onShowError(Throwable throwable) {
-        LOGGER.error("onShowError ", throwable);
-    }
 }

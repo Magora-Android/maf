@@ -1,11 +1,13 @@
 package com.magorasystems.mafmodules.provider.social;
 
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
-import com.magorasystems.mafmodules.dagger.component.SampleComponent;
+import com.magorasystems.mafmodules.dagger.component.SocialComponent;
 import com.magorasystems.mafmodules.model.social.RxCommonSocial;
 import com.magorasystems.mafmodules.network.request.SocialRequest;
 import com.magorasystems.mafmodules.network.request.SocialRequestMeta;
 import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
+
+import javax.inject.Inject;
 
 import rx.Observable;
 
@@ -14,16 +16,17 @@ import rx.Observable;
  *
  * @author Valentin S.Bolkonsky
  */
-public class SimpleSocialProviderImpl extends AbstractSocialProvider<SampleComponent, SimpleSocialApiClientWrapper, String, StringAuthInfo>
+public class SimpleSocialProviderImpl extends AbstractSocialProvider<SocialComponent, SimpleSocialApiClientWrapper, String, StringAuthInfo>
         implements SimpleSocialProvider {
 
-    public SimpleSocialProviderImpl(SampleComponent sampleComponent, SchedulersUtils.CoreScheduler scheduler, SimpleSocialApiClientWrapper restApiClientWrapper) {
-        super(sampleComponent, scheduler, restApiClientWrapper);
+    @Inject
+    public SimpleSocialProviderImpl(SocialComponent socialComponent, SchedulersUtils.CoreScheduler scheduler, SimpleSocialApiClientWrapper restApiClientWrapper) {
+        super(socialComponent, scheduler, restApiClientWrapper);
     }
 
     @Override
-    public void inject(SampleComponent sampleComponent) {
-        sampleComponent.inject(this);
+    public void inject(SocialComponent socialComponent) {
+        socialComponent.inject(this);
     }
 
     @Override

@@ -9,9 +9,9 @@ import com.magorasystems.mafmodules.router.SocialRouter;
  *
  * @author Valentin S.Bolkonsky
  */
-public class SimpleSocialModuleInputImpl extends AbstractModuleInput<SimpleSocialViewInput, SocialRouter> implements SimpleSocialModuleInput{
+public class SimpleSocialModuleInputImpl extends AbstractModuleInput<SimpleSocialViewInput, SocialRouter<String>> implements SimpleSocialModuleInput{
 
-    public SimpleSocialModuleInputImpl(SimpleSocialViewInput viewInput, SocialRouter router) {
+    public SimpleSocialModuleInputImpl(SimpleSocialViewInput viewInput, SocialRouter<String> router) {
         super(viewInput, router);
     }
 }

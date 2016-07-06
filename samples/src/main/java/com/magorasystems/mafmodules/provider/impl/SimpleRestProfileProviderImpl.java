@@ -44,10 +44,10 @@ public class SimpleRestProfileProviderImpl extends BaseRestProfileDataProvider<P
     @RxLogObservable
     public Observable<UserProfile> getMyProfile() {
         if (refreshTokenApiClient == null) {
-            return callMyProvider().compose(converter());
+            return callMyProfile().compose(converter());
         } else {
-            return callMyProvider().compose(
-                    commonTransformer(callMyProvider(),
+            return callMyProfile().compose(
+                    commonTransformer(callMyProfile(),
                             refreshToken()));
 
         }
@@ -55,7 +55,7 @@ public class SimpleRestProfileProviderImpl extends BaseRestProfileDataProvider<P
 
     @Override
     @RxLogObservable
-    protected Observable<ProfileSuccessResponse> callMyProvider() {
+    protected Observable<ProfileSuccessResponse> callMyProfile() {
         return Observable.defer(restApiClientWrapper::getMyProfile);
     }
 }

@@ -4,13 +4,12 @@ import android.content.Context;
 
 import com.magorasystems.mafmodules.authmodule.module.outpit.AuthViewOutput;
 import com.magorasystems.mafmodules.authmodule.view.impl.StringAuthView;
-import com.magorasystems.mafmodules.dagger.component.SampleComponent;
+import com.magorasystems.mafmodules.dagger.component.SocialComponent;
 import com.magorasystems.mafmodules.module.input.SimpleSocialViewInput;
 import com.magorasystems.mafmodules.module.input.SocialInteractiveView;
 import com.magorasystems.mafmodules.presenter.impl.SimpleSocialPresenter;
 import com.magorasystems.mafmodules.router.SocialRouter;
 import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
-import com.mgrmobi.sdk.social.base.SocialType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +19,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Valentin S.Bolkonsky
  */
-public class SimpleSocialPresenterModuleImpl extends AbstractSocialPresenterModule<SampleComponent, String, StringAuthInfo,
+public class SimpleSocialPresenterModuleImpl extends AbstractSocialPresenterModule<SocialComponent, String, StringAuthInfo,
         SocialRouter<String>, SimpleSocialViewInput,
         SimpleSocialModuleInput, AuthViewOutput> implements SimpleSocialPresenterModule {
 
@@ -30,7 +29,7 @@ public class SimpleSocialPresenterModuleImpl extends AbstractSocialPresenterModu
 
     public SimpleSocialPresenterModuleImpl(Context context, SimpleSocialPresenter presenter) {
         this.presenter = presenter;
-        injectComponent(context, SampleComponent.class);
+        injectComponent(context, SocialComponent.class);
     }
 
     @Override
@@ -45,10 +44,11 @@ public class SimpleSocialPresenterModuleImpl extends AbstractSocialPresenterModu
         super.start();
         final SocialInteractiveView interactiveView = getInteractiveView();
         if (interactiveView != null) {
-            interactiveView.model(SocialType.VK)
+            interactiveView.model()
                     .subscribe(getPresenter()::authorizationBySocial);
         }
-
+        output(getPresenter().output());
+        super.start();
     }
 
     @Override
@@ -57,8 +57,8 @@ public class SimpleSocialPresenterModuleImpl extends AbstractSocialPresenterModu
     }
 
     @Override
-    public void inject(SampleComponent sampleComponent) {
-        sampleComponent.inject(this);
+    public void inject(SocialComponent socialComponent) {
+        socialComponent.inject(this);
     }
 
     @Override

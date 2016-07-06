@@ -42,6 +42,6 @@ public abstract class BaseRestProfileDataProvider<COMPONENT, W, T> extends
         return tokenStorage.restoreObject(SimpleTokenConfig.HEADER_FIELD_NAME);
     }
 
-    protected abstract Observable<? extends SuccessResponse<? super T>> callMyProvider();
+    protected abstract Observable<? extends SuccessResponse<? super T>> callMyProfile();
 
-};
+}

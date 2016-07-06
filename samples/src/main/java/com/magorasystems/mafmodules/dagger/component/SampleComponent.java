@@ -4,11 +4,8 @@ import com.magorasystems.mafmodules.application.SampleApplication;
 import com.magorasystems.mafmodules.common.dagger.component.CommonModuleComponent;
 import com.magorasystems.mafmodules.dagger.module.SampleApplicationModule;
 import com.magorasystems.mafmodules.dagger.scope.ApplicationScope;
-import com.magorasystems.mafmodules.module.SimpleSocialPresenterModuleImpl;
-import com.magorasystems.mafmodules.provider.social.SimpleSocialProviderImpl;
 import com.magorasystems.mafmodules.ui.activity.SampleActivity;
 import com.magorasystems.mafmodules.ui.activity.SocialAuthorizationActivity;
-import com.magorasystems.mafmodules.ui.fragment.SocialAuthorizationFragment;
 
 import dagger.Component;
 
@@ -27,11 +24,4 @@ public interface SampleComponent {
     void inject(SampleActivity activity);
 
     void inject(SocialAuthorizationActivity activity);
-
-    void inject(SocialAuthorizationFragment f);
-
-    void inject(SimpleSocialProviderImpl p);
-
-    void inject(SimpleSocialPresenterModuleImpl m);
-
 }
