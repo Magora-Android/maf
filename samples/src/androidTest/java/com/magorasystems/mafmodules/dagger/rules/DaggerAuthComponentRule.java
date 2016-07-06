@@ -1,6 +1,6 @@
 package com.magorasystems.mafmodules.dagger.rules;
 
-import com.magorasystems.mafmodules.application.MockAuthApplication;
+import com.magorasystems.mafmodules.application.MockSampleApplication;
 import com.magorasystems.mafmodules.authmodule.dagger.component.AuthComponent;
 import com.magorasystems.mafmodules.authmodule.dagger.module.AuthNetworkModule;
 import com.magorasystems.mafmodules.common.dagger.component.CommonModuleComponent;
@@ -19,7 +19,7 @@ public class DaggerAuthComponentRule extends DaggerMockRule<AuthComponent> {
         super(AuthComponent.class, networkModule);
         addComponentDependency(CommonModuleComponent.class, new ApplicationModule(DaggerSampleMockRule.getApp()));
         set(authComponent -> {
-            final MockAuthApplication app = DaggerSampleMockRule.getApp();
+            final MockSampleApplication app = DaggerSampleMockRule.getApp();
             app.putComponent(AuthComponent.class.getSimpleName(), authComponent);
         });
     }

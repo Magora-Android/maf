@@ -2,7 +2,7 @@ package com.magorasystems.mafmodules.dagger.rules;
 
 import android.support.test.InstrumentationRegistry;
 
-import com.magorasystems.mafmodules.application.MockAuthApplication;
+import com.magorasystems.mafmodules.application.MockSampleApplication;
 import com.magorasystems.mafmodules.dagger.component.SampleComponent;
 import com.magorasystems.mafmodules.dagger.module.SampleApplicationModule;
 
@@ -20,8 +20,8 @@ public class DaggerSampleMockRule extends DaggerMockRule<SampleComponent> {
         set(sampleComponent -> getApp().setComponent(sampleComponent));
     }
 
-    public static MockAuthApplication getApp() {
-        return (MockAuthApplication) InstrumentationRegistry.getInstrumentation().getTargetContext().getApplicationContext();
+    public static MockSampleApplication getApp() {
+        return (MockSampleApplication) InstrumentationRegistry.getInstrumentation().getTargetContext().getApplicationContext();
     }
 
 }
