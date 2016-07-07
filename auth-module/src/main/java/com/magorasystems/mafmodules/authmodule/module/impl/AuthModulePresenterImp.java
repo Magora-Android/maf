@@ -8,6 +8,7 @@ import com.magorasystems.mafmodules.authmodule.module.input.StringAuthViewInput;
 import com.magorasystems.mafmodules.authmodule.module.outpit.AuthViewOutput;
 import com.magorasystems.mafmodules.authmodule.presenter.SimpleAuthPresenter;
 import com.magorasystems.mafmodules.authmodule.router.AuthRouter;
+import com.magorasystems.mafmodule.security.store.AuthPreferencesStorage;
 import com.magorasystems.mafmodules.authmodule.view.impl.StringAuthView;
 import com.magorasystems.mafmodules.common.module.base.AbstractModulePresenter;
 import com.magorasystems.mafmodules.common.utils.component.HasComponent;
@@ -25,6 +26,9 @@ public class AuthModulePresenterImp extends AbstractModulePresenter<AuthRouter, 
 
     @Inject
     protected SimpleAuthPresenter presenter;
+
+    @Inject
+    protected AuthPreferencesStorage preferencesStorage;
 
     @Inject
     public AuthModulePresenterImp(Context context) {
@@ -48,6 +52,7 @@ public class AuthModulePresenterImp extends AbstractModulePresenter<AuthRouter, 
 
     @Override
     public void onNext(AuthViewOutput authViewOutput) {
+        preferencesStorage.storeObject("my", authViewOutput.getModel());
         final AuthRouter router = getRouter();
         if (router != null) {
             router.onAfterAuth();

@@ -10,4 +10,5 @@ public interface BaseModule {
     String QUALIFIER_MOCK = "mock";
     String QUALIFIER_COMBAT = "combat";
     String QUALIFIER_REST = "rest";
+    String QUALIFIER_PREFERENCES = "preferences";
 }

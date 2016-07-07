@@ -9,6 +9,8 @@ import me.henrytao.rxsharedpreferences.RxSharedPreferences;
  */
 public abstract class PreferencesStorable<K,T> implements Storable<K, T> {
 
+    public static final String PREFERENCE_MY = "my";
+
     protected final RxSharedPreferences rxSharedPreferences;
 
     public PreferencesStorable(final RxSharedPreferences preferences) {

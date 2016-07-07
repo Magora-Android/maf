@@ -2,6 +2,8 @@ package com.magorasystems.mafmodules.dagger.module.social;
 
 import android.content.Context;
 
+import com.magorasystems.mafmodule.security.store.AuthPreferencesStorage;
+import com.magorasystems.mafmodule.security.store.SimplePreferencesTokenStorage;
 import com.magorasystems.mafmodules.common.dagger.module.BaseModule;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
 import com.magorasystems.mafmodules.common.utils.component.HasComponent;
@@ -23,12 +25,15 @@ public class SocialProviderModule implements BaseModule {
 
     @Provides
     protected SimpleSocialProvider providerSocialProvider(Context context, SchedulersUtils.CoreScheduler scheduler,
-                                                          SimpleSocialApiClientWrapper clientWrapper) {
+                                                          SimpleSocialApiClientWrapper clientWrapper,
+                                                          AuthPreferencesStorage authPreferencesStorage,
+                                                          SimplePreferencesTokenStorage simplePreferencesTokenStorage) {
         if (context instanceof HasComponent<?>) {
             final Object component = ((HasComponent<?>) context).getComponent(SocialComponent.class.getSimpleName());
             if (component != null) {
                 if (component instanceof SocialComponent) {
-                    return new SimpleSocialProviderImpl((SocialComponent) component, scheduler, clientWrapper);
+                    return new SimpleSocialProviderImpl((SocialComponent) component, scheduler,
+                            clientWrapper, authPreferencesStorage, simplePreferencesTokenStorage);
                 }
             }
         }

@@ -1,5 +1,7 @@
 package com.magorasystems.mafmodules.dagger.rules;
 
+import com.magorasystems.mafmodule.security.store.AuthPreferencesStorage;
+import com.magorasystems.mafmodule.security.store.SimplePreferencesTokenStorage;
 import com.magorasystems.mafmodules.application.MockSampleApplication;
 import com.magorasystems.mafmodules.common.dagger.component.CommonModuleComponent;
 import com.magorasystems.mafmodules.common.dagger.module.ApplicationModule;
@@ -16,6 +18,9 @@ import it.cosenonjaviste.daggermock.DaggerMockRule;
  */
 public class DaggerSocialComponentRule extends DaggerMockRule<SocialComponent> {
 
+    private AuthPreferencesStorage authPreferencesStorage;
+    private SimplePreferencesTokenStorage preferencesTokenStorage;
+
     public DaggerSocialComponentRule(SocialNetworkModule module) {
         super(SocialComponent.class, module);
         addComponentDependency(CommonModuleComponent.class,
@@ -24,6 +29,16 @@ public class DaggerSocialComponentRule extends DaggerMockRule<SocialComponent> {
         set(socialComponent -> {
             MockSampleApplication app = DaggerSampleMockRule.getApp();
             app.putComponent(SocialComponent.class.getSimpleName(), socialComponent);
+            authPreferencesStorage = socialComponent.getAuthPreferencesStorage();
+            preferencesTokenStorage = socialComponent.getPreferencesTokenStorage();
         });
+    }
+
+    public AuthPreferencesStorage getAuthPreferencesStorage() {
+        return authPreferencesStorage;
+    }
+
+    public SimplePreferencesTokenStorage getPreferencesTokenStorage() {
+        return preferencesTokenStorage;
     }
 }
