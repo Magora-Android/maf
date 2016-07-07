@@ -54,7 +54,7 @@ public abstract class AuthLcePresenter<I extends AuthInteractor<StringAuthInfo>>
         super.onNext(stringAuthInfo);
         final AuthRouter router = getRouter();
         if (router != null) {
-            router.onAfterAuth();
+            router.onAfterAuth(stringAuthInfo);
         }
     }
 

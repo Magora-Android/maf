@@ -13,6 +13,8 @@ import com.magorasystems.mafmodules.authmodule.view.impl.StringAuthView;
 import com.magorasystems.mafmodules.common.module.base.AbstractModulePresenter;
 import com.magorasystems.mafmodules.common.utils.component.HasComponent;
 import com.magorasystems.mafmodules.common.utils.component.Injectable;
+import com.magorasystems.mafmodules.common.utils.store.PreferencesStorable;
+import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
 
 import javax.inject.Inject;
 
@@ -52,10 +54,10 @@ public class AuthModulePresenterImp extends AbstractModulePresenter<AuthRouter, 
 
     @Override
     public void onNext(AuthViewOutput authViewOutput) {
-        preferencesStorage.storeObject("my", authViewOutput.getModel());
+        preferencesStorage.storeObject(PreferencesStorable.PREFERENCE_MY, authViewOutput.getModel());
         final AuthRouter router = getRouter();
         if (router != null) {
-            router.onAfterAuth();
+            router.onAfterAuth(authViewOutput.getModel());
         }
     }
 
@@ -67,7 +69,22 @@ public class AuthModulePresenterImp extends AbstractModulePresenter<AuthRouter, 
     }
 
     @Override
+    public boolean checkIfAuthorization() {
+        final StringAuthInfo authInfo = preferencesStorage.restoreObject(PreferencesStorable.PREFERENCE_MY);
+        final AuthRouter router = getRouter();
+        if (router != null) {
+            if (authInfo != null) {
+                router.onAfterAuth(authInfo);
+            } else {
+                router.onNotAuth();
+            }
+        }
+        return authInfo != null;
+    }
+
+    @Override
     public void start() {
+
         final AuthInteractiveView interactiveView = getInteractiveView();
         if (interactiveView != null) {
             subscription.add(interactiveView.model()

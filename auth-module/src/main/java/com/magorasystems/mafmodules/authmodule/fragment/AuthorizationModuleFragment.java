@@ -104,6 +104,9 @@ public abstract class AuthorizationModuleFragment extends GenericModuleFragment<
                 modulePresenter.input(new AuthModuleInput(
                         new StringAuthViewInput(authPassiveView, authInteractiveView),
                         AuthorizationModuleFragment.this));
+                if (!modulePresenter.checkIfAuthorization()) {
+                    LOGGER.debug("user already authorization");
+                }
                 modulePresenter.start();
             });
         }

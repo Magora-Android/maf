@@ -8,6 +8,7 @@ import com.magorasystems.mafmodules.authmodule.router.AuthRouter;
 import com.magorasystems.mafmodules.common.ui.activity.CommonBaseActivity;
 import com.magorasystems.mafmodules.common.ui.fragment.BaseFragmentImpl;
 import com.magorasystems.mafmodules.common.ui.fragment.BaseSupportFragmentImpl;
+import com.magorasystems.protocolapi.auth.dto.response.AuthInfo;
 import com.magorasystems.widgets.WidgetUtils;
 
 /**
@@ -24,7 +25,12 @@ public abstract class AuthorizationActivity extends CommonBaseActivity<AuthCompo
     }
 
     @Override
-    public void onAfterAuth() {
+    public void onAfterAuth(AuthInfo<?> authInfo) {
+        WidgetUtils.hideSoftKeyboard(this);
+    }
+
+    @Override
+    public void onNotAuth() {
         WidgetUtils.hideSoftKeyboard(this);
     }
 

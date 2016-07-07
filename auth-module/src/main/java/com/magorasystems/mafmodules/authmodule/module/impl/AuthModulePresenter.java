@@ -12,4 +12,8 @@ import com.magorasystems.mafmodules.common.module.base.ModulePresenter;
  */
 public interface AuthModulePresenter extends ModulePresenter<AuthRouter,
         StringAuthViewInput, AuthViewOutput, AuthModuleInput> {
+
+    boolean checkIfAuthorization();
 }
+
+
