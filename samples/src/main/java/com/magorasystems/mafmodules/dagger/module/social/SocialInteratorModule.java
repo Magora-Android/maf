@@ -2,9 +2,9 @@ package com.magorasystems.mafmodules.dagger.module.social;
 
 import com.magorasystems.mafmodules.common.dagger.module.BaseModule;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
-import com.magorasystems.mafmodules.interactor.SimpleSocialInteractor;
+import com.magorasystems.android.module.social.interactor.SimpleSocialInteractor;
 import com.magorasystems.mafmodules.interactor.impl.SimpleSocialInteractorImpl;
-import com.magorasystems.mafmodules.provider.social.SimpleSocialProvider;
+import com.magorasystems.android.module.social.provider.SimpleSocialProvider;
 
 import dagger.Module;
 import dagger.Provides;

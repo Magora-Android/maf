@@ -2,13 +2,16 @@ package com.magorasystems.mafmodules.module;
 
 import android.content.Context;
 
+import com.magorasystems.android.module.social.module.AbstractSocialPresenterModule;
+import com.magorasystems.android.module.social.module.SimpleSocialModuleInput;
+import com.magorasystems.android.module.social.module.SimpleSocialPresenterModule;
 import com.magorasystems.mafmodules.authmodule.module.outpit.AuthViewOutput;
 import com.magorasystems.mafmodules.authmodule.view.impl.StringAuthView;
 import com.magorasystems.mafmodules.dagger.component.SocialComponent;
-import com.magorasystems.mafmodules.module.input.SimpleSocialViewInput;
-import com.magorasystems.mafmodules.module.input.SocialInteractiveView;
-import com.magorasystems.mafmodules.presenter.impl.SimpleSocialPresenter;
-import com.magorasystems.mafmodules.router.SocialRouter;
+import com.magorasystems.android.module.social.module.input.SimpleSocialViewInput;
+import com.magorasystems.android.module.social.module.input.SocialInteractiveView;
+import com.magorasystems.android.module.social.presenter.SimpleSocialPresenter;
+import com.magorasystems.android.module.social.router.SocialRouter;
 import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
 
 import org.slf4j.Logger;

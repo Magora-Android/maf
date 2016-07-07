@@ -1,10 +1,10 @@
 package com.magorasystems.mafmodules.interactor.impl;
 
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
-import com.magorasystems.mafmodules.interactor.AbstractSocialInteractor;
-import com.magorasystems.mafmodules.interactor.SimpleSocialInteractor;
-import com.magorasystems.mafmodules.provider.social.SimpleSocialProvider;
-import com.magorasystems.mafmodules.provider.social.SocialProvider;
+import com.magorasystems.android.module.social.interactor.AbstractSocialInteractor;
+import com.magorasystems.android.module.social.interactor.SimpleSocialInteractor;
+import com.magorasystems.android.module.social.provider.SimpleSocialProvider;
+import com.magorasystems.android.module.social.provider.SocialProvider;
 import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
 
 import javax.inject.Inject;

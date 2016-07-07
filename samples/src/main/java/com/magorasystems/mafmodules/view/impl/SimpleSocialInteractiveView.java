@@ -8,8 +8,8 @@ import com.jakewharton.rxbinding.view.RxView;
 import com.magorasystems.mafmodules.common.utils.component.HasComponent;
 import com.magorasystems.mafmodules.dagger.component.SocialComponent;
 import com.magorasystems.mafmodules.dagger.module.social.SocialsModule;
-import com.magorasystems.mafmodules.model.social.RxCommonSocial;
-import com.magorasystems.mafmodules.module.input.SocialInteractiveView;
+import com.magorasystems.android.module.social.model.RxCommonSocial;
+import com.magorasystems.android.module.social.module.input.SocialInteractiveView;
 import com.mgrmobi.sdk.social.android.AndroidBaseSocialNetwork;
 
 import javax.inject.Inject;

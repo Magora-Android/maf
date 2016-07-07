@@ -1,7 +1,8 @@
 package com.magorasystems.mafmodules.network;
 
-import com.magorasystems.mafmodules.network.request.SocialRequest;
-import com.magorasystems.mafmodules.network.request.SocialRequestMeta;
+import com.magorasystems.android.module.social.network.SocialApiClient;
+import com.magorasystems.android.module.social.network.request.SocialRequest;
+import com.magorasystems.android.module.social.network.request.SocialRequestMeta;
 import com.magorasystems.mafmodules.protocolapi.auth.response.SimpleStringAuthSuccessResponse;
 import com.magorasystems.mafmodules.utils.JsonStub;
 

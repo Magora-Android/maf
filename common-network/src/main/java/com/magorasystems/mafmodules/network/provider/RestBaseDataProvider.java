@@ -38,7 +38,7 @@ public abstract class RestBaseDataProvider<T, COMPONENT> implements Injectable<C
                 .map(data -> data != null ? mapper.apply(data) : null);
     }
 
-    protected <F, T extends SuccessResponse<F>> Observable.Transformer<T, F> converter() {
+    protected <F, T extends SuccessResponse<? extends F>> Observable.Transformer<T, F> converter() {
         return observable -> observable.onBackpressureDrop().subscribeOn(scheduler.backgroundThread())
                 .retryWhen(RxRestApiFunctions.networkNoAvailableRetry(observable, networkConnectionManager))
                 .map(SuccessResponse::getData);

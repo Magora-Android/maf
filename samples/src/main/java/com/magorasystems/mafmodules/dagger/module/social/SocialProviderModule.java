@@ -8,8 +8,8 @@ import com.magorasystems.mafmodules.common.dagger.module.BaseModule;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
 import com.magorasystems.mafmodules.common.utils.component.HasComponent;
 import com.magorasystems.mafmodules.dagger.component.SocialComponent;
-import com.magorasystems.mafmodules.provider.social.SimpleSocialApiClientWrapper;
-import com.magorasystems.mafmodules.provider.social.SimpleSocialProvider;
+import com.magorasystems.android.module.social.network.wrapper.SimpleSocialApiClientWrapper;
+import com.magorasystems.android.module.social.provider.SimpleSocialProvider;
 import com.magorasystems.mafmodules.provider.social.SimpleSocialProviderImpl;
 
 import dagger.Module;

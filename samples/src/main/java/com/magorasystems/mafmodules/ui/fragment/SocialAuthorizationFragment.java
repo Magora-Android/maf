@@ -5,16 +5,17 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
+import com.magorasystems.android.module.social.ui.fragment.GenericSocialFragment;
 import com.magorasystems.mafmodules.R;
 import com.magorasystems.mafmodules.authmodule.view.impl.StringAuthView;
 import com.magorasystems.mafmodules.dagger.component.SocialComponent;
-import com.magorasystems.mafmodules.module.SimpleSocialModuleInputImpl;
-import com.magorasystems.mafmodules.module.SimpleSocialPresenterModule;
-import com.magorasystems.mafmodules.module.input.SimpleSocialViewInput;
-import com.magorasystems.mafmodules.module.input.SocialInteractiveView;
+import com.magorasystems.android.module.social.module.SimpleSocialModuleInputImpl;
+import com.magorasystems.android.module.social.module.SimpleSocialPresenterModule;
+import com.magorasystems.android.module.social.module.input.SimpleSocialViewInput;
+import com.magorasystems.android.module.social.module.input.SocialInteractiveView;
 import com.magorasystems.mafmodules.module.input.impl.SimpleSocialViewInputImpl;
 import com.magorasystems.mafmodules.view.impl.SimpleSocialInteractiveView;
-import com.magorasystems.mafmodules.view.impl.SimpleSocialLceView;
+import com.magorasystems.android.module.social.view.SimpleSocialLceView;
 import com.magorasystems.protocolapi.auth.dto.response.AuthInfo;
 import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
 

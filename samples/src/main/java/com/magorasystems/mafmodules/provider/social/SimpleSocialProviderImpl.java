@@ -1,13 +1,17 @@
 package com.magorasystems.mafmodules.provider.social;
 
+import com.magorasystems.android.module.social.network.request.SocialRequest;
+import com.magorasystems.android.module.social.network.request.SocialRequestMeta;
+import com.magorasystems.android.module.social.network.wrapper.SimpleSocialApiClientWrapper;
+import com.magorasystems.android.module.social.provider.AbstractSocialProvider;
+import com.magorasystems.android.module.social.provider.SimpleSocialProvider;
 import com.magorasystems.mafmodule.security.store.AuthPreferencesStorage;
 import com.magorasystems.mafmodule.security.store.TokenPreferencesStorage;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
 import com.magorasystems.mafmodules.dagger.component.SocialComponent;
-import com.magorasystems.mafmodules.model.social.RxCommonSocial;
 import com.magorasystems.mafmodules.network.config.SimpleTokenConfig;
-import com.magorasystems.mafmodules.network.request.SocialRequest;
-import com.magorasystems.mafmodules.network.request.SocialRequestMeta;
+import com.magorasystems.mafmodules.protocolapi.auth.response.SimpleStringAuthSuccessResponse;
+import com.magorasystems.protocolapi.auth.dto.response.AuthResponseData;
 import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
 
 import javax.inject.Inject;
@@ -36,27 +40,14 @@ public class SimpleSocialProviderImpl extends AbstractSocialProvider<SocialCompo
         socialComponent.inject(this);
     }
 
+
     @Override
-    public Observable<StringAuthInfo> authorization(RxCommonSocial rxCommonSocial) {
-        final SocialRequest.Builder<SocialRequestMeta> builder = new SocialRequest.Builder<>();
-        return rxCommonSocial.login()
-                .compose(SchedulersUtils.applySchedulers(scheduler))
-                .flatMap(authResult -> {
-                    builder.token(authResult.getToken())
-                            .type(authResult.getSocialType().name());
-                    return rxCommonSocial.profile();
-                })
-                .map(profile -> builder.meta(
-                        new SocialRequestMeta
-                                .Builder()
-                                .firstName(profile.getSocialUser().getFirstName())
-                                .lastName(profile.getSocialUser().getLastName())
-                                .nickName(profile.getSocialUser().getName())
-                                .build()).build())
-                .flatMap(socialRequest -> restApiClientWrapper.authorization(socialRequest)
-                        .compose(converter())
-                        .doOnNext(response -> saveToken(new SimpleTokenConfig(response.getAccessToken(), response.getRefreshToken())))
-                        .map(this::receiveData))
-                .doOnNext(this::saveUser);
+    protected Observable<SimpleStringAuthSuccessResponse> authorization(SocialRequest<SocialRequestMeta> request) {
+        return restApiClientWrapper.authorization(request);
+    }
+
+    @Override
+    protected SimpleTokenConfig getToken(AuthResponseData<? extends StringAuthInfo> response) {
+        return new SimpleTokenConfig(response.getAccessToken(), response.getRefreshToken());
     }
 }

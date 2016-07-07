@@ -5,9 +5,9 @@ import android.content.Context;
 import com.fernandocejas.frodo.annotation.RxLogObservable;
 import com.magorasystems.mafmodules.common.dagger.module.BaseModule;
 import com.magorasystems.mafmodules.dagger.scope.SocialScope;
-import com.magorasystems.mafmodules.module.SimpleSocialPresenterModule;
+import com.magorasystems.android.module.social.module.SimpleSocialPresenterModule;
 import com.magorasystems.mafmodules.module.SimpleSocialPresenterModuleImpl;
-import com.magorasystems.mafmodules.presenter.impl.SimpleSocialPresenter;
+import com.magorasystems.android.module.social.presenter.SimpleSocialPresenter;
 
 import dagger.Module;
 import dagger.Provides;

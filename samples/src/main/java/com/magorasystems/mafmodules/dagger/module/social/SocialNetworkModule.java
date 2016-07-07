@@ -4,11 +4,11 @@ import com.google.gson.Gson;
 import com.magorasystems.mafmodules.common.dagger.module.BaseModule;
 import com.magorasystems.mafmodules.dagger.scope.SocialScope;
 import com.magorasystems.mafmodules.network.RestApiFactory;
-import com.magorasystems.mafmodules.network.SocialApiClient;
-import com.magorasystems.mafmodules.network.SocialRestApiFactory;
+import com.magorasystems.android.module.social.network.SocialApiClient;
+import com.magorasystems.android.module.social.network.SocialRestApiFactory;
 import com.magorasystems.mafmodules.network.config.ServerEndpoint;
-import com.magorasystems.mafmodules.provider.social.SimpleSocialApiClientWrapper;
-import com.magorasystems.mafmodules.provider.social.SimpleSocialApiClientWrapperImpl;
+import com.magorasystems.android.module.social.network.wrapper.SimpleSocialApiClientWrapper;
+import com.magorasystems.android.module.social.network.wrapper.SimpleSocialApiClientWrapperImpl;
 
 import dagger.Module;
 import dagger.Provides;

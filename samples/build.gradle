@@ -102,13 +102,10 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     compile project(':auth-module')
+    compile project(':social-module')
     compile project(':profile-module')
     compile project(':rx-imagepicker')
     compile project(':digital-keyboard-widget')
-
-    compile("com.magorasystems.android:android-common-social:$version_social_common@aar") {
-        transitive = true
-    }
 
     compile("com.magorasystems.android:vkontakte:$version_magora_social@aar") {
         transitive = true
@@ -160,6 +157,7 @@ dependencies {
             "com.github.fabioCollini:DaggerMock:0.6"
     )
     androidTestCompile project(path: ':auth-module')
+    androidTestCompile project(path: ':social-module')
     androidTestCompile project(path: ':profile-module')
     androidTestCompile project(path: ':digital-keyboard-widget')
     //androidTestCompile project(path: ':common-network')

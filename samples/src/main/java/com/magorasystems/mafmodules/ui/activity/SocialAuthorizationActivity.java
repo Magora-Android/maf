@@ -10,7 +10,7 @@ import com.magorasystems.mafmodules.common.ui.activity.CommonBaseActivity;
 import com.magorasystems.mafmodules.common.ui.fragment.BaseFragmentImpl;
 import com.magorasystems.mafmodules.common.ui.fragment.BaseSupportFragmentImpl;
 import com.magorasystems.mafmodules.dagger.component.SampleComponent;
-import com.magorasystems.mafmodules.router.SocialRouter;
+import com.magorasystems.android.module.social.router.SocialRouter;
 import com.magorasystems.mafmodules.ui.fragment.SocialAuthorizationFragment;
 import com.magorasystems.protocolapi.auth.dto.response.AuthInfo;
 

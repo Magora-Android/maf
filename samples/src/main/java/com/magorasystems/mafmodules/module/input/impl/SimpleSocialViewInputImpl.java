@@ -1,9 +1,9 @@
 package com.magorasystems.mafmodules.module.input.impl;
 
 import com.magorasystems.mafmodules.authmodule.view.impl.StringAuthView;
-import com.magorasystems.mafmodules.module.input.AbstractSocialViewInput;
-import com.magorasystems.mafmodules.module.input.SimpleSocialViewInput;
-import com.magorasystems.mafmodules.module.input.SocialInteractiveView;
+import com.magorasystems.android.module.social.module.input.AbstractSocialViewInput;
+import com.magorasystems.android.module.social.module.input.SimpleSocialViewInput;
+import com.magorasystems.android.module.social.module.input.SocialInteractiveView;
 import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
 
 /**
