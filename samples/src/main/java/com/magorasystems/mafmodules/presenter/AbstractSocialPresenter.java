@@ -18,7 +18,7 @@ import java.io.Serializable;
  */
 public abstract class AbstractSocialPresenter<ID extends Serializable,
         M extends AuthInfo<ID>,
-        I extends SocialInteractor<ID, M>, V extends AuthLceView<ID, M>, R extends SocialRouter, VO extends ViewOutput<M>>
+        I extends SocialInteractor<ID, M>, V extends AuthLceView<ID, M>, R extends SocialRouter<ID>, VO extends ViewOutput<M>>
         extends BaseIteratorLcePresenter<M, I, V, R, VO>
         implements SocialPresenter<ID, M, V, R, VO> {
 

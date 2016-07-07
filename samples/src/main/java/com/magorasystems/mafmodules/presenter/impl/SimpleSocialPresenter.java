@@ -11,6 +11,6 @@ import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
  *
  * @author Valentin S.Bolkonsky
  */
-public interface SimpleSocialPresenter extends SocialPresenter<String, StringAuthInfo, StringAuthView, SocialRouter, AuthViewOutput> {
+public interface SimpleSocialPresenter extends SocialPresenter<String, StringAuthInfo, StringAuthView, SocialRouter<String>, AuthViewOutput> {
 
 }

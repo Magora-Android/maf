@@ -25,6 +25,7 @@ public class SimpleSocialPresenterModuleImpl extends AbstractSocialPresenterModu
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SimpleSocialPresenterModuleImpl.class);
 
+
     private SimpleSocialPresenter presenter;
 
     public SimpleSocialPresenterModuleImpl(Context context, SimpleSocialPresenter presenter) {

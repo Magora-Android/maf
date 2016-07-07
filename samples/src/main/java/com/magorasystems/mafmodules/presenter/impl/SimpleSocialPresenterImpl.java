@@ -15,7 +15,7 @@ import javax.inject.Inject;
  * @author Valentin S.Bolkonsky
  */
 public class SimpleSocialPresenterImpl
-        extends AbstractSocialPresenter<String, StringAuthInfo, SimpleSocialInteractor, StringAuthView, SocialRouter, AuthViewOutput>
+        extends AbstractSocialPresenter<String, StringAuthInfo, SimpleSocialInteractor, StringAuthView, SocialRouter<String>, AuthViewOutput>
         implements SimpleSocialPresenter {
 
     @Inject
