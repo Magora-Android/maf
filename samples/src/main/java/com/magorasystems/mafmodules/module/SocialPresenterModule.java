@@ -17,6 +17,6 @@ import java.io.Serializable;
  * @author Valentin S.Bolkonsky
  */
 public interface SocialPresenterModule<ID extends Serializable, M extends AuthInfo<ID>, R extends SocialRouter<ID>,
-        VI extends SocialViewInput<ID, M, ? extends AuthLceView<ID, M>, ? extends SocialInteractiveView>, MI extends ModuleInput<VI, R>, VO extends ViewOutput<M>> extends ModulePresenter<R,
-        VI, VO, MI> {
+        VI extends SocialViewInput<ID, M, ? extends AuthLceView<ID, M>, ? extends SocialInteractiveView>, MI extends ModuleInput<VI, R>, VO extends ViewOutput<M>>
+        extends ModulePresenter<R,VI, VO, MI> {
 }

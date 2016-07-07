@@ -7,31 +7,29 @@ import android.view.View;
 
 import com.magorasystems.mafmodules.R;
 import com.magorasystems.mafmodules.authmodule.view.impl.StringAuthView;
-import com.magorasystems.mafmodules.common.ui.fragment.GenericModuleFragment;
 import com.magorasystems.mafmodules.dagger.component.SocialComponent;
 import com.magorasystems.mafmodules.module.SimpleSocialModuleInputImpl;
 import com.magorasystems.mafmodules.module.SimpleSocialPresenterModule;
+import com.magorasystems.mafmodules.module.input.SimpleSocialViewInput;
 import com.magorasystems.mafmodules.module.input.SocialInteractiveView;
 import com.magorasystems.mafmodules.module.input.impl.SimpleSocialViewInputImpl;
-import com.magorasystems.mafmodules.router.SocialRouter;
 import com.magorasystems.mafmodules.view.impl.SimpleSocialInteractiveView;
 import com.magorasystems.mafmodules.view.impl.SimpleSocialLceView;
 import com.magorasystems.protocolapi.auth.dto.response.AuthInfo;
+import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
-import rx.Observable;
 
 /**
  * Developed 2016.
  *
  * @author Valentin S.Bolkonsky
  */
-public class SocialAuthorizationFragment extends GenericModuleFragment<SocialComponent> implements SocialRouter<String> {
+public class SocialAuthorizationFragment extends GenericSocialFragment<SocialComponent, String,
+        StringAuthInfo, StringAuthView, SimpleSocialViewInput, SimpleSocialPresenterModule> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SocialAuthorizationFragment.class);
 
@@ -49,10 +47,6 @@ public class SocialAuthorizationFragment extends GenericModuleFragment<SocialCom
     @BindView(R.id.content_layout)
     protected View contentView;
 
-    @Inject
-    protected Observable<SimpleSocialPresenterModule> moduleObservable;
-
-    private SimpleSocialPresenterModule modulePresenter;
 
     private StringAuthView passiveView;
     private SocialInteractiveView interactiveView;
@@ -76,25 +70,6 @@ public class SocialAuthorizationFragment extends GenericModuleFragment<SocialCom
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        if (modulePresenter != null) {
-            modulePresenter.start();
-        } else {
-            moduleObservable.subscribe(this::startModule);
-        }
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (modulePresenter != null) {
-            modulePresenter.stop();
-            modulePresenter = null;
-        }
-    }
-
-    @Override
     public void onAfterSocialAuth(AuthInfo<String> authInfo) {
         LOGGER.debug("onAfterSocialAuth {} ", authInfo);
     }
@@ -114,23 +89,16 @@ public class SocialAuthorizationFragment extends GenericModuleFragment<SocialCom
     }
 
     @Override
-    public String getTitle() {
-        return "";
-    }
-
-
-    @Override
     public void inject(SocialComponent socialComponent) {
         socialComponent.inject(this);
     }
 
     @Override
     protected SimpleSocialPresenterModule getModulePresenter() {
-        return modulePresenter;
+        return (SimpleSocialPresenterModule) super.getModulePresenter();
     }
 
     protected void startModule(SimpleSocialPresenterModule module) {
-        modulePresenter = module;
         module.input(new SimpleSocialModuleInputImpl(
                 new SimpleSocialViewInputImpl(getPassiveView(), getInteractiveView()),
                 this));
