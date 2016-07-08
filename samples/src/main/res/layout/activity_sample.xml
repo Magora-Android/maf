@@ -1,36 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <Button
         android:id="@+id/action_go_auth"
         style="@style/Base.Widget.AppCompat.Button.Colored"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="А. Презентер" />
+        android:text="А. Презентер"/>
 
     <Button
         android:id="@+id/action_go_module_auth"
         style="@style/Base.Widget.AppCompat.Button.Colored"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="А. Модуль" />
+        android:text="А. Модуль"/>
 
     <Button
         android:id="@+id/action_go_take_photo"
         style="@style/Base.Widget.AppCompat.Button.Colored"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Изображение" />
+        android:text="Изображение"/>
 
     <Button
         android:id="@+id/action_go_profile"
         style="@style/Base.Widget.AppCompat.Button.Colored"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Профиль" />
+        android:text="Профиль"/>
+
+    <Button
+        android:id="@+id/action_go_digital_keyboard"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Ц. Клавиатура"/>
+
+    <Button
+        android:id="@+id/action_go_social"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Соц. сети"/>
 
 </LinearLayout>

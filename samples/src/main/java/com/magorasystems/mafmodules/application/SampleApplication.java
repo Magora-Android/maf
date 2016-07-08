@@ -12,13 +12,14 @@ import com.magorasystems.mafmodules.common.application.CommonApplicationSettings
 import com.magorasystems.mafmodules.common.dagger.component.CommonModuleComponent;
 import com.magorasystems.mafmodules.dagger.component.DaggerProfileComponent;
 import com.magorasystems.mafmodules.dagger.component.DaggerSampleComponent;
+import com.magorasystems.mafmodules.dagger.component.DaggerSocialComponent;
 import com.magorasystems.mafmodules.dagger.component.ProfileComponent;
 import com.magorasystems.mafmodules.dagger.component.ProfileComponentProvider;
 import com.magorasystems.mafmodules.dagger.component.SampleComponent;
 import com.magorasystems.mafmodules.dagger.component.SampleComponents;
+import com.magorasystems.mafmodules.dagger.component.SocialComponent;
 import com.magorasystems.mafmodules.dagger.module.ProfileNetworkModule;
 import com.magorasystems.mafmodules.dagger.module.SampleApplicationModule;
-import com.magorasystems.mafmodules.dagger.scope.ApplicationScope;
 import com.magorasystems.rx.permission.RxResult;
 
 import org.apache.commons.lang3.StringUtils;
@@ -37,7 +38,6 @@ public class SampleApplication extends BaseComponentApplication<SampleComponent>
     private static final Logger LOGGER = LoggerFactory.getLogger(SampleApplication.class);
 
     @Inject
-    @ApplicationScope
     protected Context context;
 
     private ProfileComponentProvider profileComponentProvider;
@@ -61,6 +61,8 @@ public class SampleApplication extends BaseComponentApplication<SampleComponent>
                 return subcomponents.get(key);
             case PROFILE_COMPONENT:
                 return subcomponents.get(key);
+            case SOCIAL_COMPONENT:
+                return subcomponents.get(key);
             default:
                 return getComponent();
         }
@@ -71,11 +73,15 @@ public class SampleApplication extends BaseComponentApplication<SampleComponent>
         final CommonModuleComponent component = AuthDaggerInner.buildCommonModuleComponent(this);
         final AuthComponent authComponent = AuthDaggerInner.buildGraph(component);
         final SampleComponent sampleComponent = DaggerSampleComponent.builder()
+                .commonModuleComponent(component)
                 .sampleApplicationModule(new SampleApplicationModule(this))
                 .build();
         final ProfileComponent profileComponent = DaggerProfileComponent.builder()
                 .commonModuleComponent(component)
                 .profileNetworkModule(new ProfileNetworkModule())
+                .build();
+        final SocialComponent socialComponent = DaggerSocialComponent.builder()
+                .commonModuleComponent(component)
                 .build();
         sampleComponent.inject(this);
         setComponent(sampleComponent);
@@ -83,6 +89,7 @@ public class SampleApplication extends BaseComponentApplication<SampleComponent>
         subcomponents.put(AuthComponent.class.getSimpleName(), authComponent);
         subcomponents.put(SampleComponent.class.getSimpleName(), sampleComponent);
         subcomponents.put(ProfileComponent.class.getSimpleName(), profileComponent);
+        subcomponents.put(SocialComponent.class.getSimpleName(), socialComponent);
         profileComponentProvider = new ProfileComponentProvider(this);
     }
 

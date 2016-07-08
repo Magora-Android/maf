@@ -9,7 +9,7 @@ public interface Storable<K,T> {
 
     T restoreObject(K key);
 
-    void storeObject(K key, T object);
+    void storeObject(K key,T object);
 
     void remove(K key);
 

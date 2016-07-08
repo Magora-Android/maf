@@ -1,9 +1,11 @@
 package com.magorasystems.mafmodules.dagger.component;
 
 import com.magorasystems.mafmodules.application.SampleApplication;
+import com.magorasystems.mafmodules.common.dagger.component.CommonModuleComponent;
 import com.magorasystems.mafmodules.dagger.module.SampleApplicationModule;
 import com.magorasystems.mafmodules.dagger.scope.ApplicationScope;
 import com.magorasystems.mafmodules.ui.activity.SampleActivity;
+import com.magorasystems.mafmodules.ui.activity.SocialAuthorizationActivity;
 
 import dagger.Component;
 
@@ -13,7 +15,7 @@ import dagger.Component;
  * @author Valentin S.Bolkonsky
  */
 
-@Component(dependencies = {}, modules = {SampleApplicationModule.class})
+@Component(dependencies = {CommonModuleComponent.class}, modules = {SampleApplicationModule.class})
 @ApplicationScope
 public interface SampleComponent {
 
@@ -21,4 +23,5 @@ public interface SampleComponent {
 
     void inject(SampleActivity activity);
 
+    void inject(SocialAuthorizationActivity activity);
 }

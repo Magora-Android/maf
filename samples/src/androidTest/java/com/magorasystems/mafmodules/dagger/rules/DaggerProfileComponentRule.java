@@ -1,12 +1,12 @@
 package com.magorasystems.mafmodules.dagger.rules;
 
-import com.magorasystems.mafmodules.application.MockAuthApplication;
+import com.magorasystems.mafmodules.application.MockSampleApplication;
 import com.magorasystems.mafmodules.common.dagger.component.CommonModuleComponent;
 import com.magorasystems.mafmodules.common.dagger.module.ApplicationModule;
 import com.magorasystems.mafmodules.dagger.component.ProfileComponent;
 import com.magorasystems.mafmodules.dagger.module.MockStorableModule;
 import com.magorasystems.mafmodules.dagger.module.ProfileNetworkModule;
-import com.magorasystems.mafmodules.interactor.impl.SimpleProfileInteractor;
+import com.magorasystems.mafmodules.interactor.SimpleProfileInteractor;
 import com.magorasystems.mafmodules.model.UserProfile;
 import com.magorasystems.mafmodules.presenter.impl.SimpleProfilePresenter;
 import com.magorasystems.mafmodules.profile.provider.ProfileDataProvider;
@@ -31,7 +31,7 @@ public class DaggerProfileComponentRule extends DaggerMockRule<ProfileComponent>
                 new ApplicationModule(DaggerSampleMockRule.getApp()),
                 new MockStorableModule());
         set(profileComponent -> {
-            final MockAuthApplication app = DaggerSampleMockRule.getApp();
+            final MockSampleApplication app = DaggerSampleMockRule.getApp();
             app.putComponent(ProfileComponent.class.getSimpleName(), profileComponent);
             profileProvider = profileComponent.getRestApiProvider();
             profileInteractor = profileComponent.getProfileInteractor();

@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
  *
  * @author Valentin S.Bolkonsky
  */
-public class MockAuthApplication extends SampleApplication {
+public class MockSampleApplication extends SampleApplication {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MockAuthApplication.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MockSampleApplication.class);
 
 
     @Override

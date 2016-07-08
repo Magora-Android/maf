@@ -1,6 +1,6 @@
 package com.magorasystems.mafmodules.dagger;
 
-import com.magorasystems.mafmodules.application.MockAuthApplication;
+import com.magorasystems.mafmodules.application.MockSampleApplication;
 import com.magorasystems.mafmodules.dagger.component.DaggerSampleComponent;
 import com.magorasystems.mafmodules.dagger.component.SampleComponent;
 import com.magorasystems.mafmodules.dagger.module.SampleApplicationModule;
@@ -16,7 +16,7 @@ public final class DaggerTestInner {
 
     }
 
-    public static SampleComponent buildGraph(final MockAuthApplication context) {
+    public static SampleComponent buildGraph(final MockSampleApplication context) {
         return DaggerSampleComponent.builder()
                 .sampleApplicationModule(new SampleApplicationModule(context))
                 .build();

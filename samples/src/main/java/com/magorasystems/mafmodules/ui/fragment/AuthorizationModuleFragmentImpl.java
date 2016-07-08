@@ -9,6 +9,7 @@ import com.google.common.collect.Lists;
 import com.magorasystems.mafmodules.R;
 import com.magorasystems.mafmodules.authmodule.fragment.AuthorizationModuleFragment;
 import com.magorasystems.mafmodules.authmodule.widget.AuthWidget;
+import com.magorasystems.protocolapi.auth.dto.response.AuthInfo;
 import com.magorasystems.widgets.ValidationTextRule;
 import com.magorasystems.widgets.WidgetUtils;
 import com.magorasystems.mafmodules.common.utils.PatternsUtils;
@@ -82,8 +83,14 @@ public class AuthorizationModuleFragmentImpl extends AuthorizationModuleFragment
     }
 
     @Override
-    public void onAfterAuth() {
+    public void onAfterAuth(AuthInfo<?> authInfo) {
         LOGGER.debug("onAfterAuth");
+        WidgetUtils.hideSoftKeyboard(getActivity());
+    }
+
+    @Override
+    public void onNotAuth() {
+        LOGGER.debug("onNotAuth");
         WidgetUtils.hideSoftKeyboard(getActivity());
     }
 
@@ -102,16 +109,4 @@ public class AuthorizationModuleFragmentImpl extends AuthorizationModuleFragment
         return progressView;
     }
 
-
-    @Override
-    public void onBack() {
-        if (!isActivityDetached()) {
-            getActivity().onBackPressed();
-        }
-    }
-
-    @Override
-    public void onShowError(Throwable throwable) {
-        LOGGER.error("onShowError ", throwable);
-    }
 }

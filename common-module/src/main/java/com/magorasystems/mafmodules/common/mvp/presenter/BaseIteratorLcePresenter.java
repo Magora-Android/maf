@@ -1,6 +1,6 @@
 package com.magorasystems.mafmodules.common.mvp.presenter;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fernandocejas.frodo.annotation.RxLogObservable;
 import com.magorasystems.mafmodules.common.module.output.ViewOutput;
 import com.magorasystems.mafmodules.common.mvp.interactor.BaseInteractor;
 import com.magorasystems.mafmodules.common.mvp.router.BaseRouter;
@@ -46,11 +46,10 @@ public abstract class BaseIteratorLcePresenter<M, I extends BaseInteractor<? sup
     }
 
     @Override
+    @RxLogObservable
     public Observable<VO> output() {
-        if (outputPublisher == null) {
-            outputPublisher = PublishSubject.create();
-        }
-        return outputPublisher;
+        destroyPublisher();
+        return outputPublisher = PublishSubject.create();
     }
 
     @Override
@@ -64,9 +63,15 @@ public abstract class BaseIteratorLcePresenter<M, I extends BaseInteractor<? sup
 
     @Override
     public void destroy() {
+        destroyPublisher();
+    }
+
+    protected final void destroyPublisher() {
         if (outputPublisher != null) {
             outputPublisher.onCompleted();
             outputPublisher = null;
         }
     }
+
+
 }

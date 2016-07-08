@@ -1,14 +1,11 @@
 package com.magorasystems.mafmodules.profile.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
 import com.magorasystems.mafmodules.common.module.base.ModuleInput;
 import com.magorasystems.mafmodules.common.module.input.ViewInput;
 import com.magorasystems.mafmodules.common.ui.fragment.GenericModuleFragment;
-import com.magorasystems.mafmodules.common.utils.component.HasComponent;
-import com.magorasystems.mafmodules.common.utils.component.Injectable;
 import com.magorasystems.mafmodules.profile.R;
 import com.magorasystems.mafmodules.profile.module.ProfilePresenterModule;
 import com.magorasystems.mafmodules.profile.module.input.ProfileInteractiveView;
@@ -31,7 +28,7 @@ import rx.Observable;
  */
 public abstract class GenericProfileFragment<COMPONENT,
         MODULE extends ProfilePresenterModule<P, ? extends ProfileViewInput<P, ?, ?>, ? extends ProfileViewOutput<P>, ? extends ModuleInput<?, ProfileRouter<P>>>, P>
-        extends GenericModuleFragment implements Injectable<COMPONENT>, ProfileRouter<P> {
+        extends GenericModuleFragment<COMPONENT> implements  ProfileRouter<P> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GenericProfileFragment.class);
 
@@ -42,7 +39,6 @@ public abstract class GenericProfileFragment<COMPONENT,
     private ProfilePresenterModule<P, ? extends ProfileViewInput<P, ?, ?>, ? extends ProfileViewOutput<P>, ? extends ModuleInput<? extends ViewInput<?, ?>, ProfileRouter<P>>> modulePresenter;
 
 
-    protected abstract void initialization();
 
     protected abstract void startModule(MODULE module);
 
@@ -90,21 +86,6 @@ public abstract class GenericProfileFragment<COMPONENT,
         LOGGER.debug("onUpdateProfile {} ", model);
     }
 
-    @Override
-    public void onBack() {
-        if (!isActivityDetached()) {
-            getActivity().onBackPressed();
-        }
-    }
-
-    @Override
-    public void onShowError(Throwable throwable) {
-        if (!isActivityDetached()) {
-            LOGGER.error("something wrong ", throwable);
-            showErrorDialog(throwable.getMessage(), (v, i) -> {
-            });
-        }
-    }
 
     @Override
     protected int getResourceLayout() {
@@ -123,24 +104,4 @@ public abstract class GenericProfileFragment<COMPONENT,
         getInteractiveView().destroy();
     }
 
-    @Override
-    public void showError(Throwable e) {
-        LOGGER.error("showError ", e);
-    }
-
-    @SuppressWarnings("unchecked")
-    protected final void injectComponent(Context context, Class<COMPONENT> clazz) {
-        if (context instanceof HasComponent<?>) {
-            final Object component = ((HasComponent<?>) context).getComponent(clazz.getSimpleName());
-            if (component != null) {
-                try {
-                    inject((COMPONENT) component);
-                } catch (ClassCastException e) {
-                    throw new IllegalArgumentException("Context has not implement \"" + clazz.getSimpleName() + "\" component");
-                }
-                return;
-            }
-        }
-        throw new IllegalArgumentException("Context has not implement \"" + clazz.getSimpleName() + "\" component");
-    }
 }

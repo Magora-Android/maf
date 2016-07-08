@@ -1,10 +1,13 @@
 package com.magorasystems.mafmodules.authmodule.network.provider;
 
 import com.magorasystems.mafmodule.security.network.RefreshTokenApiClient;
+import com.magorasystems.mafmodule.security.store.AuthPreferencesStorage;
 import com.magorasystems.mafmodules.authmodule.dagger.component.AuthComponent;
 import com.magorasystems.mafmodules.authmodule.network.AuthApiClientWrapper;
 import com.magorasystems.mafmodules.authmodule.provider.impl.SimpleAuthProvider;
+import com.magorasystems.mafmodule.security.store.SimplePreferencesTokenStorage;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
+import com.magorasystems.mafmodules.common.utils.store.PreferencesStorable;
 import com.magorasystems.mafmodules.network.config.SimpleTokenConfig;
 import com.magorasystems.mafmodules.network.exception.RestApiException;
 import com.magorasystems.mafmodules.network.provider.RestBaseDataProvider;
@@ -30,6 +33,12 @@ public class AuthRestProvider extends RestBaseDataProvider<AuthApiClientWrapper,
     protected StringApiTokenStorage tokenStorage;
 
     @Inject
+    protected SimplePreferencesTokenStorage preferencesTokenStorage;
+
+    @Inject
+    protected AuthPreferencesStorage authPreferencesStorage;
+
+    @Inject
     protected RefreshTokenApiClient refreshTokenApiClient;
 
     @Inject
@@ -48,8 +57,11 @@ public class AuthRestProvider extends RestBaseDataProvider<AuthApiClientWrapper,
     public Observable<StringAuthInfo> authToken(AuthRequest authorization) {
         return restApiClientWrapper.getClient().authToken(authorization)
                 .compose(converter())
+                .doOnNext(response -> preferencesTokenStorage.storeObject(SimpleTokenConfig.HEADER_FIELD_NAME,
+                        new SimpleTokenConfig(response.getAccessToken(), response.getRefreshToken())))
                 .doOnNext(saveTokensToStorage)
-                .map(data -> data != null ? data.getAuthInfo() : null);
+                .map(data -> data != null ? data.getAuthInfo() : null)
+                .doOnNext(user -> authPreferencesStorage.storeObject(PreferencesStorable.PREFERENCE_MY, user));
     }
 
     @Override
@@ -62,8 +74,11 @@ public class AuthRestProvider extends RestBaseDataProvider<AuthApiClientWrapper,
                 new RefreshTokenRequest(tokenStorage.restoreObject(SimpleTokenConfig.HEADER_FIELD_NAME)
                         .getRefreshToken()))
                 .compose(converter())
+                .doOnNext(response -> preferencesTokenStorage.storeObject(SimpleTokenConfig.HEADER_FIELD_NAME,
+                        new SimpleTokenConfig(response.getAccessToken(), response.getRefreshToken())))
                 .doOnNext(saveTokensToStorage)
-                .map(data -> data != null ? data.getAuthInfo() : null);
+                .map(data -> data != null ? data.getAuthInfo() : null)
+                .doOnNext(user -> authPreferencesStorage.storeObject(PreferencesStorable.PREFERENCE_MY, user));
     }
 
     private final Action1<AuthResponseData<?>> saveTokensToStorage = new Action1<AuthResponseData<?>>() {

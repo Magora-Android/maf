@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.interactor.impl;
+package com.magorasystems.mafmodules.interactor;
 
 import com.magorasystems.mafmodules.common.utils.component.Injectable;
 import com.magorasystems.mafmodules.dagger.component.ProfileComponent;

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DigitalKeyboard">
+        <attr name="marginsBetweenItems" format="dimension" />
+        <attr name="keysInOneRow" format="integer" />
+    </declare-styleable>
+</resources>

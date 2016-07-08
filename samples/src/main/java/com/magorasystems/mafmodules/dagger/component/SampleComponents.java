@@ -13,7 +13,8 @@ public enum SampleComponents {
     AUTH_COMPONENT(AuthComponent.class.getSimpleName()),
     COMMON_COMPONENT(CommonModuleComponent.class.getSimpleName()),
     SAMPLE_COMPONENTS(SampleComponent.class.getSimpleName()),
-    PROFILE_COMPONENT(ProfileComponent.class.getSimpleName());
+    PROFILE_COMPONENT(ProfileComponent.class.getSimpleName()),
+    SOCIAL_COMPONENT(SocialComponent.class.getSimpleName());
 
     private String component;
 
