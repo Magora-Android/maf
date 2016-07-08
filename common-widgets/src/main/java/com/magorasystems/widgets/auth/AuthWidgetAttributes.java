@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.authmodule.widget;
+package com.magorasystems.widgets.auth;
 
 import android.support.annotation.LayoutRes;
 

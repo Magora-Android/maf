@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.magorasystems.mafmodules.authmodule.R;
 import com.magorasystems.mafmodules.authmodule.performance.AuthViewModel;
 import com.magorasystems.mafmodules.common.utils.PatternsUtils;
+import com.magorasystems.widgets.auth.GenericAuthWidget;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +24,7 @@ import rx.Observable;
  *
  * @author Valentin S. Bolkonsky
  */
-public class AuthWidget extends BaseAuthWidget<AuthViewModel, AuthViewModel> {
+public class AuthWidget extends GenericAuthWidget<AuthViewModel, AuthViewModel> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthWidget.class);
 

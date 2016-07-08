@@ -19,11 +19,11 @@ import butterknife.Unbinder;
  *
  * @author Valentin S.Bolkonsky
  */
-public abstract class BaseRelativeWidget<M extends BaseViewModel, T> extends RelativeLayout implements BaseWidget<M, T> {
+public abstract class BaseRelativeWidget<INPUT, RESULT extends BaseViewModel> extends RelativeLayout implements BaseWidget<INPUT, RESULT> {
 
     private Unbinder unbinder;
 
-    protected T model;
+    protected INPUT model;
 
     private WidgetAttributes widgetAttributes;
 
@@ -81,7 +81,7 @@ public abstract class BaseRelativeWidget<M extends BaseViewModel, T> extends Rel
     }
 
     @Override
-    public void update(T model) {
+    public void update(INPUT model) {
         this.model = model;
     }
 }

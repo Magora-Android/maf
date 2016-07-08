@@ -1,9 +1,9 @@
-package com.magorasystems.mafmodules.authmodule.widget;
+package com.magorasystems.widgets.auth;
 
 import android.content.res.TypedArray;
 
-import com.magorasystems.mafmodules.authmodule.R;
 import com.magorasystems.widgets.AttributesReader;
+import com.magorasystems.widgets.R;
 import com.magorasystems.widgets.WidgetAttributes;
 import com.magorasystems.widgets.WidgetAttributesReader;
 
@@ -25,8 +25,8 @@ public class AuthWidgetAttributesReader implements AttributesReader {
         final WidgetAttributes widgetAttributes = widgetAttributesReader.read();
         final AuthWidgetAttributes attributes = new AuthWidgetAttributes(widgetAttributes.getLayoutId());
         final TypedArray a = widgetAttributesReader.getContext().obtainStyledAttributes(widgetAttributesReader.getAttributeSet(),
-                R.styleable.BaseAuthWidget);
-        attributes.setShowError(a.getBoolean(R.styleable.BaseAuthWidget_is_show_errors, false));
+                R.styleable.ValidationWidget);
+        attributes.setShowError(a.getBoolean(R.styleable.ValidationWidget_is_show_errors, false));
         a.recycle();
         return attributes;
     }

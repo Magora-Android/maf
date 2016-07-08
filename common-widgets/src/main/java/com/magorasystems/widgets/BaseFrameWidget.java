@@ -19,11 +19,11 @@ import butterknife.Unbinder;
  *
  * @author Valentin S.Bolkonsky
  */
-public abstract class BaseFrameWidget<M extends BaseViewModel, T> extends FrameLayout implements BaseWidget<M, T> {
+public abstract class BaseFrameWidget<INPUT, RESULT extends BaseViewModel> extends FrameLayout implements BaseWidget<INPUT, RESULT> {
 
     private Unbinder unbinder;
 
-    protected T model;
+    protected INPUT model;
 
     private WidgetAttributes widgetAttributes;
 
@@ -81,7 +81,7 @@ public abstract class BaseFrameWidget<M extends BaseViewModel, T> extends FrameL
     }
 
     @Override
-    public void update(T model) {
+    public void update(INPUT model) {
         this.model = model;
     }
 }

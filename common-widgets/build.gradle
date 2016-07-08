@@ -130,6 +130,9 @@ dependencies {
     //Image
     compile "com.facebook.fresco:fresco:$version_fresco"
 
+    //Guava
+    compile "com.google.guava:guava:$version_guava"
+
     compile(
             "io.reactivex:rxandroid:$version_rx_android",
             "io.reactivex:rxjava:$version_rx_java",

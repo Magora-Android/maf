@@ -6,4 +6,12 @@
     <string name="action_sign_in">Войти</string>
     <string name="title_sign_in">Вход</string>
     <string name="password_recover"><u>Забыли пароль?</u></string>
+
+    <!-- registration -->
+    <string name="registration_email_hint">Электронная почта*</string>
+    <string name="registration_password_hint">Пароль*</string>
+    <string name="registration_phone_hint">Телефон*</string>
+    <string name="registration_name_hint">Имя</string>
+    <string name="action_sign_up">Зарегистрироваться</string>
+    <string name="title_register">Регистрация</string>
 </resources>

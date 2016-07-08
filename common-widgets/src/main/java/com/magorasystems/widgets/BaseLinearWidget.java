@@ -19,11 +19,11 @@ import butterknife.Unbinder;
  *
  * @author karpenko
  */
-public abstract class BaseLinearWidget<M extends BaseViewModel, T> extends LinearLayout implements BaseWidget<M, T> {
+public abstract class BaseLinearWidget<INPUT, RESULT extends BaseViewModel> extends LinearLayout implements BaseWidget<INPUT, RESULT> {
 
     private Unbinder unbinder;
 
-    protected T model;
+    protected INPUT model;
 
     private WidgetAttributes widgetAttributes;
 
@@ -82,7 +82,7 @@ public abstract class BaseLinearWidget<M extends BaseViewModel, T> extends Linea
     }
 
     @Override
-    public void update(T model) {
+    public void update(INPUT model) {
         this.model = model;
     }
 }

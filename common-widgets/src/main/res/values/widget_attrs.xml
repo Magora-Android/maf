@@ -3,4 +3,7 @@
     <declare-styleable name="BaseWidget">
         <attr name="root_layout" format="reference"/>
     </declare-styleable>
+    <declare-styleable name="ValidationWidget">
+        <attr name="is_show_errors" format="boolean"/>
+    </declare-styleable>
 </resources>

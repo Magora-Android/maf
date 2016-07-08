@@ -9,13 +9,13 @@ import rx.Observable;
  *
  * @author Valentin S. Bolkonsky
  */
-public interface BaseWidget<M extends BaseViewModel, T> {
+public interface BaseWidget<INPUT, RESULT extends BaseViewModel> {
 
-    Observable<? super M> model();
+    Observable<? super RESULT> model();
 
     void destroyWidget();
 
     WidgetAttributes getWidgetAttributes();
 
-    void update(T model);
+    void update(INPUT model);
 }

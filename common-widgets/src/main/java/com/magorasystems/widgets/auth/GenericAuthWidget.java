@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.authmodule.widget;
+package com.magorasystems.widgets.auth;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -11,13 +11,13 @@ import android.view.ViewParent;
 import android.widget.TextView;
 
 import com.google.common.collect.Lists;
-import com.magorasystems.mafmodules.authmodule.performance.AuthViewModel;
 import com.magorasystems.widgets.BaseLinearWidget;
 import com.magorasystems.widgets.ValidationTextRule;
 import com.magorasystems.widgets.ValidationWidget;
 import com.magorasystems.widgets.WidgetAttributes;
 import com.magorasystems.widgets.WidgetAttributesReader;
 import com.magorasystems.widgets.WidgetTextUtils;
+import com.magorasystems.widgets.model.BaseViewModel;
 
 import java.util.Collection;
 import java.util.List;
@@ -32,23 +32,43 @@ import rx.subscriptions.CompositeSubscription;
  *
  * @author Valentin S. Bolkonsky
  */
-public abstract class BaseAuthWidget<M extends AuthViewModel, T> extends BaseLinearWidget<M, T> implements
+public abstract class GenericAuthWidget<INPUT, RESULT extends BaseViewModel> extends BaseLinearWidget<INPUT, RESULT> implements
+        IdentityWidget<INPUT, RESULT>,
         ValidationWidget<ValidationTextRule> {
+
+    /**
+     * Static method for start validation for text field.
+     *
+     * @param textView     - validation field
+     * @param pattern      - text regexp
+     * @param minLength    - count of chars (0 - ignore)
+     * @param subscription
+     * @param func
+     * @return
+     */
+    public static Observable<Boolean> validator(TextView textView, Pattern pattern, int minLength,
+                                                CompositeSubscription subscription, Action1<Boolean> func) {
+        final Observable<Boolean> validator = WidgetTextUtils.validationTextView(textView, pattern, minLength);
+        subscription.add(validator
+                .doOnNext(func)
+                .subscribe());
+        return validator;
+    }
 
     protected final CompositeSubscription subscription = new CompositeSubscription();
 
     protected Collection<ValidationTextRule> textRules;
 
-    public BaseAuthWidget(Context context, AttributeSet attrs) {
+    public GenericAuthWidget(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public BaseAuthWidget(Context context, AttributeSet attrs, int defStyleAttr) {
+    public GenericAuthWidget(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public BaseAuthWidget(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public GenericAuthWidget(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
@@ -99,17 +119,7 @@ public abstract class BaseAuthWidget<M extends AuthViewModel, T> extends BaseLin
         }
     }
 
-    public static Observable<Boolean> validator(TextView textView, Pattern pattern, int minLength,
-                                                CompositeSubscription subscription, Action1<Boolean> func) {
-        final Observable<Boolean> validator = WidgetTextUtils.validationTextView(textView, pattern, minLength);
-        subscription.add(validator
-                .doOnNext(func)
-                .subscribe());
-        return validator;
-    }
-
-
-    public void setError(boolean isValid, TextInputLayout textInputLayout, String message) {
+    protected void setError(boolean isValid, TextInputLayout textInputLayout, String message) {
         if (textInputLayout == null) {
             return;
         }
@@ -127,5 +137,10 @@ public abstract class BaseAuthWidget<M extends AuthViewModel, T> extends BaseLin
             return;
         }
         this.textRules = Lists.newArrayList(rules);
+    }
+
+    @Override
+    protected void onLayout(boolean b, int i, int i1, int i2, int i3) {
+
     }
 }
