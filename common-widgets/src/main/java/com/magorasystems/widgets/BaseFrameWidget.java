@@ -7,6 +7,7 @@ import android.support.annotation.LayoutRes;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.magorasystems.widgets.model.BaseViewModel;
@@ -17,7 +18,7 @@ import butterknife.Unbinder;
 /**
  * Developed by Magora Team (magora-systems.com). 2016.
  *
- * @author Valentin S.Bolkonsky
+ * @author karpenko
  */
 public abstract class BaseFrameWidget<INPUT, RESULT extends BaseViewModel> extends FrameLayout implements BaseWidget<INPUT, RESULT> {
 
@@ -27,7 +28,10 @@ public abstract class BaseFrameWidget<INPUT, RESULT extends BaseViewModel> exten
 
     private WidgetAttributes widgetAttributes;
 
+    private ViewGroup rootView;
+
     protected abstract WidgetAttributes readWidgetAttributes(Context context, AttributeSet attributeSet);
+
 
     public BaseFrameWidget(Context context, @LayoutRes int layoutId) {
         super(context);
@@ -51,13 +55,17 @@ public abstract class BaseFrameWidget<INPUT, RESULT extends BaseViewModel> exten
         readAttributes(context, attrs);
     }
 
+    public ViewGroup getView() {
+        return rootView;
+    }
+
     protected void readAttributes(Context context, AttributeSet attributeSet) {
         widgetAttributes = readWidgetAttributes(context, attributeSet);
         createView(widgetAttributes.getLayoutId());
     }
 
     @Override
-    public WidgetAttributes getWidgetAttributes() {
+    public final WidgetAttributes getWidgetAttributes() {
         return widgetAttributes;
     }
 
@@ -66,10 +74,11 @@ public abstract class BaseFrameWidget<INPUT, RESULT extends BaseViewModel> exten
     }
 
     protected final void createView(@LayoutRes int layout) {
-        final View view = LayoutInflater.from(getContext()).inflate(layout, this, true);
+        rootView = (ViewGroup) LayoutInflater.from(getContext()).inflate(layout, null);
+        addView(rootView, 0);
         if (!isInEditMode()) {
-            unbinder = ButterKnife.bind(this, view);
-            onViewCreated(view);
+            unbinder = ButterKnife.bind(this, rootView);
+            onViewCreated(rootView);
         }
     }
 
@@ -84,4 +93,5 @@ public abstract class BaseFrameWidget<INPUT, RESULT extends BaseViewModel> exten
     public void update(INPUT model) {
         this.model = model;
     }
+
 }

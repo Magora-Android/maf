@@ -11,7 +11,7 @@ import android.view.ViewParent;
 import android.widget.TextView;
 
 import com.google.common.collect.Lists;
-import com.magorasystems.widgets.BaseLinearWidget;
+import com.magorasystems.widgets.BaseFrameWidget;
 import com.magorasystems.widgets.ValidationTextRule;
 import com.magorasystems.widgets.ValidationWidget;
 import com.magorasystems.widgets.WidgetAttributes;
@@ -32,7 +32,7 @@ import rx.subscriptions.CompositeSubscription;
  *
  * @author Valentin S. Bolkonsky
  */
-public abstract class GenericAuthWidget<INPUT, RESULT extends BaseViewModel> extends BaseLinearWidget<INPUT, RESULT> implements
+public abstract class GenericAuthWidget<INPUT, RESULT extends BaseViewModel> extends BaseFrameWidget<INPUT, RESULT> implements
         IdentityWidget<INPUT, RESULT>,
         ValidationWidget<ValidationTextRule> {
 
@@ -137,10 +137,5 @@ public abstract class GenericAuthWidget<INPUT, RESULT extends BaseViewModel> ext
             return;
         }
         this.textRules = Lists.newArrayList(rules);
-    }
-
-    @Override
-    protected void onLayout(boolean b, int i, int i1, int i2, int i3) {
-
     }
 }
