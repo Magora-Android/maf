@@ -7,7 +7,6 @@ import com.magorasystems.mafmodules.network.config.TokenConfig;
 import com.magorasystems.mafmodules.network.exception.NetworkErrorException;
 import com.magorasystems.mafmodules.network.exception.NetworkErrorExceptionFactory;
 import com.magorasystems.mafmodules.network.manager.NetworkConnectionManager;
-import com.magorasystems.mafmodules.network.provider.RestBaseDataProvider;
 import com.magorasystems.mafmodules.network.rx.RxRestApiFunctions;
 import com.magorasystems.mafmodules.network.store.ApiTokenStorable;
 import com.magorasystems.protocolapi.auth.dto.response.AuthResponseData;
@@ -24,30 +23,25 @@ import rx.functions.Func1;
  *
  * @author Valentin S.Bolkonsky
  */
-public abstract class GenericRestRefreshTokenProvider<W, COMPONENT, TOKEN extends TokenConfig, S extends ApiTokenStorable<TOKEN>, R, A> extends RestBaseDataProvider<W, COMPONENT> implements BaseRefreshTokenProvider<A> {
+public abstract class GenericRestRefreshTokenProvider<W, COMPONENT, TOKEN extends TokenConfig, R, A>
+        extends GenericRestTokenProvider<W, COMPONENT, TOKEN> implements BaseRefreshTokenProvider<A> {
 
     protected R refreshTokenApiClient;
 
-    protected S tokenStorage;
-
     /**
-     *
-     * @param component - dagger component
-     * @param scheduler - background worker
-     * @param restApiClientWrapper - wrapper for profile api
+     * @param component             - dagger component
+     * @param scheduler             - background worker
+     * @param restApiClientWrapper  - wrapper for profile api
      * @param refreshTokenApiClient - client for refresh token
-     * @param tokenStorage - storage for tokens
+     * @param tokenStorage          - storage for tokens
      */
     public GenericRestRefreshTokenProvider(COMPONENT component, SchedulersUtils.CoreScheduler scheduler,
                                            W restApiClientWrapper,
                                            R refreshTokenApiClient,
-                                           S tokenStorage) {
-        super(component, scheduler, restApiClientWrapper);
+                                           ApiTokenStorable<TOKEN> tokenStorage) {
+        super(component, scheduler, restApiClientWrapper, tokenStorage);
         this.refreshTokenApiClient = refreshTokenApiClient;
-        this.tokenStorage = tokenStorage;
     }
-
-    protected abstract TOKEN getTokenConfig();
 
     protected <RESULT, RESPONSE extends AuthResponseData<?>> Func1<? super Observable<? extends Throwable>, ? extends Observable<?>> retryAndRefreshTokenFunc(
             final Observable<RESULT> toBeResumed, final Observable<RESPONSE> refresher, final NetworkConnectionManager networkConnectionManager) {
@@ -72,10 +66,10 @@ public abstract class GenericRestRefreshTokenProvider<W, COMPONENT, TOKEN extend
                                         final NetworkErrorException networkErrorException = NetworkErrorExceptionFactory.fromHttpException((HttpException) throwable);
                                         if (networkErrorException.isTokenExpired()) {
                                             return refresher.flatMap(r -> {
-                                                final TOKEN token = getTokenConfig();
+                                                final TOKEN token = getTokenConfig(SimpleTokenConfig.HEADER_FIELD_NAME);
                                                 token.setAccessToken(r.getAccessToken());
                                                 token.setRefreshToken(r.getRefreshToken());
-                                                tokenStorage.storeObject(SimpleTokenConfig.HEADER_FIELD_NAME, token);
+                                                saveToken(SimpleTokenConfig.HEADER_FIELD_NAME, token);
                                                 return toBeResumed;
                                             });
                                         } else {
@@ -95,7 +89,7 @@ public abstract class GenericRestRefreshTokenProvider<W, COMPONENT, TOKEN extend
 
     protected final <RESPONSE extends SuccessResponse<REF>, AUTH extends AuthResponseData<?>, REF> Observable.Transformer<RESPONSE, REF> commonTransformer(final Observable<RESPONSE> toBeResumed,
 
-                                                                                                                                                     final Observable<AUTH> refresher) {
+                                                                                                                                                           final Observable<AUTH> refresher) {
         return observable -> observable
                 .onBackpressureDrop()
                 .subscribeOn(scheduler.backgroundThread())

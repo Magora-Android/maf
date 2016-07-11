@@ -17,7 +17,9 @@ android {
         group 'com.magorasystems.android'
         versionCode gitVersion()
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
-
+        aaptOptions {
+            additionalParameters "--no-version-vectors"
+        }
     }
     buildTypes {
         release {
@@ -26,7 +28,7 @@ android {
         }
 
         debug {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

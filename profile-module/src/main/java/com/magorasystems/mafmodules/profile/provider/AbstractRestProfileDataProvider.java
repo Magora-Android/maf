@@ -12,24 +12,21 @@ import com.magorasystems.mafmodules.protocolapi.auth.response.StringAuthResponse
  * @author Valentin S.Bolkonsky
  */
 public abstract class AbstractRestProfileDataProvider<C, W, T, R, TOKEN extends TokenConfig, S extends ApiTokenStorable<TOKEN>>
-        extends GenericRestRefreshTokenProvider<W,C,TOKEN,S,R, StringAuthResponseData> implements ProfileDataProvider<T> {
+        extends GenericRestRefreshTokenProvider<W, C, TOKEN, R, StringAuthResponseData> implements ProfileDataProvider<T> {
 
     /**
-     *
-     * @param c - dagger component
-     * @param scheduler - background worker
-     * @param restApiClientWrapper - wrapper for profile api
+     * @param c                     - dagger component
+     * @param scheduler             - background worker
+     * @param restApiClientWrapper  - wrapper for profile api
      * @param refreshTokenApiClient - client for refresh token
-     * @param tokenStorage - storage for tokens
+     * @param tokenStorage          - storage for tokens
      */
     public AbstractRestProfileDataProvider(C c, SchedulersUtils.CoreScheduler scheduler,
                                            W restApiClientWrapper,
                                            R refreshTokenApiClient,
                                            S tokenStorage) {
-        super(c, scheduler,restApiClientWrapper,refreshTokenApiClient, tokenStorage);
+        super(c, scheduler, restApiClientWrapper, refreshTokenApiClient, tokenStorage);
     }
-
-
 
 
 }

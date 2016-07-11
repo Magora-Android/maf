@@ -50,4 +50,9 @@ public class SimpleSocialProviderImpl extends AbstractSocialProvider<SocialCompo
     protected SimpleTokenConfig getToken(AuthResponseData<? extends StringAuthInfo> response) {
         return new SimpleTokenConfig(response.getAccessToken(), response.getRefreshToken());
     }
+
+    @Override
+    protected SimpleTokenConfig getTokenConfig(String key) {
+        return tokenStorage.restoreObject(SimpleTokenConfig.HEADER_FIELD_NAME);
+    }
 }

@@ -20,14 +20,16 @@ import rx.Observable;
 public abstract class BaseRestProfileDataProvider<COMPONENT, W, T> extends
         AbstractRestProfileDataProvider<COMPONENT, W, T, RefreshTokenApiClient, SimpleTokenConfig, StringApiTokenStorage> {
 
-    public BaseRestProfileDataProvider(COMPONENT component, SchedulersUtils.CoreScheduler scheduler, W restApiClientWrapper, RefreshTokenApiClient refreshTokenApiClient, StringApiTokenStorage storable) {
+    public BaseRestProfileDataProvider(COMPONENT component, SchedulersUtils.CoreScheduler scheduler,
+                                       W restApiClientWrapper, RefreshTokenApiClient refreshTokenApiClient,
+                                       StringApiTokenStorage storable) {
         super(component, scheduler, restApiClientWrapper, refreshTokenApiClient, storable);
     }
 
 
     @Override
     public Observable<StringAuthResponseData> refreshToken() {
-        final SimpleTokenConfig tokenConfig = getTokenConfig();
+        final SimpleTokenConfig tokenConfig = getTokenConfig(SimpleTokenConfig.HEADER_FIELD_NAME);
         if (tokenConfig == null) {
             return Observable.error(new RestApiException("token config not set "));
         }
@@ -35,11 +37,13 @@ public abstract class BaseRestProfileDataProvider<COMPONENT, W, T> extends
                 new RefreshTokenRequest(tokenConfig.getRefreshToken()))
                 .onBackpressureDrop().subscribeOn(scheduler.backgroundThread());
         return observable.map(SuccessResponse::getData);
-    };
+    }
+
+    ;
 
     @Override
-    protected SimpleTokenConfig getTokenConfig() {
-        return tokenStorage.restoreObject(SimpleTokenConfig.HEADER_FIELD_NAME);
+    protected SimpleTokenConfig getTokenConfig(String key) {
+        return tokenStorage.restoreObject(key);
     }
 
     protected abstract Observable<? extends SuccessResponse<? super T>> callMyProfile();
