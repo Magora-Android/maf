@@ -138,4 +138,11 @@ public abstract class GenericAuthWidget<INPUT, RESULT extends BaseViewModel> ext
         }
         this.textRules = Lists.newArrayList(rules);
     }
+
+    @Override
+    public Observable<? extends RESULT> model() {
+        return Observable.just(getResult());
+    }
+
+    protected abstract RESULT getResult();
 }

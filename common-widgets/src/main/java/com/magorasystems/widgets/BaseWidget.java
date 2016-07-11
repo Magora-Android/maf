@@ -11,7 +11,7 @@ import rx.Observable;
  */
 public interface BaseWidget<INPUT, RESULT extends BaseViewModel> {
 
-    Observable<? super RESULT> model();
+    Observable<? extends RESULT> model();
 
     void destroyWidget();
 

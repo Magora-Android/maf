@@ -47,11 +47,8 @@ public class AuthWidget extends GenericAuthWidget<AuthViewModel, AuthViewModel> 
     }
 
     @Override
-    public Observable<AuthViewModel> model() {
-        return Observable.just(new AuthViewModel.Builder()
-                .login(textEmail.getText().toString())
-                .password(textPassword.getText().toString())
-                .build())
+    public Observable<? extends AuthViewModel> model() {
+        return super.model()
                 .doOnNext(model -> {
                     textPassword.setText(null);
                     textInputPassword.setError(null);
@@ -90,5 +87,13 @@ public class AuthWidget extends GenericAuthWidget<AuthViewModel, AuthViewModel> 
     protected final Observable<Boolean> validatorPassword(int minLength) {
         return validator(textPassword, PatternsUtils.patternPassword, minLength,
                 subscription, isValid -> setError(isValid, textInputPassword, getContext().getString(R.string.error_password_no_valid, minLength)));
+    }
+
+    @Override
+    protected AuthViewModel getResult() {
+        return new AuthViewModel.Builder()
+                .login(textEmail.getText().toString())
+                .password(textPassword.getText().toString())
+                .build();
     }
 }

@@ -52,7 +52,7 @@ public class SimpleRegistrationWidget extends AbstractRegistrationWidget<String,
     }
 
     @Override
-    public Observable<? super SimpleUserPasswordViewModel> model() {
+    public Observable<? extends SimpleUserPasswordViewModel> model() {
         return super.model()
                 .doOnNext(model -> {
                     textPassword.setText(null);

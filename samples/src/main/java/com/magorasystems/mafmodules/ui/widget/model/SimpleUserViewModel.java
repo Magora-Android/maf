@@ -31,6 +31,14 @@ public class SimpleUserViewModel extends UserViewModel<String> {
         return email;
     }
 
+    @Override
+    public String toString() {
+        return "SimpleUserViewModel{" +
+                "userName=" + userName +
+                ", phone=" + phone +
+                ", email=" + email +
+                '}';
+    }
 
     /**
      * {@code SimpleUserViewModel} builder static inner class.

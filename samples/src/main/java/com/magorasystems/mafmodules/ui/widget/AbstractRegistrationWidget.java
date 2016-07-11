@@ -10,8 +10,6 @@ import com.magorasystems.widgets.model.UserViewModel;
 
 import java.io.Serializable;
 
-import rx.Observable;
-
 /**
  * Developed 2016.
  *
@@ -34,11 +32,4 @@ public abstract class AbstractRegistrationWidget<ID extends Serializable,
     protected AbstractRegistrationWidget(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
-
-    @Override
-    public Observable<? super RESULT> model() {
-        return Observable.just(getResult());
-    }
-
-    protected abstract RESULT getResult();
 }

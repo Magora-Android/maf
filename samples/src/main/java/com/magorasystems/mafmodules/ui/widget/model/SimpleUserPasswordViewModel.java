@@ -18,4 +18,13 @@ public class SimpleUserPasswordViewModel extends SimpleUserViewModel {
         return password;
     }
 
+    @Override
+    public String toString() {
+        return "SimpleUserPasswordViewModel{" +
+                "email=" + getEmail() +
+                ", phone=" + getPhone() +
+                ", name=" + getUserName() +
+                ", password is set=" + (password != null) +
+                '}';
+    }
 }
