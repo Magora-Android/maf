@@ -20,8 +20,9 @@ public abstract class BaseComponentApplication<COMPONENT> extends Application
 
     private COMPONENT component;
     private ApplicationSettings settings;
-    protected Map<String, Object> subcomponents;
+    private Map<String, Object> subcomponents;
 
+    @SuppressWarnings("unchecked")
     public static <COMPONENT> ComponentApplication<COMPONENT> get(final Context context) {
         return (ComponentApplication<COMPONENT>) context.getApplicationContext();
     }
@@ -48,6 +49,19 @@ public abstract class BaseComponentApplication<COMPONENT> extends Application
     @Override
     public Context getContext() {
         return getApplicationContext();
+    }
+
+    @Override
+    public Object getComponent(String key) {
+        return subcomponents.get(key);
+    }
+
+    @Override
+    public void putComponent(String name, Object component) {
+        if (subcomponents.containsKey(name)) {
+            subcomponents.remove(name);
+        }
+        subcomponents.put(name, component);
     }
 
     /**

@@ -24,7 +24,7 @@ public abstract class BaseFrameWidget<INPUT, RESULT extends BaseViewModel> exten
 
     private Unbinder unbinder;
 
-    protected INPUT model;
+    private INPUT model;
 
     private WidgetAttributes widgetAttributes;
 
@@ -57,6 +57,10 @@ public abstract class BaseFrameWidget<INPUT, RESULT extends BaseViewModel> exten
 
     public ViewGroup getView() {
         return rootView;
+    }
+
+    protected final INPUT getModel() {
+        return model;
     }
 
     protected void readAttributes(Context context, AttributeSet attributeSet) {

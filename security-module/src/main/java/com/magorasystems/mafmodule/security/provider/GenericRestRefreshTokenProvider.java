@@ -26,7 +26,7 @@ import rx.functions.Func1;
 public abstract class GenericRestRefreshTokenProvider<W, COMPONENT, TOKEN extends TokenConfig, R, A>
         extends GenericRestTokenProvider<W, COMPONENT, TOKEN> implements BaseRefreshTokenProvider<A> {
 
-    protected R refreshTokenApiClient;
+    private R refreshTokenApiClient;
 
     /**
      * @param component             - dagger component
@@ -41,6 +41,10 @@ public abstract class GenericRestRefreshTokenProvider<W, COMPONENT, TOKEN extend
                                            ApiTokenStorable<TOKEN> tokenStorage) {
         super(component, scheduler, restApiClientWrapper, tokenStorage);
         this.refreshTokenApiClient = refreshTokenApiClient;
+    }
+
+    protected final R getRefreshTokenApiClient() {
+        return refreshTokenApiClient;
     }
 
     protected <RESULT, RESPONSE extends AuthResponseData<?>> Func1<? super Observable<? extends Throwable>, ? extends Observable<?>> retryAndRefreshTokenFunc(

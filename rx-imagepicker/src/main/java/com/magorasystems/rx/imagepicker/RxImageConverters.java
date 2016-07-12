@@ -37,14 +37,23 @@ public class RxImageConverters {
     }
 
     private static void copyInputStreamToFile(InputStream in, File file) throws IOException {
-        OutputStream out = new FileOutputStream(file);
-        byte[] buf = new byte[10 * 1024];
-        int len;
-        while ((len = in.read(buf)) > 0) {
-            out.write(buf, 0, len);
+        OutputStream out = null;
+        try {
+            out = new FileOutputStream(file);
+            byte[] buf = new byte[10 * 1024];
+            int len;
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            if (out != null) {
+                out.close();
+            }
+            in.close();
         }
-        out.close();
-        in.close();
+
     }
 
     public static Observable<Bitmap> uriToBitmap(final Context context, final Uri uri) {

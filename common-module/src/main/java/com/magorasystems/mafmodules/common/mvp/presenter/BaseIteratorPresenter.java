@@ -13,9 +13,13 @@ import com.magorasystems.mafmodules.common.mvp.view.BaseView;
 public abstract class BaseIteratorPresenter<I extends BaseInteractor, V extends BaseView, R extends BaseRouter, M, VO extends ViewOutput<? extends M>>
         extends CommonPresenter<V, R, M, VO> {
 
-    private I iterator;
+    private final I iterator;
 
     public BaseIteratorPresenter(I iterator) {
         this.iterator = iterator;
+    }
+
+    protected final I getIterator() {
+        return iterator;
     }
 }

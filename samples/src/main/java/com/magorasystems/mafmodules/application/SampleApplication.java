@@ -55,13 +55,10 @@ public class SampleApplication extends BaseComponentApplication<SampleComponent>
     public Object getComponent(String key) {
         switch (SampleComponents.find(key)) {
             case AUTH_COMPONENT:
-                return subcomponents.get(key);
             case COMMON_COMPONENT:
-                return subcomponents.get(key);
             case PROFILE_COMPONENT:
-                return subcomponents.get(key);
             case SOCIAL_COMPONENT:
-                return subcomponents.get(key);
+                return super.getComponent(key);
             default:
                 return getComponent();
         }
@@ -83,11 +80,11 @@ public class SampleApplication extends BaseComponentApplication<SampleComponent>
                 .build();
         sampleComponent.inject(this);
         setComponent(sampleComponent);
-        subcomponents.put(CommonModuleComponent.class.getSimpleName(), component);
-        subcomponents.put(AuthComponent.class.getSimpleName(), authComponent);
-        subcomponents.put(SampleComponent.class.getSimpleName(), sampleComponent);
-        subcomponents.put(ProfileComponent.class.getSimpleName(), profileComponent);
-        subcomponents.put(SocialComponent.class.getSimpleName(), socialComponent);
+        putComponent(CommonModuleComponent.class.getSimpleName(), component);
+        putComponent(AuthComponent.class.getSimpleName(), authComponent);
+        putComponent(SampleComponent.class.getSimpleName(), sampleComponent);
+        putComponent(ProfileComponent.class.getSimpleName(), profileComponent);
+        putComponent(SocialComponent.class.getSimpleName(), socialComponent);
         profileComponentProvider = new ProfileComponentProvider(this);
     }
 

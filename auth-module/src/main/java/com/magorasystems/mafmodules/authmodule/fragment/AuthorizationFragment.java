@@ -59,7 +59,7 @@ public abstract class AuthorizationFragment extends GenericFragment<AuthRouter> 
         super.onActivityCreated(savedInstanceState);
         inject((AuthComponent) ((HasComponent<?>) getActivity().getApplication()).getComponent(AuthComponent.class.getSimpleName()));
         getPresenter().attachView(this);
-        getPresenter().setRouter(router);
+        getPresenter().setRouter(getRouter());
         final PublishSubject<AuthViewModel> subject = PublishSubject.create();
         getAuthWidget().updateRules(getRules());
         AuthInteractiveView authInteractiveView = new AuthInteractiveViewImpl(

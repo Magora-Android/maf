@@ -12,14 +12,16 @@ import android.view.animation.Interpolator;
 import android.widget.Scroller;
 
 
+import com.magorasystems.widgets.BuildConfig;
+
 import java.lang.reflect.Field;
 
 /**
  * Created by S.A.B. on 20.01.2016.
  */
-public class FixedPager extends ViewPager {
+public final class FixedPager extends ViewPager {
 
-    public static boolean isDebug;
+    public static final boolean isDebug = BuildConfig.DEBUG;
 
     private boolean isEnabled = true;
 

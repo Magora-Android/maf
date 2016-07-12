@@ -33,13 +33,12 @@ public abstract class BaseRestProfileDataProvider<COMPONENT, W, T> extends
         if (tokenConfig == null) {
             return Observable.error(new RestApiException("token config not set "));
         }
-        Observable<SimpleStringAuthSuccessResponse> observable = refreshTokenApiClient.refreshToken(
+        Observable<SimpleStringAuthSuccessResponse> observable = getRefreshTokenApiClient().refreshToken(
                 new RefreshTokenRequest(tokenConfig.getRefreshToken()))
                 .onBackpressureDrop().subscribeOn(scheduler.backgroundThread());
         return observable.map(SuccessResponse::getData);
     }
 
-    ;
 
     @Override
     protected SimpleTokenConfig getTokenConfig(String key) {

@@ -24,10 +24,5 @@ public class MockSampleApplication extends SampleApplication {
         super.buildGraphAndInject();
     }
 
-    public void putComponent(String name, Object component) {
-        if (subcomponents.containsKey(name)) {
-            subcomponents.remove(name);
-        }
-        subcomponents.put(name, component);
-    }
+
 }

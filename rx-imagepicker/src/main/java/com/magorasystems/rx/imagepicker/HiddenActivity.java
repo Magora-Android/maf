@@ -51,6 +51,8 @@ public class HiddenActivity extends Activity {
                 case TAKE_PHOTO:
                     RxImagePicker.with(this).onImagePicked(cameraPictureUrl);
                     break;
+                default:
+                    break;
             }
         }
         finish();

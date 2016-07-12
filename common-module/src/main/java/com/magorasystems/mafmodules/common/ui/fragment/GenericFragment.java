@@ -23,7 +23,7 @@ public abstract class GenericFragment<ROUTER extends BaseRouter> extends BaseFra
     }
 
     @NonNull
-    protected ROUTER router;
+    private ROUTER router;
 
     protected abstract BasePresenter<? extends BaseView, ROUTER, ?, ? extends ViewOutput<?>> getPresenter();
 
@@ -44,6 +44,11 @@ public abstract class GenericFragment<ROUTER extends BaseRouter> extends BaseFra
                     "\' must be implement \'BaseRouter\' interface");
         }
         router = (ROUTER) activity;
+    }
+
+    @Override
+    public final ROUTER getRouter() {
+        return router;
     }
 
     /**

@@ -14,4 +14,6 @@ public interface ComponentApplication<COMPONENT> extends HasComponent<COMPONENT>
     Context getContext();
 
     ApplicationSettings getSettings();
+
+    void putComponent(String name, Object component);
 }

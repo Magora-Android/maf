@@ -7,6 +7,8 @@ import com.magorasystems.mafmodules.common.mvp.router.BaseRouter;
  *
  * @author Valentin S. Bolkonsky
  */
-public interface CommonFragment<T extends BaseRouter> extends BaseFragment {
+public interface CommonFragment<ROUTER extends BaseRouter> extends BaseFragment {
+
+    ROUTER getRouter();
 
 }

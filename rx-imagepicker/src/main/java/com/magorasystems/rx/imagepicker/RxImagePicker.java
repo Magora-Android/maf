@@ -47,7 +47,6 @@ public class RxImagePicker {
             publishSubject.onCompleted();
             publishSubject = null;
         }
-        instance = null;
     }
 
     private void startImagePickHiddenActivity(int imageSource) {
