@@ -1,11 +1,11 @@
 package com.magorasystems.mafmodules.dagger.component;
 
 import com.magorasystems.mafmodules.common.dagger.component.CommonModuleComponent;
-import com.magorasystems.mafmodules.dagger.module.ProfileInteractorModule;
-import com.magorasystems.mafmodules.dagger.module.ProfileNetworkModule;
-import com.magorasystems.mafmodules.dagger.module.ProfilePresenterModule;
-import com.magorasystems.mafmodules.dagger.module.ProfileProviderModule;
-import com.magorasystems.mafmodules.dagger.module.ProfileStoreModule;
+import com.magorasystems.mafmodules.dagger.module.profile.ProfileInteractorModule;
+import com.magorasystems.mafmodules.dagger.module.profile.ProfileNetworkModule;
+import com.magorasystems.mafmodules.dagger.module.profile.ProfilePresenterModule;
+import com.magorasystems.mafmodules.dagger.module.profile.ProfileProviderModule;
+import com.magorasystems.mafmodules.dagger.module.profile.ProfileStoreModule;
 import com.magorasystems.mafmodules.dagger.scope.ProfileScope;
 import com.magorasystems.mafmodules.interactor.SimpleProfileInteractor;
 import com.magorasystems.mafmodules.interactor.impl.SimpleProfileInteractorImpl;

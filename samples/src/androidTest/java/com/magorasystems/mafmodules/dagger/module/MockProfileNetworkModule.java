@@ -2,6 +2,7 @@ package com.magorasystems.mafmodules.dagger.module;
 
 import com.google.gson.Gson;
 import com.magorasystems.mafmodule.security.network.RefreshTokenApiClient;
+import com.magorasystems.mafmodules.dagger.module.profile.ProfileNetworkModule;
 import com.magorasystems.mafmodules.network.MockProfileRestClient;
 import com.magorasystems.mafmodules.network.MockRefreshTokenRestClient;
 import com.magorasystems.mafmodules.network.ProfileApiClient;

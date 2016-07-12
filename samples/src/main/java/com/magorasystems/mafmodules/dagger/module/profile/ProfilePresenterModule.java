@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.dagger.module;
+package com.magorasystems.mafmodules.dagger.module.profile;
 
 import android.content.Context;
 

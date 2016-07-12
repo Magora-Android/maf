@@ -4,6 +4,7 @@ import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
 import com.magorasystems.mafmodules.common.utils.store.PreferencesStorable;
 import com.magorasystems.mafmodules.network.config.TokenConfig;
 import com.magorasystems.mafmodules.network.store.ApiTokenStorable;
+import com.magorasystems.protocolapi.auth.dto.response.AuthInfo;
 import com.magorasystems.protocolapi.auth.dto.response.AuthResponseData;
 
 /**
@@ -11,7 +12,7 @@ import com.magorasystems.protocolapi.auth.dto.response.AuthResponseData;
  *
  * @author Valentin S.Bolkonsky
  */
-public abstract class GenericRestAuthTokenProvider<W, COMPONENT, TOKEN extends TokenConfig, AUTH, P extends PreferencesStorable<String, AUTH>>
+public abstract class GenericRestAuthTokenProvider<W, COMPONENT, TOKEN extends TokenConfig, AUTH extends AuthInfo, P extends PreferencesStorable<String, AUTH>>
         extends GenericRestTokenProvider<W, COMPONENT, TOKEN> {
 
     protected P authPreferencesStorage;

@@ -18,7 +18,7 @@ import com.magorasystems.mafmodules.dagger.component.ProfileComponentProvider;
 import com.magorasystems.mafmodules.dagger.component.SampleComponent;
 import com.magorasystems.mafmodules.dagger.component.SampleComponents;
 import com.magorasystems.mafmodules.dagger.component.SocialComponent;
-import com.magorasystems.mafmodules.dagger.module.ProfileNetworkModule;
+import com.magorasystems.mafmodules.dagger.module.profile.ProfileNetworkModule;
 import com.magorasystems.mafmodules.dagger.module.SampleApplicationModule;
 import com.magorasystems.rx.permission.RxResult;
 

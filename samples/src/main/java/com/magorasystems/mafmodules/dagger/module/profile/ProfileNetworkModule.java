@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.dagger.module;
+package com.magorasystems.mafmodules.dagger.module.profile;
 
 import com.google.gson.Gson;
 import com.magorasystems.mafmodule.security.network.RefreshTokenApiClient;
