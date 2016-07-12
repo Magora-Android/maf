@@ -7,7 +7,7 @@ import com.magorasystems.mafmodules.common.utils.store.PreferencesStorable;
 import com.magorasystems.mafmodules.dagger.component.SampleComponent;
 import com.magorasystems.mafmodules.network.SimpleRegistrationApiClientWrapper;
 import com.magorasystems.mafmodules.network.config.SimpleTokenConfig;
-import com.magorasystems.mafmodules.protocolapi.auth.request.RegistrationRequest;
+import com.magorasystems.protocolapi.auth.dto.request.AuthRequest;
 import com.magorasystems.protocolapi.auth.dto.response.AuthResponseData;
 import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
 
@@ -37,11 +37,11 @@ public class SimpleRegistrationProviderImpl extends RestRegistrationProvider<Sam
 
     @Override
     public void inject(SampleComponent sampleComponent) {
-
+        sampleComponent.inject(this);
     }
 
     @Override
-    public Observable<StringAuthInfo> registration(RegistrationRequest<?> request) {
+    public Observable<StringAuthInfo> registration(AuthRequest request) {
         return restApiClientWrapper.registration(request)
                 .compose(converter())
                 .doOnNext(response -> saveToken(SimpleTokenConfig.HEADER_FIELD_NAME, new SimpleTokenConfig(response.getAccessToken(), response.getRefreshToken())))

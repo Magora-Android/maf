@@ -5,8 +5,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.magorasystems.mafmodules.authmodule.performance.AuthViewModel;
 import com.magorasystems.mafmodules.common.utils.MiscUtils;
+import com.magorasystems.mafmodules.model.RegistrationMeta;
 import com.magorasystems.mafmodules.model.UserProfile;
 import com.magorasystems.mafmodules.network.config.SimpleTokenConfig;
+import com.magorasystems.mafmodules.network.request.SimpleRegistrationRequest;
 import com.magorasystems.mafmodules.network.response.ProfileSuccessResponse;
 import com.magorasystems.mafmodules.protocolapi.auth.response.SimpleStringAuthSuccessResponse;
 import com.magorasystems.mafmodules.protocolapi.auth.response.StringAuthResponseData;
@@ -81,8 +83,15 @@ public class JsonStub {
         final Faker faker = new Faker(Locale.US.getLanguage());
         final UserProfile profile = UserProfile.create(faker.number.positive(1L, 10000L),
                 faker.number.number(10), faker.name.name(), faker.name.firstName(),
-                faker.name.lastName(), faker.phoneNumber.phoneNumber(),faker.avatar.image());
+                faker.name.lastName(), faker.phoneNumber.phoneNumber(), faker.avatar.image());
         return generator(new ProfileSuccessResponse(profile));
+    }
+
+    public static SimpleRegistrationRequest generateRegistrationRequest() {
+        final Faker faker = new Faker(Locale.US.getLanguage());
+        final SimpleRegistrationRequest request = new SimpleRegistrationRequest(faker.internet.email(), faker.internet.password(),
+                new RegistrationMeta(faker.name.name(), faker.phoneNumber.phoneNumber()));
+        return request;
     }
 
     public static String generateTokenErrorResponse() {

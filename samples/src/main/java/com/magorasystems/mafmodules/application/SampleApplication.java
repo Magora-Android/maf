@@ -19,7 +19,6 @@ import com.magorasystems.mafmodules.dagger.component.SampleComponent;
 import com.magorasystems.mafmodules.dagger.component.SampleComponents;
 import com.magorasystems.mafmodules.dagger.component.SocialComponent;
 import com.magorasystems.mafmodules.dagger.module.profile.ProfileNetworkModule;
-import com.magorasystems.mafmodules.dagger.module.SampleApplicationModule;
 import com.magorasystems.rx.permission.RxResult;
 
 import org.apache.commons.lang3.StringUtils;
@@ -74,7 +73,6 @@ public class SampleApplication extends BaseComponentApplication<SampleComponent>
         final AuthComponent authComponent = AuthDaggerInner.buildGraph(component);
         final SampleComponent sampleComponent = DaggerSampleComponent.builder()
                 .commonModuleComponent(component)
-                .sampleApplicationModule(new SampleApplicationModule(this))
                 .build();
         final ProfileComponent profileComponent = DaggerProfileComponent.builder()
                 .commonModuleComponent(component)

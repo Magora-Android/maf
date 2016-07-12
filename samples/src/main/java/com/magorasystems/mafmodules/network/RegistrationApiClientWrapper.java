@@ -1,6 +1,6 @@
 package com.magorasystems.mafmodules.network;
 
-import com.magorasystems.mafmodules.protocolapi.auth.request.RegistrationRequest;
+import com.magorasystems.protocolapi.auth.dto.request.AuthRequest;
 import com.magorasystems.protocolapi.auth.dto.response.AuthInfo;
 import com.magorasystems.protocolapi.auth.dto.response.AuthResponseData;
 import com.magorasystems.protocolapi.dto.response.SuccessResponse;
@@ -16,5 +16,5 @@ import rx.Observable;
  */
 public interface RegistrationApiClientWrapper<ID extends Serializable, M extends AuthResponseData<? extends AuthInfo<ID>>> {
 
-    Observable<? extends SuccessResponse<? super M>> registration(RegistrationRequest<?> request);
+    Observable<? extends SuccessResponse<? super M>> registration(AuthRequest request);
 }

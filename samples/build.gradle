@@ -74,7 +74,7 @@ android {
         disable 'ExtraTranslation'
     }
     dexOptions {
-        incremental false
+        incremental true
         preDexLibraries = false
         javaMaxHeapSize "4g"
     }
@@ -87,7 +87,7 @@ android {
         javaVersion JavaVersion.VERSION_1_7
         defaultMethods false
         jvmArgs '-noverify'
-        incremental false
+        incremental true
     }
 
     // Always show the result of every unit test, even if it passes.

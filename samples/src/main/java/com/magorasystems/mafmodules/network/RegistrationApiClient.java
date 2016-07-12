@@ -1,7 +1,7 @@
 package com.magorasystems.mafmodules.network;
 
-import com.magorasystems.mafmodules.protocolapi.auth.request.RegistrationRequest;
 import com.magorasystems.mafmodules.protocolapi.auth.response.SimpleStringAuthSuccessResponse;
+import com.magorasystems.protocolapi.auth.dto.request.AuthRequest;
 
 import retrofit2.http.Body;
 import retrofit2.http.POST;
@@ -17,5 +17,5 @@ public interface RegistrationApiClient {
     String RESOURCE_REGISTRATION = "registration/internal/principals";
 
     @POST(RESOURCE_REGISTRATION)
-    Observable<SimpleStringAuthSuccessResponse> registration(@Body RegistrationRequest<?> request);
+    Observable<SimpleStringAuthSuccessResponse> registration(@Body AuthRequest request);
 }

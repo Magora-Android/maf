@@ -1,8 +1,8 @@
 package com.magorasystems.mafmodules.network;
 
-import com.magorasystems.mafmodules.protocolapi.auth.request.RegistrationRequest;
 import com.magorasystems.mafmodules.protocolapi.auth.response.SimpleStringAuthSuccessResponse;
 import com.magorasystems.mafmodules.protocolapi.auth.response.StringAuthResponseData;
+import com.magorasystems.protocolapi.auth.dto.request.AuthRequest;
 
 import rx.Observable;
 
@@ -14,5 +14,5 @@ import rx.Observable;
 public interface SimpleRegistrationApiClientWrapper extends RegistrationApiClientWrapper<String, StringAuthResponseData> {
 
     @Override
-    Observable<SimpleStringAuthSuccessResponse> registration(RegistrationRequest<?> request);
+    Observable<SimpleStringAuthSuccessResponse> registration(AuthRequest request);
 }

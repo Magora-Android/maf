@@ -27,7 +27,7 @@ android {
         }
 
         debug {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -54,6 +54,8 @@ android {
         disable 'InvalidPackage'
         disable 'ExtraTranslation'
     }
+
+
     dexOptions {
         incremental true
         preDexLibraries = false
@@ -65,6 +67,8 @@ android {
     }
 
     retrolambda {
+        jdk System.getenv("JAVA8_HOME")
+        oldJdk System.getenv("JAVA7_HOME")
         javaVersion JavaVersion.VERSION_1_7
         defaultMethods false
         jvmArgs '-noverify'
