@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.module;
+package com.magorasystems.mafmodules.module.input;
 
 import com.magorasystems.mafmodules.common.module.input.ViewInput;
 import com.magorasystems.mafmodules.view.RegistrationInteractiveView;
