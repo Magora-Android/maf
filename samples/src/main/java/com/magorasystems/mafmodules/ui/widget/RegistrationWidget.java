@@ -14,4 +14,6 @@ import java.io.Serializable;
 public interface RegistrationWidget<ID extends Serializable, INPUT extends UserViewModel<ID>, RESULT extends UserViewModel<ID>>
         extends IdentityWidget<INPUT, RESULT>, BaseWidget<INPUT, RESULT> {
 
+    void setEnabled(boolean isEnabled);
+
 }
