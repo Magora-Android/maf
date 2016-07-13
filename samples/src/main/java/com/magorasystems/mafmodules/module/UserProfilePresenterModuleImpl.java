@@ -9,7 +9,7 @@ import com.magorasystems.mafmodules.dagger.component.ProfileComponent;
 import com.magorasystems.mafmodules.model.UserProfile;
 import com.magorasystems.mafmodules.module.input.impl.UserProfileViewInput;
 import com.magorasystems.mafmodules.module.output.UserProfileViewOutput;
-import com.magorasystems.mafmodules.presenter.impl.SimpleProfilePresenter;
+import com.magorasystems.mafmodules.presenter.SimpleProfilePresenter;
 import com.magorasystems.mafmodules.profile.router.ProfileRouter;
 import com.magorasystems.mafmodules.store.UserProfilePreferencesStorage;
 import com.magorasystems.mafmodules.view.impl.UserProfileInteractiveView;

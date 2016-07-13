@@ -16,7 +16,7 @@ import rx.Subscriber;
  *
  * @author Valentin S.Bolkonsky
  */
-public abstract class AbstractRegistrationInteractor<ID extends Serializable, M extends AuthInfo<ID>> extends CommonInteractor<M> implements RegistrationInteractor<ID, M> {
+public abstract class AbstractRegistrationInteractor<M extends AuthInfo<? extends Serializable>> extends CommonInteractor<M> implements RegistrationInteractor<M> {
 
     protected AbstractRegistrationInteractor(SchedulersUtils.CoreScheduler scheduler) {
         super(scheduler);
@@ -27,5 +27,5 @@ public abstract class AbstractRegistrationInteractor<ID extends Serializable, M 
         execute(getProfileProvider().registration(request), subscriber);
     }
 
-    protected abstract RegistrationProvider<ID, M> getProfileProvider();
+    protected abstract RegistrationProvider<M> getProfileProvider();
 }

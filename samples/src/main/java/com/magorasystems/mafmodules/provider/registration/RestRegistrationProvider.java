@@ -19,7 +19,7 @@ import java.io.Serializable;
 public abstract class RestRegistrationProvider<COMPONENT, ID extends Serializable, M extends AuthInfo<ID>,
         WRAPPER extends RegistrationApiClientWrapper<ID, ? extends AuthResponseData<M>>, TOKEN extends TokenConfig>
         extends GenericRestAuthTokenProvider<WRAPPER, COMPONENT, TOKEN, M,PreferencesStorable<String, M>>
-        implements RegistrationProvider<ID, M> {
+        implements RegistrationProvider<M> {
 
     protected RestRegistrationProvider(COMPONENT component, SchedulersUtils.CoreScheduler scheduler, WRAPPER restApiClientWrapper,
                                        ApiTokenStorable<TOKEN> tokenStorage, PreferencesStorable<String, M> authPreferencesStorage) {

@@ -63,6 +63,7 @@ public abstract class BaseIteratorLcePresenter<M, I extends BaseInteractor<? sup
 
     @Override
     public void destroy() {
+        getIteractor().unsubscribe();
         destroyPublisher();
     }
 

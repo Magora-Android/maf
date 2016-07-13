@@ -10,7 +10,7 @@ import rx.Subscriber;
  *
  * @author Valentin S.Bolkonsky
  */
-public interface SimpleRegistrationInteractor extends RegistrationInteractor<String, StringAuthInfo> {
+public interface SimpleRegistrationInteractor extends RegistrationInteractor<StringAuthInfo> {
 
     @Override
     void executeRegistration(AuthRequest request, Subscriber<StringAuthInfo> subscriber);

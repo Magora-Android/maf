@@ -4,7 +4,7 @@ import com.magorasystems.mafmodules.common.utils.component.HasComponent;
 import com.magorasystems.mafmodules.common.utils.component.Injectable;
 import com.magorasystems.mafmodules.module.UserProfilePresenterModule;
 import com.magorasystems.mafmodules.network.UserProfileApiClientWrapper;
-import com.magorasystems.mafmodules.presenter.impl.SimpleProfilePresenter;
+import com.magorasystems.mafmodules.presenter.SimpleProfilePresenter;
 import com.magorasystems.mafmodules.store.UserProfilePreferencesStorage;
 
 import javax.inject.Inject;

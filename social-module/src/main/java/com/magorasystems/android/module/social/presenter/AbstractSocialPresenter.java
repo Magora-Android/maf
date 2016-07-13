@@ -40,7 +40,6 @@ public abstract class AbstractSocialPresenter<ID extends Serializable,
 
     @Override
     public void onStop() {
-        getIteractor().unsubscribe();
         destroy();
     }
 }

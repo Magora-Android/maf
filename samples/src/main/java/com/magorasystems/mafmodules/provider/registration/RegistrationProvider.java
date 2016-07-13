@@ -13,7 +13,7 @@ import rx.Observable;
  *
  * @author Valentin S.Bolkonsky
  */
-public interface RegistrationProvider<ID extends Serializable, M extends AuthInfo<ID>> extends BaseProvider<M> {
+public interface RegistrationProvider<M extends AuthInfo<? extends Serializable>> extends BaseProvider<M> {
 
     Observable<M> registration(AuthRequest request);
 }

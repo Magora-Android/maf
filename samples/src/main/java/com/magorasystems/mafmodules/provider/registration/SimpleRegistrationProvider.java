@@ -7,5 +7,5 @@ import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
  *
  * @author Valentin S.Bolkonsky
  */
-public interface SimpleRegistrationProvider extends RegistrationProvider<String, StringAuthInfo> {
+public interface SimpleRegistrationProvider extends RegistrationProvider<StringAuthInfo> {
 }

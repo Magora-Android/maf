@@ -13,7 +13,7 @@ import rx.Subscriber;
  *
  * @author Valentin S.Bolkonsky
  */
-public interface RegistrationInteractor<ID extends Serializable, M extends AuthInfo<ID>> extends BaseInteractor<M> {
+public interface RegistrationInteractor<M extends AuthInfo<? extends Serializable>> extends BaseInteractor<M> {
 
     void executeRegistration(AuthRequest request, Subscriber<M> subscriber);
 }

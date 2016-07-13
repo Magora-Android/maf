@@ -10,7 +10,7 @@ import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
  *
  * @author Valentin S.Bolkonsky
  */
-public class SimpleRegistrationInteractorImpl extends AbstractRegistrationInteractor<String, StringAuthInfo>
+public class SimpleRegistrationInteractorImpl extends AbstractRegistrationInteractor<StringAuthInfo>
         implements SimpleRegistrationInteractor {
 
     private SimpleRegistrationProvider provider;

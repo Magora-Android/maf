@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.presenter.impl;
+package com.magorasystems.mafmodules.presenter;
 
 import com.magorasystems.mafmodules.model.UserProfile;
 import com.magorasystems.mafmodules.module.output.UserProfileViewOutput;

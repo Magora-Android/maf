@@ -9,7 +9,7 @@ import com.magorasystems.mafmodules.dagger.module.MockProfileNetworkModule;
 import com.magorasystems.mafmodules.dagger.rules.DaggerProfileComponentRule;
 import com.magorasystems.mafmodules.model.UserProfile;
 import com.magorasystems.mafmodules.network.RestApiTestSubscriber;
-import com.magorasystems.mafmodules.presenter.impl.SimpleProfilePresenter;
+import com.magorasystems.mafmodules.presenter.SimpleProfilePresenter;
 import com.magorasystems.mafmodules.view.impl.UserProfileLceView;
 
 import org.junit.Assert;

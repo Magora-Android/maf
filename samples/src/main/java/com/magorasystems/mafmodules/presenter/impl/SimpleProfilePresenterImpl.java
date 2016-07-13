@@ -10,6 +10,7 @@ import com.magorasystems.mafmodules.interactor.SimpleProfileInteractor;
 import com.magorasystems.mafmodules.model.UserProfile;
 import com.magorasystems.mafmodules.module.output.UserProfileViewOutput;
 import com.magorasystems.mafmodules.module.output.UserProfileViewOutputImpl;
+import com.magorasystems.mafmodules.presenter.SimpleProfilePresenter;
 import com.magorasystems.mafmodules.profile.presenter.GenericProfilePresenter;
 import com.magorasystems.mafmodules.profile.router.ProfileRouter;
 import com.magorasystems.mafmodules.view.impl.UserProfileLceView;
