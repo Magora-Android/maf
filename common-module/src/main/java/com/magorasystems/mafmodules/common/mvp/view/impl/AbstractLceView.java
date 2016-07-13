@@ -17,10 +17,6 @@ public abstract class AbstractLceView<M> implements BaseLceView<M> {
     private WeakReference<View> progressView;
     private WeakReference<View> contentView;
 
-    protected abstract void showContent(@NonNull View view);
-
-    protected abstract void showProgress(@NonNull View view);
-
     protected AbstractLceView(View progressView, View contentView) {
         this.progressView = new WeakReference<>(progressView);
         this.contentView = new WeakReference<>(contentView);
@@ -40,7 +36,7 @@ public abstract class AbstractLceView<M> implements BaseLceView<M> {
 
     @Override
     public void showProgress() {
-        final View view = progressView.get();
+        final View view = getProgressView();
         if (view != null) {
             showProgress(view);
         }
@@ -48,7 +44,7 @@ public abstract class AbstractLceView<M> implements BaseLceView<M> {
 
     @Override
     public void showContent() {
-        final View view = contentView.get();
+        final View view = getContentView();
         if (view != null) {
             showContent(view);
         }
@@ -63,4 +59,30 @@ public abstract class AbstractLceView<M> implements BaseLceView<M> {
     public void showError(Throwable e) {
 
     }
+
+    protected final View getProgressView() {
+        return progressView.get();
+    }
+
+    protected final View getContentView() {
+        return contentView.get();
+    }
+
+    protected void showContent(@NonNull View view) {
+        view.setEnabled(true);
+        final View progressView = getProgressView();
+        if (progressView != null) {
+            progressView.setVisibility(View.GONE);
+        }
+    }
+
+    protected void showProgress(@NonNull View view) {
+        view.setVisibility(View.VISIBLE);
+        final View contentView = getContentView();
+        if (contentView != null) {
+            contentView.setEnabled(false);
+        }
+    }
+
+
 }

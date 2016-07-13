@@ -6,6 +6,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.view.View;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.magorasystems.mafmodules.common.mvp.view.impl.AbstractLceView;
 import com.magorasystems.mafmodules.model.UserProfile;
 import com.magorasystems.widgets.utils.ColorGenerator;
 
@@ -20,44 +21,17 @@ import java.lang.ref.WeakReference;
  *
  * @author Valentin S.Bolkonsky
  */
-public class UserProfileLceViewImpl implements UserProfileLceView {
+public class UserProfileLceViewImpl extends AbstractLceView<UserProfile> implements UserProfileLceView {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserProfileLceViewImpl.class);
 
-    private final WeakReference<View> progressView;
-    private final WeakReference<View> contentView;
     private final WeakReference<SimpleDraweeView> avatarView;
     private final WeakReference<CollapsingToolbarLayout> toolbar;
 
     public UserProfileLceViewImpl(View progressView, View contentView, SimpleDraweeView avatar, CollapsingToolbarLayout toolbar) {
-        this.progressView = new WeakReference<>(progressView);
-        this.contentView = new WeakReference<>(contentView);
+        super(progressView, contentView);
         this.avatarView = new WeakReference<>(avatar);
         this.toolbar = new WeakReference<>(toolbar);
-    }
-
-    @Override
-    public void showProgress() {
-        final View progress = progressView.get();
-        if (progress != null) {
-            progress.setVisibility(View.VISIBLE);
-        }
-        final View content = contentView.get();
-        if (content != null) {
-            content.setEnabled(false);
-        }
-    }
-
-    @Override
-    public void showContent() {
-        final View progress = progressView.get();
-        if (progress != null) {
-            progress.setVisibility(View.INVISIBLE);
-        }
-        final View content = contentView.get();
-        if (content != null) {
-            content.setEnabled(true);
-        }
     }
 
     @Override
@@ -68,9 +42,11 @@ public class UserProfileLceViewImpl implements UserProfileLceView {
 
     @Override
     public void detachView() {
-        progressView.clear();
-        contentView.clear();
+        super.detachView();
+        avatarView.clear();
+        toolbar.clear();
     }
+
 
     @Override
     public void showError(Throwable e) {
