@@ -2,7 +2,10 @@ package com.magorasystems.mafmodules.dagger.component;
 
 import com.magorasystems.mafmodules.application.SampleApplication;
 import com.magorasystems.mafmodules.common.dagger.component.CommonModuleComponent;
+import com.magorasystems.mafmodules.dagger.module.SampleInteractorModule;
+import com.magorasystems.mafmodules.dagger.module.SampleModulePresenterModule;
 import com.magorasystems.mafmodules.dagger.module.SampleNetworkModule;
+import com.magorasystems.mafmodules.dagger.module.SamplePresenterModule;
 import com.magorasystems.mafmodules.dagger.module.SampleProvidersModule;
 import com.magorasystems.mafmodules.dagger.module.SampleStoreModule;
 import com.magorasystems.mafmodules.dagger.scope.ApplicationScope;
@@ -24,6 +27,9 @@ import dagger.Component;
            modules = {
                    SampleProvidersModule.class,
                    SampleNetworkModule.class,
+                   SampleModulePresenterModule.class,
+                   SampleInteractorModule.class,
+                   SamplePresenterModule.class,
                    SampleStoreModule.class
            })
 @ApplicationScope
