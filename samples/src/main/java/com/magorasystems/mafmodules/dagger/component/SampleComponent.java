@@ -6,6 +6,7 @@ import com.magorasystems.mafmodules.dagger.module.SampleNetworkModule;
 import com.magorasystems.mafmodules.dagger.module.SampleProvidersModule;
 import com.magorasystems.mafmodules.dagger.module.SampleStoreModule;
 import com.magorasystems.mafmodules.dagger.scope.ApplicationScope;
+import com.magorasystems.mafmodules.module.SimpleRegistrationPresenterModuleImpl;
 import com.magorasystems.mafmodules.provider.registration.SimpleRegistrationProvider;
 import com.magorasystems.mafmodules.provider.registration.SimpleRegistrationProviderImpl;
 import com.magorasystems.mafmodules.ui.activity.SampleActivity;
@@ -37,4 +38,6 @@ public interface SampleComponent {
     void inject(SocialAuthorizationActivity activity);
 
     void inject(SimpleRegistrationProviderImpl p);
+
+    void inject(SimpleRegistrationPresenterModuleImpl m);
 }

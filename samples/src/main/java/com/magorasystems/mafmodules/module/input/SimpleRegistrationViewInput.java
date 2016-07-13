@@ -9,5 +9,5 @@ import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
  *
  * @author Valentin S.Bolkonsky
  */
-public interface SimpleRegistrationInputView extends RegistrationViewInput<StringAuthInfo, SimpleRegistrationLceView,SimpleRegistrationInteractiveView> {
+public interface SimpleRegistrationViewInput extends RegistrationViewInput<StringAuthInfo, SimpleRegistrationLceView,SimpleRegistrationInteractiveView> {
 }

@@ -1,6 +1,6 @@
 package com.magorasystems.mafmodules.module.input.impl;
 
-import com.magorasystems.mafmodules.module.input.SimpleRegistrationInputView;
+import com.magorasystems.mafmodules.module.input.SimpleRegistrationViewInput;
 import com.magorasystems.mafmodules.view.SimpleRegistrationInteractiveView;
 import com.magorasystems.mafmodules.view.impl.SimpleRegistrationLceView;
 import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
@@ -10,11 +10,11 @@ import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
  *
  * @author Valentin S.Bolkonsky
  */
-public class SimpleRegistrationInputViewImpl extends AbstractRegistrationViewInput<StringAuthInfo,
+public class SimpleRegistrationViewInputImpl extends AbstractRegistrationViewInput<StringAuthInfo,
         SimpleRegistrationLceView, SimpleRegistrationInteractiveView>
-        implements SimpleRegistrationInputView {
+        implements SimpleRegistrationViewInput {
 
-    public SimpleRegistrationInputViewImpl(SimpleRegistrationLceView passiveView, SimpleRegistrationInteractiveView interactiveView) {
+    public SimpleRegistrationViewInputImpl(SimpleRegistrationLceView passiveView, SimpleRegistrationInteractiveView interactiveView) {
         super(passiveView, interactiveView);
     }
 }
