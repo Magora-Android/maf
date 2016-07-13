@@ -2,4 +2,6 @@
 <resources>
     <string name="error_email_no_valid">Email указан не верно</string>
     <string name="error_password_no_valid">Длина пароля меньше %d символов или содержит недопустимые символы</string>
+    <string name="error_phone_no_valid">Телефон указан не верно</string>
+    <string name="error_field_empty">Поле не может быть пустым</string>
 </resources>

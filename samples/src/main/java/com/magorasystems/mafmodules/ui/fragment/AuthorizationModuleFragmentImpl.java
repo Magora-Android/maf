@@ -9,6 +9,7 @@ import com.google.common.collect.Lists;
 import com.magorasystems.mafmodules.R;
 import com.magorasystems.mafmodules.authmodule.fragment.AuthorizationModuleFragment;
 import com.magorasystems.mafmodules.authmodule.widget.AuthWidget;
+import com.magorasystems.mafmodules.ui.activity.AuthorizationModuleActivity;
 import com.magorasystems.protocolapi.auth.dto.response.AuthInfo;
 import com.magorasystems.widgets.ValidationTextRule;
 import com.magorasystems.widgets.WidgetUtils;
@@ -21,6 +22,7 @@ import java.util.Collection;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Developed by Magora Team (magora-systems.com). 2016.
@@ -92,6 +94,12 @@ public class AuthorizationModuleFragmentImpl extends AuthorizationModuleFragment
     public void onNotAuth() {
         LOGGER.debug("onNotAuth");
         WidgetUtils.hideSoftKeyboard(getActivity());
+    }
+
+    @OnClick(R.id.button_go_sign_up)
+    protected void onGoToSignUp() {
+        LOGGER.debug("onGoToSignUp");
+        ((AuthorizationModuleActivity) getActivity()).onGoToRegistration();
     }
 
     @Override

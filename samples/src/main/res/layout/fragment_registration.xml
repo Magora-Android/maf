@@ -26,12 +26,13 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
+            android:id="@+id/content_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <ProgressBar
-                android:id="@+id/progress_layout"
+                android:id="@+id/progress_view"
                 style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="4dp"
@@ -42,50 +43,50 @@
                 android:visibility="invisible"
                 tools:visibility="visible"/>
 
-            <com.magorasystems.mafmodules.authmodule.widget.AuthWidget
-                android:id="@+id/widget_authorization"
+            <com.magorasystems.mafmodules.ui.widget.SimpleRegistrationWidget
+                android:id="@+id/widget_registration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:is_show_errors="true"
-                app:root_layout="@layout/widget_authorization"/>
+                app:root_layout="@layout/widget_registrer"/>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
                 android:padding="@dimen/standard_screen_padding_vertical">
 
                 <TextView
-                    android:id="@+id/text_password_recover"
+                    android:id="@+id/text_terms"
                     style="@style/Base.TextAppearance.AppCompat.Caption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:text="@string/password_recover"/>
+                    android:text="@string/registration_terms_and_condition"/>
 
                 <Button
-                    android:id="@+id/button_sign_in"
+                    android:id="@+id/button_sign_up"
                     style="@style/Base.Widget.AppCompat.Button.Colored"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
                     android:enabled="false"
-                    android:text="@string/action_sign_in"
+                    android:text="@string/action_sign_up"
                     tools:enable="true"/>
-            </RelativeLayout>
 
-            <TextView
-                android:id="@+id/button_go_sign_up"
-                style="@style/Base.TextAppearance.AppCompat.Caption"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autoLink="all"
-                android:enabled="true"
-                android:gravity="center"
-                android:padding="@dimen/standard_screen_padding_vertical"
-                android:text="@string/auth_sign_up_button"
-                android:textColor="@color/colorAccent"/>
+                <TextView
+                    android:id="@+id/button_go_sign_in"
+                    style="@style/Base.TextAppearance.AppCompat.Caption"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autoLink="all"
+                    android:enabled="true"
+                    android:gravity="center"
+                    android:padding="@dimen/standard_screen_padding_vertical"
+                    android:text="@string/auth_sign_in_button"
+                    android:textColor="@color/colorAccent"/>
+            </LinearLayout>
+
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+
 </android.support.design.widget.CoordinatorLayout>

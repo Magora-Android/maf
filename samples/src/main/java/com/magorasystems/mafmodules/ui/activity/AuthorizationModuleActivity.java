@@ -7,7 +7,7 @@ import com.magorasystems.mafmodules.authmodule.activity.AuthorizationActivity;
 import com.magorasystems.mafmodules.authmodule.dagger.component.AuthComponent;
 import com.magorasystems.mafmodules.authmodule.fragment.AuthorizationModuleFragment;
 import com.magorasystems.mafmodules.ui.fragment.AuthorizationModuleFragmentImpl;
-import com.magorasystems.mafmodules.ui.fragment.AuthorizationModuleSupportFragmentImpl;
+import com.magorasystems.mafmodules.ui.fragment.SimpleRegistrationFragment;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,8 +24,8 @@ public class AuthorizationModuleActivity extends AuthorizationActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setFragment(makeFragment());
-        setSupportFragment(AuthorizationModuleSupportFragmentImpl.makeFragment());
+        setFragment(makeFragment());
+        //setSupportFragment(AuthorizationModuleSupportFragmentImpl.makeFragment());
     }
 
     @Override
@@ -36,6 +36,10 @@ public class AuthorizationModuleActivity extends AuthorizationActivity {
     @Override
     public void onRecoverPassword() {
         LOGGER.debug("onRecoverPassword");
+    }
+
+    public void onGoToRegistration() {
+        setFragment(SimpleRegistrationFragment.makeFragment());
     }
 
     @Override

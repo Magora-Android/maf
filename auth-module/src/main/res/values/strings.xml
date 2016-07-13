@@ -14,4 +14,7 @@
     <string name="registration_name_hint">Имя</string>
     <string name="action_sign_up">Зарегистрироваться</string>
     <string name="title_register">Регистрация</string>
+    <string name="registration_terms_and_condition"><u>Создавая аккаунт, вы принимаете\nпользовательское соглашение</u></string>
+    <string name="auth_sign_in_button"><u>или войти</u></string>
+    <string name="auth_sign_up_button"><u>или регистрация</u></string>
 </resources>

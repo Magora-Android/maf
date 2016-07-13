@@ -7,25 +7,6 @@ import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
  *
  * @author Valentin S.Bolkonsky
  */
-public class SimpleRegistrationRouter implements RegistrationRouter<StringAuthInfo> {
+public interface SimpleRegistrationRouter extends RegistrationRouter<StringAuthInfo> {
 
-    @Override
-    public void onAfterRegistration(StringAuthInfo info) {
-
-    }
-
-    @Override
-    public void onGoToAuthorization() {
-
-    }
-
-    @Override
-    public void onBack() {
-
-    }
-
-    @Override
-    public void onShowError(Throwable throwable) {
-
-    }
 }

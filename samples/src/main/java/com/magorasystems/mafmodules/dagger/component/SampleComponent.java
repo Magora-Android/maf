@@ -14,6 +14,7 @@ import com.magorasystems.mafmodules.provider.registration.SimpleRegistrationProv
 import com.magorasystems.mafmodules.provider.registration.SimpleRegistrationProviderImpl;
 import com.magorasystems.mafmodules.ui.activity.SampleActivity;
 import com.magorasystems.mafmodules.ui.activity.SocialAuthorizationActivity;
+import com.magorasystems.mafmodules.ui.fragment.SimpleRegistrationFragment;
 
 import dagger.Component;
 
@@ -46,4 +47,6 @@ public interface SampleComponent {
     void inject(SimpleRegistrationProviderImpl p);
 
     void inject(SimpleRegistrationPresenterModuleImpl m);
+
+    void inject(SimpleRegistrationFragment f);
 }
