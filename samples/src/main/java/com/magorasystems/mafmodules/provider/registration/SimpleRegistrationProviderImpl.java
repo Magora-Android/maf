@@ -7,6 +7,7 @@ import com.magorasystems.mafmodules.common.utils.store.PreferencesStorable;
 import com.magorasystems.mafmodules.dagger.component.SampleComponent;
 import com.magorasystems.mafmodules.network.SimpleRegistrationApiClientWrapper;
 import com.magorasystems.mafmodules.network.config.SimpleTokenConfig;
+import com.magorasystems.mafmodules.registration.provider.RestRegistrationProvider;
 import com.magorasystems.protocolapi.auth.dto.request.AuthRequest;
 import com.magorasystems.protocolapi.auth.dto.response.AuthResponseData;
 import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;

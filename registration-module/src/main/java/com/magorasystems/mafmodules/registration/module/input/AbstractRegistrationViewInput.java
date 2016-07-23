@@ -1,9 +1,8 @@
-package com.magorasystems.mafmodules.module.input.impl;
+package com.magorasystems.mafmodules.registration.module.input;
 
 import com.magorasystems.mafmodules.common.module.input.AbstractViewInput;
-import com.magorasystems.mafmodules.module.input.RegistrationViewInput;
-import com.magorasystems.mafmodules.view.RegistrationInteractiveView;
-import com.magorasystems.mafmodules.view.RegistrationLceView;
+import com.magorasystems.mafmodules.registration.view.RegistrationInteractiveView;
+import com.magorasystems.mafmodules.registration.view.RegistrationLceView;
 import com.magorasystems.protocolapi.auth.dto.response.AuthInfo;
 
 import java.io.Serializable;

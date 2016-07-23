@@ -8,6 +8,8 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 import com.magorasystems.mafmodules.R;
+import com.magorasystems.mafmodules.registration.ui.widget.AbstractRegistrationWidget;
+import com.magorasystems.mafmodules.registration.ui.widget.ValidationRegistrationWidget;
 import com.magorasystems.mafmodules.ui.widget.model.SimpleUserPasswordViewModel;
 import com.magorasystems.mafmodules.ui.widget.model.SimpleUserViewModel;
 

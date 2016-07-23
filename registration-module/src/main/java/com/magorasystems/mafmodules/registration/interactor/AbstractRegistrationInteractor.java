@@ -1,9 +1,8 @@
-package com.magorasystems.mafmodules.interactor.impl;
+package com.magorasystems.mafmodules.registration.interactor;
 
 import com.magorasystems.mafmodules.common.mvp.interactor.CommonInteractor;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
-import com.magorasystems.mafmodules.interactor.RegistrationInteractor;
-import com.magorasystems.mafmodules.provider.registration.RegistrationProvider;
+import com.magorasystems.mafmodules.registration.provider.RegistrationProvider;
 import com.magorasystems.protocolapi.auth.dto.request.AuthRequest;
 import com.magorasystems.protocolapi.auth.dto.response.AuthInfo;
 

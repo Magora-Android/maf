@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.ui.fragment;
+package com.magorasystems.mafmodules.common.ui.fragment;
 
 import com.magorasystems.mafmodules.common.module.base.ModuleInput;
 import com.magorasystems.mafmodules.common.module.base.ModulePresenter;
@@ -7,7 +7,6 @@ import com.magorasystems.mafmodules.common.module.input.ViewInput;
 import com.magorasystems.mafmodules.common.module.output.ViewOutput;
 import com.magorasystems.mafmodules.common.mvp.router.BaseRouter;
 import com.magorasystems.mafmodules.common.mvp.view.BaseLceView;
-import com.magorasystems.mafmodules.common.ui.fragment.GenericModuleFragment;
 
 import javax.inject.Inject;
 

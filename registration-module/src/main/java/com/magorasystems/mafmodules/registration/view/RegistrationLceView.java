@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.view;
+package com.magorasystems.mafmodules.registration.view;
 
 import com.magorasystems.mafmodules.common.mvp.view.BaseLceView;
 import com.magorasystems.protocolapi.auth.dto.response.AuthInfo;

@@ -1,5 +1,6 @@
 package com.magorasystems.mafmodules.interactor;
 
+import com.magorasystems.mafmodules.registration.interactor.RegistrationInteractor;
 import com.magorasystems.protocolapi.auth.dto.request.AuthRequest;
 import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
 

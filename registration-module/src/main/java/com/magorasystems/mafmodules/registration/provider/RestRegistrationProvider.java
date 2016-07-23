@@ -1,9 +1,9 @@
-package com.magorasystems.mafmodules.provider.registration;
+package com.magorasystems.mafmodules.registration.provider;
 
 import com.magorasystems.mafmodule.security.provider.GenericRestAuthTokenProvider;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
 import com.magorasystems.mafmodules.common.utils.store.PreferencesStorable;
-import com.magorasystems.mafmodules.network.RegistrationApiClientWrapper;
+import com.magorasystems.mafmodules.registration.network.RegistrationApiClientWrapper;
 import com.magorasystems.mafmodules.network.config.TokenConfig;
 import com.magorasystems.mafmodules.network.store.ApiTokenStorable;
 import com.magorasystems.protocolapi.auth.dto.response.AuthInfo;

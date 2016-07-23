@@ -1,5 +1,6 @@
 package com.magorasystems.mafmodules.view;
 
+import com.magorasystems.mafmodules.registration.view.RegistrationInteractiveView;
 import com.magorasystems.mafmodules.ui.widget.model.SimpleUserPasswordViewModel;
 
 /**

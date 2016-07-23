@@ -2,6 +2,7 @@ package com.magorasystems.mafmodules.view.impl;
 
 import android.view.View;
 
+import com.magorasystems.mafmodules.registration.view.AbstractRegistrationInteractiveView;
 import com.magorasystems.mafmodules.ui.widget.SimpleRegistrationWidget;
 import com.magorasystems.mafmodules.ui.widget.model.SimpleUserPasswordViewModel;
 import com.magorasystems.mafmodules.view.SimpleRegistrationInteractiveView;

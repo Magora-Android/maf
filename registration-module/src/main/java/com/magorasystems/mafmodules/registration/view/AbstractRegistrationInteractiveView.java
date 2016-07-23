@@ -1,11 +1,10 @@
-package com.magorasystems.mafmodules.view.impl;
+package com.magorasystems.mafmodules.registration.view;
 
 import android.view.View;
 
 import com.fernandocejas.frodo.annotation.RxLogObservable;
 import com.jakewharton.rxbinding.view.RxView;
-import com.magorasystems.mafmodules.ui.widget.RegistrationWidget;
-import com.magorasystems.mafmodules.view.RegistrationInteractiveView;
+import com.magorasystems.mafmodules.registration.ui.widget.RegistrationWidget;
 import com.magorasystems.widgets.model.UserViewModel;
 
 import java.io.Serializable;

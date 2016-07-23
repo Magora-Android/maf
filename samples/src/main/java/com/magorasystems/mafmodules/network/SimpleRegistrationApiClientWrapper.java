@@ -2,6 +2,7 @@ package com.magorasystems.mafmodules.network;
 
 import com.magorasystems.mafmodules.protocolapi.auth.response.SimpleStringAuthSuccessResponse;
 import com.magorasystems.mafmodules.protocolapi.auth.response.StringAuthResponseData;
+import com.magorasystems.mafmodules.registration.network.RegistrationApiClientWrapper;
 import com.magorasystems.protocolapi.auth.dto.request.AuthRequest;
 
 import rx.Observable;

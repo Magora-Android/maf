@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.provider.registration;
+package com.magorasystems.mafmodules.registration.provider;
 
 import com.magorasystems.mafmodules.common.mvp.provider.BaseProvider;
 import com.magorasystems.protocolapi.auth.dto.request.AuthRequest;

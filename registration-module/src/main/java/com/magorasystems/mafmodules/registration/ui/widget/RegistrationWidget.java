@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.ui.widget;
+package com.magorasystems.mafmodules.registration.ui.widget;
 
 import com.magorasystems.widgets.auth.IdentityWidget;
 import com.magorasystems.widgets.BaseWidget;

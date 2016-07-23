@@ -3,6 +3,7 @@ package com.magorasystems.mafmodules.interactor.impl;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
 import com.magorasystems.mafmodules.interactor.SimpleRegistrationInteractor;
 import com.magorasystems.mafmodules.provider.registration.SimpleRegistrationProvider;
+import com.magorasystems.mafmodules.registration.interactor.AbstractRegistrationInteractor;
 import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
 
 /**

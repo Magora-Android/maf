@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.ui.widget;
+package com.magorasystems.mafmodules.registration.ui.widget;
 
 import android.annotation.TargetApi;
 import android.content.Context;

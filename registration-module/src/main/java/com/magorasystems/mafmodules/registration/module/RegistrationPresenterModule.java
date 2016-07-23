@@ -1,10 +1,10 @@
-package com.magorasystems.mafmodules.module;
+package com.magorasystems.mafmodules.registration.module;
 
 import com.magorasystems.mafmodules.common.module.base.ModuleInput;
 import com.magorasystems.mafmodules.common.module.base.ModulePresenter;
-import com.magorasystems.mafmodules.module.input.RegistrationViewInput;
-import com.magorasystems.mafmodules.module.output.RegistrationViewOutput;
-import com.magorasystems.mafmodules.router.RegistrationRouter;
+import com.magorasystems.mafmodules.registration.module.input.RegistrationViewInput;
+import com.magorasystems.mafmodules.registration.module.output.RegistrationViewOutput;
+import com.magorasystems.mafmodules.registration.router.RegistrationRouter;
 import com.magorasystems.protocolapi.auth.dto.response.AuthInfo;
 
 import java.io.Serializable;

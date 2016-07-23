@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.network;
+package com.magorasystems.mafmodules.registration.network;
 
 import com.magorasystems.protocolapi.auth.dto.request.AuthRequest;
 import com.magorasystems.protocolapi.auth.dto.response.AuthInfo;

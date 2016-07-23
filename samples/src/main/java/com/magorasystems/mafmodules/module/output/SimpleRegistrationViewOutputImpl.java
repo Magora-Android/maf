@@ -1,5 +1,6 @@
 package com.magorasystems.mafmodules.module.output;
 
+import com.magorasystems.mafmodules.registration.module.output.AbstractRegistrationViewOutput;
 import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
 
 /**

@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.ui.widget;
+package com.magorasystems.mafmodules.registration.ui.widget;
 
 import com.magorasystems.widgets.ValidationTextRule;
 import com.magorasystems.widgets.ValidationWidget;

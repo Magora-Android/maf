@@ -1,11 +1,11 @@
-package com.magorasystems.mafmodules.presenter;
+package com.magorasystems.mafmodules.registration.presenter;
 
 import com.magorasystems.mafmodules.common.module.output.ViewOutput;
 import com.magorasystems.mafmodules.common.mvp.presenter.BaseIteratorLcePresenter;
 import com.magorasystems.mafmodules.common.utils.rx.PresenterSubscriber;
-import com.magorasystems.mafmodules.interactor.RegistrationInteractor;
-import com.magorasystems.mafmodules.router.RegistrationRouter;
-import com.magorasystems.mafmodules.view.RegistrationLceView;
+import com.magorasystems.mafmodules.registration.interactor.RegistrationInteractor;
+import com.magorasystems.mafmodules.registration.router.RegistrationRouter;
+import com.magorasystems.mafmodules.registration.view.RegistrationLceView;
 import com.magorasystems.protocolapi.auth.dto.request.AuthRequest;
 import com.magorasystems.protocolapi.auth.dto.response.AuthInfo;
 import com.magorasystems.widgets.model.UserViewModel;

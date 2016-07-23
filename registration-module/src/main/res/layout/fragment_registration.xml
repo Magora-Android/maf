@@ -83,7 +83,7 @@
                     android:gravity="center"
                     android:padding="@dimen/standard_screen_padding_vertical"
                     android:text="@string/auth_sign_in_button"
-                    android:textColor="@color/colorAccent"/>
+                    android:textColor="?attr/colorAccent"/>
             </LinearLayout>
 
         </LinearLayout>

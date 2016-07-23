@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.router;
+package com.magorasystems.mafmodules.registration.router;
 
 import com.magorasystems.mafmodules.common.mvp.router.BaseRouter;
 import com.magorasystems.protocolapi.auth.dto.response.AuthInfo;

@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.module.output;
+package com.magorasystems.mafmodules.registration.module.output;
 
 import com.magorasystems.mafmodules.common.module.output.AbstractViewOutput;
 import com.magorasystems.protocolapi.auth.dto.response.AuthInfo;

@@ -1,6 +1,6 @@
 package com.magorasystems.mafmodules.view.impl;
 
-import com.magorasystems.mafmodules.view.RegistrationLceView;
+import com.magorasystems.mafmodules.registration.view.RegistrationLceView;
 import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
 
 /**

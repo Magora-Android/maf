@@ -8,6 +8,7 @@ import android.view.View;
 import com.google.common.collect.Lists;
 import com.magorasystems.mafmodules.R;
 import com.magorasystems.mafmodules.common.module.base.ModulePresenter;
+import com.magorasystems.mafmodules.common.ui.fragment.GenericPresenterModuleFragment;
 import com.magorasystems.mafmodules.common.utils.PatternsUtils;
 import com.magorasystems.mafmodules.dagger.component.SampleComponent;
 import com.magorasystems.mafmodules.module.SimpleRegistrationModuleInputImpl;

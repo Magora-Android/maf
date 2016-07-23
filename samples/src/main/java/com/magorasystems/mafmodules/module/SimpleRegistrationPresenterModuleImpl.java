@@ -8,6 +8,7 @@ import com.magorasystems.mafmodules.dagger.component.SampleComponent;
 import com.magorasystems.mafmodules.module.input.SimpleRegistrationViewInput;
 import com.magorasystems.mafmodules.module.output.SimpleRegistrationViewOutput;
 import com.magorasystems.mafmodules.presenter.SimpleRegistrationPresenter;
+import com.magorasystems.mafmodules.registration.module.AbstractRegistrationPresenterModule;
 import com.magorasystems.mafmodules.router.SimpleRegistrationRouter;
 import com.magorasystems.mafmodules.view.SimpleRegistrationInteractiveView;
 import com.magorasystems.mafmodules.view.impl.SimpleRegistrationLceView;

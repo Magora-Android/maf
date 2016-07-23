@@ -1,4 +1,4 @@
-package com.magorasystems.mafmodules.interactor;
+package com.magorasystems.mafmodules.registration.interactor;
 
 import com.magorasystems.mafmodules.common.mvp.interactor.BaseInteractor;
 import com.magorasystems.protocolapi.auth.dto.request.AuthRequest;
