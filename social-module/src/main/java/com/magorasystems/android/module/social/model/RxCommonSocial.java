@@ -72,10 +72,14 @@ public class RxCommonSocial {
                         return;
                     }
                     subscriber.onError(
-                            Exceptions.propagate(
+                            new RxSocialException(network.getSocialType(),
+                                    "authorization." + network.getSocialType().name() + ".fail ",
+                                    throwable));
+                    //old code don't work
+                            /*Exceptions.propagate(
                                     new RxSocialException(network.getSocialType(),
                                             "authorization." + network.getSocialType().name() + ".fail ",
-                                            throwable)));
+                                            throwable))*/
                 }
 
                 @Override
