@@ -18,3 +18,4 @@ Thumbs.db
 
 # Mac OS X files
 .DS_Store
+/gradle.properties
