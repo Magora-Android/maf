@@ -20,7 +20,7 @@ public class PermissionInfo implements Parcelable {
         return new PermissionInfo(Manifest.permission.ACCESS_FINE_LOCATION,
                 rationaleTitle,
                 rationaleMessage,
-                rationaleNegativeButton,
+                rationalePositiveButton,
                 rationaleNegativeButton);
     }
 
