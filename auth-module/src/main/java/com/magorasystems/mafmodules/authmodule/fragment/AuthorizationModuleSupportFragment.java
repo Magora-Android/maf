@@ -1,6 +1,5 @@
 package com.magorasystems.mafmodules.authmodule.fragment;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 
@@ -18,8 +17,6 @@ import com.magorasystems.mafmodules.authmodule.view.impl.StringAuthViewImpl;
 import com.magorasystems.mafmodules.authmodule.widget.AuthWidget;
 import com.magorasystems.mafmodules.common.mvp.view.BaseModelView;
 import com.magorasystems.mafmodules.common.ui.fragment.GenericModuleSupportFragment;
-import com.magorasystems.mafmodules.common.utils.component.HasComponent;
-import com.magorasystems.mafmodules.common.utils.component.Injectable;
 import com.magorasystems.protocolapi.auth.dto.response.StringAuthInfo;
 import com.magorasystems.widgets.ValidationTextRule;
 import com.magorasystems.widgets.WidgetUtils;
@@ -40,9 +37,15 @@ import rx.subjects.PublishSubject;
  *
  * @author Valentin S.Bolkonsky
  */
-public abstract class AuthorizationModuleSupportFragment extends GenericModuleSupportFragment implements Injectable<AuthComponent>, AuthRouter, BaseModelView<StringAuthInfo> {
+public abstract class AuthorizationModuleSupportFragment extends GenericModuleSupportFragment<AuthComponent> implements AuthRouter, BaseModelView<StringAuthInfo> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthorizationModuleSupportFragment.class);
+    @Inject
+    protected Observable<AuthModulePresenter> modulePresenterObservable;
+    private AuthModulePresenter modulePresenter;
+    private Subscription subscription;
+    private AuthInteractiveView authInteractiveView;
+    private StringAuthView authPassiveView;
 
     protected abstract AuthWidget getAuthWidget();
 
@@ -52,19 +55,20 @@ public abstract class AuthorizationModuleSupportFragment extends GenericModuleSu
 
     protected abstract Collection<ValidationTextRule> getRules();
 
-    @Inject
-    protected Observable<AuthModulePresenter> modulePresenterObservable;
-
-    private AuthModulePresenter modulePresenter;
-
-    private Subscription subscription;
-    private AuthInteractiveView authInteractiveView;
-    private StringAuthView authPassiveView;
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initialization();
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        inject((AuthComponent) ((HasComponent<?>) getActivity().getApplication()).getComponent(AuthComponent.class.getSimpleName()));
+        injectComponent(getActivity(), AuthComponent.class);
+    }
+
+    @Override
+    protected void initialization() {
         final PublishSubject<AuthViewModel> subject = PublishSubject.create();
         getAuthWidget().updateRules(getRules());
         authInteractiveView = new AuthInteractiveViewImpl(
@@ -78,7 +82,6 @@ public abstract class AuthorizationModuleSupportFragment extends GenericModuleSu
                 }, this::showError);
         authPassiveView = new StringAuthViewImpl(getActivity().getWindow().getDecorView(),
                 getAuthWidget(), this);
-
     }
 
     @Override
@@ -87,9 +90,8 @@ public abstract class AuthorizationModuleSupportFragment extends GenericModuleSu
     }
 
     @Override
-    @SuppressLint("MissingSuperCall")
     public void onStart() {
-        super.onSuperStart();
+        onSuperStart();
         if (modulePresenter != null) {
             modulePresenter.start();
         } else {
@@ -98,16 +100,17 @@ public abstract class AuthorizationModuleSupportFragment extends GenericModuleSu
                 modulePresenter.input(new AuthModuleInput(
                         new StringAuthViewInput(authPassiveView, authInteractiveView),
                         AuthorizationModuleSupportFragment.this));
+                if (!modulePresenter.checkIfAuthorization()) {
+                    LOGGER.debug("user already authorization");
+                }
                 modulePresenter.start();
             });
         }
     }
 
-
     @Override
-    @SuppressLint("MissingSuperCall")
     public void onStop() {
-        super.onSuperStop();
+        onSuperStop();
         if (modulePresenter != null) {
             modulePresenter.stop();
         }
@@ -131,13 +134,6 @@ public abstract class AuthorizationModuleSupportFragment extends GenericModuleSu
             authPassiveView.detachView();
             authPassiveView = null;
         }
-    }
-
-    @Override
-    public void showError(Throwable e) {
-        LOGGER.error("something wrong ", e);
-        showErrorDialog(e.getMessage(), (v, i) -> {
-        });
     }
 
     @Override
