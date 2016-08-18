@@ -2,7 +2,6 @@ package com.magorasystems.mafmodule.security.provider;
 
 import com.fernandocejas.frodo.annotation.RxLogObservable;
 import com.magorasystems.mafmodules.common.utils.SchedulersUtils;
-import com.magorasystems.mafmodules.network.config.SimpleTokenConfig;
 import com.magorasystems.mafmodules.network.config.TokenConfig;
 import com.magorasystems.mafmodules.network.exception.NetworkErrorException;
 import com.magorasystems.mafmodules.network.exception.NetworkErrorExceptionFactory;
@@ -43,6 +42,8 @@ public abstract class GenericRestRefreshTokenProvider<W, COMPONENT, TOKEN extend
         this.refreshTokenApiClient = refreshTokenApiClient;
     }
 
+    protected abstract String getTokenKey();
+
     protected final R getRefreshTokenApiClient() {
         return refreshTokenApiClient;
     }
@@ -70,10 +71,10 @@ public abstract class GenericRestRefreshTokenProvider<W, COMPONENT, TOKEN extend
                                         final NetworkErrorException networkErrorException = NetworkErrorExceptionFactory.fromHttpException((HttpException) throwable);
                                         if (networkErrorException.isTokenExpired()) {
                                             return refresher.flatMap(r -> {
-                                                final TOKEN token = getTokenConfig(SimpleTokenConfig.HEADER_FIELD_NAME);
+                                                final TOKEN token = getTokenConfig(getTokenKey());
                                                 token.setAccessToken(r.getAccessToken());
                                                 token.setRefreshToken(r.getRefreshToken());
-                                                saveToken(SimpleTokenConfig.HEADER_FIELD_NAME, token);
+                                                saveToken(getTokenKey(), token);
                                                 return toBeResumed;
                                             });
                                         } else {

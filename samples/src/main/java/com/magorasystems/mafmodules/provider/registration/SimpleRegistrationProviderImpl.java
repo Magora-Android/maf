@@ -32,11 +32,6 @@ public class SimpleRegistrationProviderImpl extends RestRegistrationProvider<Sam
     }
 
     @Override
-    protected SimpleTokenConfig getTokenConfig(String key) {
-        return tokenStorage.restoreObject(SimpleTokenConfig.HEADER_FIELD_NAME);
-    }
-
-    @Override
     public void inject(SampleComponent sampleComponent) {
         sampleComponent.inject(this);
     }

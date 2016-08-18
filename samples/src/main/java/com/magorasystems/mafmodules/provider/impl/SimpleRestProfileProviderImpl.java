@@ -9,6 +9,7 @@ import com.magorasystems.mafmodules.common.utils.component.HasComponent;
 import com.magorasystems.mafmodules.dagger.component.ProfileComponent;
 import com.magorasystems.mafmodules.model.UserProfile;
 import com.magorasystems.mafmodules.network.UserProfileApiClientWrapper;
+import com.magorasystems.mafmodules.network.config.SimpleTokenConfig;
 import com.magorasystems.mafmodules.network.response.ProfileSuccessResponse;
 import com.magorasystems.mafmodules.network.store.StringApiTokenStorage;
 import com.magorasystems.mafmodules.profile.provider.BaseRestProfileDataProvider;
@@ -38,6 +39,11 @@ public class SimpleRestProfileProviderImpl extends BaseRestProfileDataProvider<P
     @Override
     public void inject(ProfileComponent component) {
         component.inject(this);
+    }
+
+    @Override
+    protected String getTokenKey() {
+        return SimpleTokenConfig.HEADER_FIELD_NAME;
     }
 
     @Override

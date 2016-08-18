@@ -39,12 +39,6 @@ public abstract class BaseRestProfileDataProvider<COMPONENT, W, T> extends
         return observable.map(SuccessResponse::getData);
     }
 
-
-    @Override
-    protected SimpleTokenConfig getTokenConfig(String key) {
-        return tokenStorage.restoreObject(key);
-    }
-
     protected abstract Observable<? extends SuccessResponse<? super T>> callMyProfile();
 
 }

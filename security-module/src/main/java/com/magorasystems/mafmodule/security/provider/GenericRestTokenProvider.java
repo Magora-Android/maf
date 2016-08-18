@@ -19,7 +19,9 @@ public abstract class GenericRestTokenProvider<W, COMPONENT, TOKEN extends Token
         this.tokenStorage = tokenStorage;
     }
 
-    protected abstract TOKEN getTokenConfig(String key);
+    protected final TOKEN getTokenConfig(String key) {
+        return tokenStorage.restoreObject(key);
+    }
 
     protected final void saveToken(String key, TOKEN token) {
         tokenStorage.storeObject(key, token);
