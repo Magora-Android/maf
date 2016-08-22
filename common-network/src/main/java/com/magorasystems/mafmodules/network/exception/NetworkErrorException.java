@@ -39,5 +39,19 @@ public class NetworkErrorException extends RuntimeException {
         return errors.getCode();
     }
 
+    public final ErrorResponse getErrors() {
+        return errors;
+    }
 
+    public final int getHttpCode() {
+        return httpCode;
+    }
+
+    @Override
+    public String toString() {
+        return "NetworkErrorException{" +
+                "errors=" + errors +
+                ", httpCode=" + httpCode +
+                "} " + super.toString();
+    }
 }
