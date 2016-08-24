@@ -1,4 +1,8 @@
-include ':samples', ':common-widgets', ':profile-module', ':digital-keyboard-widget', ':social-module', ':registration-module',
+include ':common-widgets',
+        ':profile-module',
+        ':digital-keyboard-widget',
+        ':social-module',
+        ':registration-module',
         ':common-module',
         ':common-utils',
         ':common-protocol-api',
@@ -8,4 +12,5 @@ include ':samples', ':common-widgets', ':profile-module', ':digital-keyboard-wid
         ':security-module',
         ':rx-activityresult',
         ':rx-permission',
-        ':rx-imagepicker'
+        ':rx-imagepicker',
+        ':samples'

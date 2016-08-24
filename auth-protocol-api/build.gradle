@@ -6,7 +6,7 @@ group 'com.magorasystems.android'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-version "0.0.3"
+version "0.0.4"
 
 modifyPom {
     project {
