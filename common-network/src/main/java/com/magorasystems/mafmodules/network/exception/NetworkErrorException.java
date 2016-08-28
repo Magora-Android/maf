@@ -32,7 +32,7 @@ public class NetworkErrorException extends RuntimeException {
     }
 
     public boolean isTokenExpired() {
-        return httpCode == HttpCodes.HTTP_SECURITY_FORBIDDEN;
+        return httpCode == HttpCodes.HTTP_SECURITY_UNAUTHORIZED;
     }
 
     public String getCode() {
