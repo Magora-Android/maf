@@ -78,7 +78,7 @@ buildscript {
         maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:$version_gradle_plugin"
+        classpath 'com.android.tools.build:gradle:2.2.0'
         classpath "com.neenbedankt.gradle.plugins:android-apt:$version_apt"
         classpath "me.tatarka:gradle-retrolambda:$version_retrolambda_plugin"
         classpath "io.fabric.tools:gradle:$version_fabric_plugin"
