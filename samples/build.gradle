@@ -107,6 +107,7 @@ dependencies {
     compile project(':profile-module')
     compile project(':rx-imagepicker')
     compile project(':digital-keyboard-widget')
+    compile project(':rx-images')
 
     compile("com.magorasystems.android:vkontakte:$version_magora_social@aar") {
         transitive = true

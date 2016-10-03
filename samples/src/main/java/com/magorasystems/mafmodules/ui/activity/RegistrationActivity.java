@@ -5,7 +5,10 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.jakewharton.rxbinding.view.RxView;
 import com.magorasystems.mafmodules.R;
 import com.magorasystems.rx.imagepicker.RxImagePicker;
@@ -31,14 +34,32 @@ public class RegistrationActivity extends AppCompatActivity {
                 .subscribe(aVoid -> {
                     RxImagePicker.with(this)
                             .requestImage(Sources.CAMERA)
-                            .subscribe(ivPickedImage::setImageURI);
+                            .map(uri -> {
+                                final ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri)
+                                        .setAutoRotateEnabled(true)
+                                        .build();
+                                return Fresco.newDraweeControllerBuilder()
+                                        .setImageRequest(request)
+                                        .setOldController(ivPickedImage.getController())
+                                        .build();
+                            })
+                            .subscribe(ivPickedImage::setController);
                 });
 
         RxView.clicks(fabGallery)
                 .subscribe(aVoid -> {
                     RxImagePicker.with(this)
                             .requestImage(Sources.GALLERY)
-                            .subscribe(ivPickedImage::setImageURI);
+                            .map(uri -> {
+                                final ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri)
+                                        .setAutoRotateEnabled(true)
+                                        .build();
+                                return Fresco.newDraweeControllerBuilder()
+                                        .setImageRequest(request)
+                                        .setOldController(ivPickedImage.getController())
+                                        .build();
+                            })
+                            .subscribe(ivPickedImage::setController);
                 });
     }
 }

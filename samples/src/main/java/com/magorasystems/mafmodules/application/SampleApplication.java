@@ -19,6 +19,7 @@ import com.magorasystems.mafmodules.dagger.component.SampleComponent;
 import com.magorasystems.mafmodules.dagger.component.SampleComponents;
 import com.magorasystems.mafmodules.dagger.component.SocialComponent;
 import com.magorasystems.mafmodules.dagger.module.profile.ProfileNetworkModule;
+import com.magorasystems.rx.images.RxImage;
 import com.magorasystems.rx.permission.RxResult;
 
 import org.apache.commons.lang3.StringUtils;
@@ -45,6 +46,7 @@ public class SampleApplication extends BaseComponentApplication<SampleComponent>
     public void onCreate() {
         super.onCreate();
         RxResult.register(this);
+        RxImage.register(this);
         Fresco.initialize(this);
         LOGGER.debug("Inject Context {}", context);
         LOGGER.debug("{}", StringUtils.isBlank(""));

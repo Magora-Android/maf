@@ -1,4 +1,4 @@
-include ':common-widgets',
+include ':common-widgets', ':rx-images',
         ':profile-module',
         ':digital-keyboard-widget',
         ':social-module',
