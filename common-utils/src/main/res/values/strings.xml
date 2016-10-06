@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">common-utils</string>
+    <string name="link_to_google_play" translatable="false">https://play.google.com/store/apps/details?id=%s</string>
 </resources>
