@@ -85,9 +85,8 @@ public class RxImage {
                     BitmapLoadUtils.getRotationFromGallery(instance.context, uriWithRealPath)); // resize if needed
             if (!subscriber.isUnsubscribed()) {
                 subscriber.onNext(bitmap);
-            } else {
-                subscriber.onCompleted();
             }
+            subscriber.onCompleted();
         });
     }
 
