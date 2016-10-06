@@ -26,6 +26,7 @@ public class RxImageConverters {
                     InputStream inputStream = context.getContentResolver().openInputStream(uri);
                     copyInputStreamToFile(inputStream, file);
                     subscriber.onNext(file);
+                    subscriber.onCompleted();
                 } catch (Exception e) {
                     Log.e(RxImageConverters.class.getSimpleName(), "Error converting uri", e);
                     subscriber.onError(e);
@@ -63,6 +64,7 @@ public class RxImageConverters {
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), uri);
                     subscriber.onNext(bitmap);
+                    subscriber.onCompleted();
                 } catch (IOException e) {
                     Log.e(RxImageConverters.class.getSimpleName(), "Error converting uri", e);
                     subscriber.onError(e);
